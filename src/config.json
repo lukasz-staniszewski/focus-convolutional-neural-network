@@ -1,0 +1,81 @@
+{
+    "name": "FootballFramesClassifier",
+    "n_gpu": 1,
+    "arch": {
+        "type": "ResNetClassifier",
+        "args": {
+            "num_classes": 7
+        }
+    },
+    "data_loader": {
+        "type": "FramesDataLoader",
+        "args": {
+            "images_folder": "data/train_rs2",
+            "batch_size": 128,
+            "is_with_aug": false,
+            "csv_path": "data/df_train_framefilter.csv",
+            "csv_path_tf": "data/df_train_framefilter_rs.csv",
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 2
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 0.00001,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loss": "cross_entropy_loss",
+    "metrics": [
+        "micro_accuracy",
+        "micro_recall",
+        "micro_precision",
+        "micro_f1",
+        "macro_accuracy",
+        "macro_recall",
+        "macro_precision",
+        "macro_f1"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 50,
+            "gamma": 0.1
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "saved/",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 10,
+        "tensorboard": false
+    },
+    "class_weights_normal": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+    ],
+    "class_weights": [
+        0.253,
+        0.558,
+        0.958,
+        13.768,
+        14.400,
+        23.426,
+        33.395
+    ],
+    "model_to_load_path": "saved/models/FootballFramesClassifier/0527_022215/model_best.pth",
+    "predicting": {
+        "results_file": "results.csv",
+        "test_folder": "/content/drive/MyDrive/GitHub/football-frame-classifier/data/test_rs2"
+    }
+}
