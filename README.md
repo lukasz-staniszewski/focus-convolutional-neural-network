@@ -1,6 +1,6 @@
 <h1 align="center">Focus Convolutional Neural Network (Focus-CNN)</h1>
-<h2 align="center">Łukasz Staniszewski</h2>
-<h2 align="center">supervised by dr hab. Paweł Wawrzyński</h2>
+<h3 align="center">Łukasz Staniszewski</h2>
+<h3 align="center">supervised by dr hab. Paweł Wawrzyński</h2>
 
 <br>
 <div align="center">
@@ -18,11 +18,11 @@ Direct competitor for proposed network: <a href="https://arxiv.org/pdf/1506.0149
 <h2 align="center"> II. Architecture </h2>
 
 ### Focus Network
-The focus network is fed with an image. It outputs 5 numbers:
-+ $ (x,y) $ coordinates of the location in the image where the object is likely to be,
-+ $ log(scale) $, where scale says how much the part of the object needs to be zoomed to the predefined resolution,
-+ $ \theta $ angle at which the indicated part needs to be rotated to its normal view,
-+ $ p $ likelihood at which the located part contains the wanted object.
+The focus network is fed with an image. It outputs 4 numbers:
+1) $(x,y)$ coordinates of the location in the image where the object is likely to be,
+2) $log(scale)$, where scale says how much the part of the object needs to be zoomed to the predefined resolution,
+3) $\theta$ angle at which the indicated part needs to be rotated to its normal view,
+4) $p$ likelihood at which the located part contains the wanted object.
 
 ### Classifier
 The classifier is fed with the zoomed and rotated part of the image indicated by the focus network. It output one scalar that says if the image contains an object of the given class or not. 
@@ -48,7 +48,7 @@ Experiments will be carried out on two benchmark datasets:
 
 <h2 align="center"> V. Additional information </h2>
 
-+ Trainings are performed on Tesla T4 using Google Colab and on RTX 2060M locally.
++ Trainings are performed using Tesla T4 (Google Colab) and Nvidia RTX 2060M (locally) GPUs.
 + In local development, Python 3.9.5 was used with venv, all necessary modules are in requirements.txt.
 + All experiments are reproducible thanks to random seeds.
 <!-- + Folder structure:
