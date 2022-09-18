@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 import logging
 from pathlib import Path
@@ -5,9 +6,8 @@ from functools import reduce, partial
 from operator import getitem
 from datetime import datetime
 from logger import setup_logging
-from utils import read_json, write_json
+from utils.project_utils import read_json, write_json
 from typing import Dict, Any, List
-from __future__ import annotations
 
 
 class ConfigParser:
@@ -30,30 +30,17 @@ class ConfigParser:
         """
         self._config = _update_config(config, modification)
         self.resume = resume
-        save_dir = Path(self.config["trainer"]["save_dir"])
+        self.save_cfg_dir = self._config["save_cfg_dir"]
+        self.experiment_name = self._config["name"]
 
-        exper_name = self.config["name"]
-        if run_id is None:  # use timestamp as default run-id
-            run_id = datetime.now().strftime(r"%m%d_%H%M%S")
-        self._save_dir = save_dir / "models" / exper_name / run_id
-        self._log_dir = save_dir / "log" / exper_name / run_id
-
-        exist_ok = run_id == ""
-        self.save_dir.mkdir(parents=True, exist_ok=exist_ok)
-        self.log_dir.mkdir(parents=True, exist_ok=exist_ok)
+        if "trainer" in self._config.keys():
+            self.init_trainer()
 
         write_json(self.config, self.save_dir / "config.json")
 
-        setup_logging(self.log_dir)
-        self.log_levels = {
-            0: logging.WARNING,
-            1: logging.INFO,
-            2: logging.DEBUG,
-        }
-
     @classmethod
     def from_args(cls, args, options: str = "") -> ConfigParser:
-        """Initialize this class from some cli arguments. Used in train, test."""
+        """Initialize this class from some cli arguments. Used in preprocessor, train, test."""
         for opt in options:
             args.add_argument(*opt.flags, default=None, type=opt.type)
         if not isinstance(args, tuple):
@@ -61,6 +48,7 @@ class ConfigParser:
 
         if args.device is not None:
             os.environ["CUDA_VISIBLE_DEVICES"] = args.device
+
         if args.resume is not None:
             resume = Path(args.resume)
             cfg_fname = resume.parent / "config.json"
@@ -80,9 +68,14 @@ class ConfigParser:
 
         # parse custom cli options into dictionary
         modification = {
-            opt.target: getattr(args, _get_opt_name(opt.flags)) for opt in options
+            opt.target: getattr(args, _get_opt_name(opt.flags))
+            for opt in options
         }
-        return cls(config, resume, modification)
+        return cls(
+            config=config,
+            resume=resume,
+            modification=modification,
+        )
 
     def init_obj(self, name: str, module: Any, *args, **kwargs) -> Any:
         """Finds a function handle with the name given as 'type' in config, and returns the
@@ -118,13 +111,17 @@ class ConfigParser:
         ), "Overwriting kwargs given in config file is not allowed"
         module_args.update(kwargs)
 
-        return partial(getattr(module, module_name), *args, **module_args)
+        return partial(
+            getattr(module, module_name), *args, **module_args
+        )
 
     def __getitem__(self, name: str) -> Any:
         """Access items like ordinary dict."""
         return self.config[name]
 
-    def get_logger(self, name: str, verbosity: int = 2) -> logging.Logger:
+    def get_logger(
+        self, name: str, verbosity: int = 2
+    ) -> logging.Logger:
         """Get a logger with the name given. By default, logger is configured to log to both console and file.
 
         Args:
@@ -134,8 +131,9 @@ class ConfigParser:
         Returns:
             logging.Logger: logger instance
         """
-        msg_verbosity = "verbosity option {} is invalid. Valid options are {}.".format(
-            verbosity, self.log_levels.keys()
+        msg_verbosity = (
+            "verbosity option {} is invalid. Valid options are {}."
+            .format(verbosity, self.log_levels.keys())
         )
 
         assert verbosity in self.log_levels, msg_verbosity
@@ -143,6 +141,27 @@ class ConfigParser:
         logger = logging.getLogger(name)
         logger.setLevel(self.log_levels[verbosity])
         return logger
+
+    def init_trainer(self):
+        save_model_dir = Path(self.config["trainer"]["save_dir"])
+        if run_id is None:  # use timestamp as default run-id
+            run_id = datetime.now().strftime(r"%m%d_%H%M%S")
+        self._save_dir = (
+            save_model_dir / "models" / self.experiment_name / run_id
+        )
+        self._log_dir = (
+            save_model_dir / "log" / self.experiment_name / run_id
+        )
+        exist_ok = run_id == ""
+        self.save_dir.mkdir(parents=True, exist_ok=exist_ok)
+        self.log_dir.mkdir(parents=True, exist_ok=exist_ok)
+
+        setup_logging(self.log_dir)
+        self.log_levels = {
+            0: logging.WARNING,
+            1: logging.INFO,
+            2: logging.DEBUG,
+        }
 
     # setting read-only attributes
     @property

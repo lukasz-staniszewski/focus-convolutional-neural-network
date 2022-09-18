@@ -2,7 +2,7 @@ import numpy as np
 from torch.utils.data import DataLoader, Dataset
 from torch.utils.data.dataloader import default_collate
 from torch.utils.data.sampler import SubsetRandomSampler
-from utils.utils import set_seed
+from utils.project_utils import set_seed
 from typing import Callable, Tuple, Union
 
 
@@ -49,7 +49,7 @@ class BaseDataLoader(DataLoader):
     def _split_sampler(
         self, split: Union[float, int]
     ) -> Tuple[SubsetRandomSampler]:
-        """Creates and returns a subset sampler for the training and validation
+        """Creates and returns a subset sampler for the training and validation.
 
         Args:
             split (Union[float, int]): fraction of the training set used for validation

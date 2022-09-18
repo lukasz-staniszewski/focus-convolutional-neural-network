@@ -1,0 +1,26 @@
+{
+    "name": "CocoClassifierPersonPreprocessing",
+    "preprocessor": {
+        "type": "CocoClassifierPreprocessor",
+        "args": {
+            "img_in_dir_path": "data/raw/COCO-2017/validate",
+            "ann_file_path": "data/raw/COCO-2017/instances_val2017.json",
+            "img_out_dir_path": "data/processed/COCO-2017/validate/",
+            "img_out_shape": [
+                250,
+                250
+            ],
+            "label_pos": "person",
+            "label_neg": [
+                "car",
+                "bus",
+                "truck",
+                "motorcycle",
+                "bicycle",
+                "train",
+                "boat"
+            ]
+        }
+    },
+    "save_cfg_dir": "data/processed/COCO-2017/validate/"
+}

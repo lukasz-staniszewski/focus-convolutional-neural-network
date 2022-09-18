@@ -64,7 +64,10 @@ def prepare_device(gpu_id: int) -> Tuple[torch.device, List[int]]:
     """
     n_gpu = torch.cuda.device_count()
     if gpu_id > 0 and n_gpu == 0:
-        print("Warning - no GPU available, CPU training will take a place" " instead.")
+        print(
+            "Warning - no GPU available, CPU training will take a place"
+            " instead."
+        )
         gpu_id = 0
     if gpu_id > n_gpu:
         print(
