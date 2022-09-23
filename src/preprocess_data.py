@@ -14,17 +14,18 @@ def main(config):
 
 
 def parse_config(args):
+    config_path = args.parse_args().config
     assert os.path.exists(
-        args.config
-    ), f"File not found at path: {args.config}"
-    cfg_json = read_json(args.config)
+        config_path
+    ), f"File not found at path: {config_path}"
+    cfg_json = read_json(config_path)
     assert all(
         [
             k in cfg_json
             for k in ["name", "preprocessor", "save_cfg_dir"]
         ]
     ), "Invalid config file keys!"
-    config = ConfigParser.from_args(args=args)
+    return ConfigParser.from_args(args=args)
 
 
 if __name__ == "__main__":
@@ -36,6 +37,6 @@ if __name__ == "__main__":
         type=str,
         help="config file path (default: None)",
     )
-
-    config = ConfigParser.from_args(args=args)
+    args.parse_args()
+    config = parse_config(args=args)
     main(config)

@@ -5,6 +5,7 @@ from pathlib import Path
 from itertools import repeat
 from collections import OrderedDict
 import numpy as np
+import os
 
 
 def ensure_dir(dirname: str) -> None:
@@ -40,6 +41,7 @@ def write_json(content: Dict, fname: str) -> None:
         fname (str): json file name
     """
     fname = Path(fname)
+    os.makedirs(fname.parent, exist_ok=True)
     with fname.open("wt") as handle:
         json.dump(content, handle, indent=4, sort_keys=False)
 
@@ -72,7 +74,8 @@ def prepare_device(gpu_id: int) -> Tuple[torch.device, List[int]]:
     if gpu_id > n_gpu:
         print(
             f"Warning - there is {n_gpu} GPU's available, but"
-            f" {gpu_id} was specified."
+            f" {gpu_id} was specified. Training will take place on"
+            f" GPU {n_gpu}."
         )
         gpu_id = n_gpu
     device = torch.device("cuda:0" if gpu_id > 0 else "cpu")

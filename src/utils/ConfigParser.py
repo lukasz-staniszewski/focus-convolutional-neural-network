@@ -30,13 +30,13 @@ class ConfigParser:
         """
         self._config = _update_config(config, modification)
         self.resume = resume
-        self.save_cfg_dir = self._config["save_cfg_dir"]
+        self.save_cfg_dir = Path(self._config["save_cfg_dir"])
         self.experiment_name = self._config["name"]
 
         if "trainer" in self._config.keys():
-            self.init_trainer()
+            self.init_trainer(run_id=run_id)
 
-        write_json(self.config, self.save_dir / "config.json")
+        write_json(self.config, self.save_cfg_dir / "config.json")
 
     @classmethod
     def from_args(cls, args, options: str = "") -> ConfigParser:
@@ -46,18 +46,13 @@ class ConfigParser:
         if not isinstance(args, tuple):
             args = args.parse_args()
 
-        if args.device is not None:
-            os.environ["CUDA_VISIBLE_DEVICES"] = args.device
-
-        if args.resume is not None:
+        if "resume" in vars(args).keys() and args.resume is not None:
             resume = Path(args.resume)
             cfg_fname = resume.parent / "config.json"
         else:
-            msg_no_cfg = (
-                "Configuration file need to be specified. Add '-c"
-                " config.json', for example."
-            )
-            assert args.config is not None, msg_no_cfg
+            assert (
+                args.config is not None
+            ), "Config file must be specified."
             resume = None
             cfg_fname = Path(args.config)
 
@@ -142,7 +137,7 @@ class ConfigParser:
         logger.setLevel(self.log_levels[verbosity])
         return logger
 
-    def init_trainer(self):
+    def init_trainer(self, run_id: int = None) -> None:
         save_model_dir = Path(self.config["trainer"]["save_dir"])
         if run_id is None:  # use timestamp as default run-id
             run_id = datetime.now().strftime(r"%m%d_%H%M%S")
