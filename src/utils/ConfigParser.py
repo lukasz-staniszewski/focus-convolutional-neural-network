@@ -48,9 +48,11 @@ class ConfigParser:
 
         if "resume" in vars(args).keys() and args.resume is not None:
             resume = Path(args.resume)
-            cfg_fname = resume.parent / "config.json"
+            cfg_fname = resume.parents[3] / "config.json"
         else:
-            assert args.config is not None, "Config file must be specified."
+            assert (
+                args.config is not None
+            ), "Config file must be specified."
             resume = None
             cfg_fname = Path(args.config)
 
@@ -61,9 +63,14 @@ class ConfigParser:
 
         # parse custom cli options into dictionary
         modification = {
-            opt.target: getattr(args, _get_opt_name(opt.flags)) for opt in options
+            opt.target: getattr(args, _get_opt_name(opt.flags))
+            for opt in options
         }
-        return cls(config=config, resume=resume, modification=modification,)
+        return cls(
+            config=config,
+            resume=resume,
+            modification=modification,
+        )
 
     def init_obj(self, name: str, module: Any, *args, **kwargs) -> Any:
         """Finds a function handle with the name given as 'type' in config, and returns the
@@ -99,13 +106,17 @@ class ConfigParser:
         ), "Overwriting kwargs given in config file is not allowed"
         module_args.update(kwargs)
 
-        return partial(getattr(module, module_name), *args, **module_args)
+        return partial(
+            getattr(module, module_name), *args, **module_args
+        )
 
     def __getitem__(self, name: str) -> Any:
         """Access items like ordinary dict."""
         return self.config[name]
 
-    def get_logger(self, name: str, verbosity: int = 2) -> logging.Logger:
+    def get_logger(
+        self, name: str, verbosity: int = 2
+    ) -> logging.Logger:
         """Get a logger with the name given. By default, logger is configured to log to both console and file.
 
         Args:
@@ -115,8 +126,9 @@ class ConfigParser:
         Returns:
             logging.Logger: logger instance
         """
-        msg_verbosity = "verbosity option {} is invalid. Valid options are {}.".format(
-            verbosity, self.log_levels.keys()
+        msg_verbosity = (
+            "verbosity option {} is invalid. Valid options are {}."
+            .format(verbosity, self.log_levels.keys())
         )
 
         assert verbosity in self.log_levels, msg_verbosity
@@ -129,8 +141,12 @@ class ConfigParser:
         save_model_dir = Path(self.config["trainer"]["save_dir"])
         if run_id is None:  # use timestamp as default run-id
             run_id = datetime.now().strftime(r"%m%d_%H%M%S")
-        self._save_dir = save_model_dir / "models" / self.experiment_name / run_id
-        self._log_dir = save_model_dir / "log" / self.experiment_name / run_id
+        self._save_dir = (
+            save_model_dir / "models" / self.experiment_name / run_id
+        )
+        self._log_dir = (
+            save_model_dir / "log" / self.experiment_name / run_id
+        )
         exist_ok = run_id == ""
         self.save_dir.mkdir(parents=True, exist_ok=exist_ok)
         self.log_dir.mkdir(parents=True, exist_ok=exist_ok)
