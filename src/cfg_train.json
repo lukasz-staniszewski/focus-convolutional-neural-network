@@ -1,0 +1,55 @@
+{
+    "name": "CocoPersonClassifier",
+    "device": 1,
+    "seed": 42,
+    "save_cfg_dir": "res/classifiers/classifier_person/",
+    "arch": {
+        "type": "Classifier",
+        "args": {
+            "threshold": 0.5
+        }
+    },
+    "data_loader": {
+        "type": "ClassifierDataLoader",
+        "args": {
+            "images_dir": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/images",
+            "batch_size": 512,
+            "csv_path": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/labels.csv",
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 8,
+            "balance": true
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 3e-4,
+            "weight_decay": 0,
+            "amsgrad": true
+        }
+    },
+    "loss": "binary_cross_entropy_loss",
+    "metrics": [
+        "accuracy",
+        "recall",
+        "precision",
+        "f1"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 50,
+            "gamma": 0.1
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "res/classifiers/classifier_person/",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 6,
+        "tensorboard": true
+    }
+}

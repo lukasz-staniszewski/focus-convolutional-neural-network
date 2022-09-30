@@ -1,0 +1,22 @@
+{
+    "test": {
+        "model_to_load_path": "res/models/classifier_person/model_best.pth",
+        "predicting": {
+            "results_file": "results.csv",
+            "test_folder": "data/processed/COCO-2017/images"
+        },
+        "data_loader": {
+            "type": "ClassifierDataLoader",
+            "args": {
+                "images_folder": "data/processed/validate/",
+                "batch_size": 128,
+                "csv_path": "data/df_train_framefilter.csv",
+                "csv_path_tf": "data/df_train_framefilter_rs.csv",
+                "shuffle": false,
+                "validation_split": 0.0,
+                "num_workers": 2,
+                "is_train": false
+            }
+        }
+    }
+}
