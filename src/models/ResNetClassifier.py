@@ -9,9 +9,7 @@ class ResNetClassifier(BaseModel):
         super().__init__()
         self.model = models.resnet18(pretrained=True)
         res_fc_out = self.model.fc.out_features
-        self.fc_out = nn.Linear(
-            in_features=res_fc_out, out_features=num_classes
-        )
+        self.fc_out = nn.Linear(in_features=res_fc_out, out_features=num_classes)
 
     def forward(self, x):
         x = self.model(x)

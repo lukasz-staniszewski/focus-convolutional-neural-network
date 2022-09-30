@@ -23,13 +23,8 @@ def setup_logging(
         config = read_json(log_config)
         for _, handler in config["handlers"].items():
             if "filename" in handler:
-                handler["filename"] = os.path.join(
-                    save_dir, handler["filename"]
-                )
+                handler["filename"] = os.path.join(save_dir, handler["filename"])
         logging.config.dictConfig(config)
     else:
-        print(
-            "Warning - logging configuration file is not found in"
-            f" {log_config}."
-        )
+        print("Warning - logging configuration file is not found in" f" {log_config}.")
         logging.basicConfig(level=default_level)

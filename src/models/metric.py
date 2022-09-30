@@ -105,3 +105,59 @@ def top_k_acc(output, target, k=3):
         for i in range(k):
             correct += torch.sum(pred[:, i] == target).item()
     return correct / len(target)
+
+
+def true_positive(output, target):
+    with torch.no_grad():
+        tp = torch.sum(output * target).item()
+    return tp
+
+
+def true_negative(output, target):
+    with torch.no_grad():
+        tn = torch.sum((1 - output) * (1 - target)).item()
+    return tn
+
+
+def false_positive(output, target):
+    with torch.no_grad():
+        fp = torch.sum(output * (1 - target)).item()
+    return fp
+
+
+def false_negative(output, target):
+    with torch.no_grad():
+        fn = torch.sum((1 - output) * target).item()
+    return fn
+
+
+def accuracy(output, target):
+    tp = true_positive(output, target)
+    tn = true_negative(output, target)
+    fp = false_positive(output, target)
+    fn = false_negative(output, target)
+    return (tp + tn) / (tp + tn + fp + fn)
+
+
+def recall(output, target):
+    tp = true_positive(output, target)
+    fn = false_negative(output, target)
+    if tp + fn == 0:
+        return 0.0
+    return (tp) / (tp + fn)
+
+
+def precision(output, target):
+    tp = true_positive(output, target)
+    fp = false_positive(output, target)
+    if tp + fp == 0:
+        return 0.0
+    return (tp) / (tp + fp)
+
+
+def f1(output, target):
+    prec = precision(output, target)
+    rec = recall(output, target)
+    if prec + rec == 0:
+        return 0.0
+    return 2 * prec * rec / (prec + rec)

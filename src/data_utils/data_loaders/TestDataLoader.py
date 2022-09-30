@@ -33,14 +33,8 @@ class TestDataLoader(BaseDataLoader):
             6: "wide_view",
         }
         self.images_folder = images_folder
-        self.dataset = TestDataset(
-            images_folder=self.images_folder, transform=trsfm
-        )
+        self.dataset = TestDataset(images_folder=self.images_folder, transform=trsfm)
 
         super().__init__(
-            self.dataset,
-            batch_size,
-            shuffle,
-            validation_split,
-            num_workers,
+            self.dataset, batch_size, shuffle, validation_split, num_workers,
         )

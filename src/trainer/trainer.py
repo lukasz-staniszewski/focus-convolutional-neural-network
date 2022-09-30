@@ -3,6 +3,7 @@ import torch
 from torchvision.utils import make_grid
 from base import BaseTrainer
 from utils import inf_loop, MetricTracker
+from tqdm import tqdm
 
 
 class Trainer(BaseTrainer):
@@ -35,9 +36,7 @@ class Trainer(BaseTrainer):
             lr_scheduler (torch.optim.lr_scheduler, optional): learning rate scheduler. Defaults to None.
             len_epoch (int, optional): if provided, then iteration-based training is performed with time. Defaults to None.
         """
-        super().__init__(
-            model, criterion, metric_ftns, optimizer, config
-        )
+        super().__init__(model, criterion, metric_ftns, optimizer, config)
         self.config = config
         self.device = device
         self.data_loader = data_loader
@@ -55,14 +54,10 @@ class Trainer(BaseTrainer):
         self.lr_scheduler = lr_scheduler
         self.log_step = int(np.sqrt(data_loader.batch_size))
         self.train_metrics = MetricTracker(
-            "loss",
-            *[m.__name__ for m in self.metric_ftns],
-            writer=self.writer
+            "loss", *[m.__name__ for m in self.metric_ftns], writer=self.writer
         )
         self.valid_metrics = MetricTracker(
-            "loss",
-            *[m.__name__ for m in self.metric_ftns],
-            writer=self.writer
+            "loss", *[m.__name__ for m in self.metric_ftns], writer=self.writer
         )
 
     def _train_epoch(self, epoch: int) -> dict:
@@ -80,19 +75,18 @@ class Trainer(BaseTrainer):
         for batch_idx, (data, target) in enumerate(self.data_loader):
             data, target = data.to(self.device), target.to(self.device)
             self.optimizer.zero_grad()
-            output = self.model(data)
-            loss = self.criterion(output, target, self.device)
+            output = self.model(data).squeeze()
+            target = target.float()
+            loss = self.criterion(output, target)
             loss.backward()
             self.optimizer.step()
 
-            self.writer.set_step(
-                (epoch - 1) * self.len_epoch + batch_idx
-            )
+            self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
             self.train_metrics.update("loss", loss.item())
+            output = (output >= self.model.threshold).float()
+
             for met in self.metric_ftns:
-                self.train_metrics.update(
-                    met.__name__, met(output, target)
-                )
+                self.train_metrics.update(met.__name__, met(output, target))
 
             if batch_idx % self.log_step == 0:
                 self.logger.debug(
@@ -101,8 +95,7 @@ class Trainer(BaseTrainer):
                     )
                 )
                 self.writer.add_image(
-                    "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    "input", make_grid(data.cpu(), nrow=8, normalize=True),
                 )
             if batch_idx == self.len_epoch:
                 break
@@ -129,28 +122,26 @@ class Trainer(BaseTrainer):
         self.valid_metrics.reset()
 
         with torch.no_grad():
-            for batch_idx, (data, target) in enumerate(
-                self.valid_data_loader
+            for batch_idx, (data, target) in tqdm(
+                enumerate(self.valid_data_loader),
+                total=len(self.valid_data_loader),
+                desc="Validating",
+                colour="green",
             ):
-                data, target = data.to(self.device), target.to(
-                    self.device
-                )
-                output = self.model(data)
-                loss = self.criterion(output, target, self.device)
+                data, target = data.to(self.device), target.to(self.device)
+                target = target.float()
+                output = self.model(data).squeeze()
+                loss = self.criterion(output, target)
+                output = (output >= self.model.threshold).float()
 
                 self.writer.set_step(
-                    (epoch - 1) * len(self.valid_data_loader)
-                    + batch_idx,
-                    "valid",
+                    (epoch - 1) * len(self.valid_data_loader) + batch_idx, "valid",
                 )
                 self.valid_metrics.update("loss", loss.item())
                 for met in self.metric_ftns:
-                    self.valid_metrics.update(
-                        met.__name__, met(output, target)
-                    )
+                    self.valid_metrics.update(met.__name__, met(output, target))
                 self.writer.add_image(
-                    "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    "input", make_grid(data.cpu(), nrow=8, normalize=True),
                 )
 
         # adding histogram of model parameters to the tensorboard

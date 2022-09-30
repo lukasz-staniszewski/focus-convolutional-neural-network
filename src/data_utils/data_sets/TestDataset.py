@@ -4,12 +4,12 @@ import os
 
 
 class TestDataset(torch.utils.data.Dataset):
-    def __init__(self, images_folder, transform=None):
-        self.images_folder = images_folder
+    def __init__(self, images_dir, transform=None):
+        self.images_dir = images_dir
         self.files_names = [
             f
-            for f in os.listdir(self.images_folder)
-            if os.path.isfile(os.path.join(self.images_folder, f))
+            for f in os.listdir(self.images_dir)
+            if os.path.isfile(os.path.join(self.images_dir, f))
         ]
         self.transform = transform
 
@@ -18,7 +18,7 @@ class TestDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         filename = self.files_names[idx]
-        image = torchvision.io.read_image(os.path.join(self.images_folder, filename))
+        image = torchvision.io.read_image(os.path.join(self.images_dir, filename))
         if self.transform is not None:
             image = self.transform(image)
         return image, filename

@@ -1,39 +1,40 @@
 {
     "name": "CocoPersonClassifier",
     "device": 1,
+    "seed": 42,
+    "save_cfg_dir": "res/classifiers/classifier_person/",
     "arch": {
-        "type": "Classifier"
+        "type": "Classifier",
+        "args": {
+            "threshold": 0.5
+        }
     },
     "data_loader": {
         "type": "ClassifierDataLoader",
         "args": {
-            "images_folder": "data/processed/validate/images",
-            "batch_size": 128,
-            "csv_path": "data/df_train_framefilter.csv",
-            "csv_path_tf": "data/df_train_framefilter_rs.csv",
+            "images_dir": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/images",
+            "batch_size": 512,
+            "csv_path": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/labels.csv",
             "shuffle": true,
             "validation_split": 0.2,
-            "num_workers": 2
+            "num_workers": 8,
+            "balance": true
         }
     },
     "optimizer": {
         "type": "Adam",
         "args": {
-            "lr": 0.0001,
+            "lr": 3e-4,
             "weight_decay": 0,
             "amsgrad": true
         }
     },
-    "loss": "cross_entropy_loss",
+    "loss": "binary_cross_entropy_loss",
     "metrics": [
-        "micro_accuracy",
-        "micro_recall",
-        "micro_precision",
-        "micro_f1",
-        "macro_accuracy",
-        "macro_recall",
-        "macro_precision",
-        "macro_f1"
+        "accuracy",
+        "recall",
+        "precision",
+        "f1"
     ],
     "lr_scheduler": {
         "type": "StepLR",
@@ -44,11 +45,11 @@
     },
     "trainer": {
         "epochs": 100,
-        "save_dir": "res/models/classifier_person/",
+        "save_dir": "res/classifiers/classifier_person/",
         "save_period": 1,
         "verbosity": 2,
         "monitor": "min val_loss",
-        "early_stop": 10,
+        "early_stop": 6,
         "tensorboard": true
     }
 }

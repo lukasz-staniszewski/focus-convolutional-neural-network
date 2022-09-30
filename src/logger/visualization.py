@@ -6,9 +6,7 @@ from typing import Any
 class TensorboardWriter:
     """Class is for compatibility with tensorboardX."""
 
-    def __init__(
-        self, log_dir: str, logger: Any, enabled: bool
-    ) -> None:
+    def __init__(self, log_dir: str, logger: Any, enabled: bool) -> None:
         """Tensorboard writer constructor.
 
         Args:
@@ -25,9 +23,7 @@ class TensorboardWriter:
             succeeded = False
             for module in ["torch.utils.tensorboard", "tensorboardX"]:
                 try:
-                    self.writer = importlib.import_module(
-                        module
-                    ).SummaryWriter(log_dir)
+                    self.writer = importlib.import_module(module).SummaryWriter(log_dir)
                     succeeded = True
                     break
                 except ImportError:
@@ -72,9 +68,7 @@ class TensorboardWriter:
             self.timer = datetime.now()
         else:
             duration = datetime.now() - self.timer
-            self.add_scalar(
-                "steps_per_sec", 1 / duration.total_seconds()
-            )
+            self.add_scalar("steps_per_sec", 1 / duration.total_seconds())
             self.timer = datetime.now()
 
     def __getattr__(self, name: str):

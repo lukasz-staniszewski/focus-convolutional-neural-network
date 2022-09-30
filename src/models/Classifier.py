@@ -5,8 +5,9 @@ import torch
 
 
 class Classifier(BaseModel):
-    def __init__(self):
+    def __init__(self, threshold):
         super().__init__()
+        self.threshold = threshold
         self.layer1 = nn.Sequential(
             nn.Conv2d(
                 in_channels=3,
@@ -43,6 +44,7 @@ class Classifier(BaseModel):
                 in_channels=100,
                 out_channels=120,
                 kernel_size=(3, 3),
+                stride=(1, 1),
             ),
             nn.ReLU(),
             nn.Dropout(0.5),
@@ -50,12 +52,14 @@ class Classifier(BaseModel):
             nn.MaxPool2d(kernel_size=3, stride=3),
         )
         self.fc = nn.Sequential(
-            nn.Linear(in_features=1080, out_features=500),
+            nn.Linear(in_features=480, out_features=500),
             nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(in_features=500, out_features=300),
             nn.ReLU(),
             nn.Linear(in_features=300, out_features=50),
             nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(in_features=50, out_features=1),
             nn.Sigmoid(),
         )
@@ -67,6 +71,6 @@ class Classifier(BaseModel):
         x = self.layer4(x)
 
         x = torch.flatten(x, 1)  # flatten all dimensions except batch
-        x = self.final_act(x)
+        x = self.fc(x)
 
         return x

@@ -46,9 +46,7 @@ def write_json(content: Dict, fname: str) -> None:
         json.dump(content, handle, indent=4, sort_keys=False)
 
 
-def inf_loop(
-    data_loader: torch.utils.data.DataLoader,
-) -> torch.utils.data.DataLoader:
+def inf_loop(data_loader: torch.utils.data.DataLoader,) -> torch.utils.data.DataLoader:
     """Wrapper function for endless data loader."""
     for loader in repeat(data_loader):
         yield from loader
@@ -66,10 +64,7 @@ def prepare_device(gpu_id: int) -> Tuple[torch.device, List[int]]:
     """
     n_gpu = torch.cuda.device_count()
     if gpu_id > 0 and n_gpu == 0:
-        print(
-            "Warning - no GPU available, CPU training will take a place"
-            " instead."
-        )
+        print("Warning - no GPU available, CPU training will take a place" " instead.")
         gpu_id = 0
     if gpu_id > n_gpu:
         print(
