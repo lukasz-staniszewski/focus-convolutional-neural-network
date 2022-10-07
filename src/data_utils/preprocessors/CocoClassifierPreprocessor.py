@@ -37,6 +37,18 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         self.df_out = None
         self.img_idx = 0
 
+        self._prepare_output_img_dir()
+
+    def _prepare_output_img_dir(self):
+        """Prepares output directory for images."""
+        assert os.path.exists(
+            self.out_dir_path
+        ), "Output dir not found."
+        self.img_out_dir_path = os.path.join(
+            self.out_dir_path, "images"
+        )
+        os.makedirs(self.img_out_dir_path, exist_ok=True)
+
     def _resize_img(self, img: PIL.Image) -> PIL.Image:
         """Resizes image to own shape.
 
@@ -98,34 +110,28 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         Returns:
             List[str]: filenames for objects
         """
-
-        if labels and type(labels) == str:
+        if self.preprocessing_pos:
+            assert labels and isinstance(labels, str)
             labels = [labels]
+        else:
+            assert labels is None or isinstance(labels, list)
+            if labels is None:
+                labels = list(COCO_2017_LABEL_MAP.values())
+                labels.remove(self.label_pos)
         filenames = []
         n_imgs_label = 0
 
-        for img, objects in tqdm(
-            self.dataset,
-            desc="Preprocessing images cutting",
-            total=self.label_max_sz
-            if self.label_max_sz
-            else len(self.dataset),
-        ):
+        for img, objects in self.dataset:
             for obj in objects:
                 img_in = deepcopy(img)
-                if (
-                    labels is None
-                    or COCO_2017_LABEL_MAP[obj["category_id"]] in labels
-                ):
+                if COCO_2017_LABEL_MAP[obj["category_id"]] in labels:
                     self.img_idx += 1
                     bbox = deepcopy(obj["bbox"])
                     img_in = self.cut_fn(img_in=img_in, bbox=bbox)
 
                     filename = f"{self.img_idx}.jpg"
                     img_in.save(
-                        os.path.join(
-                            self.img_out_dir_path, "images", filename
-                        )
+                        os.path.join(self.img_out_dir_path, filename)
                     )
                     filenames.append(filename)
 
@@ -186,22 +192,23 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         self.logger.info(
             f"Starting preprocessing images for label 1..."
         )
-        X_pos, filenames_pos = self.collect_filenames_per_label(
-            self.label_pos
-        )
-        y_pos = [1 for _ in range(len(X_pos))]
+        self.preprocessing_pos = True
+        filenames_pos = self.collect_filenames_per_label(self.label_pos)
+        y_pos = [1 for _ in range(len(filenames_pos))]
         self.logger.info(f"Preprocessing label 1 images finished.")
         self.logger.info(
             f"Starting preprocessing images for label 0..."
         )
-        X_neg, filenames_neg = self.collect_filenames_per_label(
+        self.preprocessing_pos = False
+        filenames_neg = self.collect_filenames_per_label(
             self.labels_neg
         )
-        y_neg = [0 for _ in range(len(X_neg))]
+        y_neg = [0 for _ in range(len(filenames_neg))]
         self.logger.info(f"Preprocessing label 0 images finished.")
         self.logger.info(
             "Images preprocessed, number of label 1 images:"
-            f" {len(X_pos)} and label 0 images: {len(X_neg)}."
+            f" {len(filenames_pos)} and label 0 images:"
+            f" {len(filenames_neg)}."
         )
 
         self.y = y_pos + y_neg
@@ -221,15 +228,8 @@ class CocoClassifierPreprocessor(BasePreprocessor):
             and self.filenames is not None
         ), "Data not collected."
 
-        assert os.path.exists(
-            self.img_out_dir_path
-        ), "Output dir not found."
-        os.makedirs(
-            os.path.join(self.img_out_dir_path, "images"), exist_ok=True
-        )
-
         self.df_out.to_csv(
-            os.path.join(self.img_out_dir_path, "labels.csv"),
+            os.path.join(self.out_dir_path, "labels.csv"),
             index=False,
             sep=",",
             header=True,

@@ -1,21 +1,21 @@
 {
-    "name": "CocoClassifierPersonPreprocessing",
+    "name": "CocoClassifierBicyclePreprocessing",
     "preprocessor": {
         "type": "CocoClassifierPreprocessor",
         "args": {
-            "img_in_dir_path": "data/raw/COCO-2017/validate/",
-            "ann_file_path": "data/raw/COCO-2017/annotations/instances_val2017.json",
-            "img_out_dir_path": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/",
+            "img_in_dir_path": "data/raw/COCO-2017/train/",
+            "ann_file_path": "data/raw/COCO-2017/annotations/instances_train2017.json",
+            "out_dir_path": "data/processed/COCO-2017/CocoBicycleClassifier/train/",
             "img_out_shape": [
-                250,
-                250
+                300,
+                300
             ],
-            "label_max_sz": 40000,
-            "label_pos": "person",
+            "label_max_sz": 8000,
+            "label_pos": "bicycle",
             "labels_neg": null,
             "cut_fn": "cut_min_covering_square",
             "reflect_padding_cut": false
         }
     },
-    "save_cfg_dir": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/"
+    "save_cfg_dir": "data/processed/COCO-2017/CocoBicycleClassifier/train/"
 }
