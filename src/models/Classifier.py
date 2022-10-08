@@ -16,7 +16,7 @@ class Classifier(BaseModel):
                 stride=(2, 2),
             ),
             nn.ReLU(),
-            nn.Dropout2d(0.7),
+            nn.Dropout2d(0.1),
         )
         self.layer2 = nn.Sequential(
             nn.Conv2d(
@@ -37,7 +37,7 @@ class Classifier(BaseModel):
                 stride=(2, 2),
             ),
             nn.ReLU(),
-            nn.Dropout2d(0.6),
+            nn.Dropout2d(0.1),
             nn.MaxPool2d(kernel_size=3, stride=3),
         )
         self.layer4 = nn.Sequential(
@@ -48,19 +48,20 @@ class Classifier(BaseModel):
                 stride=(1, 1),
             ),
             nn.ReLU(),
-            nn.Dropout2d(0.7),
+            nn.Dropout2d(0.15),
             nn.BatchNorm2d(120),
             nn.MaxPool2d(kernel_size=3, stride=3),
         )
         self.fc = nn.Sequential(
             nn.Linear(in_features=1080, out_features=650),
             nn.ReLU(),
-            nn.Dropout(0.7),
+            nn.Dropout(0.5),
             nn.Linear(in_features=650, out_features=300),
             nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(in_features=300, out_features=50),
             nn.ReLU(),
-            nn.Dropout(0.7),
+            nn.Dropout(0.5),
             nn.Linear(in_features=50, out_features=1),
             nn.Sigmoid(),
         )

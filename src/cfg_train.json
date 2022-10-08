@@ -12,12 +12,22 @@
     "data_loader": {
         "type": "ClassifierDataLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/images",
+            "images_dir": "data/processed/COCO-2017/CocoPersonClassifier/train/images",
             "batch_size": 512,
-            "csv_path": "data/processed/COCO-2017/CocoClassifierPreprocessor/validate/labels.csv",
+            "csv_path": "data/processed/COCO-2017/CocoPersonClassifier/train/labels.csv",
+            "transform_mean": [
+                0.5462,
+                0.5803,
+                0.6043
+            ],
+            "transform_std": [
+                0.2952,
+                0.2886,
+                0.2965
+            ],
             "shuffle": true,
             "validation_split": 0.2,
-            "num_workers": 8,
+            "num_workers": 4,
             "balance": true
         }
     },
@@ -49,7 +59,7 @@
         "save_period": 1,
         "verbosity": 2,
         "monitor": "min val_loss",
-        "early_stop": 6,
-        "tensorboard": true
+        "early_stop": 7,
+        "tensorboard": false
     }
 }

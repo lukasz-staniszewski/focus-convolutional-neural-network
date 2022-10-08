@@ -1,10 +1,8 @@
-from email.mime import image
 from pathlib import Path
-from torchvision import transforms
 from base import BaseDataLoader
 from data_utils.data_sets import ClassifierDataset
 from torch.utils.data import ConcatDataset
-from typing import List, Any
+from typing import Tuple
 import torchvision.transforms as T
 import pandas as pd
 from copy import deepcopy
@@ -16,6 +14,8 @@ class ClassifierDataLoader(BaseDataLoader):
         images_dir: str,
         batch_size: int,
         csv_path: str,
+        transform_mean: Tuple[float] = None,
+        transform_std: Tuple[float] = None,
         shuffle: bool = True,
         validation_split: float = 0.0,
         num_workers: int = 1,
@@ -23,12 +23,12 @@ class ClassifierDataLoader(BaseDataLoader):
         balance: bool = False,
     ):
         self.images_dir = images_dir
-        self.transform = transforms.Compose(transforms=[])
-        self.transform_aug = transforms.Compose(
-            transforms=[T.RandomHorizontalFlip(0.5), T.RandomErasing(0.5),]
-        )
         self.csv_path = csv_path
         self.balance = balance
+
+        self.combine_transforms(
+            transform_mean=transform_mean, transform_std=transform_std
+        )
 
         if is_test:
             self.dataset = ClassifierDataset(
@@ -40,7 +40,9 @@ class ClassifierDataLoader(BaseDataLoader):
             shuffle = False
         else:
             self.csv_aug_path = (
-                self.balance_lower_class() if self.balance else self.csv_path
+                self.balance_lower_class()
+                if self.balance
+                else self.csv_path
             )
             self.dataset = ConcatDataset(
                 [
@@ -58,7 +60,11 @@ class ClassifierDataLoader(BaseDataLoader):
             )
 
         super().__init__(
-            self.dataset, batch_size, shuffle, validation_split, num_workers,
+            self.dataset,
+            batch_size,
+            shuffle,
+            validation_split,
+            num_workers,
         )
 
     def balance_lower_class(self) -> Path:
@@ -69,7 +75,44 @@ class ClassifierDataLoader(BaseDataLoader):
         freq_cls = int(n_0 <= n_1)
         cnt_diff = abs(n_0 - n_1)
 
-        df_aug = df_orig[df_orig["label"] != freq_cls].sample(cnt_diff, replace=True)
+        df_aug = df_orig[df_orig["label"] != freq_cls].sample(
+            cnt_diff, replace=True
+        )
         new_path = deepcopy(self.csv_path).replace(".csv", "_aug.csv")
         df_aug.to_csv(new_path, index=False, header=True)
         return new_path
+
+    def combine_transforms(
+        self,
+        transform_mean: Tuple[float] = None,
+        transform_std: Tuple[float] = None,
+    ) -> None:
+        if transform_mean and transform_std:
+            self.transform = T.Compose(
+                transforms=[
+                    T.ToPILImage(),
+                    T.ToTensor(),
+                    T.Normalize(transform_mean, transform_std),
+                ]
+            )
+            self.transform_aug = T.Compose(
+                transforms=[
+                    T.ToPILImage(),
+                    T.ToTensor(),
+                    T.Normalize(transform_mean, transform_std),
+                    T.RandomHorizontalFlip(0.5),
+                    T.RandomErasing(0.5),
+                ]
+            )
+        else:
+            self.transform = T.Compose(
+                transforms=[T.ToPILImage(), T.ToTensor()]
+            )
+            self.transform_aug = T.Compose(
+                transforms=[
+                    T.ToPILImage(),
+                    T.ToTensor(),
+                    T.RandomHorizontalFlip(0.5),
+                    T.RandomErasing(0.5),
+                ]
+            )
