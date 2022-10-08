@@ -8,9 +8,13 @@ import os
 class BaseTrainer:
     """Base class for all trainers"""
 
-    def __init__(self, model, criterion, metric_ftns, optimizer, config) -> None:
+    def __init__(
+        self, model, criterion, metric_ftns, optimizer, config
+    ) -> None:
         self.config = config
-        self.logger = config.get_logger("trainer", config["trainer"]["verbosity"])
+        self.logger = config.get_logger(
+            "trainer", config["trainer"]["verbosity"]
+        )
         self.model = model
         self.criterion = criterion
         self.metric_ftns = metric_ftns
@@ -58,22 +62,25 @@ class BaseTrainer:
             log = {"epoch": epoch}
             log.update(result)
             for key, value in log.items():
-                self.logger.info("    {:15s}: {}".format(str(key), value))
+                self.logger.info(
+                    "    {:15s}: {}".format(str(key), value)
+                )
 
-            best = False
+            is_best = False
             if self.mnt_mode != "off":
                 try:
                     improved = (
-                        self.mnt_mode == "min" and log[self.mnt_metric] <= self.mnt_best
+                        self.mnt_mode == "min"
+                        and log[self.mnt_metric] <= self.mnt_best
                     ) or (
-                        self.mnt_mode == "max" and log[self.mnt_metric] >= self.mnt_best
+                        self.mnt_mode == "max"
+                        and log[self.mnt_metric] >= self.mnt_best
                     )
                 except KeyError:
                     self.logger.warning(
                         "Warning: Metric '{}' is not found. "
-                        "Model performance monitoring is disabled.".format(
-                            self.mnt_metric
-                        )
+                        "Model performance monitoring is disabled."
+                        .format(self.mnt_metric)
                     )
                     self.mnt_mode = "off"
                     improved = False
@@ -81,25 +88,33 @@ class BaseTrainer:
                 if improved:
                     self.mnt_best = log[self.mnt_metric]
                     not_improved_count = 0
-                    best = True
+                    is_best = True
                 else:
                     not_improved_count += 1
 
                 if not_improved_count > self.early_stop:
                     self.logger.info(
                         "Validation performance didn't improve for {}"
-                        " epochs. Training stops.".format(self.early_stop)
+                        " epochs. Training stops.".format(
+                            self.early_stop
+                        )
                     )
                     break
 
             if epoch % self.save_period == 0:
-                self._save_checkpoint(epoch, save_best=best)
+                self._save_checkpoint(epoch=epoch, save_as_best=False)
+            if is_best:
+                self._save_best_checkpoint(
+                    epoch=epoch, save_as_best=True
+                )
 
-    def _save_checkpoint(self, epoch: int, save_best: bool = False) -> None:
-        """Saves checkpoint.
+    def _save_checkpoint(
+        self, epoch: int, save_as_best: bool = False
+    ) -> None:
+        """By default saves checkpoint of path. If save_as_best is True, saves checkpoint as best.
         Args:
             epoch (int): current epoch number
-            save_best (bool, optional): if True, rename the saved checkpoint to 'model_best.pth'. Defaults to False.
+            save_as_best (bool): if True, saves checkpoint as best; defaults to False
         """
         arch = type(self.model).__name__
         state = {
@@ -110,13 +125,17 @@ class BaseTrainer:
             "monitor_best": self.mnt_best,
             "config": self.config,
         }
-        epoch_path = os.path.join(self.checkpoint_dir, f"checkpoint-epoch{epoch}.pth")
-        torch.save(state, epoch_path)
-        self.logger.info("Saving checkpoint: {} ...".format(epoch_path))
-        if save_best:
-            best_path = os.path.join(self.checkpoint_dir / "model_best.pth")
-            torch.save(state, best_path)
-            self.logger.info("Saving current best: model_best.pth ...")
+        if save_as_best:
+            path = os.path.join(self.checkpoint_dir / "model_best.pth")
+            log_info = "Saving current best: model_best.pth ..."
+        else:
+            path = os.path.join(
+                self.checkpoint_dir, f"checkpoint-epoch{epoch}.pth"
+            )
+            log_info = "Saving checkpoint: {} ...".format(path)
+
+        torch.save(state, path)
+        self.logger.info(log_info)
 
     def _resume_checkpoint(self, resume_path: str) -> None:
         """Resumes from saved checkpoint.
@@ -124,7 +143,9 @@ class BaseTrainer:
         Args:
             resume_path (str): checkpoint path to be resumed
         """
-        self.logger.info("Loading checkpoint: {} ...".format(resume_path))
+        self.logger.info(
+            "Loading checkpoint: {} ...".format(resume_path)
+        )
         checkpoint = torch.load(resume_path)
         self.start_epoch = checkpoint["epoch"] + 1
         self.mnt_best = checkpoint["monitor_best"]
