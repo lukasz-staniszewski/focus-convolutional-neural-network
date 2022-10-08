@@ -104,9 +104,7 @@ class BaseTrainer:
             if epoch % self.save_period == 0:
                 self._save_checkpoint(epoch=epoch, save_as_best=False)
             if is_best:
-                self._save_best_checkpoint(
-                    epoch=epoch, save_as_best=True
-                )
+                self._save_checkpoint(epoch=epoch, save_as_best=True)
 
     def _save_checkpoint(
         self, epoch: int, save_as_best: bool = False
