@@ -3,13 +3,20 @@ from abc import abstractmethod
 from numpy import inf
 from logger import TensorboardWriter
 import os
+from utils import ConfigParser
+from base import BaseModel
 
 
 class BaseTrainer:
     """Base class for all trainers"""
 
     def __init__(
-        self, model, criterion, metric_ftns, optimizer, config
+        self,
+        model: BaseModel,
+        criterion: torch.nn.Module,
+        metric_ftns: list,
+        optimizer: torch.optim.Optimizer,
+        config: ConfigParser,
     ) -> None:
         self.config = config
         self.logger = config.get_logger(

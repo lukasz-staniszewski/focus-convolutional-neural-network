@@ -11,15 +11,16 @@ from trainer import Trainer
 from utils.project_utils import prepare_device
 
 
-def main(config):
+def main(config: ConfigParser) -> None:
+    # logger
     logger = config.get_logger("train")
     config.ensure_reproducibility()
 
-    # setup data_loader instances
+    # data_loader setup
     data_loader = config.init_obj("data_loader", module_data)
     valid_data_loader = data_loader.split_validation()
 
-    # build model architecture, then print to console
+    # build model
     model = config.init_obj("arch", module_arch)
     logger.info(model)
 
@@ -29,14 +30,20 @@ def main(config):
     if len(device_ids) > 1:
         model = torch.nn.DataParallel(model, device_ids=device_ids)
 
-    # get function handles of loss and metrics
+    # function handles - loss and metrics
     criterion = getattr(module_loss, config["loss"])
     metrics = [getattr(module_metric, met) for met in config["metrics"]]
 
-    # build optimizer, learning rate scheduler. delete every lines containing lr_scheduler for disabling scheduler
-    trainable_params = filter(lambda p: p.requires_grad, model.parameters())
-    optimizer = config.init_obj("optimizer", torch.optim, trainable_params)
-    lr_scheduler = config.init_obj("lr_scheduler", torch.optim.lr_scheduler, optimizer)
+    # optimizer, lr scheduler
+    trainable_params = filter(
+        lambda p: p.requires_grad, model.parameters()
+    )
+    optimizer = config.init_obj(
+        "optimizer", torch.optim, trainable_params
+    )
+    lr_scheduler = config.init_obj(
+        "lr_scheduler", torch.optim.lr_scheduler, optimizer
+    )
 
     trainer = Trainer(
         model,
@@ -54,7 +61,7 @@ def main(config):
 
 
 if __name__ == "__main__":
-    args = argparse.ArgumentParser(description="PyTorch Template")
+    args = argparse.ArgumentParser(description="Model trainer.")
     args.add_argument(
         "-c",
         "--config",
@@ -78,13 +85,19 @@ if __name__ == "__main__":
     )
 
     # custom cli options to modify configuration from default values given in json file.
-    CustomArgs = collections.namedtuple("CustomArgs", "flags type target")
+    CustomArgs = collections.namedtuple(
+        "CustomArgs", "flags type target"
+    )
     options = [
         CustomArgs(
-            ["--lr", "--learning_rate"], type=float, target="optimizer;args;lr",
+            ["--lr", "--learning_rate"],
+            type=float,
+            target="optimizer;args;lr",
         ),
         CustomArgs(
-            ["--bs", "--batch_size"], type=int, target="data_loader;args;batch_size",
+            ["--bs", "--batch_size"],
+            type=int,
+            target="data_loader;args;batch_size",
         ),
     ]
     config = ConfigParser.from_args(args, options)
