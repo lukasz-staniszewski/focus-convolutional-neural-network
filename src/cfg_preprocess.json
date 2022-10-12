@@ -1,21 +1,24 @@
 {
-    "name": "CocoClassifierBicyclePreprocessing",
+    "name": "CocoClassifierCatPreprocessing",
     "preprocessor": {
         "type": "CocoClassifierPreprocessor",
         "args": {
             "img_in_dir_path": "data/raw/COCO-2017/train/",
             "ann_file_path": "data/raw/COCO-2017/annotations/instances_train2017.json",
-            "out_dir_path": "data/processed/COCO-2017/CocoBicycleClassifier/train/",
+            "out_dir_path": "data/processed/COCO-2017/CocoCatClassifier/train/",
             "img_out_shape": [
                 300,
                 300
             ],
-            "label_max_sz": 8000,
-            "label_pos": "bicycle",
+            "label_max_sz": 12000,
+            "label_pos": "cat",
             "labels_neg": null,
             "cut_fn": "cut_min_covering_square",
             "reflect_padding_cut": false
         }
     },
-    "save_cfg_dir": "data/processed/COCO-2017/CocoBicycleClassifier/train/"
+    "preprocess": {
+        "verbosity": 1,
+        "save_dir": "data/processed/COCO-2017/CocoCatClassifier/train/"
+    }
 }

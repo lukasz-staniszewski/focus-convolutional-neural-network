@@ -1,22 +1,36 @@
 {
-    "test": {
-        "model_to_load_path": "res/models/classifier_person/model_best.pth",
-        "predicting": {
-            "results_file": "results.csv",
-            "test_folder": "data/processed/COCO-2017/images"
-        },
-        "data_loader": {
-            "type": "ClassifierDataLoader",
-            "args": {
-                "images_folder": "data/processed/validate/",
-                "batch_size": 128,
-                "csv_path": "data/df_train_framefilter.csv",
-                "csv_path_tf": "data/df_train_framefilter_rs.csv",
-                "shuffle": false,
-                "validation_split": 0.0,
-                "num_workers": 2,
-                "is_train": false
-            }
+    "name": "CocoBicycleClassifier",
+    "device": 1,
+    "seed": 42,
+    "model_path": "res/classifiers/classifier_bicycle/trainer/1012_021013/models/model_best.pth",
+    "data_loader": {
+        "type": "ClassifierTestDataLoader",
+        "args": {
+            "images_dir": "data/processed/COCO-2017/CocoBicycleClassifier/train/images",
+            "batch_size": 256,
+            "csv_path": "data/processed/COCO-2017/CocoBicycleClassifier/train/labels.csv",
+            "transform_mean": [
+                0.5647,
+                0.5906,
+                0.6088
+            ],
+            "transform_std": [
+                0.2894,
+                0.2830,
+                0.2891
+            ],
+            "num_workers": 4
         }
+    },
+    "metrics": [
+        "accuracy",
+        "recall",
+        "precision",
+        "f1"
+    ],
+    "tester": {
+        "verbosity": 1,
+        "save_dir": "res/classifiers/classifier_bicycle/",
+        "only_predict": false
     }
 }

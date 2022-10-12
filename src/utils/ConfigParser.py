@@ -1,4 +1,5 @@
 from __future__ import annotations
+from concurrent.futures import process
 import os
 import logging
 from pathlib import Path
@@ -30,13 +31,16 @@ class ConfigParser:
         """
         self._config = _update_config(config, modification)
         self.resume = resume
-        self.save_cfg_dir = Path(self._config["save_cfg_dir"])
         self.experiment_name = self._config["name"]
 
         if "trainer" in self._config.keys():
-            self.init_trainer(run_id=run_id)
+            self.init_process(process_name="trainer", run_id=run_id)
+        elif "tester" in self._config.keys():
+            self.init_process(process_name="tester", run_id=run_id)
+        elif "preprocess" in self._config.keys():
+            self.init_process(process_name="preprocess", run_id=run_id)
 
-        write_json(self.config, self.save_cfg_dir / "config.json")
+        write_json(self.config, self._save_cfg_dir / "config.json")
 
     @classmethod
     def from_args(cls, args, options: str = "") -> ConfigParser:
@@ -60,6 +64,9 @@ class ConfigParser:
         if args.config and resume:
             # update new config for fine-tuning
             config.update(read_json(args.config))
+
+        if "seed" in vars(args).keys():
+            config.update({"seed": vars(args)["seed"]})
 
         # parse custom cli options into dictionary
         modification = {
@@ -137,19 +144,31 @@ class ConfigParser:
         logger.setLevel(self.log_levels[verbosity])
         return logger
 
-    def init_trainer(self, run_id: int = None) -> None:
-        save_model_dir = Path(self.config["trainer"]["save_dir"])
-        if run_id is None:  # use timestamp as default run-id
-            run_id = datetime.now().strftime(r"%m%d_%H%M%S")
-        self._save_dir = (
-            save_model_dir / "models" / self.experiment_name / run_id
+    def init_process(
+        self, process_name: str, run_id: int = None
+    ) -> None:
+        assert process_name in ["trainer", "tester", "preprocess"], (
+            "Invalid process name. Valid options are 'trainer', "
+            " 'tester' and 'preprocess'."
         )
-        self._log_dir = (
-            save_model_dir / "log" / self.experiment_name / run_id
-        )
-        exist_ok = run_id == ""
-        self.save_dir.mkdir(parents=True, exist_ok=exist_ok)
+
+        save_dir = Path(self.config[process_name]["save_dir"])
+        if process_name == "preprocess":
+            full_save_dir = save_dir
+            exist_ok = True
+        else:
+            if run_id is None:  # use timestamp as default run-id
+                run_id = datetime.now().strftime(r"%m%d_%H%M%S")
+            exist_ok = run_id == ""
+            full_save_dir = save_dir / process_name / run_id
+
+        self._log_dir = full_save_dir / "log"
         self.log_dir.mkdir(parents=True, exist_ok=exist_ok)
+        self._save_cfg_dir = full_save_dir
+
+        if process_name == "trainer":
+            self._save_dir = full_save_dir / "models"
+            self.save_dir.mkdir(parents=True, exist_ok=exist_ok)
 
         setup_logging(self.log_dir)
         self.log_levels = {

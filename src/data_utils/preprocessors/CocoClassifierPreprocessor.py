@@ -123,8 +123,8 @@ class CocoClassifierPreprocessor(BasePreprocessor):
 
         for img, objects in self.dataset:
             for obj in objects:
-                img_in = deepcopy(img)
                 if COCO_2017_LABEL_MAP[obj["category_id"]] in labels:
+                    img_in = deepcopy(img)
                     self.img_idx += 1
                     bbox = deepcopy(obj["bbox"])
                     img_in = self.cut_fn(img_in=img_in, bbox=bbox)
