@@ -8,7 +8,7 @@ from tqdm import tqdm
 import os
 import pandas as pd
 from copy import deepcopy
-from math import floor
+from math import floor, inf
 import numpy as np
 from PIL import Image
 
@@ -22,7 +22,15 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         self.img_out_shape = kwargs["img_out_shape"]
         self.reflect_padding_cut = kwargs["reflect_padding_cut"]
         self.cut_fn = getattr(self, kwargs["cut_fn"])
-        self.label_max_sz = kwargs["label_max_sz"]
+
+        if kwargs["label_max_sz"] is None:
+            self.label_max_sz = inf
+        elif isinstance(kwargs["label_max_sz"], int):
+            self.label_max_sz = kwargs["label_max_sz"]
+        else:
+            raise ValueError(
+                "Parameter label_max_sz must be int or None."
+            )
 
         self.logger.info(
             f"Starting mapping CocoDetection dataset to memory..."
@@ -136,7 +144,10 @@ class CocoClassifierPreprocessor(BasePreprocessor):
                     filenames.append(filename)
 
                     n_imgs_label += 1
-                    if n_imgs_label >= self.label_max_sz:
+                    if (
+                        self.label_max_sz != 0
+                        and n_imgs_label >= self.label_max_sz
+                    ):
                         return filenames
 
         return filenames
@@ -196,6 +207,9 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         filenames_pos = self.collect_filenames_per_label(self.label_pos)
         y_pos = [1 for _ in range(len(filenames_pos))]
         self.logger.info(f"Preprocessing label 1 images finished.")
+
+        if self.label_max_sz == 0:
+            self.label_max_sz = len(filenames_pos)
         self.logger.info(
             f"Starting preprocessing images for label 0..."
         )

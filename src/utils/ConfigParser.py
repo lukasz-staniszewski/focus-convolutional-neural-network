@@ -162,7 +162,7 @@ class ConfigParser:
             exist_ok = run_id == ""
             full_save_dir = save_dir / process_name / run_id
 
-        self._log_dir = full_save_dir / "log"
+        self._log_dir = full_save_dir / "logs"
         self.log_dir.mkdir(parents=True, exist_ok=exist_ok)
         self._save_cfg_dir = full_save_dir
 
@@ -193,6 +193,10 @@ class ConfigParser:
     @property
     def log_dir(self):
         return self._log_dir
+
+    @property
+    def save_cfg_dir(self):
+        return self._save_cfg_dir
 
 
 # helper functions to update config dict with custom cli options

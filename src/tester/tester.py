@@ -46,8 +46,7 @@ class Tester(BaseTester):
 
         if not only_predict:
             self.predictions_path = (
-                Path(self.config["tester"]["save_dir"])
-                / "predictions.csv"
+                Path(self.config.save_cfg_dir) / "predictions.csv"
             )
 
     def _predict(self) -> None:
