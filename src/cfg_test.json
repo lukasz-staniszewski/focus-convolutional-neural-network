@@ -1,23 +1,23 @@
 {
-    "name": "CocoBicycleClassifier",
+    "name": "CocoDogClassifier",
     "device": 1,
     "seed": 42,
-    "model_path": "res/classifiers/classifier_bicycle/trainer/1012_021013/models/model_best.pth",
+    "model_path": "res/classifiers/classifier_dog/trainer/1014_025302/models/checkpoint-epoch30.pth",
     "data_loader": {
         "type": "ClassifierTestDataLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoBicycleClassifier/train/images",
+            "images_dir": "data/processed/COCO-2017/CocoDogClassifier/validate/images",
             "batch_size": 256,
-            "csv_path": "data/processed/COCO-2017/CocoBicycleClassifier/train/labels.csv",
+            "csv_path": "data/processed/COCO-2017/CocoDogClassifier/validate/labels.csv",
             "transform_mean": [
-                0.5647,
-                0.5906,
-                0.6088
+                0.5243,
+                0.5564,
+                0.5869
             ],
             "transform_std": [
-                0.2894,
-                0.2830,
-                0.2891
+                0.2958,
+                0.2923,
+                0.3011
             ],
             "num_workers": 4
         }
@@ -30,7 +30,7 @@
     ],
     "tester": {
         "verbosity": 1,
-        "save_dir": "res/classifiers/classifier_bicycle/",
+        "save_dir": "res/classifiers/classifier_dog/",
         "only_predict": false
     }
 }

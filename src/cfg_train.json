@@ -1,8 +1,8 @@
 {
-    "name": "CocoBicycleClassifier",
+    "name": "CocoDogClassifier",
     "device": 1,
     "seed": 42,
-    "save_cfg_dir": "res/classifiers/classifier_bicycle/",
+    "save_cfg_dir": "res/classifiers/classifier_dog/",
     "arch": {
         "type": "Classifier",
         "args": {
@@ -12,18 +12,18 @@
     "data_loader": {
         "type": "ClassifierDataLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoBicycleClassifier/train/images",
+            "images_dir": "data/processed/COCO-2017/CocoDogClassifier/train/images",
             "batch_size": 256,
-            "csv_path": "data/processed/COCO-2017/CocoBicycleClassifier/train/labels.csv",
+            "csv_path": "data/processed/COCO-2017/CocoDogClassifier/train/labels.csv",
             "transform_mean": [
-                0.5647,
-                0.5906,
-                0.6088
+                0.5243,
+                0.5564,
+                0.5869
             ],
             "transform_std": [
-                0.2894,
-                0.2830,
-                0.2891
+                0.2958,
+                0.2923,
+                0.3011
             ],
             "shuffle": true,
             "validation_split": 0.15,
@@ -34,7 +34,7 @@
     "optimizer": {
         "type": "Adam",
         "args": {
-            "lr": 1e-4,
+            "lr": 3e-4,
             "weight_decay": 0,
             "amsgrad": true
         }
@@ -55,11 +55,11 @@
     },
     "trainer": {
         "epochs": 100,
-        "save_dir": "res/classifiers/classifier_bicycle/",
+        "save_dir": "res/classifiers/classifier_dog/",
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",
-        "early_stop": 7,
+        "early_stop": 10,
         "tensorboard": false
     }
 }

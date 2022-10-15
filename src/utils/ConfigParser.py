@@ -52,7 +52,7 @@ class ConfigParser:
 
         if "resume" in vars(args).keys() and args.resume is not None:
             resume = Path(args.resume)
-            cfg_fname = resume.parents[3] / "config.json"
+            cfg_fname = resume.parents[1] / "config.json"
         else:
             assert (
                 args.config is not None

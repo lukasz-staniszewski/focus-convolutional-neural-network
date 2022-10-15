@@ -1,0 +1,24 @@
+{
+    "name": "CocoClassifierDogPreprocessing",
+    "preprocessor": {
+        "type": "CocoClassifierPreprocessor",
+        "args": {
+            "img_in_dir_path": "data/raw/COCO-2017/validate/",
+            "ann_file_path": "data/raw/COCO-2017/annotations/instances_val2017.json",
+            "out_dir_path": "data/processed/COCO-2017/CocoDogClassifier/validate/",
+            "img_out_shape": [
+                300,
+                300
+            ],
+            "label_max_sz": 0,
+            "label_pos": "dog",
+            "labels_neg": null,
+            "cut_fn": "cut_min_covering_square",
+            "reflect_padding_cut": false
+        }
+    },
+    "preprocess": {
+        "verbosity": 1,
+        "save_dir": "data/processed/COCO-2017/CocoDogClassifier/validate/"
+    }
+}
