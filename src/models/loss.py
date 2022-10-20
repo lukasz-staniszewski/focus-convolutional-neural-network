@@ -1,5 +1,6 @@
 import torch.nn.functional as F
 import torch.nn as nn
+import torch
 
 
 def nll_loss(output, target):
@@ -7,6 +8,10 @@ def nll_loss(output, target):
 
 
 def cross_entropy_loss(output, target):
+    return nn.CrossEntropyLoss()(output, target)
+
+
+def classifier_cross_entropy_loss(output, target):
     return nn.CrossEntropyLoss()(output, target)
 
 

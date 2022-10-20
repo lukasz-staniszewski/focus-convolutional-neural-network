@@ -76,3 +76,6 @@ class Classifier(BaseModel):
         x = self.fc(x)
 
         return x
+
+    def predict(self, x):
+        return (x >= self.model.threshold).float()

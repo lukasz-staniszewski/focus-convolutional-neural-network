@@ -1,8 +1,9 @@
 import pandas as pd
 from base import BaseDataLoader
 from data_utils.data_sets import ClassifierTestDataset
-from typing import Any, Tuple
+from typing import Any, Tuple, Union
 import torchvision.transforms as T
+from pathlib import Path
 
 
 class ClassifierTestDataLoader(BaseDataLoader):
@@ -10,9 +11,9 @@ class ClassifierTestDataLoader(BaseDataLoader):
         self,
         images_dir: str,
         batch_size: int,
-        csv_path: str = None,
-        transform_mean: Tuple[float] = None,
-        transform_std: Tuple[float] = None,
+        csv_path: Union[str, Path, None] = None,
+        transform_mean: Union[Tuple[float], None] = None,
+        transform_std: Union[Tuple[float], None] = None,
         num_workers: int = 1,
     ):
         self.images_dir = images_dir
@@ -37,8 +38,8 @@ class ClassifierTestDataLoader(BaseDataLoader):
 
     def combine_transforms(
         self,
-        transform_mean: Tuple[float] = None,
-        transform_std: Tuple[float] = None,
+        transform_mean: Union[Tuple[float], None] = None,
+        transform_std: Union[Tuple[float], None] = None,
     ) -> None:
         if transform_mean and transform_std:
             self.transform = T.Compose(

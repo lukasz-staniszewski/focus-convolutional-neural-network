@@ -1,4 +1,5 @@
 from __future__ import annotations
+from argparse import Namespace
 from concurrent.futures import process
 import os
 import logging
@@ -6,9 +7,10 @@ from pathlib import Path
 from functools import reduce, partial
 from operator import getitem
 from datetime import datetime
+import typing
 from logger import setup_logging
 from utils.project_utils import read_json, write_json, set_seed
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional, Tuple, Union
 
 
 class ConfigParser:
@@ -17,9 +19,9 @@ class ConfigParser:
     def __init__(
         self,
         config: Dict,
-        resume: str = None,
-        modification: Dict = None,
-        run_id: int = None,
+        resume: Optional[str] = None,
+        modification: Optional[Dict] = None,
+        run_id: Optional[int] = None,
     ) -> None:
         """Config parser constructor.
 
@@ -43,12 +45,12 @@ class ConfigParser:
         write_json(self.config, self._save_cfg_dir / "config.json")
 
     @classmethod
-    def from_args(cls, args, options: str = "") -> ConfigParser:
+    def from_args(cls, args: Any, options: Any = "") -> ConfigParser:
         """Initialize this class from some cli arguments. Used in preprocessor, train, test."""
         for opt in options:
             args.add_argument(*opt.flags, default=None, type=opt.type)
         if not isinstance(args, tuple):
-            args = args.parse_args()
+            args: Namespace = args.parse_args()
 
         if "resume" in vars(args).keys() and args.resume is not None:
             resume = Path(args.resume)
@@ -145,7 +147,9 @@ class ConfigParser:
         return logger
 
     def init_process(
-        self, process_name: str, run_id: int = None
+        self,
+        process_name: str,
+        run_id: Optional[Union[int, str]] = None,
     ) -> None:
         assert process_name in ["trainer", "tester", "preprocess"], (
             "Invalid process name. Valid options are 'trainer', "
@@ -200,7 +204,7 @@ class ConfigParser:
 
 
 # helper functions to update config dict with custom cli options
-def _update_config(config: Dict, modification: Dict) -> Dict:
+def _update_config(config: Dict, modification: Optional[Dict]) -> Dict:
     """Update config dict with custom cli options
 
     Args:

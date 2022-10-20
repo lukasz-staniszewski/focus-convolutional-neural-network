@@ -1,34 +1,35 @@
 {
-    "name": "CocoDogClassifier",
-    "device": 1,
+    "name": "CocoMultiClassifier",
+    "device": 0,
     "seed": 42,
-    "save_cfg_dir": "res/classifiers/classifier_dog/",
+    "save_cfg_dir": "res/classifiers/classifier_multi/",
     "arch": {
-        "type": "Classifier",
+        "type": "ResNetFCClassifier",
         "args": {
-            "threshold": 0.5
+            "n_classes": 6
         }
     },
     "data_loader": {
         "type": "ClassifierDataLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoDogClassifier/train/images",
-            "batch_size": 256,
-            "csv_path": "data/processed/COCO-2017/CocoDogClassifier/train/labels.csv",
+            "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/validate/images",
+            "batch_size": 128,
+            "csv_path": "data/processed/COCO-2017/CocoDogClassifier/validate/labels.csv",
             "transform_mean": [
-                0.5243,
-                0.5564,
-                0.5869
+                0.5438,
+                0.5786,
+                0.6030
             ],
             "transform_std": [
-                0.2958,
-                0.2923,
-                0.3011
+                0.2944,
+                0.2882,
+                0.2966
             ],
             "shuffle": true,
             "validation_split": 0.15,
             "num_workers": 4,
-            "balance": true
+            "balance": true,
+            "is_multiclass": true
         }
     },
     "optimizer": {
@@ -39,12 +40,16 @@
             "amsgrad": true
         }
     },
-    "loss": "binary_cross_entropy_loss",
+    "loss": "classifier_cross_entropy_loss",
     "metrics": [
-        "accuracy",
-        "recall",
-        "precision",
-        "f1"
+        "micro_accuracy",
+        "micro_recall",
+        "micro_precision",
+        "micro_f1",
+        "macro_accuracy",
+        "macro_recall",
+        "macro_precision",
+        "macro_f1"
     ],
     "lr_scheduler": {
         "type": "StepLR",
@@ -55,7 +60,7 @@
     },
     "trainer": {
         "epochs": 100,
-        "save_dir": "res/classifiers/classifier_dog/",
+        "save_dir": "res/classifiers/classifier_multi/",
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",

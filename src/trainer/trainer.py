@@ -94,8 +94,8 @@ class Trainer(BaseTrainer):
             progress_bar.set_postfix({"loss": pbar_loss})
             data, target = data.to(self.device), target.to(self.device)
             self.optimizer.zero_grad()
+
             output = self.model(data).squeeze()
-            target = target.float()
             loss = self.criterion(output, target)
             loss.backward()
             pbar_loss = loss.item()
@@ -105,7 +105,7 @@ class Trainer(BaseTrainer):
                 (epoch - 1) * self.len_epoch + batch_idx
             )
             self.train_metrics.update("loss", loss.item())
-            output = (output >= self.model.threshold).float()
+            output = self.model.predict(output)
 
             for met in self.metric_ftns:
                 self.train_metrics.update(
@@ -160,11 +160,10 @@ class Trainer(BaseTrainer):
                 data, target = data.to(self.device), target.to(
                     self.device
                 )
-                target = target.float()
                 output = self.model(data).squeeze()
                 loss = self.criterion(output, target)
                 pbar_loss = loss.item()
-                output = (output >= self.model.threshold).float()
+                output = self.model.predict(output)
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader)

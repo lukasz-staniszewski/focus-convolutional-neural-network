@@ -4,11 +4,16 @@ from torch.utils.data import Dataset
 import torch
 import os
 import pandas as pd
+from typing import Union, Any
+from pathlib import Path
 
 
 class ClassifierTestDataset(Dataset):
     def __init__(
-        self, images_dir: str, csv_path: str = None, transform: T = None
+        self,
+        images_dir: str,
+        csv_path: Union[str, Path, None] = None,
+        transform: Any = None,
     ) -> None:
         self.images_dir = images_dir
 
@@ -33,7 +38,7 @@ class ClassifierTestDataset(Dataset):
         img = torchvision.io.read_image(
             os.path.join(self.images_dir, filename)
         ).float()
-        
+
         if self.transform is not None:
             img = self.transform(img)
 

@@ -1,14 +1,15 @@
 import logging
 import logging.config
 from pathlib import Path
+from typing import Optional, Union
 from utils.project_utils import read_json
 import os
 
 
 def setup_logging(
-    save_dir: str,
-    log_config: str = "src/logger/logger_config.json",
-    default_level: int = logging.INFO,
+    save_dir: Union[str, Path],
+    log_config: Union[str, Path] = "src/logger/logger_config.json",
+    default_level: Optional[int] = logging.INFO,
 ) -> None:
     """Setups logging configuration.
 
