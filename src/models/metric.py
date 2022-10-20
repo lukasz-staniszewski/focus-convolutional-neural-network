@@ -51,7 +51,7 @@ def macro_recall(output, target):
     recalls = [0 for _ in range(len(TP))]
     for c in range(len(recalls)):
         recalls[c] = (
-            torch.Tensor(0.0)
+            torch.Tensor([0.0])
             if (TP[c] + FN[c]).item() == 0
             else (TP[c] / (TP[c] + FN[c]))
         )
@@ -70,7 +70,7 @@ def macro_precision(output, target):
     precisions = [0 for _ in range(len(TP))]
     for c in range(len(TP)):
         precisions[c] = (
-            torch.Tensor(0.0)
+            torch.Tensor([0.0])
             if (TP[c] + FP[c]).item() == 0
             else (TP[c] / (TP[c] + FP[c]))
         )
@@ -92,17 +92,17 @@ def macro_f1(output, target):
     f1s = [0 for _ in range(len(TP))]
     for c in range(len(f1s)):
         recall = (
-            torch.Tensor(0.0)
+            torch.Tensor([0.0])
             if (TP[c] + FN[c]).item() == 0
             else (TP[c] / (TP[c] + FN[c]))
         )
         precision = (
-            torch.Tensor(0.0)
+            torch.Tensor([0.0])
             if (TP[c] + FP[c]).item() == 0
             else (TP[c] / (TP[c] + FP[c]))
         )
         f1s[c] = (
-            torch.Tensor(0.0)
+            torch.Tensor([0.0])
             if (precision + recall).item() == 0
             else 2 * precision * recall / (precision + recall)
         )

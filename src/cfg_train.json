@@ -14,7 +14,7 @@
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/validate/images",
             "batch_size": 128,
-            "csv_path": "data/processed/COCO-2017/CocoDogClassifier/validate/labels.csv",
+            "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/validate/labels.csv",
             "transform_mean": [
                 0.5438,
                 0.5786,
