@@ -77,5 +77,5 @@ class Classifier(BaseModel):
 
         return x
 
-    def predict(self, x):
-        return (x >= self.model.threshold).float()
+    def get_prediction(self, output):
+        return (output >= self.model.threshold).float()

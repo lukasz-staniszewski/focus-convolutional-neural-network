@@ -4,6 +4,7 @@ from torchvision.utils import make_grid
 from base import BaseTrainer
 from utils import inf_loop, MetricTracker
 from tqdm import tqdm
+from typing import List
 
 
 class Trainer(BaseTrainer):
@@ -21,6 +22,7 @@ class Trainer(BaseTrainer):
         valid_data_loader: torch.utils.data.DataLoader = None,
         lr_scheduler: torch.optim.lr_scheduler = None,
         len_epoch: int = None,
+        class_weights: List[float] = None,
     ) -> None:
         """Trainer constructor.
 
@@ -46,6 +48,7 @@ class Trainer(BaseTrainer):
         self.config = config
         self.device = device
         self.data_loader = data_loader
+        self.class_weights = class_weights
 
         if len_epoch is None:
             # epoch-based training
@@ -96,7 +99,7 @@ class Trainer(BaseTrainer):
             self.optimizer.zero_grad()
 
             output = self.model(data).squeeze()
-            loss = self.criterion(output, target)
+            loss = self.calc_loss(output, target)
             loss.backward()
             pbar_loss = loss.item()
             self.optimizer.step()
@@ -105,7 +108,7 @@ class Trainer(BaseTrainer):
                 (epoch - 1) * self.len_epoch + batch_idx
             )
             self.train_metrics.update("loss", loss.item())
-            output = self.model.predict(output)
+            output = self.model.get_prediction(output)
 
             for met in self.metric_ftns:
                 self.train_metrics.update(
@@ -161,9 +164,10 @@ class Trainer(BaseTrainer):
                     self.device
                 )
                 output = self.model(data).squeeze()
-                loss = self.criterion(output, target)
+                loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
-                output = self.model.predict(output)
+
+                output = get_prediction(output)
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader)
@@ -204,3 +208,13 @@ class Trainer(BaseTrainer):
             total = self.len_epoch
 
         return base.format(current, total, 100.0 * current / total)
+
+    def calc_loss(self, output, target):
+        if self.class_weights:
+            return self.criterion(
+                output,
+                target,
+                torch.Tensor(self.class_weights).to(self.device),
+            )
+        else:
+            return self.criterion(output, target)

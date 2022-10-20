@@ -11,8 +11,8 @@ def cross_entropy_loss(output, target):
     return nn.CrossEntropyLoss()(output, target)
 
 
-def classifier_cross_entropy_loss(output, target):
-    return nn.CrossEntropyLoss()(output, target)
+def cross_entropy_loss_weighted(output, target, weights):
+    return nn.CrossEntropyLoss(weight=weights)(output, target)
 
 
 def binary_cross_entropy_loss(output, target):

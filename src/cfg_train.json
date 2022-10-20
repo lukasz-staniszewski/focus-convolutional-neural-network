@@ -26,11 +26,19 @@
                 0.2966
             ],
             "shuffle": true,
-            "validation_split": 0.15,
+            "validation_split": 0.2,
             "num_workers": 4,
             "balance": true,
             "is_multiclass": true
-        }
+        },
+        "class_weights": [
+            0.33333333,
+            0.42714267,
+            2.52585333,
+            10.87496362,
+            11.75650168,
+            11.63570317
+        ]
     },
     "optimizer": {
         "type": "Adam",
@@ -40,7 +48,7 @@
             "amsgrad": true
         }
     },
-    "loss": "classifier_cross_entropy_loss",
+    "loss": "cross_entropy_loss_weighted",
     "metrics": [
         "micro_accuracy",
         "micro_recall",

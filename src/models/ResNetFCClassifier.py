@@ -28,6 +28,6 @@ class ResNetFCClassifier(BaseModel):
         x = self.fc_out(x)
         return x
 
-    def predict(self, x):
-        _, preds = torch.max(x, 1)
-        return preds
+    def get_prediction(self, output):
+        _, prediction = torch.max(output, 1)
+        return prediction
