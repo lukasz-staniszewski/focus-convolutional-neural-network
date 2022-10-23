@@ -3,7 +3,7 @@ import json
 
 
 def _get_class_cm(output, target):
-    N_CLASSES = torch.max(target).item() + 1
+    N_CLASSES = int(torch.max(target).item() + 1)
     TP = [0 for _ in range(N_CLASSES)]
     FP = [0 for _ in range(N_CLASSES)]
     TN = [0 for _ in range(N_CLASSES)]
@@ -40,14 +40,14 @@ def macro_accuracy(output, target):
 
 
 def micro_recall(output, target):
-    TP, _, FN, _ = _get_class_cm(output, target)
+    TP, _, FN, _ = _get_class_cm(output=output, target=target)
     TP = sum(TP)
     FN = sum(FN)
     return 0.0 if (TP + FN) == 0 else (TP / (TP + FN)).item()
 
 
 def macro_recall(output, target):
-    TP, _, FN, _ = _get_class_cm(output, target)
+    TP, _, FN, _ = _get_class_cm(output=output, target=target)
     recalls = [0 for _ in range(len(TP))]
     for c in range(len(recalls)):
         recalls[c] = (
@@ -59,14 +59,14 @@ def macro_recall(output, target):
 
 
 def micro_precision(output, target):
-    TP, FP, _, _ = _get_class_cm(output, target)
+    TP, FP, _, _ = _get_class_cm(output=output, target=target)
     TP = sum(TP)
     FP = sum(FP)
     return 0.0 if (TP + FP) == 0 else (TP / (TP + FP)).item()
 
 
 def macro_precision(output, target):
-    TP, FP, _, _ = _get_class_cm(output, target)
+    TP, FP, _, _ = _get_class_cm(output=output, target=target)
     precisions = [0 for _ in range(len(TP))]
     for c in range(len(TP)):
         precisions[c] = (
@@ -78,8 +78,8 @@ def macro_precision(output, target):
 
 
 def micro_f1(output, target):
-    precision = micro_precision(output, target)
-    recall = micro_recall(output, target)
+    precision = micro_precision(output=output, target=target)
+    recall = micro_recall(output=output, target=target)
     return (
         0.0
         if (precision + recall) == 0
@@ -88,7 +88,7 @@ def micro_f1(output, target):
 
 
 def macro_f1(output, target):
-    TP, FP, FN, TN = _get_class_cm(output, target)
+    TP, FP, FN, TN = _get_class_cm(output=output, target=target)
     f1s = [0 for _ in range(len(TP))]
     for c in range(len(f1s)):
         recall = (

@@ -1,7 +1,7 @@
 import pandas as pd
 from base import BaseDataLoader
 from data_utils.data_sets import ClassifierTestDataset
-from typing import Any, Tuple, Union
+from typing import Any, Dict, Tuple, Union
 import torchvision.transforms as T
 from pathlib import Path
 
@@ -15,8 +15,12 @@ class ClassifierTestDataLoader(BaseDataLoader):
         transform_mean: Union[Tuple[float], None] = None,
         transform_std: Union[Tuple[float], None] = None,
         num_workers: int = 1,
+        is_multiclass: bool = False,
+        labels: Dict[str, str] = None,
     ):
         self.images_dir = images_dir
+        self.labels = labels
+        self.is_multiclass = is_multiclass
 
         self.combine_transforms(
             transform_mean=transform_mean, transform_std=transform_std

@@ -2,7 +2,7 @@ from pathlib import Path
 from base import BaseDataLoader
 from data_utils.data_sets import ClassifierDataset
 from torch.utils.data import ConcatDataset
-from typing import Tuple, Union
+from typing import Tuple, Union, Dict
 import torchvision.transforms as T
 import pandas as pd
 from copy import deepcopy
@@ -22,6 +22,7 @@ class ClassifierDataLoader(BaseDataLoader):
         num_workers: int = 1,
         is_test: bool = False,
         balance: bool = False,
+        labels: Dict[str, str] = None,
     ):
         self.images_dir = images_dir
         self.csv_path = csv_path
@@ -30,6 +31,7 @@ class ClassifierDataLoader(BaseDataLoader):
         self.is_test = is_test
         self.shuffle = shuffle
         self.validation_split = validation_split
+        self.labels = labels
 
         self.combine_transforms(
             transform_mean=transform_mean, transform_std=transform_std

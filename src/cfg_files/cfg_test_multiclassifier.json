@@ -1,0 +1,45 @@
+{
+    "name": "CocoMultiClassifier",
+    "device": 0,
+    "seed": 42,
+    "model_path": "res/classifiers/classifier_multi/trainer/1020_110337/models/model_best.pth",
+    "data_loader": {
+        "type": "ClassifierTestDataLoader",
+        "args": {
+            "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/validate/images",
+            "batch_size": 128,
+            "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/validate/labels.csv",
+            "transform_mean": [
+                0.5438,
+                0.5786,
+                0.6030
+            ],
+            "transform_std": [
+                0.2944,
+                0.2882,
+                0.2966
+            ],
+            "num_workers": 4,
+            "is_multiclass": true,
+            "labels": {
+                "0": "none",
+                "1": "person",
+                "2": "bicycle",
+                "3": "car",
+                "4": "cat",
+                "5": "dog"
+            }
+        }
+    },
+    "metrics": [
+        "accuracy",
+        "recall",
+        "precision",
+        "f1"
+    ],
+    "tester": {
+        "verbosity": 1,
+        "save_dir": "res/classifiers/classifier_multi/",
+        "only_predict": false
+    }
+}
