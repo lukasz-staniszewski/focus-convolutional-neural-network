@@ -112,7 +112,7 @@ class Trainer(BaseTrainer):
 
             for met in self.metric_ftns:
                 self.train_metrics.update(
-                    met.__name__, met(output, target)
+                    met.__name__, met(output.cpu(), target.cpu())
                 )
 
             if batch_idx % self.log_step == 0:
@@ -167,7 +167,7 @@ class Trainer(BaseTrainer):
                 loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
 
-                output = get_prediction(output)
+                output = self.model.get_prediction(output)
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader)
@@ -177,7 +177,7 @@ class Trainer(BaseTrainer):
                 self.valid_metrics.update("loss", loss.item())
                 for met in self.metric_ftns:
                     self.valid_metrics.update(
-                        met.__name__, met(output, target)
+                        met.__name__, met(output.cpu(), target.cpu())
                     )
                 self.writer.add_image(
                     "input",

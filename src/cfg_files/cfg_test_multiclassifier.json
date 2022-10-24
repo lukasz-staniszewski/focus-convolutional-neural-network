@@ -2,7 +2,7 @@
     "name": "CocoMultiClassifier",
     "device": 0,
     "seed": 42,
-    "model_path": "res/classifiers/classifier_multi/trainer/1020_110337/models/model_best.pth",
+    "model_path": "res/classifiers/classifier_multi/trainer/losowe/models/checkpoint-epoch27.pth",
     "data_loader": {
         "type": "ClassifierTestDataLoader",
         "args": {
@@ -32,10 +32,14 @@
         }
     },
     "metrics": [
-        "accuracy",
-        "recall",
-        "precision",
-        "f1"
+        "micro_accuracy",
+        "micro_recall",
+        "micro_precision",
+        "micro_f1",
+        "macro_accuracy",
+        "macro_recall",
+        "macro_precision",
+        "macro_f1"
     ],
     "tester": {
         "verbosity": 1,
