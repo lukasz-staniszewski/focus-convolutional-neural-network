@@ -23,6 +23,7 @@ class ClassifierDataLoader(BaseDataLoader):
         is_test: bool = False,
         balance: bool = False,
         labels: Dict[str, str] = None,
+        balance_max_multiplicity: int = 15,
     ):
         self.images_dir = images_dir
         self.csv_path = csv_path
@@ -32,6 +33,7 @@ class ClassifierDataLoader(BaseDataLoader):
         self.shuffle = shuffle
         self.validation_split = validation_split
         self.labels = labels
+        self.balance_max_multiplicity = balance_max_multiplicity
 
         self.combine_transforms(
             transform_mean=transform_mean, transform_std=transform_std
@@ -93,7 +95,9 @@ class ClassifierDataLoader(BaseDataLoader):
         )
 
     def balance_multiclass(self) -> Path:
-        """Function is desingned for multiclass classification and balances data using firstly oversampling minority classes and then undersampling majority class.
+        """Function is desingned for multiclass classification and 
+        balances data using firstly oversampling minority classes 
+        and then undersampling majority class.
 
         Returns:
             Path: path to new augmented csv file
@@ -102,7 +106,7 @@ class ClassifierDataLoader(BaseDataLoader):
             self.is_multiclass
         ), "Cannot balance binary labeled data using this function"
 
-        # balances data by oversampling minority classes
+        # -- balances data by oversampling minority classes -- #
         df_orig = pd.read_csv(self.csv_path)
         label_cnt = df_orig["label"].value_counts().sort_index()
         aug_labels_cnt = label_cnt.max() / label_cnt
@@ -123,35 +127,45 @@ class ClassifierDataLoader(BaseDataLoader):
         )
         df_aug.to_csv(new_path_aug, index=False, header=True)
 
-        # balances data by undersampling majority class
+        # -- balances data by undersampling majority classes -- #
         new_label_cnt = (
             df_orig["label"]
             .value_counts()
             .add(df_aug["label"].value_counts(), fill_value=0)
         )
-        diff_biggest_rest = new_label_cnt.max() - (
-            new_label_cnt.sum() - new_label_cnt.max()
-        )
-        if diff_biggest_rest > 0:
-            biggest_class = new_label_cnt.idxmax()
-            df_undersampled = df_orig.drop(
-                df_orig[
-                    df_orig["label"].astype(int) == int(biggest_class)
-                ]
-                .sample(
-                    n=int(diff_biggest_rest),
-                    replace=False,
-                    random_state=0,
-                )
-                .index
-            )
-            new_path_undersampled = deepcopy(self.csv_path).replace(
+
+        if (
+            new_label_cnt.max() / new_label_cnt.min()
+            > self.balance_max_multiplicity
+        ):
+            df_undersampled = deepcopy(df_orig)
+            min_cnt = new_label_cnt.min()
+            for label, cnt in new_label_cnt.iteritems():
+                if cnt / min_cnt > self.balance_max_multiplicity:
+                    df_undersampled = df_undersampled.drop(
+                        df_undersampled[
+                            df_undersampled["label"] == label
+                        ]
+                        .sample(
+                            int(
+                                cnt
+                                - (
+                                    self.balance_max_multiplicity
+                                    * min_cnt
+                                )
+                            ),
+                            replace=False,
+                            random_state=0,
+                        )
+                        .index
+                    )
+            path_undersampled = deepcopy(self.csv_path).replace(
                 ".csv", "_undersampled.csv"
             )
             df_undersampled.to_csv(
-                new_path_undersampled, index=False, header=True
+                path_undersampled, index=False, header=True
             )
-            self.csv_path = new_path_undersampled
+            self.csv_path = path_undersampled
 
         return new_path_aug
 
