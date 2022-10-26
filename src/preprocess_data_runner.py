@@ -2,7 +2,6 @@ import argparse
 import data_utils.preprocessors as module_preprocessor
 from utils import ConfigParser
 import os
-
 from utils.project_utils import read_json
 
 

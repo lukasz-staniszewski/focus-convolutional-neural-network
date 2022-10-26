@@ -1,5 +1,4 @@
 import torch
-import json
 
 
 def _get_class_cm(output, target):

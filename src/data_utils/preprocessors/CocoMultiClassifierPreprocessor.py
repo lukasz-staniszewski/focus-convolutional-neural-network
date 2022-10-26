@@ -1,6 +1,4 @@
-from collections import defaultdict
-from typing import List, Union
-
+from typing import List
 import PIL
 from base import BasePreprocessor
 import torchvision

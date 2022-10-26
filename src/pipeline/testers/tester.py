@@ -3,8 +3,8 @@ import pandas as pd
 import torch
 from base import BaseTester, BaseDataLoader
 from tqdm import tqdm
-from models.metric import _get_class_cm
 from utils import MetricTracker
+from pipeline import utils as pipeline_utils
 
 
 class Tester(BaseTester):
@@ -65,7 +65,7 @@ class Tester(BaseTester):
             for data in progress_bar:
                 data = data.to(self.device)
                 output = self.model(data).squeeze()
-                output = output = self.model.get_prediction(output)
+                output = self.model.get_prediction(output)
                 predictions.append(output.cpu())
 
         predictions = torch.cat(predictions).numpy()
@@ -98,34 +98,9 @@ class Tester(BaseTester):
         )
 
         if self.test_data_loader.is_multiclass:
-            self._get_per_class_summary()
-
-    def _get_per_class_summary(self) -> None:
-        targets = self.test_data_loader.get_targets()
-        df_preds = pd.read_csv(self.predictions_path)
-        assert (
-            "label" in df_preds.columns
-        ), "Predictions file does not contain label column!"
-
-        TP, FP, FN, TN = _get_class_cm(
-            torch.Tensor(df_preds["label"]).to(self.device),
-            torch.Tensor(targets).to(self.device),
-        )
-        idx2cls = (
-            lambda x: self.test_data_loader.labels[str(x)]
-            if self.test_data_loader.labels is not None
-            else str(x)
-        )
-
-        for idx, (tp, fp, fn, tn) in enumerate(zip(TP, FP, FN, TN)):
-            acc = (tp + tn) / (tp + fp + fn + tn)
-            rec = tp / (tp + fn)
-            prec = tp / (tp + fp)
-            f1 = 2 * (prec * rec) / (prec + rec)
-            self.logger.info(
-                f"Class {idx2cls(idx)} metrics summary:\n"
-                f"Accuracy: {acc:.4f}\n"
-                f"Recall: {rec:.4f}\n"
-                f"Precision: {prec:.4f}\n"
-                f"F1: {f1:.4f}"
+            pipeline_utils.print_per_class_metrics(
+                targets=targets,
+                predictions=df_preds["label"],
+                cls_map=self.test_data_loader.labels,
+                logger=self.logger,
             )

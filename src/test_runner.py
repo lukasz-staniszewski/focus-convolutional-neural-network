@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 import torch
 import data_utils.data_loaders as module_data
-import models.metric as module_metric
+import pipeline.metrics as module_metric
 import models as module_arch
 from utils import ConfigParser
-from tester import Tester
+from pipeline.testers import Tester
 from utils.project_utils import prepare_device
 
 

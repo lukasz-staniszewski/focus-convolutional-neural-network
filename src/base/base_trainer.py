@@ -1,7 +1,7 @@
 import torch
 from abc import abstractmethod
 from numpy import inf
-from logger import TensorboardWriter
+from utils.logger import TensorboardWriter
 import os
 from utils import ConfigParser
 from base import BaseModel

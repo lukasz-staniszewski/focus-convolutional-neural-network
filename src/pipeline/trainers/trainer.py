@@ -5,6 +5,7 @@ from base import BaseTrainer
 from utils import inf_loop, MetricTracker
 from tqdm import tqdm
 from typing import List
+from pipeline import utils as pipeline_utils
 
 
 class Trainer(BaseTrainer):
@@ -157,6 +158,7 @@ class Trainer(BaseTrainer):
         )
         pbar_loss = "None"
 
+        preds, targets = [], []
         with torch.no_grad():
             for batch_idx, (data, target) in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
@@ -168,6 +170,8 @@ class Trainer(BaseTrainer):
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
+                preds.append(output.cpu())
+                targets.append(target.cpu())
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader)
@@ -183,6 +187,16 @@ class Trainer(BaseTrainer):
                     "input",
                     make_grid(data.cpu(), nrow=8, normalize=True),
                 )
+
+        if self.valid_data_loader.is_multiclass:
+            preds = torch.cat(preds)
+            targets = torch.cat(targets)
+            pipeline_utils.print_per_class_metrics(
+                targets=targets,
+                predictions=preds,
+                cls_map=self.data_loader.labels,
+                logger=self.logger,
+            )
 
         # adding histogram of model parameters to the tensorboard
         for name, p in self.model.named_parameters():

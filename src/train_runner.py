@@ -1,13 +1,12 @@
 import argparse
 import collections
 import torch
-import numpy as np
 import data_utils.data_loaders as module_data
-import models.loss as module_loss
-import models.metric as module_metric
+import pipeline.loss as module_loss
+import pipeline.metrics as module_metric
 import models as module_arch
 from utils import ConfigParser
-from trainer import Trainer
+from pipeline.trainers import Trainer
 from utils.project_utils import prepare_device
 
 

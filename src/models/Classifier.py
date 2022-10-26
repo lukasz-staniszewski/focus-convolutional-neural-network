@@ -1,6 +1,5 @@
 import torch.nn as nn
 from base import BaseModel
-import torch.nn.functional as F
 import torch
 
 
@@ -78,4 +77,4 @@ class Classifier(BaseModel):
         return x
 
     def get_prediction(self, output):
-        return (output >= self.model.threshold).float()
+        return (output >= self.threshold).float()

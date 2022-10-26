@@ -1,4 +1,3 @@
-import torchvision.transforms as T
 import torchvision
 from torch.utils.data import Dataset
 import torch

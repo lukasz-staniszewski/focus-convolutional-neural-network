@@ -1,10 +1,8 @@
 from typing import List, Union
-
 import PIL
 from base import BasePreprocessor
 import torchvision
 from data_utils.constants import COCO_2017_LABEL_MAP
-from tqdm import tqdm
 import os
 import pandas as pd
 from copy import deepcopy

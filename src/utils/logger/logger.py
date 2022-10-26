@@ -8,14 +8,14 @@ import os
 
 def setup_logging(
     save_dir: Union[str, Path],
-    log_config: Union[str, Path] = "src/logger/logger_config.json",
+    log_config: Union[str, Path] = "src/utils/logger/logger_config.json",
     default_level: Optional[int] = logging.INFO,
 ) -> None:
     """Setups logging configuration.
 
     Args:
         save_dir (str): directory where logs will be saved
-        log_config (str, optional): path to logging config file. Defaults to "src/logger/logger_config.json".
+        log_config (str, optional): path to logging config file. Defaults to "src/utils/logger/logger_config.json".
         default_level (int, optional): level of logging. Defaults to logging.INFO.
     """
     log_config = Path(log_config)
