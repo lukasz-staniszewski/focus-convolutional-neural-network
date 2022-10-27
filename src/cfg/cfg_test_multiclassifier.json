@@ -2,7 +2,7 @@
     "name": "CocoMultiClassifier",
     "device": 1,
     "seed": 42,
-    "model_path": "res/classifiers/classifier_multi/trainer/1021_053735/models/checkpoint-epoch7.pth",
+    "model_path": "/content/drive/MyDrive/GitHub/focus-convolutional-neural-network/res/classifiers/classifier_multi/trainer/1026_133132/models/checkpoint-epoch9.pth",
     "data_loader": {
         "type": "ClassifierTestDataLoader",
         "args": {
@@ -10,14 +10,14 @@
             "batch_size": 128,
             "csv_path": "/content/data/CocoMultiClassifier/validate/labels.csv",
             "transform_mean": [
-                0.5438,
-                0.5786,
-                0.6030
+                0.5507,
+                0.5801,
+                0.6003
             ],
             "transform_std": [
                 0.2944,
-                0.2882,
-                0.2966
+                0.2885,
+                0.2955
             ],
             "num_workers": 4,
             "is_multiclass": true,

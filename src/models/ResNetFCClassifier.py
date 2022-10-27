@@ -1,6 +1,7 @@
 import torch.nn as nn
 from base import BaseModel
 from torchvision import models
+from torchvision.models import ResNet18_Weights
 import torch
 
 
@@ -9,7 +10,7 @@ class ResNetFCClassifier(BaseModel):
         super().__init__()
         self.n_classes = n_classes
 
-        self.model = models.resnet18(pretrained=True)
+        self.model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
         res_fc_out = self.model.fc.out_features
 
         self.fc_out = nn.Sequential(

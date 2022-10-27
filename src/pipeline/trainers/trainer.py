@@ -188,7 +188,7 @@ class Trainer(BaseTrainer):
                     make_grid(data.cpu(), nrow=8, normalize=True),
                 )
 
-        if self.valid_data_loader.is_multiclass:
+        if self.data_loader.is_multiclass:
             preds = torch.cat(preds)
             targets = torch.cat(targets)
             pipeline_utils.print_per_class_metrics(
