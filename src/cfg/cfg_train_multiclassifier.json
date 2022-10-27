@@ -57,7 +57,7 @@
             "amsgrad": true
         }
     },
-    "loss": "cross_entropy_loss",
+    "loss": "cross_entropy_loss_weighted",
     "metrics": [
         "micro_accuracy",
         "micro_recall",

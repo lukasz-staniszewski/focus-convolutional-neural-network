@@ -20,5 +20,6 @@
     "preprocess": {
         "verbosity": 1,
         "save_dir": "data/processed/COCO-2017/CocoDogClassifier/validate/"
-    }
+    },
+    "seed": 42
 }

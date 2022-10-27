@@ -1,6 +1,6 @@
 {
     "name": "CocoMultiClassifier",
-    "device": 0,
+    "device": 1,
     "seed": 42,
     "save_cfg_dir": "res/classifiers/classifier_multi/",
     "arch": {
