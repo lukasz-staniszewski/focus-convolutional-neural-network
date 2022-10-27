@@ -32,7 +32,14 @@
             "is_multiclass": true,
             "balance_max_multiplicity": 8
         },
-        "class_weights": null,
+        "class_weights": [
+            0.49470646,
+            0.49470646,
+            0.85029101,
+            3.66089501,
+            3.95765171,
+            3.91698668
+        ],
         "labels": {
             "0": "none",
             "1": "person",

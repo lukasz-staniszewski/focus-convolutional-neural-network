@@ -20,10 +20,9 @@ def print_per_class_metrics(
     targets, predictions = targets.cpu(), predictions.cpu()
 
     TP, FP, FN, TN = _get_class_cm(output=predictions, target=targets)
-    idx2cls = (
-        lambda x: cls_map[str(x)] if cls_map is not None else str(x)
-    )
 
+    idx2cls = (lambda x: cls_map[str(x)]) if cls_map is not None else (lambda x: str(x))
+    
     console = Console()
     table = Table(show_header=True, header_style="bold magenta")
     table.add_column("Class", style="dim", width=10)
