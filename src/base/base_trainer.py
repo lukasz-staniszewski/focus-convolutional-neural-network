@@ -5,6 +5,7 @@ from utils.logger import TensorboardWriter
 import os
 from utils import ConfigParser
 from base import BaseModel
+from utils.project_utils import secure_load_path
 
 
 class BaseTrainer:
@@ -151,6 +152,7 @@ class BaseTrainer:
         self.logger.info(
             "Loading checkpoint: {} ...".format(resume_path)
         )
+        secure_load_path()
         checkpoint = torch.load(resume_path)
         self.start_epoch = checkpoint["epoch"] + 1
         self.mnt_best = checkpoint["monitor_best"]

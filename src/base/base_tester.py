@@ -2,6 +2,7 @@ import torch
 from abc import abstractmethod
 from utils import ConfigParser
 from base import BaseModel
+from utils.project_utils import secure_load_path
 
 
 class BaseTester:
@@ -53,6 +54,7 @@ class BaseTester:
             load_path (str): model path to be loaded
         """
         self.logger.info("Loading model: {} ...".format(load_path))
+        secure_load_path()
         model = torch.load(load_path)
 
         self.model.load_state_dict(model["state_dict"])

@@ -45,11 +45,13 @@ def print_per_class_metrics(
         )
 
         if logger is not None:
-            logger.debug(
-                f"Class {idx2cls(cls_idx)} metrics summary:\n"
-                f"Accuracy: {acc:.4f}\n"
-                f"Recall: {rec:.4f}\n"
-                f"Precision: {prec:.4f}\n"
-                f"F1: {f1:.4f}"
+            logger.info(
+                "{"
+                f"class: {idx2cls(cls_idx)}, "
+                f"accuracy: {acc:.4f}, "
+                f"recall: {rec:.4f}, "
+                f"precision: {prec:.4f}, "
+                f"f1-score: {f1:.4f}"
+                "}"
             )
     console.print(table)

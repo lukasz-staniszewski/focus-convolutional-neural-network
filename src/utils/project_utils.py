@@ -7,6 +7,8 @@ from itertools import repeat
 from collections import OrderedDict
 import numpy as np
 import os
+import platform
+import pathlib
 
 
 def ensure_dir(dirname: Union[str, Path]) -> None:
@@ -98,3 +100,11 @@ def set_seed(seed: int = 42) -> None:
     torch.backends.cudnn.determinstic = True
     torch.backends.cudnn.benchmark = False
     np.random.seed(seed)
+
+
+def secure_load_path():
+    plt = platform.system()
+    if plt == "Windows":
+        pathlib.PosixPath = pathlib.WindowsPath
+    elif plt == "Linux":
+        pathlib.WindowsPath = pathlib.PosixPath
