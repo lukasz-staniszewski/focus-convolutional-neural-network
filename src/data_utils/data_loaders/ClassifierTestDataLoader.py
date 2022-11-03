@@ -37,7 +37,7 @@ class ClassifierTestDataLoader(BaseDataLoader):
 
         self.dataset = ClassifierTestDataset(
             images_dir=self.images_dir,
-            csv_path=csv_path,
+            csv_path=self.csv_path,
             transform=self.transform,
         )
 
@@ -83,30 +83,19 @@ class ClassifierTestDataLoader(BaseDataLoader):
 
     def balance_data(self) -> None:
         """Function balances data by undersampling majority class."""
-        assert (
-            self.balance
-        ), "Argument balance is False, cannot balance data!"
+        assert self.balance, "Argument balance is False, cannot balance data!"
         df_orig = pd.read_csv(self.csv_path)
         label_cnt = df_orig["label"].value_counts()
-        if (
-            label_cnt.max() / label_cnt.min()
-            > self.balance_max_multiplicity
-        ):
+        if label_cnt.max() / label_cnt.min() > self.balance_max_multiplicity:
             df_undersampled = deepcopy(df_orig)
             min_cnt = label_cnt.min()
             for label, cnt in label_cnt.iteritems():
                 if cnt / min_cnt > self.balance_max_multiplicity:
                     df_undersampled = df_undersampled.drop(
-                        df_undersampled[
-                            df_undersampled["label"] == label
-                        ]
+                        df_undersampled[df_undersampled["label"] == label]
                         .sample(
                             int(
-                                cnt
-                                - (
-                                    self.balance_max_multiplicity
-                                    * min_cnt
-                                )
+                                cnt - (self.balance_max_multiplicity * min_cnt)
                             ),
                             replace=False,
                             random_state=0,
@@ -116,7 +105,5 @@ class ClassifierTestDataLoader(BaseDataLoader):
             path_undersampled = deepcopy(self.csv_path).replace(
                 ".csv", "_undersampled.csv"
             )
-            df_undersampled.to_csv(
-                path_undersampled, index=False, header=True
-            )
+            df_undersampled.to_csv(path_undersampled, index=False, header=True)
             self.csv_path = path_undersampled

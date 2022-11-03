@@ -17,8 +17,7 @@ def main(config: ConfigParser) -> None:
 
     # data_loader setup
     data_loader = config.init_obj("data_loader", module_data)
-    valid_data_loader = data_loader.split_validation()
-
+    
     # build model
     model = config.init_obj("arch", module_arch)
     logger.info(model)
@@ -52,7 +51,6 @@ def main(config: ConfigParser) -> None:
         config=config,
         device=device,
         data_loader=data_loader,
-        valid_data_loader=valid_data_loader,
         lr_scheduler=lr_scheduler,
         class_weights=class_weights,
     )

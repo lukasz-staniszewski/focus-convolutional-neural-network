@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+from torch.utils import data
 from torchvision.utils import make_grid
 from base import BaseTrainer
 from utils import inf_loop, MetricTracker
@@ -20,7 +21,7 @@ class Trainer(BaseTrainer):
         config: dict,
         device: torch.device,
         data_loader: torch.utils.data.DataLoader,
-        valid_data_loader: torch.utils.data.DataLoader = None,
+        do_validation: bool = True,
         lr_scheduler: torch.optim.lr_scheduler = None,
         len_epoch: int = None,
         class_weights: List[float] = None,
@@ -49,20 +50,21 @@ class Trainer(BaseTrainer):
         self.config = config
         self.device = device
         self.data_loader = data_loader
+        self.train_data_loader = data_loader.get_train_loader()
         self.class_weights = class_weights
 
         if len_epoch is None:
             # epoch-based training
-            self.len_epoch = len(self.data_loader)
+            self.len_epoch = len(self.train_data_loader)
         else:
             # iteration-based training
-            self.data_loader = inf_loop(data_loader)
+            self.train_data_loader = inf_loop(self.train_data_loader)
             self.len_epoch = len_epoch
 
-        self.valid_data_loader = valid_data_loader
-        self.do_validation = self.valid_data_loader is not None
+        self.valid_data_loader = data_loader.get_valid_loader()
+        self.do_validation = do_validation
         self.lr_scheduler = lr_scheduler
-        self.log_step = int(np.sqrt(data_loader.batch_size))
+        self.log_step = int(np.sqrt(self.train_data_loader.batch_size))
         self.train_metrics = MetricTracker(
             "loss",
             *[m.__name__ for m in self.metric_ftns],
@@ -87,10 +89,10 @@ class Trainer(BaseTrainer):
         self.train_metrics.reset()
 
         progress_bar = tqdm(
-            enumerate(self.data_loader),
+            enumerate(self.train_data_loader),
             desc=f"Training epoch {epoch}",
             colour="blue",
-            total=len(self.data_loader),
+            total=len(self.train_data_loader),
         )
         pbar_loss = "None"
 

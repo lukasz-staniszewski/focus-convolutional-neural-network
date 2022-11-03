@@ -10,11 +10,11 @@
         }
     },
     "data_loader": {
-        "type": "ClassifierDataLoader",
+        "type": "MultiClassifierDataLoader",
         "args": {
-            "images_dir": "/content/data/CocoMultiClassifier/train/images",
-            "batch_size": 128,
-            "csv_path": "/content/data/CocoMultiClassifier/train/labels.csv",
+            "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/train/images",
+            "batch_size": 64,
+            "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/train/labels.csv",
             "transform_mean": [
                 0.5438,
                 0.5786,
@@ -28,32 +28,31 @@
             "shuffle": true,
             "validation_split": 0.2,
             "num_workers": 4,
-            "balance": true,
-            "is_multiclass": true,
-            "balance_max_multiplicity": 8
+            "balance_train": true,
+            "balance_max_multiplicity": 35,
+            "labels": {
+                "0": "none",
+                "1": "person",
+                "2": "bicycle",
+                "3": "car",
+                "4": "cat",
+                "5": "dog"
+            }
         },
         "class_weights": [
-            0.49470646,
-            0.49470646,
-            0.85029101,
-            3.66089501,
-            3.95765171,
-            3.91698668
-        ],
-        "labels": {
-            "0": "none",
-            "1": "person",
-            "2": "bicycle",
-            "3": "car",
-            "4": "cat",
-            "5": "dog"
-        }
+            0.33463243,
+            0.4254861,
+            2.51605741,
+            10.83436414,
+            11.71213512,
+            11.59208079
+        ]
     },
     "optimizer": {
         "type": "Adam",
         "args": {
-            "lr": 1e-5,
-            "weight_decay": 0,
+            "lr": 3e-4,
+            "weight_decay": 0.001,
             "amsgrad": true
         }
     },
@@ -80,7 +79,7 @@
         "save_dir": "res/classifiers/classifier_multi/",
         "save_period": 1,
         "verbosity": 1,
-        "monitor": "min val_loss",
+        "monitor": "max macro_precision",
         "early_stop": 10,
         "tensorboard": false
     }
