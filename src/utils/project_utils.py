@@ -1,14 +1,17 @@
 import json
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Union
 import torch
+from torch.utils.data import DataLoader
 from pathlib import Path
 from itertools import repeat
 from collections import OrderedDict
 import numpy as np
 import os
+import platform
+import pathlib
 
 
-def ensure_dir(dirname: str) -> None:
+def ensure_dir(dirname: Union[str, Path]) -> None:
     """Creates directory if it does not exist.
 
     Args:
@@ -19,7 +22,7 @@ def ensure_dir(dirname: str) -> None:
         dirname.mkdir(parents=True, exist_ok=False)
 
 
-def read_json(fname: str) -> Dict:
+def read_json(fname: Union[str, Path]) -> Dict:
     """Reads json file.
 
     Args:
@@ -33,7 +36,7 @@ def read_json(fname: str) -> Dict:
         return json.load(handle, object_hook=OrderedDict)
 
 
-def write_json(content: Dict, fname: str) -> None:
+def write_json(content: Dict, fname: Union[str, Path]) -> None:
     """Writes dictionary to json file.
 
     Args:
@@ -46,7 +49,9 @@ def write_json(content: Dict, fname: str) -> None:
         json.dump(content, handle, indent=4, sort_keys=False)
 
 
-def inf_loop(data_loader: torch.utils.data.DataLoader,) -> torch.utils.data.DataLoader:
+def inf_loop(
+    data_loader: DataLoader,
+) -> DataLoader:
     """Wrapper function for endless data loader."""
     for loader in repeat(data_loader):
         yield from loader
@@ -64,7 +69,10 @@ def prepare_device(gpu_id: int) -> Tuple[torch.device, List[int]]:
     """
     n_gpu = torch.cuda.device_count()
     if gpu_id > 0 and n_gpu == 0:
-        print("Warning - no GPU available, CPU training will take a place" " instead.")
+        print(
+            "Warning - no GPU available, CPU training will take a place"
+            " instead."
+        )
         gpu_id = 0
     if gpu_id > n_gpu:
         print(
@@ -92,3 +100,11 @@ def set_seed(seed: int = 42) -> None:
     torch.backends.cudnn.determinstic = True
     torch.backends.cudnn.benchmark = False
     np.random.seed(seed)
+
+
+def secure_load_path():
+    plt = platform.system()
+    if plt == "Windows":
+        pathlib.PosixPath = pathlib.WindowsPath
+    elif plt == "Linux":
+        pathlib.WindowsPath = pathlib.PosixPath

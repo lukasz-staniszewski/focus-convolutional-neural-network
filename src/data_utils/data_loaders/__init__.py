@@ -1,2 +1,3 @@
-from .TestDataLoader import *
 from .ClassifierDataLoader import *
+from .ClassifierTestDataLoader import *
+from .MultiClassifierDataLoader import MultiClassifierDataLoader

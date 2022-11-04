@@ -1,0 +1,30 @@
+{
+    "name": "CocoMultiClassifierPreprocessing",
+    "preprocessor": {
+        "type": "CocoMultiClassifierPreprocessor",
+        "args": {
+            "img_in_dir_path": "data/raw/COCO-2017/validate/",
+            "ann_file_path": "data/raw/COCO-2017/annotations/instances_val2017.json",
+            "out_dir_path": "data/processed/COCO-2017/CocoMultiClassifier/validate/",
+            "img_out_shape": [
+                300,
+                300
+            ],
+            "labels": {
+                "0": "nothing",
+                "1": "person",
+                "2": "car",
+                "3": "bicycle",
+                "4": "cat",
+                "5": "dog"
+            },
+            "cut_fn": "cut_min_covering_square",
+            "reflect_padding_cut": false
+        }
+    },
+    "preprocess": {
+        "verbosity": 1,
+        "save_dir": "data/processed/COCO-2017/CocoMultiClassifier/validate/"
+    },
+    "seed": 42
+}

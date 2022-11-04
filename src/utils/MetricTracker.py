@@ -1,6 +1,6 @@
 from typing import Dict
 import pandas as pd
-from logger import TensorboardWriter
+from utils.logger import TensorboardWriter
 
 
 class MetricTracker:

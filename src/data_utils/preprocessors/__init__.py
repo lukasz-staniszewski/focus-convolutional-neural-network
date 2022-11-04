@@ -1,1 +1,2 @@
 from .CocoClassifierPreprocessor import CocoClassifierPreprocessor
+from .CocoMultiClassifierPreprocessor import CocoMultiClassifierPreprocessor

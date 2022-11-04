@@ -1,8 +1,9 @@
-from typing import List, Union
+from typing import List
 import PIL
 from base import BasePreprocessor
 import torchvision
 from data_utils.constants import COCO_2017_LABEL_MAP
+from tqdm import tqdm
 import os
 import pandas as pd
 from copy import deepcopy
@@ -11,17 +12,27 @@ import numpy as np
 from PIL import Image
 
 
-class CocoClassifierPreprocessor(BasePreprocessor):
+class CocoMultiClassifierPreprocessor(BasePreprocessor):
     def __init__(self, *args, **kwargs):
         """Preprocessor constructor."""
         super().__init__(*args, **kwargs)
-        self.label_pos = kwargs["label_pos"]
-        self.labels_neg = kwargs["labels_neg"]
+        self.labels = {int(k): v for k, v in kwargs["labels"].items()}
+
+        self.labels_cnt = {}
+        for label in self.labels.keys():
+            self.labels_cnt[label] = 0
+
+        self.idx_2_label = self.labels
+        self.label_2_idx = {v: k for k, v in self.labels.items()}
+
         self.img_out_shape = kwargs["img_out_shape"]
         self.reflect_padding_cut = kwargs["reflect_padding_cut"]
         self.cut_fn = getattr(self, kwargs["cut_fn"])
 
-        if kwargs["label_max_sz"] is None:
+        if (
+            "label_max_sz" not in kwargs.keys()
+            or kwargs["label_max_sz"] is None
+        ):
             self.label_max_sz = inf
         elif isinstance(kwargs["label_max_sz"], int):
             self.label_max_sz = kwargs["label_max_sz"]
@@ -38,8 +49,8 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         )
         self.logger.info(f"Mapping finished.")
 
-        self.y = None
-        self.filenames = None
+        self.y = []
+        self.filenames = []
         self.df_out = None
         self.img_idx = 0
 
@@ -105,50 +116,38 @@ class CocoClassifierPreprocessor(BasePreprocessor):
             (bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3])
         )
 
-    def collect_filenames_per_label(
-        self, labels: Union[List[str], str] = None
-    ) -> List[str]:
-        """Function collects images and their pathnames with correct preprocessing of bounding box.
-
-        Args:
-            labels (Union[List[str], str], optional): objects with those labels will be taken into account. If none, images of all labels are taken into account. Defaults to None.
-
-        Returns:
-            List[str]: filenames for objects
-        """
-        if self.preprocessing_pos:
-            assert labels and isinstance(labels, str)
-            labels = [labels]
-        else:
-            assert labels is None or isinstance(labels, list)
-            if labels is None:
-                labels = list(COCO_2017_LABEL_MAP.values())
-                labels.remove(self.label_pos)
-        filenames = []
-        n_imgs_label = 0
-
-        for img, objects in self.dataset:
+    def collect_files(self) -> None:
+        """Function collects images and their pathnames with correct preprocessing of bounding box."""
+        for img, objects in tqdm(
+            self.dataset,
+            total=len(self.dataset),
+            desc="Collecting data",
+            colour="green",
+        ):
             for obj in objects:
-                if COCO_2017_LABEL_MAP[obj["category_id"]] in labels:
+                label_COCO = COCO_2017_LABEL_MAP[obj["category_id"]]
+                if label_COCO in self.labels.values():
+                    label_idx = self.label_2_idx[label_COCO]
+                else:
+                    label_idx = 0
+
+                if self.labels_cnt[label_idx] > self.label_max_sz:
+                    continue
+                else:
                     img_in = deepcopy(img)
-                    self.img_idx += 1
                     bbox = deepcopy(obj["bbox"])
+
+                    self.img_idx += 1
                     img_in = self.cut_fn(img_in=img_in, bbox=bbox)
 
                     filename = f"{self.img_idx}.jpg"
                     img_in.save(
                         os.path.join(self.img_out_dir_path, filename)
                     )
-                    filenames.append(filename)
-
-                    n_imgs_label += 1
-                    if (
-                        self.label_max_sz != 0
-                        and n_imgs_label >= self.label_max_sz
-                    ):
-                        return filenames
-
-        return filenames
+                    
+                    self.filenames.append(filename)
+                    self.y.append(label_idx)
+                    self.labels_cnt[label_idx] += 1
 
     def cut_min_covering_square(
         self, img_in: PIL.Image, bbox: List[int]
@@ -198,33 +197,15 @@ class CocoClassifierPreprocessor(BasePreprocessor):
 
     def _collect_data(self):
         """Function collects data to create dataset."""
+        self.collect_files()
+        class_distribution = {
+            self.idx_2_label[k]: v for k, v in self.labels_cnt.items()
+        }
         self.logger.info(
-            f"Starting preprocessing images for label 1..."
-        )
-        self.preprocessing_pos = True
-        filenames_pos = self.collect_filenames_per_label(self.label_pos)
-        y_pos = [1 for _ in range(len(filenames_pos))]
-        self.logger.info(f"Preprocessing label 1 images finished.")
-
-        if self.label_max_sz == 0:
-            self.label_max_sz = len(filenames_pos)
-        self.logger.info(
-            f"Starting preprocessing images for label 0..."
-        )
-        self.preprocessing_pos = False
-        filenames_neg = self.collect_filenames_per_label(
-            self.labels_neg
-        )
-        y_neg = [0 for _ in range(len(filenames_neg))]
-        self.logger.info(f"Preprocessing label 0 images finished.")
-        self.logger.info(
-            "Images preprocessed, number of label 1 images:"
-            f" {len(filenames_pos)} and label 0 images:"
-            f" {len(filenames_neg)}."
+            "Images preprocessed, initial class distribution:"
+            f" {class_distribution}"
         )
 
-        self.y = y_pos + y_neg
-        self.filenames = filenames_pos + filenames_neg
         self.df_out = pd.DataFrame(
             {
                 "filename": self.filenames,
