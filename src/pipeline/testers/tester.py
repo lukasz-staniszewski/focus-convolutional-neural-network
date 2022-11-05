@@ -16,7 +16,7 @@ class Tester(BaseTester):
         metric_ftns: list,
         config: dict,
         device: torch.device,
-        test_data_loader: BaseDataLoader,
+        data_loader: BaseDataLoader,
         only_predict: bool = False,
     ) -> None:
         """Tester constructor.
@@ -37,7 +37,8 @@ class Tester(BaseTester):
         )
         self.config = config
         self.device = device
-        self.test_data_loader = test_data_loader
+        self.data_loader = data_loader
+        self.test_data_loader = self.data_loader.get_test_loader()
 
         self.test_metrics = MetricTracker(
             *[m.__name__ for m in self.metric_ftns],
@@ -69,16 +70,14 @@ class Tester(BaseTester):
                 predictions.append(output.cpu())
 
         predictions = torch.cat(predictions).numpy()
-        self.test_data_loader.to_csv(
+        self.data_loader.to_csv(
             csv_path=self.predictions_path, predictions=predictions
         )
-        self.logger.info(
-            f"Predictions saved to {self.predictions_path}"
-        )
+        self.logger.info(f"Predictions saved to {self.predictions_path}")
 
     def _calculate_metrics(self) -> None:
         """Metrics calculation logic."""
-        targets = self.test_data_loader.get_targets()
+        targets = self.data_loader.get_targets()
         df_preds = pd.read_csv(self.predictions_path)
         assert (
             "label" in df_preds.columns
@@ -97,10 +96,10 @@ class Tester(BaseTester):
             f"Common metrics summary:\n{self.test_metrics.result()}"
         )
 
-        if self.test_data_loader.is_multiclass:
+        if self.data_loader.is_multilabel:
             pipeline_utils.print_per_class_metrics(
                 targets=targets,
                 predictions=df_preds["label"],
-                cls_map=self.test_data_loader.labels,
+                cls_map=self.data_loader.labels,
                 logger=self.logger,
             )

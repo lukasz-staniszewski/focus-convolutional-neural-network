@@ -15,4 +15,5 @@ def cross_entropy_loss_weighted(output, target, weights):
 
 
 def binary_cross_entropy_loss(output, target):
+    target = target.float()
     return nn.BCELoss()(output, target)

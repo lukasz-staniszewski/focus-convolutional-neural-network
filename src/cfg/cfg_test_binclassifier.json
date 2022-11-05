@@ -1,0 +1,40 @@
+{
+    "name": "CocoBicycleClassifier",
+    "device": 1,
+    "seed": 42,
+    "model_path": "res/classifiers/classifier_bicycle/trainer/1105_121602/models/checkpoint-epoch1.pth",
+    "data_loader": {
+        "type": "TestClassifierLoader",
+        "args": {
+            "images_dir": "data/processed/COCO-2017/CocoBicycleClassifier/validate/images",
+            "batch_size": 256,
+            "csv_path": "data/processed/COCO-2017/CocoBicycleClassifier/validate/labels.csv",
+            "transform_mean": [
+                0.5243,
+                0.5564,
+                0.5869
+            ],
+            "transform_std": [
+                0.2958,
+                0.2923,
+                0.3011
+            ],
+            "num_workers": 4,
+            "labels": {
+                "0": "none",
+                "1": "bicycle"
+            }
+        }
+    },
+    "metrics": [
+        "accuracy",
+        "recall",
+        "precision",
+        "f1"
+    ],
+    "tester": {
+        "verbosity": 1,
+        "save_dir": "res/classifiers/classifier_bicycle/",
+        "only_predict": false
+    }
+}

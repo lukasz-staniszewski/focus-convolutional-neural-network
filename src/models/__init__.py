@@ -1,2 +1,2 @@
-from .ResNetFCClassifier import *
-from .Classifier import *
+from .classifier.ResNetFCClassifier import ResNetFCClassifier
+from .classifier.Classifier import Classifier
