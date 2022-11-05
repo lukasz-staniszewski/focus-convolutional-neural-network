@@ -15,6 +15,7 @@
             "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/train/images",
             "batch_size": 64,
             "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/train/labels.csv",
+            "save_out_dir": "res/classifiers/classifier_multi/trainer/labels/",
             "transform_mean": [
                 0.5438,
                 0.5786,

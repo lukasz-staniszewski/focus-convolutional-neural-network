@@ -1,3 +1,4 @@
+from pathlib import Path
 from data_utils.data_loaders.classifier.BaseClassifierLoader import (
     BaseClassifierLoader,
 )
@@ -23,6 +24,7 @@ class ClassifierLoader(BaseClassifierLoader):
         images_dir: str,
         csv_path: str,
         labels: Dict[str, str],
+        save_out_dir: str = None,
         transform_mean: Tuple[float] = None,
         transform_std: Tuple[float] = None,
         validation_split: float = 0.0,
@@ -33,6 +35,7 @@ class ClassifierLoader(BaseClassifierLoader):
         self.balance_train = balance_train
         self.validation_split = validation_split
         self.balance_max_multiplicity = balance_max_multiplicity
+        self.save_out_dir = save_out_dir
 
         super().__init__(
             batch_size=batch_size,
@@ -94,7 +97,7 @@ class ClassifierLoader(BaseClassifierLoader):
         """
         # -- balances data by oversampling minority classes -- #
         self.csv_path_train_aug = classifier_oversample(
-            csv_path_train_orig=self.csv_path_train
+            csv_path_train_orig=self.csv_path_train,
         )
 
         # -- balances data by undersampling majority classes -- #
@@ -149,12 +152,17 @@ class ClassifierLoader(BaseClassifierLoader):
             stratify=df["label"],
         )
 
-        self.csv_path_train = deepcopy(self.csv_path).replace(
-            ".csv", "_train.csv"
+        self.csv_path_train = Path(
+            deepcopy(self.csv_path).replace(".csv", "_train.csv")
         )
-        self.csv_path_valid = deepcopy(self.csv_path).replace(
-            ".csv", "_valid.csv"
+        self.csv_path_valid = Path(
+            deepcopy(self.csv_path).replace(".csv", "_valid.csv")
         )
+        if self.save_out_dir:
+            out_dir = Path(self.save_out_dir)
+            out_dir.mkdir(parents=True, exist_ok=True)
+            self.csv_path_train = out_dir / self.csv_path_train.name
+            self.csv_path_valid = out_dir / self.csv_path_valid.name
 
         df_train = pd.DataFrame(
             {"filename": X_train, "label": y_train}

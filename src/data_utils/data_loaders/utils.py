@@ -5,7 +5,7 @@ from typing import Union
 
 
 def classifier_oversample(
-    csv_path_train_orig: Union[str, Path]
+    csv_path_train_orig: Union[str, Path],
 ) -> Union[str, Path]:
     """Function balances training data using oversampling
     minority classes.
@@ -26,9 +26,10 @@ def classifier_oversample(
             )
         )
     df_aug = pd.concat(dfs_aug, ignore_index=True)
-    csv_path_train_aug = deepcopy(csv_path_train_orig).replace(
-        ".csv", "_aug.csv"
+    csv_path_train_aug = Path(
+        str(csv_path_train_orig).replace(".csv", "_aug.csv")
     )
+
     df_aug.to_csv(csv_path_train_aug, index=False, header=True)
     return csv_path_train_aug
 
@@ -68,9 +69,10 @@ def classifier_undersample(
                     )
                     .index
                 )
-        csv_path_train_undersampled = deepcopy(csv_path_train_orig).replace(
-            ".csv", "_undersampled.csv"
+        csv_path_train_undersampled = Path(
+            str(csv_path_train_orig).replace(".csv", "_undersampled.csv")
         )
+
         df_undersampled.to_csv(
             csv_path_train_undersampled, index=False, header=True
         )
