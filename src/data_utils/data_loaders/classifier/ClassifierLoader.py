@@ -4,7 +4,7 @@ from data_utils.data_loaders.classifier.BaseClassifierLoader import (
 )
 from data_utils.data_sets import ClassifierDataset
 from torch.utils.data import ConcatDataset
-from typing import Tuple, Union, Dict
+from typing import Tuple, Union, Dict, List
 import torchvision.transforms as T
 import pandas as pd
 from copy import deepcopy
@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split
 from data_utils.data_loaders.utils import (
     classifier_oversample,
     classifier_undersample,
+    classifier_make_0_half,
 )
 
 
@@ -29,13 +30,19 @@ class ClassifierLoader(BaseClassifierLoader):
         transform_std: Tuple[float] = None,
         validation_split: float = 0.0,
         balance_train: bool = False,
-        balance_max_multiplicity: int = 15,
+        balance_methods: List[str] = None,
+        balance_max_multiplicity: int = None,
     ):
         # members
         self.balance_train = balance_train
+        self.balance_methods = balance_methods
         self.validation_split = validation_split
         self.balance_max_multiplicity = balance_max_multiplicity
         self.save_out_dir = save_out_dir
+
+        assert (balance_train and balance_methods) or (
+            not balance_train and not balance_methods
+        ), "balance_train and balance_methods must be both set or both not set"
 
         super().__init__(
             batch_size=batch_size,
@@ -61,6 +68,7 @@ class ClassifierLoader(BaseClassifierLoader):
         if self.validation_split == 0.0:
             self.csv_path_train = self.csv_path
         else:
+            # validation set
             self._split_train_valid()
             self.dataset_validate = ClassifierDataset(
                 images_dir=self.images_dir,
@@ -68,23 +76,34 @@ class ClassifierLoader(BaseClassifierLoader):
                 transform=self.transform,
             )
 
+        # train set
         if self.balance_train:
             self.balance_data()
-            self.dataset_train = ConcatDataset(
-                [
-                    ClassifierDataset(
-                        images_dir=self.images_dir,
-                        csv_path=self.csv_path_train,
-                        transform=self.transform,
-                    ),
-                    ClassifierDataset(
-                        images_dir=self.images_dir,
-                        csv_path=self.csv_path_train_aug,
-                        transform=self.transform_aug,
-                    ),
-                ]
-            )
+            if self.csv_path_train_aug:
+                # balancing with augmentation
+                self.dataset_train = ConcatDataset(
+                    [
+                        ClassifierDataset(
+                            images_dir=self.images_dir,
+                            csv_path=self.csv_path_train,
+                            transform=self.transform,
+                        ),
+                        ClassifierDataset(
+                            images_dir=self.images_dir,
+                            csv_path=self.csv_path_train_aug,
+                            transform=self.transform_aug,
+                        ),
+                    ]
+                )
+            else:
+                # balancing with no augmentation
+                self.dataset_train = ClassifierDataset(
+                    images_dir=self.images_dir,
+                    csv_path=self.csv_path_train,
+                    transform=self.transform,
+                )
         else:
+            # no balancing
             self.dataset_train = ClassifierDataset(
                 images_dir=self.images_dir,
                 csv_path=self.csv_path_train,
@@ -94,18 +113,32 @@ class ClassifierLoader(BaseClassifierLoader):
     def balance_data(self) -> None:
         """Function balances training data using firstly oversampling
         minority classes and then undersampling majority classes.
-        """
-        # -- balances data by oversampling minority classes -- #
-        self.csv_path_train_aug = classifier_oversample(
-            csv_path_train_orig=self.csv_path_train,
-        )
 
-        # -- balances data by undersampling majority classes -- #
-        self.csv_path_train = classifier_undersample(
-            csv_path_train_orig=self.csv_path_train,
-            csv_path_train_aug=self.csv_path_train_aug,
-            balance_max_multiplicity=self.balance_max_multiplicity,
-        )
+        Posibilities in balance_methods:
+        * oversampling:
+            -- 'oversample' - oversample minority classes
+        * undersampling:
+            -- 'undersample' - undersample majority classes
+            -- 'make_0_half' - make class 0 (none) as max 50% of all data
+        """
+        # oversampling
+        if "oversample" in self.balance_methods:
+            self.csv_path_train_aug = classifier_oversample(
+                csv_path_train_orig=self.csv_path_train,
+            )
+
+        # undersampling
+        if "undersample" in self.balance_methods:
+            self.csv_path_train = classifier_undersample(
+                csv_path_train_orig=self.csv_path_train,
+                balance_max_multiplicity=self.balance_max_multiplicity,
+                csv_path_train_aug=self.csv_path_train_aug,
+            )
+        elif "make_0_half" in self.balance_methods:
+            self.csv_path_train = classifier_make_0_half(
+                csv_path_train_orig=self.csv_path_train,
+                csv_path_train_aug=self.csv_path_train_aug,
+            )
 
     def combine_transforms(
         self,

@@ -13,7 +13,7 @@
         "type": "ClassifierLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/train/images",
-            "batch_size": 64,
+            "batch_size": 192,
             "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/train/labels.csv",
             "save_out_dir": "res/classifiers/classifier_multi/trainer/labels/",
             "transform_mean": [
@@ -30,7 +30,11 @@
             "validation_split": 0.2,
             "num_workers": 4,
             "balance_train": true,
-            "balance_max_multiplicity": 25,
+            "balance_methods": [
+                "oversample",
+                "make_0_half"
+            ],
+            "balance_max_multiplicity": null,
             "labels": {
                 "0": "none",
                 "1": "person",
@@ -41,12 +45,12 @@
             }
         },
         "class_weights": [
-            0.33463243,
-            0.4254861,
-            2.51605741,
-            10.83436414,
-            11.71213512,
-            11.59208079
+            0.33333333,
+            0.4271424,
+            2.52586565,
+            10.87575135,
+            11.75590098,
+            11.63532764
         ]
     },
     "optimizer": {
