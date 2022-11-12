@@ -64,7 +64,7 @@ class Trainer(BaseTrainer):
         self.valid_data_loader = data_loader.get_valid_loader()
         self.do_validation = do_validation
         self.lr_scheduler = lr_scheduler
-        self.log_step = int(np.sqrt(self.train_data_loader.batch_size))
+        self.log_step = int(np.sqrt(self.data_loader.batch_size))
         self.train_metrics = MetricTracker(
             "loss",
             *[m.__name__ for m in self.metric_ftns],
@@ -190,7 +190,7 @@ class Trainer(BaseTrainer):
                     make_grid(data.cpu(), nrow=8, normalize=True),
                 )
 
-        if self.data_loader.is_multiclass:
+        if self.data_loader.is_multilabel:
             preds = torch.cat(preds)
             targets = torch.cat(targets)
             pipeline_utils.print_per_class_metrics(

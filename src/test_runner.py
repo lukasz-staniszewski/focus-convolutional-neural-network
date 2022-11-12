@@ -12,9 +12,7 @@ from utils.project_utils import prepare_device
 
 
 def config_model(config):
-    cfg_path = (
-        Path(config["model_path"]).resolve().parents[1] / "config.json"
-    )
+    cfg_path = Path(config["model_path"]).resolve().parents[1] / "config.json"
     with open(cfg_path, "r") as f:
         cfg = json.load(f)
     config._config["arch"] = cfg["arch"]
@@ -26,7 +24,7 @@ def main(config: ConfigParser) -> None:
     config.ensure_reproducibility()
 
     # data_loader setup
-    test_data_loader = config.init_obj("data_loader", module_data)
+    data_loader = config.init_obj("data_loader", module_data)
 
     # build model
     config_model(config)
@@ -46,7 +44,7 @@ def main(config: ConfigParser) -> None:
         metric_ftns=metrics,
         config=config,
         device=device,
-        test_data_loader=test_data_loader,
+        data_loader=data_loader,
         only_predict=config["tester"]["only_predict"],
     )
 
@@ -71,9 +69,7 @@ if __name__ == "__main__":
     )
 
     # custom cli options to modify configuration from default values given in json file.
-    CustomArgs = collections.namedtuple(
-        "CustomArgs", "flags type target"
-    )
+    CustomArgs = collections.namedtuple("CustomArgs", "flags type target")
     options = [
         CustomArgs(
             ["--bs", "--batch_size"],

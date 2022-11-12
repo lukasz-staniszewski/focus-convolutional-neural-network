@@ -2,13 +2,13 @@
     "name": "CocoMultiClassifier",
     "device": 1,
     "seed": 42,
-    "model_path": "/content/drive/MyDrive/GitHub/focus-convolutional-neural-network/res/classifiers/classifier_multi/trainer/1026_133132/models/checkpoint-epoch9.pth",
+    "model_path": "res/classifiers/classifier_multi/trainer/1029_001122/models/checkpoint-epoch15.pth",
     "data_loader": {
-        "type": "ClassifierTestDataLoader",
+        "type": "TestClassifierLoader",
         "args": {
-            "images_dir": "/content/data/CocoMultiClassifier/validate/images",
-            "batch_size": 128,
-            "csv_path": "/content/data/CocoMultiClassifier/validate/labels.csv",
+            "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/validate/images",
+            "batch_size": 96,
+            "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/validate/labels.csv",
             "transform_mean": [
                 0.5438,
                 0.5786,
@@ -20,7 +20,6 @@
                 0.2966
             ],
             "num_workers": 4,
-            "is_multiclass": true,
             "labels": {
                 "0": "none",
                 "1": "person",
@@ -28,9 +27,7 @@
                 "3": "car",
                 "4": "cat",
                 "5": "dog"
-            },
-            "balance": true,
-            "balance_max_multiplicity": 8
+            }
         }
     },
     "metrics": [

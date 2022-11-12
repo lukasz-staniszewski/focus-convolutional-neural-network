@@ -45,16 +45,6 @@ class CocoClassifierPreprocessor(BasePreprocessor):
 
         self._prepare_output_img_dir()
 
-    def _prepare_output_img_dir(self):
-        """Prepares output directory for images."""
-        assert os.path.exists(
-            self.out_dir_path
-        ), "Output dir not found."
-        self.img_out_dir_path = os.path.join(
-            self.out_dir_path, "images"
-        )
-        os.makedirs(self.img_out_dir_path, exist_ok=True)
-
     def _resize_img(self, img: PIL.Image) -> PIL.Image:
         """Resizes image to own shape.
 
