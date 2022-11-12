@@ -37,9 +37,7 @@ class CocoMultiClassifierPreprocessor(BasePreprocessor):
         elif isinstance(kwargs["label_max_sz"], int):
             self.label_max_sz = kwargs["label_max_sz"]
         else:
-            raise ValueError(
-                "Parameter label_max_sz must be int or None."
-            )
+            raise ValueError("Parameter label_max_sz must be int or None.")
 
         self.logger.info(
             f"Starting mapping CocoDetection dataset to memory..."
@@ -56,16 +54,6 @@ class CocoMultiClassifierPreprocessor(BasePreprocessor):
 
         self._prepare_output_img_dir()
 
-    def _prepare_output_img_dir(self):
-        """Prepares output directory for images."""
-        assert os.path.exists(
-            self.out_dir_path
-        ), "Output dir not found."
-        self.img_out_dir_path = os.path.join(
-            self.out_dir_path, "images"
-        )
-        os.makedirs(self.img_out_dir_path, exist_ok=True)
-
     def _resize_img(self, img: PIL.Image) -> PIL.Image:
         """Resizes image to own shape.
 
@@ -79,9 +67,7 @@ class CocoMultiClassifierPreprocessor(BasePreprocessor):
             img = img.resize(self.img_out_shape)
         return img
 
-    def _cut_square(
-        self, image: PIL.Image, bbox: List[int]
-    ) -> PIL.Image:
+    def _cut_square(self, image: PIL.Image, bbox: List[int]) -> PIL.Image:
         """Cuts minimal square that contains bounding box.
 
         Args:
@@ -141,10 +127,8 @@ class CocoMultiClassifierPreprocessor(BasePreprocessor):
                     img_in = self.cut_fn(img_in=img_in, bbox=bbox)
 
                     filename = f"{self.img_idx}.jpg"
-                    img_in.save(
-                        os.path.join(self.img_out_dir_path, filename)
-                    )
-                    
+                    img_in.save(os.path.join(self.img_out_dir_path, filename))
+
                     self.filenames.append(filename)
                     self.y.append(label_idx)
                     self.labels_cnt[label_idx] += 1
