@@ -9,6 +9,7 @@ import numpy as np
 import os
 import platform
 import pathlib
+import random
 
 
 def ensure_dir(dirname: Union[str, Path]) -> None:
@@ -100,6 +101,7 @@ def set_seed(seed: int = 42) -> None:
     torch.backends.cudnn.determinstic = True
     torch.backends.cudnn.benchmark = False
     np.random.seed(seed)
+    random.seed(seed)
 
 
 def secure_load_path():

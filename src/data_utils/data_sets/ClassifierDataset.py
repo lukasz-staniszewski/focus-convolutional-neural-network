@@ -5,6 +5,7 @@ from typing import Tuple, Any, Union
 import os
 from pathlib import Path
 import pandas as pd
+from PIL import Image
 
 
 class ClassifierDataset(Dataset):
@@ -24,9 +25,10 @@ class ClassifierDataset(Dataset):
     def __getitem__(self, idx: int) -> Tuple[Any, int]:
         filename = self.df["filename"][idx]
         label = self.df["label"][idx]
-        img = torchvision.io.read_image(
-            os.path.join(self.images_dir, filename)
-        ).float()
+        # img = torchvision.io.read_image(
+        #     os.path.join(self.images_dir, filename)
+        # ).float()
+        img = Image.open(os.path.join(self.images_dir, filename))
         if self.transform is not None:
             img = self.transform(img)
 

@@ -1,3 +1,4 @@
+import random
 from base.base_preprocessor import BasePreprocessor
 from PIL import Image, ImageOps
 from data_utils.constants import COCO_2017_LABEL_MAP
@@ -8,6 +9,7 @@ import pandas as pd
 import numpy as np
 import os
 from tqdm import tqdm
+from math import log
 
 
 class CocoFocusPreprocessor(BasePreprocessor):
@@ -15,8 +17,10 @@ class CocoFocusPreprocessor(BasePreprocessor):
         super().__init__(*args, **kwargs)
         self.label_pos = kwargs["label_pos"]
         self.labels_neg = kwargs["labels_neg"]
-        self.new_img_in_shape = kwargs["new_img_in_shape"]
+        self.max_input_size = kwargs["max_input_size"]
         self.img_out_shape = kwargs["img_out_shape"]
+
+        self.enable_rotation = kwargs["enable_rotation"]
 
         if kwargs["label_max_size"] is None:
             self.label_max_size = inf
@@ -43,10 +47,28 @@ class CocoFocusPreprocessor(BasePreprocessor):
 
         self._prepare_output_img_dir()
 
+    def _calculate_max_image_size(self):
+        # assuming max possible image is square
+        # then max image size is after rotation by 45 degrees
+        width = self.max_input_size[0]
+        height = self.max_input_size[1]
+
+        max_width, max_height = width, height
+
+        if self.enable_rotation:
+            max_width = width * np.cos(np.deg2rad(45)) + height * np.sin(
+                np.deg2rad(45)
+            )
+            max_height = width * np.sin(np.deg2rad(45)) + height * np.cos(
+                np.deg2rad(45)
+            )
+
+        return int(max_width), int(max_height)
+
     def _resize_with_bboxes(self, img, bboxes):
         img_padded = self._add_padding_to_img(img)
-        pad_width = (self.new_img_in_shape[0] - img.size[0]) // 2
-        pad_height = (self.new_img_in_shape[1] - img.size[1]) // 2
+        pad_width = (img_padded.size[0] - img.size[0]) // 2
+        pad_height = (img_padded.size[1] - img.size[1]) // 2
         new_bboxes = [
             [bbox[0] + pad_width, bbox[1] + pad_height, bbox[2], bbox[3]]
             for bbox in bboxes
@@ -54,8 +76,9 @@ class CocoFocusPreprocessor(BasePreprocessor):
         return img_padded, new_bboxes
 
     def _add_padding_to_img(self, img):
-        delta_width = self.new_img_in_shape[0] - img.size[0]
-        delta_height = self.new_img_in_shape[1] - img.size[1]
+        max_width, max_height = self._calculate_max_image_size()
+        delta_width = max_width - img.size[0]
+        delta_height = max_height - img.size[1]
         pad_width = delta_width // 2
         pad_height = delta_height // 2
         padding = (
@@ -70,6 +93,29 @@ class CocoFocusPreprocessor(BasePreprocessor):
         center = (bbox[0] + bbox[2] / 2, bbox[1] + bbox[3] / 2)
         radius = max(bbox[2], bbox[3]) / 2
         return [center[0] - radius, center[1] - radius, radius * 2, radius * 2]
+
+    def _make_bbox_rotate(self, bbox, deg, img_center):
+        center = (bbox[0] + bbox[2] / 2, bbox[1] + bbox[3] / 2)
+        radius = max(bbox[2], bbox[3]) / 2
+
+        new_center_x = (
+            (center[0] - img_center[0]) * np.cos(np.deg2rad(deg))
+            + (center[1] - img_center[1]) * np.sin(np.deg2rad(deg))
+            + img_center[0]
+        )
+        new_center_y = (
+            (center[0] - img_center[0]) * np.sin(np.deg2rad(deg))
+            + (center[1] - img_center[1]) * np.cos(np.deg2rad(deg))
+            + img_center[1]
+        )
+
+        new_center = [new_center_x, new_center_y]
+        return [
+            new_center[0] - radius,
+            new_center[1] - radius,
+            radius * 2,
+            radius * 2,
+        ]
 
     def _get_bbox_closest_to_center(self, bboxes, image):
         centers = [
@@ -111,7 +157,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
             }
         )
 
-    def _get_transform_params_from_bbox(self, bbox, image_padded):
+    def _get_transform_params_from_bbox(self, bbox, image_padded, rot_deg):
         center = (bbox[0] + bbox[2] / 2, bbox[1] + bbox[3] / 2)
         radius = max(bbox[2], bbox[3]) / 2
         img_padded_center = (
@@ -127,12 +173,22 @@ class CocoFocusPreprocessor(BasePreprocessor):
             )
         )
 
-        scale = cropped_bbox.size[0] / image_padded.size[0]
+        scale = log(cropped_bbox.size[0] / image_padded.size[0])
         diff_x = 2 * (center[0] - img_padded_center[0]) / image_padded.size[0]
         diff_y = 2 * (center[1] - img_padded_center[1]) / image_padded.size[1]
-        rotation = 0.0
+
+        rotation = -rot_deg * np.pi / 180
 
         return scale, diff_x, diff_y, rotation
+
+    def _perform_rotation(self, image):
+        # probability of rotation is 1/2
+        if random.random() < 0.5:
+            return image, 0
+        else:
+            # rotate image random angle from -90 to 90 degrees
+            deg = random.randint(-90, 90)
+            return image.rotate(deg), deg
 
     def collect_files(self):
         for image, annotations in tqdm(
@@ -149,14 +205,21 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 for ann in annotations
                 if COCO_2017_LABEL_MAP[ann["category_id"]] == self.label_pos
             ]
-            # pad each image to same size and change bboxes coordinates
+            # pad image to same size and change bboxes coordinates
             image_padded, pos_bboxes = self._resize_with_bboxes(
                 img=image, bboxes=pos_bboxes
             )
+            # rotate with probability
+            if self.enable_rotation:
+                image_rotated, rot_degree = self._perform_rotation(
+                    image_padded
+                )
+            else:
+                image_rotated, rot_degree = image_padded, 0
             # save file
             self.img_counter += 1
             filename = f"{self.img_counter}.jpg"
-            image_padded.save(os.path.join(self.img_out_dir_path, filename))
+            image_rotated.save(os.path.join(self.img_out_dir_path, filename))
             self.filenames.append(filename)
             # if there are no bboxes annotated as label_pos, save image as negative
             if len(pos_bboxes) == 0:
@@ -167,6 +230,24 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 self.scale_factors.append(0)
             # positive image
             else:
+                # make bbox square
+                pos_bboxes = list(
+                    map(lambda x: self._make_bbox_square(bbox=x), pos_bboxes)
+                )
+                # modify bbox center according to rotation
+                pos_bboxes = list(
+                    map(
+                        lambda x: self._make_bbox_rotate(
+                            bbox=x,
+                            deg=rot_degree,
+                            img_center=(
+                                image_rotated.size[0] / 2,
+                                image_rotated.size[1] / 2,
+                            ),
+                        ),
+                        pos_bboxes,
+                    )
+                )
                 # if there are more than one bbox annotated as label_pos, choose the one closest to the center
                 if len(pos_bboxes) > 1:
                     bbox = self._get_bbox_closest_to_center(
@@ -175,8 +256,6 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 # if there is only one bbox annotated as label_pos, choose it
                 else:
                     bbox = pos_bboxes[0]
-                # make bbox square
-                bbox = self._make_bbox_square(bbox)
                 # get transformation parameters
                 (
                     scale,
@@ -186,6 +265,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 ) = self._get_transform_params_from_bbox(
                     bbox=bbox,
                     image_padded=image_padded,
+                    rot_deg=rot_degree,
                 )
                 self.labels.append(1)
                 self.translate_xs.append(diff_x)

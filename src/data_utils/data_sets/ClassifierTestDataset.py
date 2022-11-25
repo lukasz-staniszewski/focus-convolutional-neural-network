@@ -5,6 +5,7 @@ import os
 import pandas as pd
 from typing import Union, Any
 from pathlib import Path
+from PIL import Image
 
 
 class ClassifierTestDataset(Dataset):
@@ -34,9 +35,10 @@ class ClassifierTestDataset(Dataset):
 
     def __getitem__(self, idx: int) -> torch.Tensor:
         filename = self.files[idx]
-        img = torchvision.io.read_image(
-            os.path.join(self.images_dir, filename)
-        ).float()
+        # img = torchvision.io.read_image(
+        #     os.path.join(self.images_dir, filename)
+        # ).float()
+        img = Image.open(os.path.join(self.images_dir, filename))
 
         if self.transform is not None:
             img = self.transform(img)

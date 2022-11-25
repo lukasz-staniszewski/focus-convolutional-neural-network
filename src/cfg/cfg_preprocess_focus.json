@@ -3,12 +3,13 @@
     "preprocessor": {
         "type": "CocoFocusPreprocessor",
         "args": {
-            "img_in_dir_path": "data/raw/COCO-2017/validate/",
-            "ann_file_path": "data/raw/COCO-2017/annotations/instances_val2017.json",
-            "out_dir_path": "data/processed/COCO-2017/CocoPersonFocus/validate/",
+            "img_in_dir_path": "data/raw/COCO-2017/train/",
+            "ann_file_path": "data/raw/COCO-2017/annotations/instances_train2017.json",
+            "out_dir_path": "data/processed/COCO-2017/CocoPersonFocus/train/",
             "label_pos": "person",
             "labels_neg": null,
-            "new_img_in_shape": [
+            "enable_rotation": true,
+            "max_input_size": [
                 640,
                 640
             ],
@@ -21,7 +22,7 @@
     },
     "preprocess": {
         "verbosity": 1,
-        "save_dir": "data/processed/COCO-2017/CocoPersonFocus/validate/"
+        "save_dir": "data/processed/COCO-2017/CocoPersonFocus/train/"
     },
     "seed": 42
 }
