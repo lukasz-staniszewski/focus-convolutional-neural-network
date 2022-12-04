@@ -29,7 +29,7 @@ def main(config: ConfigParser) -> None:
     # build model
     config_model(config)
     model = config.init_obj("arch", module_arch)
-    logger.info(model)
+    logger.info(model.get_n_model_params())
 
     # prepare for (multi-device) GPU testing
     device, device_ids = prepare_device(config["device"])
@@ -76,6 +76,12 @@ if __name__ == "__main__":
             type=int,
             target="data_loader;args;batch_size",
         ),
+        CustomArgs(
+            ["-mp", "--model_path"],
+            type=str,
+            target="model_path"   
+        )
     ]
     config = ConfigParser.from_args(args, options)
     main(config)
+

@@ -25,3 +25,13 @@ class BaseModel(nn.Module):
         model_parameters = filter(lambda p: p.requires_grad, self.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])
         return super().__str__() + "\nTrainable parameters: {}".format(params)
+
+    def get_n_model_params(self) -> str:
+        """Function to print number of model trainable parameters.
+
+        Returns:
+            str: model information as string
+        """
+        model_parameters = filter(lambda p: p.requires_grad, self.parameters())
+        params = sum([np.prod(p.size()) for p in model_parameters])
+        return "Trainable parameters: {}".format(params)

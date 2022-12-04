@@ -2,9 +2,9 @@
     "name": "CocoMultiClassifier",
     "device": 1,
     "seed": 42,
-    "save_cfg_dir": "res/classifiers/classifier_multi/",
+    "save_cfg_dir": "res/classifiers/coco_classifier_multi/",
     "arch": {
-        "type": "ResNetFCClassifier",
+        "type": "ResNet34Classifier",
         "args": {
             "n_classes": 6
         }
@@ -13,9 +13,9 @@
         "type": "ClassifierLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/train/images",
-            "batch_size": 96,
+            "batch_size": 128,
             "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/train/labels.csv",
-            "save_out_dir": "res/classifiers/classifier_multi/trainer/labels/",
+            "save_out_dir": "res/classifiers/coco_classifier_multi/trainer/labels/",
             "transform_mean": [
                 0.4119,
                 0.3770,
@@ -27,8 +27,8 @@
                 0.2711
             ],
             "shuffle": true,
-            "validation_split": 0.15,
-            "num_workers": 6,
+            "validation_split": 0.25,
+            "num_workers": 14,
             "balance_train": true,
             "balance_methods": [
                 "oversample",
@@ -81,7 +81,7 @@
     },
     "trainer": {
         "epochs": 100,
-        "save_dir": "res/classifiers/classifier_multi/",
+        "save_dir": "res/classifiers/coco_classifier_multi/",
         "save_period": 1,
         "verbosity": 1,
         "monitor": "max val_macro_precision",
