@@ -53,15 +53,12 @@ class TestClassifierLoader(BaseClassifierLoader):
         if transform_mean and transform_std:
             self.transform = T.Compose(
                 transforms=[
-                    T.ToPILImage(),
                     T.ToTensor(),
                     T.Normalize(transform_mean, transform_std),
                 ]
             )
         else:
-            self.transform = T.Compose(
-                transforms=[T.ToPILImage(), T.ToTensor()]
-            )
+            self.transform = T.Compose(transforms=[T.ToTensor()])
 
     def to_csv(self, csv_path: str, predictions: Any = None) -> None:
         out = {"filename": self.dataset_test.files}

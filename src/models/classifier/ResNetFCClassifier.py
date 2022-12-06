@@ -3,6 +3,7 @@ from base import BaseModel
 from torchvision import models
 from torchvision.models import ResNet18_Weights
 import torch
+from pipeline import loss
 
 
 class ResNetFCClassifier(BaseModel):
@@ -14,13 +15,13 @@ class ResNetFCClassifier(BaseModel):
         res_fc_out = self.model.fc.out_features
 
         self.fc_out = nn.Sequential(
-            nn.Linear(in_features=res_fc_out, out_features=500),
-            nn.ReLU(),
-            nn.Dropout(0.7),
-            nn.Linear(in_features=500, out_features=50),
-            nn.ReLU(),
-            nn.Dropout(0.6),
-            nn.Linear(in_features=50, out_features=self.n_classes),
+            nn.Linear(in_features=res_fc_out, out_features=1000),
+            nn.Tanh(),
+            nn.Dropout(0.5),
+            nn.Linear(in_features=1000, out_features=100),
+            nn.Tanh(),
+            # nn.Dropout(0.6),
+            nn.Linear(in_features=100, out_features=self.n_classes),
         )
 
     def forward(self, x):
@@ -31,3 +32,11 @@ class ResNetFCClassifier(BaseModel):
     def get_prediction(self, output):
         _, prediction = torch.max(output, 1)
         return prediction
+
+    def calculate_loss(self, output, target, weights=None):
+        if weights is not None:
+            return loss.cross_entropy_loss_weighted(
+                output=output, target=target, weights=weights
+            )
+        else:
+            return loss.cross_entropy_loss(output=output, target=target)

@@ -2,9 +2,9 @@
     "name": "CocoMultiClassifier",
     "device": 1,
     "seed": 42,
-    "save_cfg_dir": "res/classifiers/classifier_multi/",
+    "save_cfg_dir": "res/classifiers/coco_classifier_multi/",
     "arch": {
-        "type": "ResNetFCClassifier",
+        "type": "ResNet34Classifier",
         "args": {
             "n_classes": 6
         }
@@ -13,22 +13,22 @@
         "type": "ClassifierLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoMultiClassifier/train/images",
-            "batch_size": 192,
+            "batch_size": 128,
             "csv_path": "data/processed/COCO-2017/CocoMultiClassifier/train/labels.csv",
-            "save_out_dir": "res/classifiers/classifier_multi/trainer/labels/",
+            "save_out_dir": "res/classifiers/coco_classifier_multi/trainer/labels/",
             "transform_mean": [
-                0.5438,
-                0.5786,
-                0.6030
+                0.4119,
+                0.3770,
+                0.3452
             ],
             "transform_std": [
-                0.2944,
-                0.2882,
-                0.2966
+                0.2832,
+                0.2707,
+                0.2711
             ],
             "shuffle": true,
-            "validation_split": 0.2,
-            "num_workers": 4,
+            "validation_split": 0.25,
+            "num_workers": 14,
             "balance_train": true,
             "balance_methods": [
                 "oversample",
@@ -56,8 +56,8 @@
     "optimizer": {
         "type": "Adam",
         "args": {
-            "lr": 1e-2,
-            "weight_decay": 0.0001,
+            "lr": 3e-05,
+            "weight_decay": 0.0005,
             "amsgrad": true
         }
     },
@@ -80,11 +80,12 @@
         }
     },
     "trainer": {
+        "type": "Trainer",
         "epochs": 100,
-        "save_dir": "res/classifiers/classifier_multi/",
+        "save_dir": "res/classifiers/coco_classifier_multi/",
         "save_period": 1,
         "verbosity": 1,
-        "monitor": "min val_loss",
+        "monitor": "max val_macro_precision",
         "early_stop": 10,
         "tensorboard": false
     }

@@ -14,7 +14,6 @@ class BaseTrainer:
     def __init__(
         self,
         model: BaseModel,
-        criterion: torch.nn.Module,
         metric_ftns: list,
         optimizer: torch.optim.Optimizer,
         config: ConfigParser,
@@ -24,7 +23,6 @@ class BaseTrainer:
             "trainer", config["trainer"]["verbosity"]
         )
         self.model = model
-        self.criterion = criterion
         self.metric_ftns = metric_ftns
         self.optimizer = optimizer
         cfg_trainer = config["trainer"]

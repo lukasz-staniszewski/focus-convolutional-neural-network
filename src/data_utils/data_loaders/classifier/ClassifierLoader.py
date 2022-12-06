@@ -126,6 +126,8 @@ class ClassifierLoader(BaseClassifierLoader):
             self.csv_path_train_aug = classifier_oversample(
                 csv_path_train_orig=self.csv_path_train,
             )
+        else:
+            self.csv_path_train_aug = None
 
         # undersampling
         if "undersample" in self.balance_methods:
@@ -148,29 +150,24 @@ class ClassifierLoader(BaseClassifierLoader):
         if transform_mean and transform_std:
             self.transform = T.Compose(
                 transforms=[
-                    T.ToPILImage(),
                     T.ToTensor(),
                     T.Normalize(transform_mean, transform_std),
                 ]
             )
             self.transform_aug = T.Compose(
                 transforms=[
-                    T.ToPILImage(),
-                    T.ToTensor(),
-                    T.Normalize(transform_mean, transform_std),
                     T.RandomHorizontalFlip(0.5),
+                    T.ToTensor(),
                     T.RandomErasing(0.5),
+                    T.Normalize(transform_mean, transform_std),
                 ]
             )
         else:
-            self.transform = T.Compose(
-                transforms=[T.ToPILImage(), T.ToTensor()]
-            )
+            self.transform = T.Compose(transforms=[T.ToTensor()])
             self.transform_aug = T.Compose(
                 transforms=[
-                    T.ToPILImage(),
-                    T.ToTensor(),
                     T.RandomHorizontalFlip(0.5),
+                    T.ToTensor(),
                     T.RandomErasing(0.5),
                 ]
             )

@@ -15,7 +15,6 @@ class Trainer(BaseTrainer):
     def __init__(
         self,
         model: torch.nn.Module,
-        criterion: torch.nn.Module,
         metric_ftns: list,
         optimizer: torch.optim.Optimizer,
         config: dict,
@@ -30,7 +29,6 @@ class Trainer(BaseTrainer):
 
         Args:
             model (torch.nn.Module): model to train
-            criterion (torch.nn.Module): loss function
             metric_ftns (list): metrics to compute
             optimizer (torch.optim.Optimizer): optimizer to use
             config (dict): config dictionary
@@ -42,7 +40,6 @@ class Trainer(BaseTrainer):
         """
         super().__init__(
             model=model,
-            criterion=criterion,
             metric_ftns=metric_ftns,
             optimizer=optimizer,
             config=config,
@@ -98,7 +95,9 @@ class Trainer(BaseTrainer):
 
         for batch_idx, (data, target) in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
-            data, target = data.to(self.device), target.to(self.device)
+            
+            data = data.to(self.device)
+            target = self.prepare_target(target)
             self.optimizer.zero_grad()
 
             output = self.model(data).squeeze()
@@ -107,15 +106,15 @@ class Trainer(BaseTrainer):
             pbar_loss = loss.item()
             self.optimizer.step()
 
-            self.writer.set_step(
-                (epoch - 1) * self.len_epoch + batch_idx
-            )
+            self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
             self.train_metrics.update("loss", loss.item())
             output = self.model.get_prediction(output)
 
+            target = self.cpu_target(target)
+
             for met in self.metric_ftns:
                 self.train_metrics.update(
-                    met.__name__, met(output.cpu(), target.cpu())
+                    met.__name__, met(output.cpu(), target)
                 )
 
             if batch_idx % self.log_step == 0:
@@ -164,26 +163,25 @@ class Trainer(BaseTrainer):
         with torch.no_grad():
             for batch_idx, (data, target) in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
-                data, target = data.to(self.device), target.to(
-                    self.device
-                )
+                data = data.to(self.device)
+                target = self.prepare_target(target)
                 output = self.model(data).squeeze()
                 loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
                 preds.append(output.cpu())
-                targets.append(target.cpu())
+                target = self.cpu_target(target)
+                targets.append(target)
 
                 self.writer.set_step(
-                    (epoch - 1) * len(self.valid_data_loader)
-                    + batch_idx,
+                    (epoch - 1) * len(self.valid_data_loader) + batch_idx,
                     "valid",
                 )
                 self.valid_metrics.update("loss", loss.item())
                 for met in self.metric_ftns:
                     self.valid_metrics.update(
-                        met.__name__, met(output.cpu(), target.cpu())
+                        met.__name__, met(output.cpu(), target)
                     )
                 self.writer.add_image(
                     "input",
@@ -227,10 +225,27 @@ class Trainer(BaseTrainer):
 
     def calc_loss(self, output, target):
         if self.class_weights:
-            return self.criterion(
-                output,
-                target,
-                torch.Tensor(self.class_weights).to(self.device),
+            return self.model.calculate_loss(
+                output=output,
+                target=target,
+                weights=torch.Tensor(self.class_weights).to(self.device),
             )
         else:
-            return self.criterion(output, target)
+            return self.model.calculate_loss(
+                output=output,
+                target=target,
+            )
+
+    def prepare_target(self, target):
+        if isinstance(target, dict):
+            target = {k: v.to(self.device) for (k, v) in target.items()}
+        else:
+            target = target.to(self.device)
+        return target
+
+    def cpu_target(self, target):
+        if isinstance(target, tuple):
+            target = {k: v.cpu() for (k, v) in target.items()}
+        else:
+            target = target.cpu()
+        return target
