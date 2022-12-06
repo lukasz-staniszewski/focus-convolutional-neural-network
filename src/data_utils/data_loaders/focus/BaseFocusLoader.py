@@ -1,5 +1,5 @@
 from base import BaseDataLoader
-from typing import Tuple, Union, Dict
+from typing import Tuple, Union, Dict, Callable
 
 
 class BaseFocusLoader(BaseDataLoader):
@@ -14,11 +14,13 @@ class BaseFocusLoader(BaseDataLoader):
         csv_path: str = None,
         transform_mean: Tuple[float] = None,
         transform_std: Tuple[float] = None,
+        collate_fn: Callable = None,
     ):
         super().__init__(
             batch_size=batch_size,
             shuffle=shuffle,
             num_workers=num_workers,
+            collate_fn=collate_fn,
         )
 
         self.images_dir = images_dir

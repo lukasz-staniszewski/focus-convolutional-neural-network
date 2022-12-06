@@ -35,3 +35,17 @@ class BaseModel(nn.Module):
         model_parameters = filter(lambda p: p.requires_grad, self.parameters())
         params = sum([np.prod(p.size()) for p in model_parameters])
         return "Trainable parameters: {}".format(params)
+
+    def calculate_loss(
+        self, output: torch.Tensor, target: torch.Tensor
+    ) -> torch.Tensor:
+        """Function to calculate loss.
+
+        Args:
+            torch.Tensor: output of the model
+            torch.Tensor: data target
+
+        Returns:
+            torch.Tensor: loss
+        """
+        raise NotImplementedError

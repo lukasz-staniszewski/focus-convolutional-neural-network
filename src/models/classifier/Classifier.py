@@ -1,6 +1,7 @@
 import torch.nn as nn
 from base import BaseModel
 import torch
+from pipeline import loss
 
 
 class Classifier(BaseModel):
@@ -78,3 +79,8 @@ class Classifier(BaseModel):
 
     def get_prediction(self, output):
         return (output >= self.threshold).float()
+
+    def calculate_loss(
+        self, output: torch.Tensor, target: torch.Tensor
+    ) -> torch.Tensor:
+        return loss.binary_cross_entropy_loss(output=output, target=target)

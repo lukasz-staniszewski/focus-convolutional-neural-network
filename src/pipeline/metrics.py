@@ -32,9 +32,7 @@ def macro_accuracy(output, target):
     TP, FP, FN, TN = _get_class_cm(output, target)
     accuracies = [0 for _ in range(len(TP))]
     for c in range(len(accuracies)):
-        accuracies[c] = (TP[c] + TN[c]) / (
-            TP[c] + FP[c] + TN[c] + FN[c]
-        )
+        accuracies[c] = (TP[c] + TN[c]) / (TP[c] + FP[c] + TN[c] + FN[c])
     return torch.Tensor(accuracies).mean().item()
 
 
@@ -172,3 +170,28 @@ def f1(output, target):
     if prec + rec == 0:
         return 0.0
     return 2 * prec * rec / (prec + rec)
+
+
+# focus classification metrics
+def focus_accuracy(output, target):
+    target = target["label"]
+    output = output[0]
+    return accuracy(output, target)
+
+
+def focus_recall(output, target):
+    target = target["label"]
+    output = output[0]
+    return recall(output, target)
+
+
+def focus_precision(output, target):
+    target = target["label"]
+    output = output[0]
+    return precision(output, target)
+
+
+def focus_f1(output, target):
+    target = target["label"]
+    output = output[0]
+    return f1(output, target)

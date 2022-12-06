@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import pandas as pd
 from PIL import Image
+import torch
 
 
 class FocusDataset(Dataset):
@@ -26,19 +27,17 @@ class FocusDataset(Dataset):
         row = self.df.iloc[idx]
         filename = row["filename"]
 
-        target = {}
-        target["label"] = row["label"]
-        target["translate_x"] = row["translate_x"]
-        target["translate_y"] = row["translate_y"]
-        target["scale_factor"] = row["scale_factor"]
-        target["theta"] = row["theta"]
+        label = int(row["label"])
+        transform = torch.FloatTensor(row.iloc[2:])
 
-        # img = torchvision.io.read_image(
-        #     os.path.join(self.images_dir, filename)
-        # ).float()
         img = Image.open(os.path.join(self.images_dir, filename))
-
         if self.transform is not None:
             img = self.transform(img)
 
-        return img, target
+        data = {
+            "image": img,
+            "label": label,
+            "transform": transform,
+        }
+
+        return data

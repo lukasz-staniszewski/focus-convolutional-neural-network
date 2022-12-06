@@ -2,11 +2,11 @@ import argparse
 import collections
 import torch
 import data_utils.data_loaders as module_data
-import pipeline.loss as module_loss
+import pipeline.trainers as module_trainers
 import pipeline.metrics as module_metric
 import models as module_arch
 from utils import ConfigParser
-from pipeline.trainers import Trainer
+from pipeline.trainers import FocusTrainer
 from utils.project_utils import prepare_device
 
 
@@ -17,7 +17,7 @@ def main(config: ConfigParser) -> None:
 
     # data_loader setup
     data_loader = config.init_obj("data_loader", module_data)
-    
+
     # build model
     model = config.init_obj("arch", module_arch)
     logger.info(model)
@@ -28,24 +28,22 @@ def main(config: ConfigParser) -> None:
     if len(device_ids) > 1:
         model = torch.nn.DataParallel(model, device_ids=device_ids)
 
-    # function handles - loss and metrics
-    criterion = getattr(module_loss, config["loss"])
+    # function handles metrics
     metrics = [getattr(module_metric, met) for met in config["metrics"]]
 
     # optimizer, lr scheduler
-    trainable_params = filter(
-        lambda p: p.requires_grad, model.parameters()
-    )
-    optimizer = config.init_obj(
-        "optimizer", torch.optim, trainable_params
-    )
+    trainable_params = filter(lambda p: p.requires_grad, model.parameters())
+    optimizer = config.init_obj("optimizer", torch.optim, trainable_params)
     lr_scheduler = config.init_obj(
         "lr_scheduler", torch.optim.lr_scheduler, optimizer
     )
     class_weights = config.config["data_loader"]["class_weights"]
-    trainer = Trainer(
+
+    # trainer initialization
+    trainer_class = getattr(module_trainers, config["trainer"]["type"])
+
+    trainer = trainer_class(
         model,
-        criterion,
         metrics,
         optimizer,
         config=config,
@@ -83,9 +81,7 @@ if __name__ == "__main__":
     )
 
     # custom cli options to modify configuration from default values given in json file.
-    CustomArgs = collections.namedtuple(
-        "CustomArgs", "flags type target"
-    )
+    CustomArgs = collections.namedtuple("CustomArgs", "flags type target")
     options = [
         CustomArgs(
             ["--lr", "--learning_rate"],

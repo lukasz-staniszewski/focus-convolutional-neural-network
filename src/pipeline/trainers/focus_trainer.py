@@ -6,10 +6,9 @@ from base import BaseTrainer
 from utils import inf_loop, MetricTracker
 from tqdm import tqdm
 from typing import List
-from pipeline import utils as pipeline_utils
 
 
-class Trainer(BaseTrainer):
+class FocusTrainer(BaseTrainer):
     """Trainer class."""
 
     def __init__(
@@ -93,14 +92,15 @@ class Trainer(BaseTrainer):
         )
         pbar_loss = "None"
 
-        for batch_idx, (data, target) in progress_bar:
+        for batch_idx, data in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
-            
-            data = data.to(self.device)
-            target = self.prepare_target(target)
+
+            target = self.prepare_target(data, ["label", "transform"])
+            data_in = data["image"].to(self.device)
+
             self.optimizer.zero_grad()
 
-            output = self.model(data).squeeze()
+            output = self.model(data_in)
             loss = self.calc_loss(output, target)
             loss.backward()
             pbar_loss = loss.item()
@@ -110,11 +110,11 @@ class Trainer(BaseTrainer):
             self.train_metrics.update("loss", loss.item())
             output = self.model.get_prediction(output)
 
-            target = self.cpu_target(target)
+            target = self.cpu_tensors(target)
 
             for met in self.metric_ftns:
                 self.train_metrics.update(
-                    met.__name__, met(output.cpu(), target)
+                    met.__name__, met(self.cpu_tensors(output), target)
                 )
 
             if batch_idx % self.log_step == 0:
@@ -125,7 +125,7 @@ class Trainer(BaseTrainer):
                 )
                 self.writer.add_image(
                     "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    make_grid(data_in.cpu(), nrow=8, normalize=True),
                 )
             if batch_idx == self.len_epoch:
                 break
@@ -161,17 +161,17 @@ class Trainer(BaseTrainer):
 
         preds, targets = [], []
         with torch.no_grad():
-            for batch_idx, (data, target) in progress_bar:
+            for batch_idx, data in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
-                data = data.to(self.device)
-                target = self.prepare_target(target)
-                output = self.model(data).squeeze()
+                target = self.prepare_target(data, ["label", "transform"])
+                data_in = data["image"].to(self.device)
+                output = self.model(data_in).squeeze()
                 loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
-                preds.append(output.cpu())
-                target = self.cpu_target(target)
+                preds.append(self.cpu_tensors(output))
+                target = self.cpu_tensors(target)
                 targets.append(target)
 
                 self.writer.set_step(
@@ -181,22 +181,14 @@ class Trainer(BaseTrainer):
                 self.valid_metrics.update("loss", loss.item())
                 for met in self.metric_ftns:
                     self.valid_metrics.update(
-                        met.__name__, met(output.cpu(), target)
+                        met.__name__, met(self.cpu_tensors(output), target)
                     )
                 self.writer.add_image(
                     "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    make_grid(
+                        self.cpu_tensors(data_in), nrow=8, normalize=True
+                    ),
                 )
-
-        if self.data_loader.is_multilabel:
-            preds = torch.cat(preds)
-            targets = torch.cat(targets)
-            pipeline_utils.print_per_class_metrics(
-                targets=targets,
-                predictions=preds,
-                cls_map=self.data_loader.labels,
-                logger=self.logger,
-            )
 
         # adding histogram of model parameters to the tensorboard
         for name, p in self.model.named_parameters():
@@ -236,16 +228,25 @@ class Trainer(BaseTrainer):
                 target=target,
             )
 
-    def prepare_target(self, target):
+    def prepare_target(self, target, columns=None):
         if isinstance(target, dict):
-            target = {k: v.to(self.device) for (k, v) in target.items()}
+            if columns:
+                target = {
+                    k: v.to(self.device)
+                    for (k, v) in target.items()
+                    if k in columns
+                }
+            else:
+                target = {k: v.to(self.device) for (k, v) in target.items()}
         else:
             target = target.to(self.device)
         return target
 
-    def cpu_target(self, target):
-        if isinstance(target, tuple):
-            target = {k: v.cpu() for (k, v) in target.items()}
+    def cpu_tensors(self, tensors):
+        if isinstance(tensors, dict):
+            tensors = {k: v.cpu() for (k, v) in tensors.items()}
+        elif isinstance(tensors, tuple):
+            tensors = tuple([t.cpu() for t in tensors])
         else:
-            target = target.cpu()
-        return target
+            tensors = tensors.cpu()
+        return tensors

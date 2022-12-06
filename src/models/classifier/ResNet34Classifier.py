@@ -3,6 +3,7 @@ from base import BaseModel
 from torchvision import models
 from torchvision.models import ResNet34_Weights
 import torch
+from pipeline import loss
 
 
 class ResNet34Classifier(BaseModel):
@@ -32,3 +33,11 @@ class ResNet34Classifier(BaseModel):
     def get_prediction(self, output):
         _, prediction = torch.max(output, 1)
         return prediction
+
+    def calculate_loss(self, output, target, weights=None):
+        if weights is not None:
+            return loss.cross_entropy_loss_weighted(
+                output=output, target=target, weights=weights
+            )
+        else:
+            return loss.cross_entropy_loss(output=output, target=target)

@@ -1,0 +1,70 @@
+{
+    "name": "CocoPersonFocus",
+    "device": 1,
+    "seed": 42,
+    "save_cfg_dir": "res/focus/coco_focus_person/",
+    "arch": {
+        "type": "ResFocusNetwork",
+        "args": {
+            "threshold": 0.5
+        }
+    },
+    "data_loader": {
+        "type": "FocusLoader",
+        "args": {
+            "images_dir": "data/processed/COCO-2017/CocoPersonFocus/train/images",
+            "batch_size": 8,
+            "csv_path": "data/processed/COCO-2017/CocoPersonFocus/train/labels.csv",
+            "save_out_dir": "res/focus/coco_focus_person/trainer/labels/",
+            "transform_mean": [
+                0.4119,
+                0.3770,
+                0.3452
+            ],
+            "transform_std": [
+                0.2832,
+                0.2707,
+                0.2711
+            ],
+            "shuffle": true,
+            "validation_split": 0.15,
+            "num_workers": 1,
+            "labels": {
+                "0": "none",
+                "1": "person"
+            }
+        },
+        "class_weights": null
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 3e-05,
+            "weight_decay": 0.0005,
+            "amsgrad": true
+        }
+    },
+    "metrics": [
+        "focus_accuracy",
+        "focus_recall",
+        "focus_precision",
+        "focus_f1"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 50,
+            "gamma": 0.1
+        }
+    },
+    "trainer": {
+        "type": "FocusTrainer",
+        "epochs": 100,
+        "save_dir": "res/focus/coco_focus_person/",
+        "save_period": 1,
+        "verbosity": 1,
+        "monitor": "min val_loss",
+        "early_stop": 10,
+        "tensorboard": false
+    }
+}

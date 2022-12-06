@@ -6,6 +6,7 @@ import pandas as pd
 from copy import deepcopy
 from pathlib import Path
 from sklearn.model_selection import train_test_split
+import torch
 
 
 class FocusLoader(BaseFocusLoader):
@@ -57,7 +58,6 @@ class FocusLoader(BaseFocusLoader):
                 csv_path=self.csv_path_valid,
                 transform=self.transform,
             )
-
         # train set
         self.dataset_train = FocusDataset(
             images_dir=self.images_dir,

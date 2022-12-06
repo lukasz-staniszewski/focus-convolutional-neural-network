@@ -80,6 +80,7 @@
         }
     },
     "trainer": {
+        "type": "Trainer",
         "epochs": 100,
         "save_dir": "res/classifiers/coco_classifier_multi/",
         "save_period": 1,
