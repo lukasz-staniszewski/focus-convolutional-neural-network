@@ -159,20 +159,19 @@ class FocusTrainer(BaseTrainer):
         )
         pbar_loss = "None"
 
-        preds, targets = [], []
         with torch.no_grad():
             for batch_idx, data in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
+
                 target = self.prepare_target(data, ["label", "transform"])
                 data_in = data["image"].to(self.device)
-                output = self.model(data_in).squeeze()
+
+                output = self.model(data_in)
                 loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
-                preds.append(self.cpu_tensors(output))
                 target = self.cpu_tensors(target)
-                targets.append(target)
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader) + batch_idx,

@@ -6,14 +6,15 @@
     "arch": {
         "type": "ResFocusNetwork",
         "args": {
-            "threshold": 0.5
+            "threshold": 0.5,
+            "loss_lambda": 8.0
         }
     },
     "data_loader": {
         "type": "FocusLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoPersonFocus/train/images",
-            "batch_size": 8,
+            "batch_size": 32,
             "csv_path": "data/processed/COCO-2017/CocoPersonFocus/train/labels.csv",
             "save_out_dir": "res/focus/coco_focus_person/trainer/labels/",
             "transform_mean": [
@@ -39,7 +40,7 @@
     "optimizer": {
         "type": "Adam",
         "args": {
-            "lr": 3e-05,
+            "lr": 3e-04,
             "weight_decay": 0.0005,
             "amsgrad": true
         }

@@ -7,11 +7,15 @@ from pipeline import loss
 
 
 class ResFocusNetwork(BaseModel):
-    def __init__(self, threshold=0.5) -> None:
+    def __init__(
+        self, threshold: float = 0.5, loss_lambda: float = None
+    ) -> None:
         super().__init__()
+        self.threshold = threshold
+        self.loss_lambda = loss_lambda
+
         self.model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
         res_fc_out = self.model.fc.out_features
-
         self.fc_out = nn.Sequential(
             nn.Linear(in_features=res_fc_out, out_features=500),
             nn.Tanh(),
@@ -20,7 +24,6 @@ class ResFocusNetwork(BaseModel):
 
         self.cls_fc = nn.Linear(128, 1)
         self.tf_fc = nn.Linear(128, 4)
-        self.threshold = threshold
 
     def forward(self, x):
         x = self.model(x)
@@ -34,4 +37,6 @@ class ResFocusNetwork(BaseModel):
         return (cls >= self.threshold).float(), tf_params
 
     def calculate_loss(self, output, target):
-        return loss.focus_multiloss(output=output, target=target)
+        return loss.focus_multiloss(
+            output=output, target=target, lambd=self.loss_lambda
+        )
