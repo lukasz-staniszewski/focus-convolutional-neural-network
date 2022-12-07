@@ -47,7 +47,7 @@ def focus_multiloss_ce(output, target, lambd=10.0):
     cls_target, reg_target = target["label"], target["transform"]
 
     cls_loss = F.binary_cross_entropy_with_logits(
-        input=cls_out,
+        input=cls_out.squeeze(),
         target=cls_target.float(),
         reduction="mean",
     )

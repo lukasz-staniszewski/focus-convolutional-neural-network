@@ -37,6 +37,10 @@ class ResFocusNetwork(BaseModel):
         return (cls >= self.threshold).float(), tf_params
 
     def calculate_loss(self, output, target):
-        return loss.focus_multiloss(
+        # return loss.focus_multiloss(
+        #     output=output, target=target, lambd=self.loss_lambda
+        # )
+        return loss.focus_multiloss_ce(
             output=output, target=target, lambd=self.loss_lambda
         )
+        

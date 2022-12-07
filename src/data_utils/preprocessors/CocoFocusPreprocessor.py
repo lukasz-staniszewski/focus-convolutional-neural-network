@@ -164,16 +164,8 @@ class CocoFocusPreprocessor(BasePreprocessor):
             image_padded.size[0] / 2,
             image_padded.size[1] / 2,
         )
-        cropped_bbox = image_padded.crop(
-            (
-                center[0] - radius,
-                center[1] - radius,
-                center[0] + radius,
-                center[1] + radius,
-            )
-        )
 
-        scale = log(cropped_bbox.size[0] / image_padded.size[0])
+        scale = log(radius * 2 / image_padded.size[0])
         diff_x = 2 * (center[0] - img_padded_center[0]) / image_padded.size[0]
         diff_y = 2 * (center[1] - img_padded_center[1]) / image_padded.size[1]
 
