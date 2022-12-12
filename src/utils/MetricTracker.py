@@ -13,7 +13,9 @@ class MetricTracker:
             writer (Callable, optional): tensorboard writer function. Defaults to None.
         """
         self.writer = writer
-        self._data = pd.DataFrame(index=keys, columns=["total", "counts", "average"])
+        self._data = pd.DataFrame(
+            index=keys, columns=["total", "counts", "average"]
+        )
         self.reset()
 
     def reset(self) -> None:
@@ -29,11 +31,15 @@ class MetricTracker:
             value (int): metric value
             n (int, optional): number of samples. Defaults to 1.
         """
+        if key not in self._data.index:
+            self._data.loc[key] = 0
         if self.writer is not None:
             self.writer.add_scalar(key, value)
         self._data.total[key] += value * n
         self._data.counts[key] += n
-        self._data.average[key] = self._data.total[key] / self._data.counts[key]
+        self._data.average[key] = (
+            self._data.total[key] / self._data.counts[key]
+        )
 
     def avg(self, key: str) -> float:
         """Returns the average value of the metric.

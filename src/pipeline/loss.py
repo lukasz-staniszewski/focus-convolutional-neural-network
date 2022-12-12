@@ -41,6 +41,10 @@ def focus_multiloss(output, target, alpha=0.25, gamma=2.0, lambd=10.0):
     return cls_loss + lambd * reg_loss
 
 
+def smooth_loss(output, target):
+    return nn.SmoothL1Loss()(input=output, target=target)
+
+
 def focus_multiloss_ce(output, target, lambd=10.0):
     # calculate focal loss per classes and l1 smooth for positive classes
     cls_out, reg_out = output

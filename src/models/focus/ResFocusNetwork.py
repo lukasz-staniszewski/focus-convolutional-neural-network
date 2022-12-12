@@ -3,6 +3,7 @@ from base import BaseModel
 from torchvision import models
 from torchvision.models import ResNet34_Weights, ResNet18_Weights
 from pipeline import loss
+import torch
 
 
 class ResFocusNetwork(BaseModel):
@@ -51,9 +52,25 @@ class ResFocusNetwork(BaseModel):
         return (cls >= self.threshold).float().squeeze(), tf_params
 
     def calculate_loss(self, output, target):
-        # return loss.focus_multiloss(
-        #     output=output, target=target, lambd=self.loss_lambda
-        # )
-        return loss.focus_multiloss_ce(
+        losses = {}
+        focal_loss = loss.focus_multiloss_ce(
             output=output, target=target, lambd=self.loss_lambda
         )
+        losses["loss"] = focal_loss
+        with torch.no_grad():
+            cls_out, reg_out = output
+            cls_target, reg_target = target["label"], target["transform"]
+            positives = cls_target == 1
+            losses["translation_loss"] = nn.SmoothL1Loss()(
+                input=reg_out[:, 0:2][positives],
+                target=reg_target[:, 0:2][positives],
+            )
+            losses["scale_log_loss"] = nn.SmoothL1Loss()(
+                input=reg_out[:, 2:3][positives],
+                target=reg_target[:, 2:3][positives],
+            )
+            losses["rotation_loss"] = nn.SmoothL1Loss()(
+                input=reg_out[:, 3:4][positives],
+                target=reg_target[:, 3:4][positives],
+            )
+        return losses
