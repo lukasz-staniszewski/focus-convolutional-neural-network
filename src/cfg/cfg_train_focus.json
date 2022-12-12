@@ -7,7 +7,7 @@
         "type": "ResFocusNetwork",
         "args": {
             "threshold": 0.5,
-            "loss_lambda": 5.0
+            "loss_lambda": 6.0
         }
     },
     "data_loader": {
@@ -41,7 +41,7 @@
         "type": "Adam",
         "args": {
             "lr": 3e-04,
-            "weight_decay": 0.0005,
+            "weight_decay": 0.0001,
             "amsgrad": true
         }
     },
@@ -65,7 +65,7 @@
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",
-        "early_stop": 10,
+        "early_stop": 15,
         "tensorboard": false
     }
 }

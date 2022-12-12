@@ -65,7 +65,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
 
         return int(max_width), int(max_height)
 
-    def _resize_with_bboxes(self, img, bboxes):
+    def _pad_with_bboxes(self, img, bboxes):
         img_padded = self._add_padding_to_img(img)
         pad_width = (img_padded.size[0] - img.size[0]) // 2
         pad_height = (img_padded.size[1] - img.size[1]) // 2
@@ -104,7 +104,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
             + img_center[0]
         )
         new_center_y = (
-            (center[0] - img_center[0]) * np.sin(np.deg2rad(deg))
+            -(center[0] - img_center[0]) * np.sin(np.deg2rad(deg))
             + (center[1] - img_center[1]) * np.cos(np.deg2rad(deg))
             + img_center[1]
         )
@@ -152,8 +152,8 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 "label": self.labels,
                 "translate_x": self.translate_xs,
                 "translate_y": self.translate_ys,
-                "theta": self.thetas,
                 "scale_factor": self.scale_factors,
+                "theta": self.thetas,
             }
         )
 
@@ -178,8 +178,8 @@ class CocoFocusPreprocessor(BasePreprocessor):
         if random.random() < 0.5:
             return image, 0
         else:
-            # rotate image random angle from -90 to 90 degrees
-            deg = random.randint(-90, 90)
+            # rotate image random angle from -70 to 70 degrees
+            deg = random.randint(-85, 85)
             return image.rotate(deg), deg
 
     def collect_files(self):
@@ -198,7 +198,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 if COCO_2017_LABEL_MAP[ann["category_id"]] == self.label_pos
             ]
             # pad image to same size and change bboxes coordinates
-            image_padded, pos_bboxes = self._resize_with_bboxes(
+            image_padded, pos_bboxes = self._pad_with_bboxes(
                 img=image, bboxes=pos_bboxes
             )
             # rotate with probability
