@@ -6,7 +6,6 @@ import pipeline.trainers as module_trainers
 import pipeline.metrics as module_metric
 import models as module_arch
 from utils import ConfigParser
-from pipeline.trainers import FocusTrainer
 from utils.project_utils import prepare_device
 
 
@@ -37,7 +36,6 @@ def main(config: ConfigParser) -> None:
     lr_scheduler = config.init_obj(
         "lr_scheduler", torch.optim.lr_scheduler, optimizer
     )
-    class_weights = config.config["data_loader"]["class_weights"]
 
     # trainer initialization
     trainer_class = getattr(module_trainers, config["trainer"]["type"])
@@ -50,7 +48,6 @@ def main(config: ConfigParser) -> None:
         device=device,
         data_loader=data_loader,
         lr_scheduler=lr_scheduler,
-        class_weights=class_weights,
     )
 
     trainer.train()

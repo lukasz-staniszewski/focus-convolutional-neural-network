@@ -7,33 +7,40 @@
         "type": "ResFocusNetwork",
         "args": {
             "threshold": 0.5,
-            "loss_lambda": 6.0
+            "backbone": "resnet34",
+            "loss_lambda_tr": 12,
+            "loss_lambda_sc": 14,
+            "loss_lambda_rot": 10
         }
     },
     "data_loader": {
         "type": "FocusLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoPersonFocus/train/images",
-            "batch_size": 32,
+            "batch_size": 64,
             "csv_path": "data/processed/COCO-2017/CocoPersonFocus/train/labels.csv",
             "save_out_dir": "res/focus/coco_focus_person/trainer/labels/",
             "transform_mean": [
-                0.1587,
-                0.1506,
-                0.1375
+                0.4686,
+                0.4496,
+                0.4134
             ],
             "transform_std": [
-                0.2746,
-                0.2641,
-                0.2547
+                0.2553,
+                0.2530,
+                0.2708
             ],
             "shuffle": true,
             "validation_split": 0.15,
-            "num_workers": 1,
+            "num_workers": 12,
             "labels": {
                 "0": "none",
                 "1": "person"
-            }
+            },
+            "tf_image_size": [
+                650,
+                650
+            ]
         },
         "class_weights": null
     },
@@ -41,15 +48,17 @@
         "type": "Adam",
         "args": {
             "lr": 3e-04,
-            "weight_decay": 0.0001,
-            "amsgrad": true
+            "weight_decay": 0.0005,
+            "amsgrad": false
         }
     },
     "metrics": [
         "focus_accuracy",
         "focus_recall",
         "focus_precision",
-        "focus_f1"
+        "focus_f1",
+        "mean_iou",
+        "iou50_accuracy"
     ],
     "lr_scheduler": {
         "type": "StepLR",
