@@ -101,13 +101,15 @@ class FocusTrainer(BaseTrainer):
             self.optimizer.zero_grad()
 
             output = self.model(data_in)
-            loss = self.calc_loss(output, target)
+            loss_dict = self.calc_loss(output, target)
+            loss = loss_dict["loss"]
             loss.backward()
             pbar_loss = loss.item()
             self.optimizer.step()
 
             self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
-            self.train_metrics.update("loss", loss.item())
+            for loss_name, loss_val in loss_dict.items():
+                self.train_metrics.update(loss_name, loss_val.item())
             output = self.model.get_prediction(output)
 
             target = self.cpu_tensors(target)
@@ -159,30 +161,33 @@ class FocusTrainer(BaseTrainer):
         )
         pbar_loss = "None"
 
-        preds, targets = [], []
         with torch.no_grad():
             for batch_idx, data in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
+
                 target = self.prepare_target(data, ["label", "transform"])
                 data_in = data["image"].to(self.device)
-                output = self.model(data_in).squeeze()
-                loss = self.calc_loss(output, target)
+
+                output = self.model(data_in)
+                loss_dict = self.calc_loss(output, target)
+                loss = loss_dict["loss"]
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
-                preds.append(self.cpu_tensors(output))
                 target = self.cpu_tensors(target)
-                targets.append(target)
 
                 self.writer.set_step(
                     (epoch - 1) * len(self.valid_data_loader) + batch_idx,
                     "valid",
                 )
-                self.valid_metrics.update("loss", loss.item())
+
+                for loss_name, loss_val in loss_dict.items():
+                    self.valid_metrics.update(loss_name, loss_val.item())
                 for met in self.metric_ftns:
                     self.valid_metrics.update(
                         met.__name__, met(self.cpu_tensors(output), target)
                     )
+
                 self.writer.add_image(
                     "input",
                     make_grid(
