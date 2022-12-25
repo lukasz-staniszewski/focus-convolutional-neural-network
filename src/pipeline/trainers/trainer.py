@@ -1,9 +1,6 @@
-import numpy as np
 import torch
-from torch.utils import data
 from torchvision.utils import make_grid
 from base import BaseTrainer
-from utils import inf_loop, MetricTracker
 from tqdm import tqdm
 from typing import List
 from pipeline import utils as pipeline_utils
@@ -20,10 +17,9 @@ class Trainer(BaseTrainer):
         config: dict,
         device: torch.device,
         data_loader: torch.utils.data.DataLoader,
+        lr_scheduler: torch.optim.lr_scheduler,
         do_validation: bool = True,
-        lr_scheduler: torch.optim.lr_scheduler = None,
         len_epoch: int = None,
-        class_weights: List[float] = None,
     ) -> None:
         """Trainer constructor.
 
@@ -43,34 +39,11 @@ class Trainer(BaseTrainer):
             metric_ftns=metric_ftns,
             optimizer=optimizer,
             config=config,
-        )
-        self.config = config
-        self.device = device
-        self.data_loader = data_loader
-        self.train_data_loader = data_loader.get_train_loader()
-        self.class_weights = class_weights
-
-        if len_epoch is None:
-            # epoch-based training
-            self.len_epoch = len(self.train_data_loader)
-        else:
-            # iteration-based training
-            self.train_data_loader = inf_loop(self.train_data_loader)
-            self.len_epoch = len_epoch
-
-        self.valid_data_loader = data_loader.get_valid_loader()
-        self.do_validation = do_validation
-        self.lr_scheduler = lr_scheduler
-        self.log_step = int(np.sqrt(self.data_loader.batch_size))
-        self.train_metrics = MetricTracker(
-            "loss",
-            *[m.__name__ for m in self.metric_ftns],
-            writer=self.writer,
-        )
-        self.valid_metrics = MetricTracker(
-            "loss",
-            *[m.__name__ for m in self.metric_ftns],
-            writer=self.writer,
+            device=device,
+            data_loader=data_loader,
+            lr_scheduler=lr_scheduler,
+            len_epoch=len_epoch,
+            do_validation=do_validation,
         )
 
     def _train_epoch(self, epoch: int) -> dict:
@@ -95,9 +68,9 @@ class Trainer(BaseTrainer):
 
         for batch_idx, (data, target) in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
-            
-            data = data.to(self.device)
-            target = self.prepare_target(target)
+
+            data = pipeline_utils.move_tensors_to_device(data, self.device)
+            target = pipeline_utils.move_tensors_to_device(target, self.device)
             self.optimizer.zero_grad()
 
             output = self.model(data).squeeze()
@@ -110,12 +83,10 @@ class Trainer(BaseTrainer):
             self.train_metrics.update("loss", loss.item())
             output = self.model.get_prediction(output)
 
-            target = self.cpu_target(target)
-
+            target = pipeline_utils.cpu_tensors(target)
+            output = pipeline_utils.cpu_tensors(output)
             for met in self.metric_ftns:
-                self.train_metrics.update(
-                    met.__name__, met(output.cpu(), target)
-                )
+                self.train_metrics.update(met.__name__, met(output, target))
 
             if batch_idx % self.log_step == 0:
                 self.logger.debug(
@@ -125,7 +96,11 @@ class Trainer(BaseTrainer):
                 )
                 self.writer.add_image(
                     "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    make_grid(
+                        pipeline_utils.cpu_tensors(data),
+                        nrow=8,
+                        normalize=True,
+                    ),
                 )
             if batch_idx == self.len_epoch:
                 break
@@ -163,15 +138,21 @@ class Trainer(BaseTrainer):
         with torch.no_grad():
             for batch_idx, (data, target) in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
-                data = data.to(self.device)
-                target = self.prepare_target(target)
+
+                data = pipeline_utils.move_tensors_to_device(data, self.device)
+                target = pipeline_utils.move_tensors_to_device(
+                    target, self.device
+                )
+
                 output = self.model(data).squeeze()
                 loss = self.calc_loss(output, target)
                 pbar_loss = loss.item()
 
                 output = self.model.get_prediction(output)
-                preds.append(output.cpu())
-                target = self.cpu_target(target)
+
+                output = pipeline_utils.cpu_tensors(output)
+                target = pipeline_utils.cpu_tensors(target)
+                preds.append(output)
                 targets.append(target)
 
                 self.writer.set_step(
@@ -181,11 +162,15 @@ class Trainer(BaseTrainer):
                 self.valid_metrics.update("loss", loss.item())
                 for met in self.metric_ftns:
                     self.valid_metrics.update(
-                        met.__name__, met(output.cpu(), target)
+                        met.__name__, met(output, target)
                     )
                 self.writer.add_image(
                     "input",
-                    make_grid(data.cpu(), nrow=8, normalize=True),
+                    make_grid(
+                        pipeline_utils.cpu_tensors(data),
+                        nrow=8,
+                        normalize=True,
+                    ),
                 )
 
         if self.data_loader.is_multilabel:
@@ -204,48 +189,5 @@ class Trainer(BaseTrainer):
 
         return self.valid_metrics.result()
 
-    def _progress(self, batch_idx: int) -> str:
-        """Progress bar logic.
-
-        Args:
-            batch_idx (int): current batch index
-
-        Returns:
-            str: progress bar
-        """
-        base = "[{}/{} ({:.0f}%)]"
-        if hasattr(self.data_loader, "n_samples"):
-            current = batch_idx * self.data_loader.batch_size
-            total = self.data_loader.n_samples
-        else:
-            current = batch_idx
-            total = self.len_epoch
-
-        return base.format(current, total, 100.0 * current / total)
-
     def calc_loss(self, output, target):
-        if self.class_weights:
-            return self.model.calculate_loss(
-                output=output,
-                target=target,
-                weights=torch.Tensor(self.class_weights).to(self.device),
-            )
-        else:
-            return self.model.calculate_loss(
-                output=output,
-                target=target,
-            )
-
-    def prepare_target(self, target):
-        if isinstance(target, dict):
-            target = {k: v.to(self.device) for (k, v) in target.items()}
-        else:
-            target = target.to(self.device)
-        return target
-
-    def cpu_target(self, target):
-        if isinstance(target, tuple):
-            target = {k: v.cpu() for (k, v) in target.items()}
-        else:
-            target = target.cpu()
-        return target
+        return self.model.calculate_loss(output=output, target=target)

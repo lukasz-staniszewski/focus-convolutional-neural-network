@@ -25,9 +25,6 @@ class ClassifierDataset(Dataset):
     def __getitem__(self, idx: int) -> Tuple[Any, int]:
         filename = self.df["filename"][idx]
         label = self.df["label"][idx]
-        # img = torchvision.io.read_image(
-        #     os.path.join(self.images_dir, filename)
-        # ).float()
         img = Image.open(os.path.join(self.images_dir, filename))
         if self.transform is not None:
             img = self.transform(img)

@@ -7,9 +7,15 @@ from pipeline import loss
 
 
 class ResNet34Classifier(BaseModel):
-    def __init__(self, n_classes=1) -> None:
+    def __init__(self, n_classes=1, class_weights=None) -> None:
         super().__init__()
         self.n_classes = n_classes
+        self.class_weights = class_weights
+        if self.class_weights is not None:
+            assert len(self.class_weights) == self.n_classes, (
+                "If passed, number of class weights must match number of"
+                " classes."
+            )
 
         self.model = models.resnet34(weights=ResNet34_Weights.DEFAULT)
         res_fc_out = self.model.fc.out_features
@@ -34,10 +40,10 @@ class ResNet34Classifier(BaseModel):
         _, prediction = torch.max(output, 1)
         return prediction
 
-    def calculate_loss(self, output, target, weights=None):
-        if weights is not None:
+    def calculate_loss(self, output, target):
+        if self.class_weights is not None:
             return loss.cross_entropy_loss_weighted(
-                output=output, target=target, weights=weights
+                output=output, target=target, weights=self.class_weights
             )
         else:
             return loss.cross_entropy_loss(output=output, target=target)

@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 from PIL import Image
 import torch
+from pipeline.utils import convert_tf_params_to_bbox
 
 
 class FocusDataset(Dataset):
@@ -28,16 +29,23 @@ class FocusDataset(Dataset):
         filename = row["filename"]
 
         label = int(row["label"])
-        transform = torch.FloatTensor(row.iloc[2:])
+        transformations = torch.FloatTensor(row.iloc[2:])
 
         img = Image.open(os.path.join(self.images_dir, filename))
         if self.transform is not None:
             img = self.transform(img)
 
+        bbox = convert_tf_params_to_bbox(
+            translations=transformations[0:2].unsqueeze(0),
+            scales=transformations[2:3].unsqueeze(0),
+            img_size=img.shape[1:],
+        ).squeeze()
+
         data = {
             "image": img,
             "label": label,
-            "transform": transform,
+            "transform": transformations,
+            "bbox": bbox,
         }
 
         return data

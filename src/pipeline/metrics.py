@@ -1,25 +1,11 @@
 import torch
-
-
-def _get_class_cm(output, target):
-    N_CLASSES = int(torch.max(target).item() + 1)
-    TP = [0 for _ in range(N_CLASSES)]
-    FP = [0 for _ in range(N_CLASSES)]
-    TN = [0 for _ in range(N_CLASSES)]
-    FN = [0 for _ in range(N_CLASSES)]
-    with torch.no_grad():
-        pred = output
-        assert pred.shape[0] == len(target)
-        for c in range(N_CLASSES):
-            TP[c] = torch.sum((target == pred) * (pred == c))
-            FP[c] = torch.sum((target != pred) * (pred == c))
-            FN[c] = torch.sum((target != pred) * (target == c))
-            TN[c] = torch.sum((target != c) * (pred != c))
-    return TP, FP, FN, TN
+from pipeline.utils import get_class_cm
+from torchvision.ops import box_iou
+from typing import List
 
 
 def micro_accuracy(output, target):
-    TP, FP, FN, TN = _get_class_cm(output, target)
+    TP, FP, FN, TN = get_class_cm(output, target)
     TP = sum(TP)
     FP = sum(FP)
     FN = sum(FN)
@@ -29,7 +15,7 @@ def micro_accuracy(output, target):
 
 
 def macro_accuracy(output, target):
-    TP, FP, FN, TN = _get_class_cm(output, target)
+    TP, FP, FN, TN = get_class_cm(output, target)
     accuracies = [0 for _ in range(len(TP))]
     for c in range(len(accuracies)):
         accuracies[c] = (TP[c] + TN[c]) / (TP[c] + FP[c] + TN[c] + FN[c])
@@ -37,14 +23,14 @@ def macro_accuracy(output, target):
 
 
 def micro_recall(output, target):
-    TP, _, FN, _ = _get_class_cm(output=output, target=target)
+    TP, _, FN, _ = get_class_cm(output=output, target=target)
     TP = sum(TP)
     FN = sum(FN)
     return 0.0 if (TP + FN) == 0 else (TP / (TP + FN)).item()
 
 
 def macro_recall(output, target):
-    TP, _, FN, _ = _get_class_cm(output=output, target=target)
+    TP, _, FN, _ = get_class_cm(output=output, target=target)
     recalls = [0 for _ in range(len(TP))]
     for c in range(len(recalls)):
         recalls[c] = (
@@ -56,14 +42,14 @@ def macro_recall(output, target):
 
 
 def micro_precision(output, target):
-    TP, FP, _, _ = _get_class_cm(output=output, target=target)
+    TP, FP, _, _ = get_class_cm(output=output, target=target)
     TP = sum(TP)
     FP = sum(FP)
     return 0.0 if (TP + FP) == 0 else (TP / (TP + FP)).item()
 
 
 def macro_precision(output, target):
-    TP, FP, _, _ = _get_class_cm(output=output, target=target)
+    TP, FP, _, _ = get_class_cm(output=output, target=target)
     precisions = [0 for _ in range(len(TP))]
     for c in range(len(TP)):
         precisions[c] = (
@@ -85,7 +71,7 @@ def micro_f1(output, target):
 
 
 def macro_f1(output, target):
-    TP, FP, FN, TN = _get_class_cm(output=output, target=target)
+    TP, FP, FN, TN = get_class_cm(output=output, target=target)
     f1s = [0 for _ in range(len(TP))]
     for c in range(len(f1s)):
         recall = (
@@ -175,23 +161,59 @@ def f1(output, target):
 # focus classification metrics
 def focus_accuracy(output, target):
     target = target["label"]
-    output = output[0]
+    output = output["label"]
     return accuracy(output, target)
 
 
 def focus_recall(output, target):
     target = target["label"]
-    output = output[0]
+    output = output["label"]
     return recall(output, target)
 
 
 def focus_precision(output, target):
     target = target["label"]
-    output = output[0]
+    output = output["label"]
     return precision(output, target)
 
 
 def focus_f1(output, target):
     target = target["label"]
-    output = output[0]
+    output = output["label"]
     return f1(output, target)
+
+
+def _get_binary_ious(output, target) -> List[torch.Tensor]:
+    target_cls = target["label"]
+    out_cls = output["label"]
+    positives = torch.logical_and(target_cls == 1, out_cls == 1)
+    out_bbox = output["bbox"][positives]
+    target_bbox = target["bbox"][positives]
+
+    ious = []
+    for i in range(positives.sum().item()):
+        ious.append(
+            box_iou(
+                out_bbox[i].unsqueeze(0),
+                target_bbox[i].unsqueeze(0),
+            ).squeeze(0)
+        )
+    return ious
+
+
+def mean_iou(output, target):
+    ious = _get_binary_ious(output, target)
+
+    if len(ious) == 0:
+        return 0.0
+    else:
+        return torch.cat(ious).mean().item()
+
+
+def iou50_accuracy(output, target):
+    ious = _get_binary_ious(output, target)
+
+    if len(ious) == 0:
+        return 0.0
+    else:
+        return (torch.cat(ious) > 0.5).float().mean().item()

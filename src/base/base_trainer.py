@@ -5,7 +5,8 @@ from utils.logger import TensorboardWriter
 import os
 from utils import ConfigParser
 from base import BaseModel
-from utils.project_utils import secure_load_path
+from utils import MetricTracker, secure_load_path, inf_loop
+import numpy as np
 
 
 class BaseTrainer:
@@ -17,22 +18,45 @@ class BaseTrainer:
         metric_ftns: list,
         optimizer: torch.optim.Optimizer,
         config: ConfigParser,
+        device: torch.device,
+        data_loader: torch.utils.data.DataLoader,
+        lr_scheduler: torch.optim.lr_scheduler,
+        len_epoch: int = None,
+        do_validation: bool = True,
     ) -> None:
+        # members
         self.config = config
-        self.logger = config.get_logger(
-            "trainer", config["trainer"]["verbosity"]
-        )
         self.model = model
         self.metric_ftns = metric_ftns
         self.optimizer = optimizer
-        cfg_trainer = config["trainer"]
-        self.epochs = cfg_trainer["epochs"]
-        self.save_period = cfg_trainer["save_period"]
-        self.monitor = cfg_trainer.get("monitor", "off")
+        self.device = device
+        self.logger = config.get_logger(
+            "trainer", config["trainer"]["verbosity"]
+        )
+        self.cfg_trainer = config["trainer"]
+        self.epochs = self.cfg_trainer["epochs"]
+        self.save_period = self.cfg_trainer["save_period"]
+        self.monitor = self.cfg_trainer.get("monitor", "off")
         self.start_epoch = 1
         self.checkpoint_dir = config.save_dir
+        self.data_loader = data_loader
+        self.do_validation = do_validation
+        self.lr_scheduler = lr_scheduler
+
+        # data configuration
+        self._configure_dataloaders()
 
         # configuration to monitor model performance and save best
+        self._configure_metrics()
+
+        # check if resuming training
+        if config.resume is not None:
+            self._resume_checkpoint(config.resume)
+
+        # configuration of training
+        self._configure_epoch_training(len_epoch=len_epoch)
+
+    def _configure_metrics(self):
         if self.monitor == "off":
             self.mnt_mode = "off"
             self.mnt_best = 0
@@ -40,24 +64,38 @@ class BaseTrainer:
             self.mnt_mode, self.mnt_metric = self.monitor.split()
             assert self.mnt_mode in ["min", "max"]
             self.mnt_best = inf if self.mnt_mode == "min" else -inf
-            self.early_stop = cfg_trainer.get("early_stop", inf)
+            self.early_stop = self.cfg_trainer.get("early_stop", inf)
             if self.early_stop <= 0:
                 self.early_stop = inf
-
         self.writer = TensorboardWriter(
-            config.log_dir, self.logger, cfg_trainer["tensorboard"]
+            self.config.log_dir, self.logger, self.cfg_trainer["tensorboard"]
         )
-        if config.resume is not None:
-            self._resume_checkpoint(config.resume)
+        self.train_metrics = MetricTracker(
+            "loss",
+            *[m.__name__ for m in self.metric_ftns],
+            writer=self.writer,
+        )
+        if self.do_validation:
+            self.valid_metrics = MetricTracker(
+                "loss",
+                *[m.__name__ for m in self.metric_ftns],
+                writer=self.writer,
+            )
 
-    @abstractmethod
-    def _train_epoch(self, epoch: int) -> None:
-        """Training logic for an epoch
+    def _configure_dataloaders(self):
+        self.train_data_loader = self.data_loader.get_train_loader()
+        if self.do_validation:
+            self.valid_data_loader = self.data_loader.get_valid_loader()
 
-        Args:
-            epoch (int): current epoch number
-        """
-        raise NotImplementedError
+    def _configure_epoch_training(self, len_epoch: int = None):
+        if len_epoch is None:
+            # epoch-based training
+            self.len_epoch = len(self.train_data_loader)
+        else:
+            # iteration-based training
+            self.train_data_loader = inf_loop(self.train_data_loader)
+            self.len_epoch = len_epoch
+        self.log_step = int(np.sqrt(self.data_loader.batch_size))
 
     def train(self):
         """Performs training."""
@@ -68,9 +106,7 @@ class BaseTrainer:
             log = {"epoch": epoch}
             log.update(result)
             for key, value in log.items():
-                self.logger.info(
-                    "    {:15s}: {}".format(str(key), value)
-                )
+                self.logger.info("    {:15s}: {}".format(str(key), value))
 
             is_best = False
             if self.mnt_mode != "off":
@@ -85,8 +121,9 @@ class BaseTrainer:
                 except KeyError:
                     self.logger.warning(
                         "Warning: Metric '{}' is not found. "
-                        "Model performance monitoring is disabled."
-                        .format(self.mnt_metric)
+                        "Model performance monitoring is disabled.".format(
+                            self.mnt_metric
+                        )
                     )
                     self.mnt_mode = "off"
                     improved = False
@@ -101,9 +138,7 @@ class BaseTrainer:
                 if not_improved_count > self.early_stop:
                     self.logger.info(
                         "Validation performance didn't improve for {}"
-                        " epochs. Training stops.".format(
-                            self.early_stop
-                        )
+                        " epochs. Training stops.".format(self.early_stop)
                     )
                     break
 
@@ -112,9 +147,7 @@ class BaseTrainer:
             if is_best:
                 self._save_checkpoint(epoch=epoch, save_as_best=True)
 
-    def _save_checkpoint(
-        self, epoch: int, save_as_best: bool = False
-    ) -> None:
+    def _save_checkpoint(self, epoch: int, save_as_best: bool = False) -> None:
         """By default saves checkpoint of path. If save_as_best is True, saves checkpoint as best.
         Args:
             epoch (int): current epoch number
@@ -147,9 +180,7 @@ class BaseTrainer:
         Args:
             resume_path (str): checkpoint path to be resumed
         """
-        self.logger.info(
-            "Loading checkpoint: {} ...".format(resume_path)
-        )
+        self.logger.info("Loading checkpoint: {} ...".format(resume_path))
         secure_load_path()
         checkpoint = torch.load(resume_path)
         self.start_epoch = checkpoint["epoch"] + 1
@@ -158,9 +189,10 @@ class BaseTrainer:
         # load architecture params from checkpoint.
         if checkpoint["config"]["arch"] != self.config["arch"]:
             self.logger.warning(
-                "Warning: Architecture configuration given in config"
-                " file is different from that of checkpoint. This may"
-                " yield an exception while state_dict is being loaded."
+                "Warning: Architecture config given in file differs"
+                " from the one of checkpoint. This may cause errors"
+                " while state_dict is being loaded if differences"
+                " are not caused by loss parameters."
             )
         self.model.load_state_dict(checkpoint["state_dict"])
 
@@ -181,3 +213,44 @@ class BaseTrainer:
                 self.start_epoch
             )
         )
+
+    def _progress(self, batch_idx: int) -> str:
+        """Progress bar logic.
+
+        Args:
+            batch_idx (int): current batch index
+
+        Returns:
+            str: progress bar
+        """
+        base = "[{}/{} ({:.0f}%)]"
+        if hasattr(self.data_loader, "n_samples"):
+            current = batch_idx * self.data_loader.batch_size
+            total = self.data_loader.n_samples
+        else:
+            current = batch_idx
+            total = self.len_epoch
+
+        return base.format(current, total, 100.0 * current / total)
+    
+    def cpu_tensors(self, tensors):
+        if isinstance(tensors, dict):
+            tensors = {k: v.cpu() for (k, v) in tensors.items()}
+        elif isinstance(tensors, tuple):
+            tensors = tuple([t.cpu() for t in tensors])
+        else:
+            tensors = tensors.cpu()
+        return tensors
+
+    @abstractmethod
+    def _train_epoch(self, epoch: int) -> None:
+        """Training logic for an epoch
+
+        Args:
+            epoch (int): current epoch number
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def calc_loss(self, output, target):
+        raise NotImplementedError

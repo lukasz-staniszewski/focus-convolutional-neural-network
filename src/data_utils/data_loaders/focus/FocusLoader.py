@@ -18,6 +18,7 @@ class FocusLoader(BaseFocusLoader):
         images_dir: str,
         csv_path: str,
         labels: Dict[str, str],
+        tf_image_size: Tuple[int] = None,
         save_out_dir: str = None,
         transform_mean: Tuple[float] = None,
         transform_std: Tuple[float] = None,
@@ -26,6 +27,7 @@ class FocusLoader(BaseFocusLoader):
         # members
         self.validation_split = validation_split
         self.save_out_dir = save_out_dir
+        self.tf_image_size = tf_image_size
 
         super().__init__(
             batch_size=batch_size,
@@ -70,15 +72,12 @@ class FocusLoader(BaseFocusLoader):
         transform_mean: Union[Tuple[float], None] = None,
         transform_std: Union[Tuple[float], None] = None,
     ) -> None:
+        tf_list = [T.ToTensor()]
         if transform_mean and transform_std:
-            self.transform = T.Compose(
-                transforms=[
-                    T.ToTensor(),
-                    T.Normalize(transform_mean, transform_std),
-                ]
-            )
-        else:
-            self.transform = T.Compose(transforms=[T.ToTensor()])
+            tf_list.append(T.Normalize(transform_mean, transform_std))
+        if self.tf_image_size:
+            tf_list.append(T.Resize(self.tf_image_size))
+        self.transform = T.Compose(transforms=tf_list)
 
     def _split_train_valid(self) -> None:
         df = pd.read_csv(self.csv_path)
