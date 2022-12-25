@@ -1,6 +1,10 @@
 from data_utils.data_loaders.focus.BaseFocusLoader import BaseFocusLoader
 from data_utils.data_sets import FocusDataset
-from typing import Tuple, Union, Dict
+from data_utils.data_loaders.utils import (
+    label_undersample,
+    label_make_0_half,
+)
+from typing import Tuple, Union, Dict, List
 import torchvision.transforms as T
 import pandas as pd
 from copy import deepcopy
@@ -23,11 +27,21 @@ class FocusLoader(BaseFocusLoader):
         transform_mean: Tuple[float] = None,
         transform_std: Tuple[float] = None,
         validation_split: float = 0.0,
+        balance_train: bool = False,
+        balance_methods: List[str] = None,
+        balance_max_multiplicity: int = None,
     ):
         # members
         self.validation_split = validation_split
         self.save_out_dir = save_out_dir
         self.tf_image_size = tf_image_size
+
+        assert (balance_train and balance_methods) or (
+            not balance_train and not balance_methods
+        ), "balance_train and balance_methods must be both set or both not set"
+        self.balance_train = balance_train
+        self.balance_methods = balance_methods
+        self.balance_max_multiplicity = balance_max_multiplicity
 
         super().__init__(
             batch_size=batch_size,
@@ -60,6 +74,8 @@ class FocusLoader(BaseFocusLoader):
                 csv_path=self.csv_path_valid,
                 transform=self.transform,
             )
+        if self.balance_train:
+            self.balance_data()
         # train set
         self.dataset_train = FocusDataset(
             images_dir=self.images_dir,
@@ -67,16 +83,43 @@ class FocusLoader(BaseFocusLoader):
             transform=self.transform,
         )
 
+    def balance_data(self) -> None:
+        """Function balances training data using firstly oversampling
+        minority classes and then undersampling majority classes.
+
+        Posibilities in balance_methods:
+        * undersampling:
+            -- 'undersample' - undersample majority classes
+            -- 'make_0_half' - make class 0 (none) as max 50% of all data
+        """
+        # undersampling
+        if "undersample" in self.balance_methods:
+            self.csv_path_train = label_undersample(
+                csv_path_train_orig=self.csv_path_train,
+                balance_max_multiplicity=self.balance_max_multiplicity,
+            )
+        elif "make_0_half" in self.balance_methods:
+            self.csv_path_train = label_make_0_half(
+                csv_path_train_orig=self.csv_path_train,
+                csv_path_train_aug=self.csv_path_train_aug,
+            )
+
     def combine_transforms(
         self,
         transform_mean: Union[Tuple[float], None] = None,
         transform_std: Union[Tuple[float], None] = None,
     ) -> None:
-        tf_list = [T.ToTensor()]
-        if transform_mean and transform_std:
-            tf_list.append(T.Normalize(transform_mean, transform_std))
+        tf_list = []
         if self.tf_image_size:
             tf_list.append(T.Resize(self.tf_image_size))
+        tf_list += [
+            T.ColorJitter(
+                brightness=0.2, contrast=0.2, saturation=0.1, hue=0.1
+            ),
+            T.ToTensor(),
+        ]
+        if transform_mean and transform_std:
+            tf_list.append(T.Normalize(transform_mean, transform_std))
         self.transform = T.Compose(transforms=tf_list)
 
     def _split_train_valid(self) -> None:

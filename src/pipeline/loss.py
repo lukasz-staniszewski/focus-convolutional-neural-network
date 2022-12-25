@@ -1,11 +1,9 @@
+from typing import Dict
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
 from kornia.losses import binary_focal_loss_with_logits
-
-
-def nll_loss(output, target):
-    return F.nll_loss(output, target)
+from torch import Tensor
 
 
 def cross_entropy_loss(output, target):
@@ -26,64 +24,202 @@ def smooth_loss(output, target):
     return nn.SmoothL1Loss()(input=output, target=target)
 
 
-def focal_l1smooth_loss(output, target, alpha=0.25, gamma=2.0, lambd=10.0):
-    # calculate focal loss per classes and l1 smooth for positive classes
-    cls_out, reg_out = output
-    cls_target, reg_target = target["label"], target["transform"]
+def focal_l1smooth_loss(
+    output_cls: Tensor,
+    output_tf: Tensor,
+    target: Dict[str, Tensor],
+    alpha: float = 0.25,
+    gamma: float = 2.0,
+    lambd: float = 10.0,
+):
+    """Calculates focal loss for classification and l1 smooth for transform params (on positive classes).
+
+    Args:
+        output_cls (Tensor): class outputs
+        output_tf (Tensor): transform outputs
+        target (Tensor): target dictionary
+        alpha (float, optional): alpha focal loss param. Defaults to 0.25.
+        gamma (float, optional): gamma focal loss param. Defaults to 2.0.
+        lambd (float, optional): lambda param - weight of regression loss. Defaults to 10.0.
+
+    Returns:
+        Tensor: full loss
+    """
+    target_cls, target_tf = target["label"], target["transform"]
 
     cls_loss = binary_focal_loss_with_logits(
-        input=cls_out,
-        target=cls_target,
+        input=output_cls,
+        target=target_cls,
         alpha=alpha,
         gamma=gamma,
         reduction="mean",
     )
 
-    positives = cls_target == 1
+    positives = target_cls == 1
     reg_loss = nn.SmoothL1Loss()(
-        input=reg_out[positives], target=reg_target[positives]
+        input=output_tf[positives], target=target_tf[positives]
     )
 
     return cls_loss + lambd * reg_loss
 
 
-def ce_l1smooth_loss(output, target, lambd=10.0):
-    # calculate focal loss per classes and l1 smooth for positive classes
-    cls_out, reg_out = output
-    cls_target, reg_target = target["label"], target["transform"]
+def entropy_l1smooth_loss(
+    output_cls: Tensor,
+    output_tf: Tensor,
+    target: Dict[str, Tensor],
+    lambd: float = 10.0,
+):
+    """Calculates cross entropy loss for classification and l1 smooth for transform params (on positive classes).
 
-    cls_loss = F.binary_cross_entropy_with_logits(
-        input=cls_out.squeeze(),
-        target=cls_target.float(),
+    Args:
+        output_cls (Tensor): class outputs
+        output_tf (Tensor): transform outputs
+        target (Tensor): target dictionary
+        lambd (float, optional): lambda param - weight of regression loss. Defaults to 10.0.
+
+    Returns:
+        Tensor: full loss
+    """
+    target_cls, target_tf = target["label"], target["transform"]
+
+    cls_loss = F.binary_cross_entropy(
+        input=output_cls.squeeze(),
+        target=target_cls.float(),
         reduction="mean",
     )
 
-    positives = cls_target == 1
+    positives = target_cls == 1
     reg_loss = nn.SmoothL1Loss()(
-        input=reg_out[positives], target=reg_target[positives]
+        input=output_tf[positives], target=target_tf[positives]
     )
 
     return cls_loss + lambd * reg_loss
 
 
+def _focus_l1_loss(output: Tensor, target: Tensor, target_cls: Tensor):
+    """Modified version of L1 loss for focus model.
+
+    Args:
+        output (Tensor): output of the model
+        target (Tensor): target
+        target_cls (Tensor): target classes, loss will be count only for positive classes
+
+    Returns:
+        Tensor: modified version of L1 loss
+    """
+    loss = (
+        F.l1_loss(input=output, target=target, reduction="none").mean(dim=1)
+        * target_cls.T
+    )
+    if target_cls.sum() == 0:
+        return loss.sum()
+    else:
+        return loss.sum() / target_cls.sum()
+
+
 def focus_multiloss(
-    output, target, lambda_translation, lambda_scale, lambda_rotation
+    output_cls: Tensor,
+    output_translate: Tensor,
+    output_scale: Tensor,
+    output_rotate: Tensor,
+    target: Dict[str, Tensor],
+    lambda_translation: float,
+    lambda_scale: float,
+    lambda_rotation: float,
 ):
-    cls_out, out_translate, out_scale, out_rotate = output
-    cls_target, reg_target = target["label"], target["transform"]
-    positives = cls_target == 1
+    """Calculates loss for focus model - weighted sum of classification loss and regression on transform param loss.
+
+    Args:
+        output_cls (Tensor): output of the model on classification task
+        output_translate (Tensor): output of the model on translation
+        output_scale (Tensor): output of the model on scale
+        output_rotate (Tensor): output of the model on rotation
+        target (Dict[str, Tensor]): targets dictionary
+        lambda_translation (float): lambda param - weight of translation loss
+        lambda_scale (float): lambda param - weight of scale loss
+        lambda_rotation (float): lambda param - weight of rotation loss
+
+    Returns:
+        Tensor: full loss
+    """
+    target_cls, target_tf = target["label"], target["transform"]
+    target_translate = target_tf[:, 0:2]
+    target_scale = target_tf[:, 2:3]
+    target_rotate = target_tf[:, 3:4]
+    positives = target_cls == 1
 
     cls_loss = F.binary_cross_entropy(
-        input=cls_out.squeeze(), target=cls_target.float()
+        input=output_cls.squeeze(), target=target_cls.float()
     )
-    translation_loss = nn.L1Loss()(
-        input=out_translate[positives], target=reg_target[:, 0:2][positives]
+
+    translation_loss = F.l1_loss(
+        input=output_translate[positives],
+        target=target_translate[:, 0:2][positives],
     )
-    scale_log_loss = nn.L1Loss()(
-        input=out_scale[positives], target=reg_target[:, 2:3][positives]
+    scale_log_loss = F.l1_loss(
+        input=output_scale[positives], target=target_scale[:, 2:3][positives]
     )
-    rotation_loss = nn.L1Loss()(
-        input=out_rotate[positives], target=reg_target[:, 3:4][positives]
+    rotation_loss = F.l1_loss(
+        input=output_rotate[positives], target=target_rotate[:, 3:4][positives]
+    )
+
+    loss = (
+        cls_loss
+        + lambda_translation * translation_loss
+        + lambda_scale * scale_log_loss
+        + lambda_rotation * rotation_loss
+    )
+
+    return {
+        "loss": loss,
+        "cls_loss": cls_loss,
+        "translation_loss": translation_loss,
+        "scale_log_loss": scale_log_loss,
+        "rotation_loss": rotation_loss,
+    }
+
+
+def focus_multiloss_2(
+    output_cls: Tensor,
+    output_translate: Tensor,
+    output_scale: Tensor,
+    output_rotate: Tensor,
+    target: Dict[str, Tensor],
+    lambda_translation: float,
+    lambda_scale: float,
+    lambda_rotation: float,
+):
+    """Calculates second version of loss for focus model - weighted sum of classification loss and regression on transform param loss.
+
+    Args:
+        output_cls (Tensor): output of the model on classification task
+        output_translate (Tensor): output of the model on translation
+        output_scale (Tensor): output of the model on scale
+        output_rotate (Tensor): output of the model on rotation
+        target (Dict[str, Tensor]): targets dictionary
+        lambda_translation (float): lambda param - weight of translation loss
+        lambda_scale (float): lambda param - weight of scale loss
+        lambda_rotation (float): lambda param - weight of rotation loss
+
+    Returns:
+        Tensor: full loss
+    """
+    target_cls, target_tf = target["label"], target["transform"]
+    target_translate = target_tf[:, 0:2]
+    target_scale = target_tf[:, 2:3]
+    target_rotate = target_tf[:, 3:4]
+
+    cls_loss = F.binary_cross_entropy(
+        input=output_cls.squeeze(), target=target_cls.float()
+    )
+    translation_loss = _focus_l1_loss(
+        output=output_translate, target=target_translate, target_cls=target_cls
+    )
+    scale_log_loss = _focus_l1_loss(
+        output=output_scale, target=target_scale, target_cls=target_cls
+    )
+    rotation_loss = _focus_l1_loss(
+        output=output_rotate, target=target_rotate, target_cls=target_cls
     )
     loss = (
         cls_loss

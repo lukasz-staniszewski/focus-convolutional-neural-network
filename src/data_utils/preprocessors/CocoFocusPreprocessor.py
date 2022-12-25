@@ -17,10 +17,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.label_pos = kwargs["label_pos"]
-        self.labels_neg = kwargs["labels_neg"]
         self.max_input_size = kwargs["max_input_size"]
-        self.img_out_shape = kwargs["img_out_shape"]
-
         self.enable_rotation = kwargs["enable_rotation"]
 
         if kwargs["label_max_size"] is None:
@@ -210,7 +207,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
             pos_bboxes=pos_bboxes, img_before=image, img_after=img_padded
         )
         # process rotation
-        if self._perform_rotation:
+        if self.enable_rotation:
             # pad image for rotation
             rotation_desired_size = self._calculate_rotation_size(
                 current_size=img_padded.size
@@ -247,12 +244,15 @@ class CocoFocusPreprocessor(BasePreprocessor):
         return image_rotated, rot_degree, bboxes
 
     def collect_files(self):
-        for image, annotations in tqdm(
+        progress_bar = tqdm(
             self.dataset,
             total=len(self.dataset),
             desc="Collecting data",
             colour="green",
-        ):
+        )
+        pbar_cnt = 0
+        for image, annotations in progress_bar:
+            progress_bar.set_postfix({"N_positives": pbar_cnt})
             if len(annotations) == 0:
                 continue
             # bboxes annotated as label_pos
@@ -260,6 +260,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 ann["bbox"]
                 for ann in annotations
                 if COCO_2017_LABEL_MAP[ann["category_id"]] == self.label_pos
+                and ann["iscrowd"] == 0
             ]
             # image modification because of rotations
             image_rotated, rot_degree, pos_bboxes = self._process_image(
@@ -279,6 +280,7 @@ class CocoFocusPreprocessor(BasePreprocessor):
                 self.scale_factors.append(0)
             # positive image
             else:
+                pbar_cnt = pbar_cnt + 1
                 # make bbox square
                 pos_bboxes = list(
                     map(lambda x: self._make_bbox_square(bbox=x), pos_bboxes)

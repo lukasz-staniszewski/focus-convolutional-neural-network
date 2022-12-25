@@ -1,9 +1,8 @@
 import torch.nn as nn
 from base import BaseModel
-from torchvision import models
-from torchvision.models import ResNet34_Weights, ResNet18_Weights
+from models.models_utils import assign_backbone
 from pipeline import loss
-from pipeline.utils import convert_tf_params_to_bbox
+from pipeline.pipeline_utils import convert_tf_params_to_bbox
 from typing import Tuple
 
 
@@ -15,7 +14,7 @@ class ResFocusNetwork(BaseModel):
         loss_lambda_rot: float,
         backbone: str,
         threshold: float = 0.5,
-        inp_img_size: Tuple[int, int] = (650, 650),
+        inp_img_size: Tuple[int, int] = (640, 640),
     ) -> None:
         super().__init__()
         self.threshold = threshold
@@ -23,81 +22,82 @@ class ResFocusNetwork(BaseModel):
         self.loss_lambda_sc = loss_lambda_sc
         self.loss_lambda_rot = loss_lambda_rot
         self.inp_img_size = inp_img_size
-        assert backbone in ["resnet18", "resnet34"]
-        self.model = (
-            models.resnet18(weights=ResNet18_Weights.DEFAULT)
-            if backbone == "resnet18"
-            else models.resnet34(weights=ResNet34_Weights.DEFAULT)
-        )
 
+        self.model = assign_backbone(backbone)
         res_fc_out = self.model.fc.out_features
-        self.fc_out = nn.Sequential(
-            nn.Linear(in_features=res_fc_out, out_features=2048),
-            nn.Dropout(),
-            nn.LeakyReLU(),
-            nn.Linear(in_features=2048, out_features=1024),
-            nn.Dropout(),
-            nn.LeakyReLU(),
-        )
+        for param in self.model.parameters():
+            param.require_grad = True
 
         self.cls_fc = nn.Sequential(
-            nn.Linear(in_features=1024, out_features=512),
-            nn.ReLU(),
+            nn.Linear(in_features=res_fc_out, out_features=1024),
             nn.Dropout(),
-            nn.Linear(512, 128),
-            nn.ReLU(),
+            nn.LeakyReLU(),
+            nn.Linear(in_features=1024, out_features=256),
             nn.Dropout(),
-            nn.Linear(128, 1),
+            nn.ReLU(),
+            nn.Linear(256, 1),
             nn.Sigmoid(),
         )
 
         self.tf_fc = nn.Sequential(
+            nn.Linear(in_features=res_fc_out, out_features=1024),
+            nn.Dropout(),
+            nn.LeakyReLU(),
             nn.Linear(in_features=1024, out_features=512),
             nn.ReLU(),
         )
-
         self.tf_tr = nn.Sequential(
-            nn.Linear(512, 128), nn.Dropout(), nn.ReLU(), nn.Linear(128, 2)
+            nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 2)
         )
         self.tf_scale = nn.Sequential(
-            nn.Linear(512, 128),
-            nn.Dropout(),
-            nn.LeakyReLU(),
-            nn.Linear(128, 1),
+            nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 1)
         )
         self.tf_rot = nn.Sequential(
             nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 1)
         )
 
-    def forward(self, x):
+    def forward(self, x, target):
         x = self.model(x)
-        x = self.fc_out(x)
         out_cls = self.cls_fc(x)
         out_tf = self.tf_fc(x)
         out_translate = self.tf_tr(out_tf)
         out_scale = self.tf_scale(out_tf)
         out_rotate = self.tf_rot(out_tf)
-
-        return out_cls, out_translate, out_scale, out_rotate
-
-    def get_prediction(self, output):
-        cls, tf_translate, tf_scale, _ = output
-        bbox = convert_tf_params_to_bbox(
-            translations=tf_translate,
-            scales=tf_scale,
-            img_size=self.inp_img_size,
-        )
-        return {
-            "label": (cls >= self.threshold).float().squeeze(),
-            "confidence": cls.squeeze(),
-            "bbox": bbox,
-        }
-
-    def calculate_loss(self, output, target):
-        return loss.focus_multiloss(
-            output=output,
+        
+        loss_dict = loss.focus_multiloss_2(
+            output_cls=out_cls,
+            output_translate=out_translate,
+            output_scale=out_scale,
+            output_rotate=out_rotate,
             target=target,
             lambda_translation=self.loss_lambda_tr,
             lambda_scale=self.loss_lambda_sc,
             lambda_rotation=self.loss_lambda_rot,
         )
+
+        return {
+            "out_cls": out_cls,
+            "out_translate": out_translate,
+            "out_scale": out_scale,
+            "out_rotate": out_rotate,
+            "loss": loss_dict,
+        }
+
+    def get_prediction(self, output, target):
+        cls_out = output["out_cls"]
+        translate_out = output["out_translate"]
+        scale_out = output["out_scale"]
+        # cls_target = target["label"]
+        # scale_target = target["transform"][:, 2:3]
+        # translate_target = target["transform"][:, :2]
+        bbox = convert_tf_params_to_bbox(
+            translations=translate_out,
+            scales=scale_out,
+            img_size=self.inp_img_size,
+        )
+        return {
+            "label": (cls_out >= self.threshold).float().squeeze(),
+            "confidence": cls_out.squeeze(),
+            "bbox": bbox,
+        }
+

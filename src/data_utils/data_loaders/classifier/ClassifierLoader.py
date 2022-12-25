@@ -10,9 +10,9 @@ import pandas as pd
 from copy import deepcopy
 from sklearn.model_selection import train_test_split
 from data_utils.data_loaders.utils import (
-    classifier_oversample,
-    classifier_undersample,
-    classifier_make_0_half,
+    label_oversample,
+    label_undersample,
+    label_make_0_half,
 )
 
 
@@ -123,7 +123,7 @@ class ClassifierLoader(BaseClassifierLoader):
         """
         # oversampling
         if "oversample" in self.balance_methods:
-            self.csv_path_train_aug = classifier_oversample(
+            self.csv_path_train_aug = label_oversample(
                 csv_path_train_orig=self.csv_path_train,
             )
         else:
@@ -131,13 +131,13 @@ class ClassifierLoader(BaseClassifierLoader):
 
         # undersampling
         if "undersample" in self.balance_methods:
-            self.csv_path_train = classifier_undersample(
+            self.csv_path_train = label_undersample(
                 csv_path_train_orig=self.csv_path_train,
                 balance_max_multiplicity=self.balance_max_multiplicity,
                 csv_path_train_aug=self.csv_path_train_aug,
             )
         elif "make_0_half" in self.balance_methods:
-            self.csv_path_train = classifier_make_0_half(
+            self.csv_path_train = label_make_0_half(
                 csv_path_train_orig=self.csv_path_train,
                 csv_path_train_aug=self.csv_path_train_aug,
             )

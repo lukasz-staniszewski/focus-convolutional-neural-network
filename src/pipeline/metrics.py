@@ -1,5 +1,5 @@
 import torch
-from pipeline.utils import get_class_cm
+from pipeline.pipeline_utils import get_class_cm
 from torchvision.ops import box_iou
 from typing import List
 
@@ -185,8 +185,7 @@ def focus_f1(output, target):
 
 def _get_binary_ious(output, target) -> List[torch.Tensor]:
     target_cls = target["label"]
-    out_cls = output["label"]
-    positives = torch.logical_and(target_cls == 1, out_cls == 1)
+    positives = target_cls == 1
     out_bbox = output["bbox"][positives]
     target_bbox = target["bbox"][positives]
 

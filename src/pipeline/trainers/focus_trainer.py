@@ -2,7 +2,7 @@ import torch
 from torchvision.utils import make_grid
 from base import BaseTrainer
 from tqdm import tqdm
-from pipeline import utils as pipeline_utils
+from pipeline import pipeline_utils
 
 
 class FocusTrainer(BaseTrainer):
@@ -79,18 +79,21 @@ class FocusTrainer(BaseTrainer):
 
             self.optimizer.zero_grad()
 
-            output = self.model(data_in)
-            loss_dict = self.calc_loss(output, target)
+            output = self.model(data_in, target)
+            # loss_dict = self.calc_loss(output, target)
+            loss_dict = output["loss"]
             loss = loss_dict["loss"]
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1)
             loss.backward()
             self.optimizer.step()
+
             pbar_loss = loss.item()
 
             self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
             for loss_name, loss_val in loss_dict.items():
                 self.train_metrics.update(loss_name, loss_val.item())
 
-            preds = self.model.get_prediction(output)
+            preds = self.model.get_prediction(output, target)
             preds = pipeline_utils.cpu_tensors(preds)
             target = pipeline_utils.cpu_tensors(target)
 
@@ -156,8 +159,8 @@ class FocusTrainer(BaseTrainer):
                     dict_columns=["label", "transform", "bbox"],
                 )
 
-                output = self.model(data_in)
-                loss_dict = self.calc_loss(output, target)
+                output = self.model(data_in, target)
+                loss_dict = output["loss"]
                 loss = loss_dict["loss"]
                 pbar_loss = loss.item()
 
@@ -167,8 +170,8 @@ class FocusTrainer(BaseTrainer):
                 )
                 for loss_name, loss_val in loss_dict.items():
                     self.valid_metrics.update(loss_name, loss_val.item())
-
-                preds = self.model.get_prediction(output)
+                
+                preds = self.model.get_prediction(output, target)
                 preds = pipeline_utils.cpu_tensors(preds)
                 target = pipeline_utils.cpu_tensors(target)
 

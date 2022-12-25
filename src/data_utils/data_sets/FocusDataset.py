@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 from PIL import Image
 import torch
-from pipeline.utils import convert_tf_params_to_bbox
+from pipeline.pipeline_utils import convert_tf_params_to_bbox
 
 
 class FocusDataset(Dataset):
