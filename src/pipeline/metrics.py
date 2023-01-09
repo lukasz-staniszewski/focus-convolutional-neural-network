@@ -204,7 +204,7 @@ def mean_iou(output, target):
     ious = _get_binary_ious(output, target)
 
     if len(ious) == 0:
-        return 0.0
+        return None
     else:
         return torch.cat(ious).mean().item()
 
@@ -213,6 +213,6 @@ def iou50_accuracy(output, target):
     ious = _get_binary_ious(output, target)
 
     if len(ious) == 0:
-        return 0.0
+        return None
     else:
         return (torch.cat(ious) > 0.5).float().mean().item()

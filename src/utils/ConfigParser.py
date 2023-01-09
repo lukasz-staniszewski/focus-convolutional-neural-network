@@ -53,9 +53,7 @@ class ConfigParser:
             resume = Path(args.resume)
             cfg_fname = resume.parents[1] / "config.json"
         else:
-            assert (
-                args.config is not None
-            ), "Config file must be specified."
+            assert args.config is not None, "Config file must be specified."
             resume = None
             cfg_fname = Path(args.config)
 
@@ -86,6 +84,8 @@ class ConfigParser:
         is equivalent to
         `object = module.name(a, b=1)`
         """
+        if self[name] is None:
+            return None
         module_name = self[name]["type"]
         module_args = dict(self[name]["args"])
 
@@ -112,17 +112,13 @@ class ConfigParser:
         ), "Overwriting kwargs given in config file is not allowed"
         module_args.update(kwargs)
 
-        return partial(
-            getattr(module, module_name), *args, **module_args
-        )
+        return partial(getattr(module, module_name), *args, **module_args)
 
     def __getitem__(self, name: str) -> Any:
         """Access items like ordinary dict."""
         return self.config[name]
 
-    def get_logger(
-        self, name: str, verbosity: int = 2
-    ) -> logging.Logger:
+    def get_logger(self, name: str, verbosity: int = 2) -> logging.Logger:
         """Get a logger with the name given. By default, logger is configured to log to both console and file.
 
         Args:
@@ -133,8 +129,9 @@ class ConfigParser:
             logging.Logger: logger instance
         """
         msg_verbosity = (
-            "verbosity option {} is invalid. Valid options are {}."
-            .format(verbosity, self.log_levels.keys())
+            "verbosity option {} is invalid. Valid options are {}.".format(
+                verbosity, self.log_levels.keys()
+            )
         )
 
         assert verbosity in self.log_levels, msg_verbosity
