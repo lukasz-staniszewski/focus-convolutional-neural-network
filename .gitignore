@@ -135,5 +135,7 @@ dmypy.json
 data/raw/*/*/
 data/raw/*/*.zip
 data/processed/
+faster_rcnn/data/COCO
+faster_rcnn/data/PASCAL
 
 res/*
