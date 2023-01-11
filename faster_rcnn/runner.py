@@ -1,8 +1,8 @@
 import argparse
-from src.dataloaders import split_dls_coco
-from src.model import get_faster_rcnn_model
-from src.trainer import train
-from src.external.engine import evaluate
+from dataloaders import split_dls_coco
+from model import get_faster_rcnn_model
+from trainer import train
+from external.engine import evaluate
 import torch
 
 

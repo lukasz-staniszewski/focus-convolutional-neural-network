@@ -18,8 +18,9 @@ mv val2017 val_images
 wget -c http://images.cocodataset.org/annotations/annotations_trainval2017.zip
 unzip annotations_trainval2017.zip
 rm annotations_trainval2017.zip
-mv annotations_trainval2017 annotations
+mv annotations_trainval2017 
 
 # Converting annotations
+cd ..
 python ./coco_preprocessor.py --json_in_path ./COCO/annotations/instances_train2017.json --json_out_path ./COCO/annotations/annotations_train.json --categories_names person car bicycle
 python ./coco_preprocessor.py --json_in_path ./COCO/annotations/instances_val2017.json --json_out_path ./COCO/annotations/annotations_val.json --categories_names person car bicycle
