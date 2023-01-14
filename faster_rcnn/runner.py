@@ -7,33 +7,28 @@ import torch
 
 
 def train_runner(args, model):
-    if args.dataset_type == "pascal":
-        raise NotImplementedError("Pascal dataset is not implemented yet.")
+    assert args.dataset_type in ["pascal", "coco"], "Invalid dataset type."
 
-    elif args.dataset_type == "coco":
-        dl_train, dl_valid, _ = split_dls_coco(
-            train_ann_path=args.ann_train_path,
-            train_img_dir=args.img_train_path,
-            test_ann_path=args.ann_test_path,
-            test_img_dir=args.img_test_path,
-            batch_size=args.batch_size,
-            num_workers=args.num_workers,
-            validation_split=args.validation_split,
-            seed=args.seed,
-        )
+    dl_train, dl_valid, _ = split_dls_coco(
+        train_ann_path=args.ann_train_path,
+        train_img_dir=args.img_train_path,
+        test_ann_path=args.ann_test_path,
+        test_img_dir=args.img_test_path,
+        batch_size=args.batch_size,
+        num_workers=args.num_workers,
+        validation_split=args.validation_split,
+        seed=args.seed,
+    )
 
-        train(
-            model=model,
-            dl_train=dl_train,
-            dl_validate=dl_valid,
-            model_name_prefix=args.dataset_type,
-            lr=args.lr,
-            n_epochs=args.n_epochs,
-            print_freq=args.print_freq,
-        )
-
-    else:
-        raise ValueError("Invalid dataset type.")
+    train(
+        model=model,
+        dl_train=dl_train,
+        dl_validate=dl_valid,
+        model_name_prefix=args.dataset_type,
+        lr=args.lr,
+        n_epochs=args.n_epochs,
+        print_freq=args.print_freq,
+    )
 
 
 def test_runner(args, model):
