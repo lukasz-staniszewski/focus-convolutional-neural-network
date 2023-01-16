@@ -8,6 +8,7 @@ import torch
 
 def train_runner(args, model):
     assert args.dataset_type in ["pascal", "coco"], "Invalid dataset type."
+    torch.multiprocessing.set_sharing_strategy('file_system')
 
     dl_train, dl_valid, _ = split_dls_coco(
         train_ann_path=args.ann_train_path,
@@ -33,34 +34,41 @@ def train_runner(args, model):
 
 def test_runner(args, model):
     assert args.model_path is not None, "Model path is required for testing."
-    if args.dataset_type == "pascal":
-        raise NotImplementedError("Pascal dataset is not implemented yet.")
+    torch.multiprocessing.set_sharing_strategy('file_system')
+    
+    device = (
+        torch.device("cuda")
+        if torch.cuda.is_available()
+        else torch.device("cpu")
+    )
+    model.to(device)
 
-    elif args.dataset_type == "coco":
-        _, _, dl_test = split_dls_coco(
-            train_ann_path=args.ann_train_path,
-            train_img_dir=args.img_train_path,
-            test_ann_path=args.ann_test_path,
-            test_img_dir=args.img_test_path,
-            batch_size=args.batch_size,
-            num_workers=args.num_workers,
-            validation_split=args.validation_split,
-            seed=args.seed,
-        )
+    _, _, dl_test = split_dls_coco(
+        train_ann_path=args.ann_train_path,
+        train_img_dir=args.img_train_path,
+        test_ann_path=args.ann_test_path,
+        test_img_dir=args.img_test_path,
+        batch_size=args.batch_size,
+        num_workers=args.num_workers,
+        validation_split=args.validation_split,
+        seed=args.seed,
+    )
 
-        device = (
-            torch.device("cuda")
-            if torch.cuda.is_available()
-            else torch.device("cpu")
-        )
+    device = (
+        torch.device("cuda")
+        if torch.cuda.is_available()
+        else torch.device("cpu")
+    )
 
-        evaluate(model, dl_test, device=device)
+    evaluate(model, dl_test, device=device)
 
 
 def main(args):
     model = get_faster_rcnn_model(args.n_classes)
+
     if args.model_path:
         model.load_state_dict(torch.load(args.model_path))
+        
 
     if args.action == "train":
         train_runner(args, model)
