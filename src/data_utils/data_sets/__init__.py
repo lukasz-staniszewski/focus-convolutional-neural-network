@@ -1,3 +1,4 @@
-from .ClassifierDataset import *
-from .ClassifierTestDataset import *
-from .FocusDataset import *
+from .ClassifierDataset import ClassifierDataset
+from .ClassifierTestDataset import ClassifierTestDataset
+from .FocusDataset import FocusDataset
+from .FocusCNNDataset import FocusCNNDataset
