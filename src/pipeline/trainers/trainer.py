@@ -2,8 +2,7 @@ import torch
 from torchvision.utils import make_grid
 from base import BaseTrainer
 from tqdm import tqdm
-from typing import List
-from pipeline import utils as pipeline_utils
+from pipeline import pipeline_utils
 
 
 class Trainer(BaseTrainer):

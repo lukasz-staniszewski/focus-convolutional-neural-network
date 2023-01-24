@@ -35,6 +35,8 @@ class MetricTracker:
             self._data.loc[key] = 0
         if self.writer is not None:
             self.writer.add_scalar(key, value)
+        if value is None:
+            return
         self._data.total[key] += value * n
         self._data.counts[key] += n
         self._data.average[key] = (

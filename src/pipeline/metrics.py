@@ -1,5 +1,5 @@
 import torch
-from pipeline.utils import get_class_cm
+from pipeline.pipeline_utils import get_class_cm
 from torchvision.ops import box_iou
 from typing import List
 
@@ -185,8 +185,7 @@ def focus_f1(output, target):
 
 def _get_binary_ious(output, target) -> List[torch.Tensor]:
     target_cls = target["label"]
-    out_cls = output["label"]
-    positives = torch.logical_and(target_cls == 1, out_cls == 1)
+    positives = target_cls == 1
     out_bbox = output["bbox"][positives]
     target_bbox = target["bbox"][positives]
 
@@ -205,7 +204,7 @@ def mean_iou(output, target):
     ious = _get_binary_ious(output, target)
 
     if len(ious) == 0:
-        return 0.0
+        return None
     else:
         return torch.cat(ious).mean().item()
 
@@ -214,6 +213,6 @@ def iou50_accuracy(output, target):
     ious = _get_binary_ious(output, target)
 
     if len(ious) == 0:
-        return 0.0
+        return None
     else:
         return (torch.cat(ious) > 0.5).float().mean().item()

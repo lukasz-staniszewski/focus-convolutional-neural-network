@@ -4,14 +4,15 @@ from copy import deepcopy
 from typing import Union
 
 
-def classifier_oversample(
+def label_oversample(
     csv_path_train_orig: Union[str, Path],
+    column_label: str = "label"
 ) -> Union[str, Path]:
     """Function balances training data using oversampling
     minority classes.
     """
     df_orig = pd.read_csv(csv_path_train_orig)
-    label_cnt = df_orig["label"].value_counts().sort_index()
+    label_cnt = df_orig[column_label].value_counts().sort_index()
     aug_labels_cnt = label_cnt.max() / label_cnt
     aug_labels_cnt = aug_labels_cnt / aug_labels_cnt.max()
     aug_labels_cnt = (
@@ -21,7 +22,7 @@ def classifier_oversample(
     dfs_aug = []
     for label, cnt in aug_labels_cnt.iteritems():
         dfs_aug.append(
-            df_orig[df_orig["label"] == label].sample(
+            df_orig[df_orig[column_label] == label].sample(
                 cnt, replace=False, random_state=0
             )
         )
@@ -34,10 +35,11 @@ def classifier_oversample(
     return csv_path_train_aug
 
 
-def classifier_undersample(
+def label_undersample(
     csv_path_train_orig: Union[str, Path],
     balance_max_multiplicity: int,
     csv_path_train_aug: Union[str, Path] = None,
+    column_label: str = "label"
 ) -> Union[str, Path]:
     """Function balances training data using undersampling
     majority classes.
@@ -45,13 +47,13 @@ def classifier_undersample(
     NOTE: max(x,1) is used to avoid division by zero
     """
     df_orig = pd.read_csv(csv_path_train_orig, header=0)
-    new_label_cnt = df_orig["label"].value_counts().sort_index()
+    new_label_cnt = df_orig[column_label].value_counts().sort_index()
     if csv_path_train_aug:
         df_aug = pd.read_csv(csv_path_train_aug, header=0)
         new_label_cnt = (
-            df_orig["label"]
+            df_orig[column_label]
             .value_counts()
-            .add(df_aug["label"].value_counts(), fill_value=0)
+            .add(df_aug[column_label].value_counts(), fill_value=0)
         )
 
     if (
@@ -63,7 +65,7 @@ def classifier_undersample(
         for label, cnt in new_label_cnt.iteritems():
             if cnt / max(min_cnt, 1) > balance_max_multiplicity:
                 df_undersampled = df_undersampled.drop(
-                    df_undersampled[df_undersampled["label"] == label]
+                    df_undersampled[df_undersampled[column_label] == label]
                     .sample(
                         int(cnt - (balance_max_multiplicity * min_cnt)),
                         replace=False,
@@ -83,20 +85,21 @@ def classifier_undersample(
         return csv_path_train_orig
 
 
-def classifier_make_0_half(
+def label_make_0_half(
     csv_path_train_orig: Union[str, Path],
     csv_path_train_aug: Union[str, Path] = None,
+    column_label: str = "label"
 ) -> Union[str, Path]:
     """Function balances training data using undersampling majority classes."""
     df_orig = pd.read_csv(csv_path_train_orig, header=0)
-    new_label_cnt = df_orig["label"].value_counts().sort_index()
+    new_label_cnt = df_orig[column_label].value_counts().sort_index()
 
     if csv_path_train_aug:
         df_aug = pd.read_csv(csv_path_train_aug, header=0)
         new_label_cnt = (
-            df_orig["label"]
+            df_orig[column_label]
             .value_counts()
-            .add(df_aug["label"].value_counts(), fill_value=0)
+            .add(df_aug[column_label].value_counts(), fill_value=0)
         )
 
     sum_no_0 = sum(new_label_cnt[1:])
@@ -107,7 +110,7 @@ def classifier_make_0_half(
         cnt_to_remove_0 = cnt_0 - sum_no_0
         df_undersampled = deepcopy(df_orig)
         df_undersampled = df_undersampled.drop(
-            df_undersampled[df_undersampled["label"] == 0]
+            df_undersampled[df_undersampled[column_label] == 0]
             .sample(int(cnt_to_remove_0), replace=False, random_state=0)
             .index
         )

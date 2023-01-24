@@ -4,7 +4,7 @@ import torch
 from base import BaseTester, BaseDataLoader
 from tqdm import tqdm
 from utils import MetricTracker
-from pipeline import utils as pipeline_utils
+from pipeline import pipeline_utils
 
 
 class Tester(BaseTester):

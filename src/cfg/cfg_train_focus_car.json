@@ -1,8 +1,8 @@
 {
-    "name": "CocoPersonFocus",
+    "name": "CocoCarFocus",
     "device": 1,
     "seed": 188,
-    "save_cfg_dir": "res/focus/coco_focus_person/",
+    "save_cfg_dir": "res/focus/coco_focus_car/",
     "arch": {
         "type": "ResFocusNetwork",
         "args": {
@@ -11,6 +11,9 @@
             "loss_lambda_tr": 12,
             "loss_lambda_sc": 12,
             "loss_lambda_rot": 3,
+            "loss_weights": [
+                6
+            ],
             "inp_img_size": [
                 640,
                 640
@@ -20,32 +23,36 @@
     "data_loader": {
         "type": "FocusLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoPersonFocus/train/images",
+            "images_dir": "data/processed/COCO-2017/CocoCarFocus/train/images",
             "batch_size": 32,
-            "csv_path": "data/processed/COCO-2017/CocoPersonFocus/train/labels.csv",
-            "save_out_dir": "res/focus/coco_focus_person/trainer/labels/",
+            "csv_path": "data/processed/COCO-2017/CocoCarFocus/train/labels.csv",
+            "save_out_dir": "res/focus/coco_focus_car/trainer/labels/",
             "transform_mean": [
-                0.4686,
-                0.4496,
-                0.4134
+                0.4572,
+                0.4423,
+                0.4103
             ],
             "transform_std": [
-                0.2553,
-                0.2530,
-                0.2708
+                0.2577,
+                0.2591,
+                0.2712
             ],
             "shuffle": true,
-            "validation_split": 0.15,
+            "validation_split": 0.10,
             "num_workers": 12,
             "labels": {
                 "0": "none",
-                "1": "person"
+                "1": "car"
             },
             "tf_image_size": [
                 640,
                 640
             ],
-            "balance_train": false
+            "balance_train": true,
+            "balance_methods": [
+                "undersample"
+            ],
+            "balance_max_multiplicity": 6
         },
         "class_weights": null
     },
@@ -69,11 +76,11 @@
     "trainer": {
         "type": "FocusTrainer",
         "epochs": 100,
-        "save_dir": "res/focus/coco_focus_person/",
+        "save_dir": "res/focus/coco_focus_car/",
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",
-        "early_stop": 20,
+        "early_stop": 10,
         "tensorboard": false
     }
 }
