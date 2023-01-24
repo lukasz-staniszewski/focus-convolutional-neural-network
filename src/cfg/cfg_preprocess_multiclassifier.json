@@ -14,9 +14,7 @@
                 "0": "nothing",
                 "1": "person",
                 "2": "car",
-                "3": "bicycle",
-                "4": "cat",
-                "5": "dog"
+                "3": "bicycle"
             },
             "cut_fn": "cut_min_covering_square",
             "reflect_padding_cut": false

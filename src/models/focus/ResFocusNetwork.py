@@ -3,7 +3,8 @@ from base import BaseModel
 from models.models_utils import assign_backbone
 from pipeline import loss
 from pipeline.pipeline_utils import convert_tf_params_to_bbox
-from typing import Tuple
+from typing import Tuple, List
+import torch
 
 
 class ResFocusNetwork(BaseModel):
@@ -15,12 +16,14 @@ class ResFocusNetwork(BaseModel):
         backbone: str,
         threshold: float = 0.5,
         inp_img_size: Tuple[int, int] = (640, 640),
+        loss_weights: List[float] = [1.0],
     ) -> None:
         super().__init__()
         self.threshold = threshold
         self.loss_lambda_tr = loss_lambda_tr
         self.loss_lambda_sc = loss_lambda_sc
         self.loss_lambda_rot = loss_lambda_rot
+        self.loss_weights = loss_weights
         self.inp_img_size = inp_img_size
 
         self.model = assign_backbone(backbone)
@@ -46,8 +49,11 @@ class ResFocusNetwork(BaseModel):
             nn.Linear(in_features=1024, out_features=512),
             nn.ReLU(),
         )
-        self.tf_tr = nn.Sequential(
-            nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 2)
+        self.tf_trx = nn.Sequential(
+            nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 1)
+        )
+        self.tf_try = nn.Sequential(
+            nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 1)
         )
         self.tf_scale = nn.Sequential(
             nn.Linear(512, 128), nn.Tanh(), nn.Linear(128, 1)
@@ -60,24 +66,28 @@ class ResFocusNetwork(BaseModel):
         x = self.model(x)
         out_cls = self.cls_fc(x)
         out_tf = self.tf_fc(x)
-        out_translate = self.tf_tr(out_tf)
+        out_translate_x = self.tf_trx(out_tf)
+        out_translate_y = self.tf_try(out_tf)
         out_scale = self.tf_scale(out_tf)
         out_rotate = self.tf_rot(out_tf)
-        
+
         loss_dict = loss.focus_multiloss_2(
             output_cls=out_cls,
-            output_translate=out_translate,
+            output_translate_x=out_translate_x,
+            output_translate_y=out_translate_y,
             output_scale=out_scale,
             output_rotate=out_rotate,
             target=target,
             lambda_translation=self.loss_lambda_tr,
             lambda_scale=self.loss_lambda_sc,
             lambda_rotation=self.loss_lambda_rot,
+            weights=self.loss_weights,
         )
 
         return {
             "out_cls": out_cls,
-            "out_translate": out_translate,
+            "out_translate_x": out_translate_x,
+            "out_translate_y": out_translate_y,
             "out_scale": out_scale,
             "out_rotate": out_rotate,
             "loss": loss_dict,
@@ -85,13 +95,15 @@ class ResFocusNetwork(BaseModel):
 
     def get_prediction(self, output, target):
         cls_out = output["out_cls"]
-        translate_out = output["out_translate"]
+        translate_x_out = output["out_translate_x"]
+        translate_y_out = output["out_translate_y"]
         scale_out = output["out_scale"]
         # cls_target = target["label"]
         # scale_target = target["transform"][:, 2:3]
         # translate_target = target["transform"][:, :2]
+        # target_translate_x = target["transform"][:, 0:1]
         bbox = convert_tf_params_to_bbox(
-            translations=translate_out,
+            translations=torch.cat([translate_x_out, translate_y_out], dim=1),
             scales=scale_out,
             img_size=self.inp_img_size,
         )
@@ -100,4 +112,3 @@ class ResFocusNetwork(BaseModel):
             "confidence": cls_out.squeeze(),
             "bbox": bbox,
         }
-

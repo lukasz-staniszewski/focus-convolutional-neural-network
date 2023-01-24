@@ -6,14 +6,12 @@
     "arch": {
         "type": "ResNet34Classifier",
         "args": {
-            "n_classes": 6,
+            "n_classes": 4,
             "class_weights": [
-                0.33333333,
-                0.4271424,
-                2.52586565,
-                10.87575135,
-                11.75590098,
-                11.63532764
+                0.39715357,
+                0.82703406,
+                4.82156079,
+                15.25773196
             ]
         }
     },
@@ -46,10 +44,8 @@
             "labels": {
                 "0": "none",
                 "1": "person",
-                "2": "bicycle",
-                "3": "car",
-                "4": "cat",
-                "5": "dog"
+                "2": "car",
+                "3": "bicycle"
             }
         }
     },
@@ -72,13 +68,7 @@
         "macro_precision",
         "macro_f1"
     ],
-    "lr_scheduler": {
-        "type": "StepLR",
-        "args": {
-            "step_size": 50,
-            "gamma": 0.1
-        }
-    },
+    "lr_scheduler": null,
     "trainer": {
         "type": "Trainer",
         "epochs": 100,

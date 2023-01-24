@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
@@ -119,7 +119,8 @@ def _focus_l1_loss(output: Tensor, target: Tensor, target_cls: Tensor):
 
 def focus_multiloss(
     output_cls: Tensor,
-    output_translate: Tensor,
+    output_translate_x: Tensor,
+    output_translate_y: Tensor,
     output_scale: Tensor,
     output_rotate: Tensor,
     target: Dict[str, Tensor],
@@ -143,29 +144,36 @@ def focus_multiloss(
         Tensor: full loss
     """
     target_cls, target_tf = target["label"], target["transform"]
-    target_translate = target_tf[:, 0:2]
+    target_translate_x = target_tf[:, 0:1]
+    target_translate_y = target_tf[:, 1:2]
     target_scale = target_tf[:, 2:3]
     target_rotate = target_tf[:, 3:4]
     positives = target_cls == 1
 
-    cls_loss = F.binary_cross_entropy(
+    cls_loss = F.binary_cross_entropy_with_logits(
         input=output_cls.squeeze(), target=target_cls.float()
     )
-
-    translation_loss = F.l1_loss(
-        input=output_translate[positives],
-        target=target_translate[:, 0:2][positives],
+    translation_x_loss = _focus_l1_loss(
+        output=output_translate_x,
+        target=target_translate_x,
+        target_cls=target_cls,
+    )
+    translation_y_loss = _focus_l1_loss(
+        output=output_translate_y,
+        target=target_translate_y,
+        target_cls=target_cls,
     )
     scale_log_loss = F.l1_loss(
-        input=output_scale[positives], target=target_scale[:, 2:3][positives]
+        input=output_scale[positives], target=target_scale[positives]
     )
     rotation_loss = F.l1_loss(
-        input=output_rotate[positives], target=target_rotate[:, 3:4][positives]
+        input=output_rotate[positives], target=target_rotate[positives]
     )
 
     loss = (
         cls_loss
-        + lambda_translation * translation_loss
+        + lambda_translation * translation_x_loss
+        + lambda_translation * translation_y_loss
         + lambda_scale * scale_log_loss
         + lambda_rotation * rotation_loss
     )
@@ -173,7 +181,8 @@ def focus_multiloss(
     return {
         "loss": loss,
         "cls_loss": cls_loss,
-        "translation_loss": translation_loss,
+        "translation_x_loss": translation_x_loss,
+        "translation_y_loss": translation_y_loss,
         "scale_log_loss": scale_log_loss,
         "rotation_loss": rotation_loss,
     }
@@ -181,13 +190,15 @@ def focus_multiloss(
 
 def focus_multiloss_2(
     output_cls: Tensor,
-    output_translate: Tensor,
+    output_translate_x: Tensor,
+    output_translate_y: Tensor,
     output_scale: Tensor,
     output_rotate: Tensor,
     target: Dict[str, Tensor],
     lambda_translation: float,
     lambda_scale: float,
     lambda_rotation: float,
+    weights: List[float] = None,
 ):
     """Calculates second version of loss for focus model - weighted sum of classification loss and regression on transform param loss.
 
@@ -205,15 +216,25 @@ def focus_multiloss_2(
         Tensor: full loss
     """
     target_cls, target_tf = target["label"], target["transform"]
-    target_translate = target_tf[:, 0:2]
+    target_translate_x = target_tf[:, 0:1]
+    target_translate_y = target_tf[:, 1:2]
     target_scale = target_tf[:, 2:3]
     target_rotate = target_tf[:, 3:4]
 
-    cls_loss = F.binary_cross_entropy(
-        input=output_cls.squeeze(), target=target_cls.float()
+    cls_loss = F.binary_cross_entropy_with_logits(
+        input=output_cls.squeeze(),
+        target=target_cls.float(),
+        pos_weight=torch.tensor(weights).to(output_cls.device),
     )
-    translation_loss = _focus_l1_loss(
-        output=output_translate, target=target_translate, target_cls=target_cls
+    translation_x_loss = _focus_l1_loss(
+        output=output_translate_x,
+        target=target_translate_x,
+        target_cls=target_cls,
+    )
+    translation_y_loss = _focus_l1_loss(
+        output=output_translate_y,
+        target=target_translate_y,
+        target_cls=target_cls,
     )
     scale_log_loss = _focus_l1_loss(
         output=output_scale, target=target_scale, target_cls=target_cls
@@ -223,7 +244,8 @@ def focus_multiloss_2(
     )
     loss = (
         cls_loss
-        + lambda_translation * translation_loss
+        + lambda_translation * translation_x_loss
+        + lambda_translation * translation_y_loss
         + lambda_scale * scale_log_loss
         + lambda_rotation * rotation_loss
     )
@@ -231,7 +253,8 @@ def focus_multiloss_2(
     return {
         "loss": loss,
         "cls_loss": cls_loss,
-        "translation_loss": translation_loss,
+        "translation_x_loss": translation_x_loss,
+        "translation_y_loss": translation_y_loss,
         "scale_log_loss": scale_log_loss,
         "rotation_loss": rotation_loss,
     }

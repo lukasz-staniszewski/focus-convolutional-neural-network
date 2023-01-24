@@ -77,12 +77,10 @@ class FocusTrainer(BaseTrainer):
                 dict_columns=["label", "transform", "bbox"],
             )
 
-            self.optimizer.zero_grad()
-
             output = self.model(data_in, target)
-            # loss_dict = self.calc_loss(output, target)
             loss_dict = output["loss"]
             loss = loss_dict["loss"]
+            self.optimizer.zero_grad()
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1)
             loss.backward()
             self.optimizer.step()
@@ -106,14 +104,14 @@ class FocusTrainer(BaseTrainer):
                         epoch, self._progress(batch_idx), loss.item()
                     )
                 )
-                self.writer.add_image(
-                    "input",
-                    make_grid(
-                        pipeline_utils.cpu_tensors(data_in),
-                        nrow=8,
-                        normalize=True,
-                    ),
-                )
+                # self.writer.add_image(
+                #     "input",
+                #     make_grid(
+                #         pipeline_utils.cpu_tensors(data_in),
+                #         nrow=8,
+                #         normalize=True,
+                #     ),
+                # )
             if batch_idx == self.len_epoch:
                 break
 
@@ -170,7 +168,6 @@ class FocusTrainer(BaseTrainer):
                 )
                 for loss_name, loss_val in loss_dict.items():
                     self.valid_metrics.update(loss_name, loss_val.item())
-                
                 preds = self.model.get_prediction(output, target)
                 preds = pipeline_utils.cpu_tensors(preds)
                 target = pipeline_utils.cpu_tensors(target)
@@ -178,18 +175,18 @@ class FocusTrainer(BaseTrainer):
                 for met in self.metric_ftns:
                     self.valid_metrics.update(met.__name__, met(preds, target))
 
-                self.writer.add_image(
-                    "input",
-                    make_grid(
-                        pipeline_utils.cpu_tensors(data_in),
-                        nrow=8,
-                        normalize=True,
-                    ),
-                )
+                # self.writer.add_image(
+                #     "input",
+                #     make_grid(
+                #         pipeline_utils.cpu_tensors(data_in),
+                #         nrow=8,
+                #         normalize=True,
+                #     ),
+                # )
 
         # adding histogram of model parameters to the tensorboard
-        for name, p in self.model.named_parameters():
-            self.writer.add_histogram(name, p, bins="auto")
+        # for name, p in self.model.named_parameters():
+        #     self.writer.add_histogram(name, p, bins="auto")
 
         return self.valid_metrics.result()
 

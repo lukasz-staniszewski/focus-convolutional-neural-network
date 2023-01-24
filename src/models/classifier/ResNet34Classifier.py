@@ -28,11 +28,11 @@ class ResNet34Classifier(BaseModel):
             nn.ReLU(),
             nn.Dropout(0.6),
             nn.Linear(in_features=50, out_features=self.n_classes),
+            nn.Sigmoid(),
         )
 
     def forward(self, x):
         x = self.model(x)
-        print(f"{x.shape=}")
         x = self.fc_out(x)
         return x
 

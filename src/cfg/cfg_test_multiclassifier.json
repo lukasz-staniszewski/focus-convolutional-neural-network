@@ -23,10 +23,8 @@
             "labels": {
                 "0": "none",
                 "1": "person",
-                "2": "bicycle",
-                "3": "car",
-                "4": "cat",
-                "5": "dog"
+                "2": "car",
+                "3": "bicycle"
             }
         }
     },
