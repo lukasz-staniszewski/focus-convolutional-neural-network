@@ -1,0 +1,25 @@
+{
+    "name": "CocoFocusCNNPreprocessing",
+    "preprocessor": {
+        "type": "CocoFocusCNNPreprocessor",
+        "args": {
+            "img_in_dir_path": "data/raw/COCO-2017/train/",
+            "ann_file_path": "data/raw/COCO-2017/annotations/instances_train2017.json",
+            "out_dir_path": "data/processed/COCO-2017/CocoFocusCNN/train/",
+            "cls_map": {
+                "person": 1,
+                "car": 2,
+                "bicycle": 3
+            },
+            "max_input_size": [
+                640,
+                640
+            ]
+        }
+    },
+    "preprocess": {
+        "verbosity": 1,
+        "save_dir": "data/processed/COCO-2017/CocoFocusCNN/train/"
+    },
+    "seed": 42
+}
