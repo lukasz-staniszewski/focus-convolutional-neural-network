@@ -4,9 +4,10 @@
     "seed": 42,
     "save_cfg_dir": "res/classifiers/coco_classifier_multi/",
     "arch": {
-        "type": "ResNet34Classifier",
+        "type": "MultiClassifier",
         "args": {
             "n_classes": 4,
+            "backbone": "resnet34",
             "class_weights": [
                 0.39715357,
                 0.82703406,
@@ -33,7 +34,7 @@
                 0.2711
             ],
             "shuffle": true,
-            "validation_split": 0.25,
+            "validation_split": 0.2,
             "num_workers": 14,
             "balance_train": true,
             "balance_methods": [
@@ -76,7 +77,7 @@
         "save_period": 1,
         "verbosity": 1,
         "monitor": "max val_macro_precision",
-        "early_stop": 10,
+        "early_stop": 15,
         "tensorboard": false
     }
 }
