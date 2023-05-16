@@ -39,6 +39,7 @@ class CocoPreprocessor:
         return cat_annotations[min_idx]
 
     def _collect_annotations(self):
+        # TODO: DEBUG HERE
         for image_info in tqdm(
             self.images, desc="Collecting annotations for images"
         ):

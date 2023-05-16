@@ -199,6 +199,7 @@ def focus_multiloss_2(
     lambda_scale: float,
     lambda_rotation: float,
     weights: List[float] = None,
+    loss_rot: bool = True,
 ):
     """Calculates second version of loss for focus model - weighted sum of classification loss and regression on transform param loss.
 
@@ -239,16 +240,20 @@ def focus_multiloss_2(
     scale_log_loss = _focus_l1_loss(
         output=output_scale, target=target_scale, target_cls=target_cls
     )
-    rotation_loss = _focus_l1_loss(
-        output=output_rotate, target=target_rotate, target_cls=target_cls
-    )
     loss = (
         cls_loss
         + lambda_translation * translation_x_loss
         + lambda_translation * translation_y_loss
         + lambda_scale * scale_log_loss
-        + lambda_rotation * rotation_loss
     )
+
+    rotation_loss = torch.nan
+
+    if loss_rot:
+        rotation_loss = _focus_l1_loss(
+            output=output_rotate, target=target_rotate, target_cls=target_cls
+        )
+        loss += lambda_rotation * rotation_loss
 
     return {
         "loss": loss,
