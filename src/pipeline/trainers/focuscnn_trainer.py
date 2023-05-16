@@ -1,11 +1,10 @@
 import torch
-from torchvision.utils import make_grid
 from base import BaseTrainer
 from tqdm import tqdm
 from pipeline import pipeline_utils
 
 
-class FocusTrainer(BaseTrainer):
+class FocusCNNTrainer(BaseTrainer):
     """Trainer class."""
 
     def __init__(
@@ -69,17 +68,19 @@ class FocusTrainer(BaseTrainer):
             progress_bar.set_postfix({"loss": pbar_loss})
 
             data_in = pipeline_utils.move_tensors_to_device(
-                data["image"], device=self.device
+                data[0], device=self.device
+            )
+            img_ids = pipeline_utils.move_tensors_to_device(
+                data[1], device=self.device
             )
             target = pipeline_utils.move_tensors_to_device(
-                data,
+                data[2],
                 device=self.device,
-                dict_columns=["label", "transform", "bbox"],
+                dict_columns=["label", "transform"],
             )
 
             output = self.model(data_in, target)
-            loss_dict = output["loss"]
-            loss = loss_dict["loss"]
+            loss = output["loss"]
             self.optimizer.zero_grad()
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1)
             loss.backward()
@@ -87,11 +88,12 @@ class FocusTrainer(BaseTrainer):
 
             pbar_loss = loss.item()
 
-            self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
-            for loss_name, loss_val in loss_dict.items():
-                self.train_metrics.update(loss_name, loss_val.item())
+            self.train_metrics.update("loss", loss.item())
 
-            preds = self.model.get_prediction(output, target)
+            preds = self.model.get_prediction(output, img_ids)
+
+            # TODO: create input for map metric
+
             preds = pipeline_utils.cpu_tensors(preds)
             target = pipeline_utils.cpu_tensors(target)
 
@@ -104,14 +106,6 @@ class FocusTrainer(BaseTrainer):
                         epoch, self._progress(batch_idx), loss.item()
                     )
                 )
-                # self.writer.add_image(
-                #     "input",
-                #     make_grid(
-                #         pipeline_utils.cpu_tensors(data_in),
-                #         nrow=8,
-                #         normalize=True,
-                #     ),
-                # )
             if batch_idx == self.len_epoch:
                 break
 
@@ -147,45 +141,29 @@ class FocusTrainer(BaseTrainer):
         with torch.no_grad():
             for batch_idx, data in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
-
                 data_in = pipeline_utils.move_tensors_to_device(
-                    data["image"], device=self.device
+                    data[0], device=self.device
+                )
+                img_ids = pipeline_utils.move_tensors_to_device(
+                    data[1], device=self.device
                 )
                 target = pipeline_utils.move_tensors_to_device(
-                    data,
+                    data[2],
                     device=self.device,
-                    dict_columns=["label", "transform", "bbox"],
+                    dict_columns=["label", "transform"],
                 )
-
                 output = self.model(data_in, target)
-                loss_dict = output["loss"]
-                loss = loss_dict["loss"]
-                pbar_loss = loss.item()
+                loss_val = output["loss"]
+                pbar_loss = loss_val.item()
 
-                self.writer.set_step(
-                    (epoch - 1) * len(self.valid_data_loader) + batch_idx,
-                    "valid",
-                )
-                for loss_name, loss_val in loss_dict.items():
-                    self.valid_metrics.update(loss_name, loss_val.item())
-                preds = self.model.get_prediction(output, target)
+                self.valid_metrics.update("val_loss", loss_val.item())
+                preds = self.model.get_prediction(output, img_ids)
+
+                # here also for map metric
                 preds = pipeline_utils.cpu_tensors(preds)
                 target = pipeline_utils.cpu_tensors(target)
 
                 for met in self.metric_ftns:
                     self.valid_metrics.update(met.__name__, met(preds, target))
-
-                # self.writer.add_image(
-                #     "input",
-                #     make_grid(
-                #         pipeline_utils.cpu_tensors(data_in),
-                #         nrow=8,
-                #         normalize=True,
-                #     ),
-                # )
-
-        # adding histogram of model parameters to the tensorboard
-        # for name, p in self.model.named_parameters():
-        #     self.writer.add_histogram(name, p, bins="auto")
 
         return self.valid_metrics.result()

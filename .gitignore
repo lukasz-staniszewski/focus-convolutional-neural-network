@@ -105,7 +105,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+venv*/
 ENV/
 env.bak/
 venv.bak/
@@ -137,5 +137,7 @@ data/raw/*/*.zip
 data/processed/
 faster_rcnn/data/COCO/*
 faster_rcnn/data/PASCAL/*
+faster_rcnn/models/*.pth
+faster_rcnn/results.txt
 
 res/*

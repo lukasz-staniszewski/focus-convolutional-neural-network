@@ -1,3 +1,4 @@
 from .CocoClassifierPreprocessor import CocoClassifierPreprocessor
 from .CocoMultiClassifierPreprocessor import CocoMultiClassifierPreprocessor
 from .CocoFocusPreprocessor import CocoFocusPreprocessor
+from .CocoFocusCNNPreprocessor import CocoFocusCNNPreprocessor

@@ -17,6 +17,7 @@ class ResFocusNetwork(BaseModel):
         threshold: float = 0.5,
         inp_img_size: Tuple[int, int] = (640, 640),
         loss_weights: List[float] = [1.0],
+        loss_rot: bool = True,
     ) -> None:
         super().__init__()
         self.threshold = threshold
@@ -25,6 +26,7 @@ class ResFocusNetwork(BaseModel):
         self.loss_lambda_rot = loss_lambda_rot
         self.loss_weights = loss_weights
         self.inp_img_size = inp_img_size
+        self.loss_rot = loss_rot
 
         self.model = assign_backbone(backbone)
         res_fc_out = self.model.fc.out_features
@@ -82,6 +84,7 @@ class ResFocusNetwork(BaseModel):
             lambda_scale=self.loss_lambda_sc,
             lambda_rotation=self.loss_lambda_rot,
             weights=self.loss_weights,
+            loss_rot=self.loss_rot,
         )
 
         return {

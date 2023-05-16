@@ -1,13 +1,14 @@
 import torch.nn as nn
 from base import BaseModel
-from torchvision import models
-from torchvision.models import ResNet18_Weights
 import torch
 from pipeline import loss
+from models import models_utils
 
 
-class ResNetFCClassifier(BaseModel):
-    def __init__(self, n_classes=1, class_weights=None) -> None:
+class MultiClassifier(BaseModel):
+    def __init__(
+        self, n_classes=1, backbone="resnet34", class_weights=None
+    ) -> None:
         super().__init__()
         self.n_classes = n_classes
         self.class_weights = class_weights
@@ -17,17 +18,17 @@ class ResNetFCClassifier(BaseModel):
                 " classes."
             )
 
-        self.model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
+        self.model = models_utils.assign_backbone(backbone)
         res_fc_out = self.model.fc.out_features
 
         self.fc_out = nn.Sequential(
-            nn.Linear(in_features=res_fc_out, out_features=1000),
-            nn.Tanh(),
-            nn.Dropout(0.5),
-            nn.Linear(in_features=1000, out_features=100),
-            nn.Tanh(),
-            # nn.Dropout(0.6),
-            nn.Linear(in_features=100, out_features=self.n_classes),
+            nn.Linear(in_features=res_fc_out, out_features=500),
+            nn.ReLU(),
+            nn.Dropout(0.7),
+            nn.Linear(in_features=500, out_features=50),
+            nn.ReLU(),
+            nn.Dropout(0.6),
+            nn.Linear(in_features=50, out_features=self.n_classes),
         )
 
     def forward(self, x):

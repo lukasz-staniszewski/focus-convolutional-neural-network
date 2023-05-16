@@ -35,7 +35,7 @@ def train_runner(args, model):
 def test_runner(args, model):
     assert args.model_path is not None, "Model path is required for testing."
     torch.multiprocessing.set_sharing_strategy('file_system')
-    
+
     device = (
         torch.device("cuda")
         if torch.cuda.is_available()

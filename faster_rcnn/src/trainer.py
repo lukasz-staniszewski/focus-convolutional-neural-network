@@ -30,14 +30,14 @@ def train(
     # optimizer
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.SGD(
-        params, lr=lr, momentum=0.9, weight_decay=0.0005
+        params, lr=lr, momentum=0.9, weight_decay=0.005
     )
 
     # and a learning rate scheduler which decreases the learning rate by
     # 10x every 3 epochs
-    lr_scheduler = torch.optim.lr_scheduler.StepLR(
-        optimizer, step_size=3, gamma=0.1
-    )
+    # lr_scheduler = torch.optim.lr_scheduler.StepLR(
+    #     optimizer, step_size=3, gamma=0.1
+    # )
 
     for epoch in range(n_epochs):
         # train for one epoch, printing every 100 iterations
@@ -46,7 +46,7 @@ def train(
         )
 
         # update the learning rate
-        lr_scheduler.step()
+        # lr_scheduler.step()
 
         save_model(model, model_name_prefix, epoch)
 
