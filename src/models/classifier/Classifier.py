@@ -1,6 +1,7 @@
-import torch.nn as nn
-from base import BaseModel
 import torch
+import torch.nn as nn
+
+from base import BaseModel
 from pipeline import loss
 
 

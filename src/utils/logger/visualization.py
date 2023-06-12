@@ -1,7 +1,7 @@
 import importlib
 from datetime import datetime
-from typing import Any, Union
 from pathlib import Path
+from typing import Any, Union
 
 
 class TensorboardWriter:
@@ -73,9 +73,7 @@ class TensorboardWriter:
             self.timer = datetime.now()
         else:
             duration = datetime.now() - self.timer
-            self.add_scalar(
-                "steps_per_sec", 1 / duration.total_seconds()
-            )
+            self.add_scalar("steps_per_sec", 1 / duration.total_seconds())
             self.timer = datetime.now()
 
     def __getattr__(self, name: str):

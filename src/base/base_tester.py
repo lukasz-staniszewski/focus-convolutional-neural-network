@@ -1,7 +1,9 @@
-import torch
 from abc import abstractmethod
-from utils import ConfigParser
+
+import torch
+
 from base import BaseModel
+from utils import ConfigParser
 from utils.project_utils import secure_load_path
 
 
@@ -36,9 +38,7 @@ class BaseTester:
 
     def test(self):
         """Performs prediction."""
-        self.logger.info(
-            "Testing model: {}".format(self.config["name"])
-        )
+        self.logger.info("Testing model: {}".format(self.config["name"]))
         self.logger.info("Performing predictions...")
 
         self._predict()

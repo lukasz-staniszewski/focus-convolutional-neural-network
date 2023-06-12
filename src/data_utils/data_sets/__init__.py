@@ -1,4 +1,4 @@
 from .ClassifierDataset import ClassifierDataset
 from .ClassifierTestDataset import ClassifierTestDataset
-from .FocusDataset import FocusDataset
 from .FocusCNNDataset import FocusCNNDataset
+from .FocusDataset import FocusDataset

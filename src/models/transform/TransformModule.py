@@ -1,6 +1,7 @@
-import torch.nn as nn
-import torch
 from typing import Tuple
+
+import torch
+import torch.nn as nn
 
 
 class TransformModule(nn.Module):

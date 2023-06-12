@@ -1,6 +1,7 @@
-import torch
-from typing import Union, Optional, Dict, Any, Tuple
+from typing import Any, Dict, Optional, Tuple, Union
+
 import pandas as pd
+import torch
 from rich.console import Console
 from rich.table import Table
 

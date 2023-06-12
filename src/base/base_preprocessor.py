@@ -1,6 +1,7 @@
-from utils.logger import setup_logging
 import logging
 import os
+
+from utils.logger import setup_logging
 
 
 class BasePreprocessor(object):

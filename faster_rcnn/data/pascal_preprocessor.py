@@ -1,12 +1,13 @@
-import os
 import argparse
 import json
-import xml.etree.ElementTree as ET
-from typing import Dict, List
-import numpy as np
-from tqdm import tqdm
+import os
 import re
 import shutil
+import xml.etree.ElementTree as ET
+from typing import Dict, List
+
+import numpy as np
+from tqdm import tqdm
 
 
 def get_label2id(labels_path: str) -> Dict[str, int]:

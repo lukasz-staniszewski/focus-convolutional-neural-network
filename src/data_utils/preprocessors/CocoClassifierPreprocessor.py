@@ -1,14 +1,16 @@
-from typing import List, Union
-import PIL
-from base import BasePreprocessor
-import torchvision
-from data_utils.constants import COCO_2017_LABEL_MAP
 import os
-import pandas as pd
 from copy import deepcopy
 from math import floor, inf
+from typing import List, Union
+
 import numpy as np
+import pandas as pd
+import PIL
+import torchvision
 from PIL import Image
+
+from base import BasePreprocessor
+from data_utils.constants import COCO_2017_LABEL_MAP
 
 
 class CocoClassifierPreprocessor(BasePreprocessor):
@@ -26,9 +28,7 @@ class CocoClassifierPreprocessor(BasePreprocessor):
         elif isinstance(kwargs["label_max_sz"], int):
             self.label_max_sz = kwargs["label_max_sz"]
         else:
-            raise ValueError(
-                "Parameter label_max_sz must be int or None."
-            )
+            raise ValueError("Parameter label_max_sz must be int or None.")
 
         self.logger.info(
             f"Starting mapping CocoDetection dataset to memory..."
@@ -58,9 +58,7 @@ class CocoClassifierPreprocessor(BasePreprocessor):
             img = img.resize(self.img_out_shape)
         return img
 
-    def _cut_square(
-        self, image: PIL.Image, bbox: List[int]
-    ) -> PIL.Image:
+    def _cut_square(self, image: PIL.Image, bbox: List[int]) -> PIL.Image:
         """Cuts minimal square that contains bounding box.
 
         Args:
@@ -126,9 +124,7 @@ class CocoClassifierPreprocessor(BasePreprocessor):
                     img_in = self.cut_fn(img_in=img_in, bbox=bbox)
 
                     filename = f"{self.img_idx}.jpg"
-                    img_in.save(
-                        os.path.join(self.img_out_dir_path, filename)
-                    )
+                    img_in.save(os.path.join(self.img_out_dir_path, filename))
                     filenames.append(filename)
 
                     n_imgs_label += 1
@@ -188,9 +184,7 @@ class CocoClassifierPreprocessor(BasePreprocessor):
 
     def _collect_data(self):
         """Function collects data to create dataset."""
-        self.logger.info(
-            f"Starting preprocessing images for label 1..."
-        )
+        self.logger.info(f"Starting preprocessing images for label 1...")
         self.preprocessing_pos = True
         filenames_pos = self.collect_filenames_per_label(self.label_pos)
         y_pos = [1 for _ in range(len(filenames_pos))]
@@ -198,13 +192,9 @@ class CocoClassifierPreprocessor(BasePreprocessor):
 
         if self.label_max_sz == 0:
             self.label_max_sz = len(filenames_pos)
-        self.logger.info(
-            f"Starting preprocessing images for label 0..."
-        )
+        self.logger.info(f"Starting preprocessing images for label 0...")
         self.preprocessing_pos = False
-        filenames_neg = self.collect_filenames_per_label(
-            self.labels_neg
-        )
+        filenames_neg = self.collect_filenames_per_label(self.labels_neg)
         y_neg = [0 for _ in range(len(filenames_neg))]
         self.logger.info(f"Preprocessing label 0 images finished.")
         self.logger.info(

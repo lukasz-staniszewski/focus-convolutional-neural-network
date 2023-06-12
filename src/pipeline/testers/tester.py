@@ -1,10 +1,12 @@
 from pathlib import Path
+
 import pandas as pd
 import torch
-from base import BaseTester, BaseDataLoader
 from tqdm import tqdm
-from utils import MetricTracker
+
+from base import BaseDataLoader, BaseTester
 from pipeline import pipeline_utils
+from utils import MetricTracker
 
 
 class Tester(BaseTester):

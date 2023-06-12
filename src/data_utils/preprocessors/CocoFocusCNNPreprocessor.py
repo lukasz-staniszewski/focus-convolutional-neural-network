@@ -1,15 +1,17 @@
+import os
 from collections import OrderedDict
+from math import log
+
+import cv2
+import numpy as np
+import pandas as pd
+import torchvision
+from PIL import Image
+from tqdm import tqdm
+
+from base import BasePreprocessor
 from base.base_preprocessor import BasePreprocessor
 from data_utils.constants import COCO_2017_LABEL_MAP
-from base import BasePreprocessor
-import torchvision
-import pandas as pd
-import numpy as np
-import os
-from tqdm import tqdm
-from math import log
-import cv2
-from PIL import Image
 
 
 class CocoFocusCNNPreprocessor(BasePreprocessor):

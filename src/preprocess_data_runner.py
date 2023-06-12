@@ -1,7 +1,8 @@
 import argparse
+import os
+
 import data_utils.preprocessors as module_preprocessor
 from utils import ConfigParser
-import os
 from utils.project_utils import read_json
 
 
@@ -22,10 +23,7 @@ def parse_config(args):
     ), f"File not found at path: {config_path}"
     cfg_json = read_json(config_path)
     assert all(
-        [
-            k in cfg_json
-            for k in ["name", "preprocessor", "save_cfg_dir"]
-        ]
+        [k in cfg_json for k in ["name", "preprocessor", "save_cfg_dir"]]
     ), "Invalid config file keys!"
     return ConfigParser.from_args(args=args)
 

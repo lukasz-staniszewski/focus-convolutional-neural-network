@@ -1,10 +1,12 @@
 import argparse
 import collections
+
 import torch
+
 import data_utils.data_loaders as module_data
-import pipeline.trainers as module_trainers
-import pipeline.metrics as module_metric
 import models as module_arch
+import pipeline.metrics as module_metric
+import pipeline.trainers as module_trainers
 from utils import ConfigParser
 from utils.project_utils import prepare_device
 

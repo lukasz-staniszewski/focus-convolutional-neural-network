@@ -1,7 +1,8 @@
 import torch
 from torchvision.utils import make_grid
-from base import BaseTrainer
 from tqdm import tqdm
+
+from base import BaseTrainer
 from pipeline import pipeline_utils
 
 

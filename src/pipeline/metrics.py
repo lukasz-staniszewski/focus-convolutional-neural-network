@@ -1,7 +1,9 @@
-import torch
-from pipeline.pipeline_utils import get_class_cm
-from torchvision.ops import box_iou
 from typing import List
+
+import torch
+from torchvision.ops import box_iou
+
+from pipeline.pipeline_utils import get_class_cm
 
 
 def micro_accuracy(output, target):

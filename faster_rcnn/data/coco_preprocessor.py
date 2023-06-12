@@ -1,8 +1,9 @@
-import numpy as np
-from tqdm import tqdm
-import json
-from pycocotools.coco import COCO
 import argparse
+import json
+
+import numpy as np
+from pycocotools.coco import COCO
+from tqdm import tqdm
 
 
 class CocoPreprocessor:

@@ -1,12 +1,14 @@
+from copy import deepcopy
+from pathlib import Path
+from typing import Any, Dict, Tuple, Union
+
 import pandas as pd
+import torchvision.transforms as T
+
 from data_utils.data_loaders.classifier.BaseClassifierLoader import (
     BaseClassifierLoader,
 )
 from data_utils.data_sets import ClassifierTestDataset
-from typing import Any, Dict, Tuple, Union
-import torchvision.transforms as T
-from pathlib import Path
-from copy import deepcopy
 
 
 class TestClassifierLoader(BaseClassifierLoader):

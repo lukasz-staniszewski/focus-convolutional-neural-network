@@ -1,15 +1,16 @@
+from copy import deepcopy
+from pathlib import Path
+from typing import Dict, Tuple, Union
+
+import pandas as pd
 import torch
+import torchvision.transforms as T
+from sklearn.model_selection import train_test_split
+
 from data_utils.data_loaders.focus_cnn.BaseFocusCNNLoader import (
     BaseFocusCNNLoader,
 )
 from data_utils.data_sets import FocusCNNDataset
-
-from typing import Tuple, Union, Dict
-import torchvision.transforms as T
-import pandas as pd
-from copy import deepcopy
-from pathlib import Path
-from sklearn.model_selection import train_test_split
 
 
 def collate_func(batch):
