@@ -1,0 +1,148 @@
+// {
+//     "name": "CocoFocusCNN",
+//     "device": 1,
+//     "seed": 188,
+//     "save_cfg_dir": "res/focus_cnn/coco_focuscnn/",
+//     "arch": {
+//         "type": "FocusCNN",
+//         "args": {
+//             "classifier_model": {
+//                 "arch": {
+//                     "type": "MultiClassifier",
+//                     "args": {
+//                         "n_classes": 4,
+//                         "backbone": "resnet34"
+//                     }
+//                 },
+//                 "model_checkpoint": "./res/classifiers/coco_classifier_multi/trainer/0116_044824/models/checkpoint-epoch44.pth"
+//             },
+//             "focus_models": [
+//                 {
+//                     "id_cls": 1,
+//                     "arch": {
+//                         "type": "ResFocusNetwork",
+//                         "args": {
+//                             "threshold": 0.5,
+//                             "backbone": "resnet34",
+//                             "loss_lambda_tr": 1,
+//                             "loss_lambda_sc": 1,
+//                             "loss_lambda_rot": 1,
+//                             "inp_img_size": [
+//                                 640,
+//                                 640
+//                             ],
+//                             "loss_rot": false
+//                         }
+//                     },
+//                     "model_checkpoint": "./res/classifiers/coco_classifier_multi/trainer/0219_215726/models/checkpoint-epoch59.pth"
+//                 },
+//                 {
+//                     "id_cls": 2,
+//                     "arch": {
+//                         "type": "ResFocusNetwork",
+//                         "args": {
+//                             "threshold": 0.5,
+//                             "backbone": "resnet34",
+//                             "loss_lambda_tr": 1,
+//                             "loss_lambda_sc": 1,
+//                             "loss_lambda_rot": 1,
+//                             "inp_img_size": [
+//                                 640,
+//                                 640
+//                             ],
+//                             "loss_rot": false
+//                         }
+//                     },
+//                     "model_checkpoint": "/home/ubuntu/focus-convolutional-neural-network/res/focus/coco_focus_car/trainer/0111_050401/models/checkpoint-epoch19.pth"
+//                 },
+//                 {
+//                     "id_cls": 3,
+//                     "arch": {
+//                         "type": "ResFocusNetwork",
+//                         "args": {
+//                             "threshold": 0.5,
+//                             "backbone": "resnet34",
+//                             "loss_lambda_tr": 1,
+//                             "loss_lambda_sc": 1,
+//                             "loss_lambda_rot": 1,
+//                             "inp_img_size": [
+//                                 640,
+//                                 640
+//                             ],
+//                             "loss_rot": false
+//                         }
+//                     },
+//                     "model_checkpoint": "/home/ubuntu/focus-convolutional-neural-network/res/focus/coco_focus_bicycle/trainer/0114_175807/models/checkpoint-epoch56.pth"
+//                 }
+//             ],
+//             "inp_img_size": [
+//                 640,
+//                 640
+//             ],
+//             "out_img_size": [
+//                 300,
+//                 300
+//             ]
+//         }
+//     },
+//     "data_loader": {
+//         "type": "FocusCNNLoader",
+//         "args": {
+//             "images_dir": "data/processed/COCO-2017/CocoFocusCNN/train/images",
+//             "batch_size": 8,
+//             "csv_path": "data/processed/COCO-2017/CocoFocusCNN/train/labels.csv",
+//             "save_out_dir": "res/focus_cnn/coco_focuscnn/trainer/labels/",
+//             "transform_mean": [
+//                 0.4615,
+//                 0.4410,
+//                 0.4051
+//             ],
+//             "transform_std": [
+//                 0.2699,
+//                 0.2703,
+//                 0.2797
+//             ],
+//             "shuffle": true,
+//             "validation_split": 0.15,
+//             "num_workers": 12,
+//             "labels": {
+//                 "0": "none",
+//                 "1": "person",
+//                 "2": "car",
+//                 "3": "bicycle"
+//             },
+//             "tf_image_size": [
+//                 640,
+//                 640
+//             ],
+//             "is_test": false
+//         }
+//     },
+//     "optimizer": {
+//         "type": "SGD",
+//         "args": {
+//             "lr": 1e-4,
+//             "momentum": 0.9,
+//             "weight_decay": 0.0
+//         }
+//     },
+//     // "metrics": [
+//     //     "accuracy",
+//     //     "recall",
+//     //     "precision",
+//     //     "f1_",
+//     //     "mean_iou",
+//     //     "iou50_accuracy"
+//     // ],
+//     "lr_scheduler": null,
+//     "trainer": {
+//         // "type": "FocusCNNTrainer",
+//         "epochs": 100,
+//         "save_dir": "res/focus_cnn/coco_focuscnn/",
+//         "save_period": 1,
+//         "verbosity": 1,
+//         "monitor": "min val_loss",
+//         "early_stop": 12,
+//         "tensorboard": false
+//     }
+// }

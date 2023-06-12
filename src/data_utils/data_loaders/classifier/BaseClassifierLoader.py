@@ -1,5 +1,6 @@
+from typing import Dict, Tuple, Union
+
 from base import BaseDataLoader
-from typing import Tuple, Union, Dict
 
 
 class BaseClassifierLoader(BaseDataLoader):

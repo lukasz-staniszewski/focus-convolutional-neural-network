@@ -1,15 +1,17 @@
-from typing import List
-import PIL
-from base import BasePreprocessor
-import torchvision
-from data_utils.constants import COCO_2017_LABEL_MAP
-from tqdm import tqdm
 import os
-import pandas as pd
 from copy import deepcopy
 from math import floor, inf
+from typing import List
+
 import numpy as np
+import pandas as pd
+import PIL
+import torchvision
 from PIL import Image
+from tqdm import tqdm
+
+from base import BasePreprocessor
+from data_utils.constants import COCO_2017_LABEL_MAP
 
 
 class CocoMultiClassifierPreprocessor(BasePreprocessor):

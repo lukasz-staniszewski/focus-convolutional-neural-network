@@ -2,12 +2,14 @@ import argparse
 import collections
 import json
 from pathlib import Path
+
 import torch
+
 import data_utils.data_loaders as module_data
-import pipeline.metrics as module_metric
 import models as module_arch
-from utils import ConfigParser
+import pipeline.metrics as module_metric
 from pipeline.testers import Tester
+from utils import ConfigParser
 from utils.project_utils import prepare_device
 
 
@@ -76,12 +78,7 @@ if __name__ == "__main__":
             type=int,
             target="data_loader;args;batch_size",
         ),
-        CustomArgs(
-            ["-mp", "--model_path"],
-            type=str,
-            target="model_path"   
-        )
+        CustomArgs(["-mp", "--model_path"], type=str, target="model_path"),
     ]
     config = ConfigParser.from_args(args, options)
     main(config)
-

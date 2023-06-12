@@ -1,14 +1,15 @@
 import argparse
+
+import torch
 from dataloaders import split_dls_coco
+from external.engine import evaluate
 from model import get_faster_rcnn_model
 from trainer import train
-from external.engine import evaluate
-import torch
 
 
 def train_runner(args, model):
     assert args.dataset_type in ["pascal", "coco"], "Invalid dataset type."
-    torch.multiprocessing.set_sharing_strategy('file_system')
+    torch.multiprocessing.set_sharing_strategy("file_system")
 
     dl_train, dl_valid, _ = split_dls_coco(
         train_ann_path=args.ann_train_path,
@@ -34,7 +35,7 @@ def train_runner(args, model):
 
 def test_runner(args, model):
     assert args.model_path is not None, "Model path is required for testing."
-    torch.multiprocessing.set_sharing_strategy('file_system')
+    torch.multiprocessing.set_sharing_strategy("file_system")
 
     device = (
         torch.device("cuda")
@@ -68,7 +69,6 @@ def main(args):
 
     if args.model_path:
         model.load_state_dict(torch.load(args.model_path))
-        
 
     if args.action == "train":
         train_runner(args, model)

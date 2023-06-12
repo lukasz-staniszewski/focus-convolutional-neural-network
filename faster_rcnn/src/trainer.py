@@ -1,6 +1,7 @@
-import torch
-from external.engine import train_one_epoch, evaluate
 import os
+
+import torch
+from external.engine import evaluate, train_one_epoch
 
 
 def save_model(model, model_name_prefix, epoch):

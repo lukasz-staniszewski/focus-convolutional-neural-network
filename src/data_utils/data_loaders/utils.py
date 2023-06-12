@@ -1,12 +1,12 @@
-import pandas as pd
-from pathlib import Path
 from copy import deepcopy
+from pathlib import Path
 from typing import Union
+
+import pandas as pd
 
 
 def label_oversample(
-    csv_path_train_orig: Union[str, Path],
-    column_label: str = "label"
+    csv_path_train_orig: Union[str, Path], column_label: str = "label"
 ) -> Union[str, Path]:
     """Function balances training data using oversampling
     minority classes.
@@ -39,7 +39,7 @@ def label_undersample(
     csv_path_train_orig: Union[str, Path],
     balance_max_multiplicity: int,
     csv_path_train_aug: Union[str, Path] = None,
-    column_label: str = "label"
+    column_label: str = "label",
 ) -> Union[str, Path]:
     """Function balances training data using undersampling
     majority classes.
@@ -88,7 +88,7 @@ def label_undersample(
 def label_make_0_half(
     csv_path_train_orig: Union[str, Path],
     csv_path_train_aug: Union[str, Path] = None,
-    column_label: str = "label"
+    column_label: str = "label",
 ) -> Union[str, Path]:
     """Function balances training data using undersampling majority classes."""
     df_orig = pd.read_csv(csv_path_train_orig, header=0)

@@ -1,8 +1,9 @@
+from typing import Callable, Tuple, Union
+
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 from torch.utils.data.dataloader import default_collate
 from torch.utils.data.sampler import SubsetRandomSampler
-from typing import Callable, Tuple, Union
 
 
 class BaseDataLoader(DataLoader):

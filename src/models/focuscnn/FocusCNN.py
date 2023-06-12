@@ -1,38 +1,30 @@
-from utils.ConfigParser import ConfigParser
-import models as module_arch
-from models import TransformModule
+from collections import OrderedDict
+from typing import Dict, Tuple
+
+import torch
+
 from base import BaseModel
+from models import TransformModule
+from models.classifier.MultiClassifier import MultiClassifier
+from models.focus.ResFocusNetwork import ResFocusNetwork
 from pipeline import loss
 from pipeline.pipeline_utils import convert_tf_params_to_bbox
-from typing import List, Dict, Any, Tuple
-import torch
 
 
 class FocusCNN(BaseModel):
     def __init__(
         self,
-        classifier_model: Dict[str, Any],
-        focus_models: List[Dict[str, Any]],
+        classifier_model: MultiClassifier,
+        focus_models: OrderedDict[str, ResFocusNetwork],
         inp_img_size: Tuple[int, int] = (640, 640),
         out_img_size: Tuple[int, int] = (300, 300),
     ) -> None:
         super().__init__()
         self.inp_img_size = inp_img_size
         self.out_img_size = out_img_size
-        self.classifier_dict = classifier_model
-        self.focus_models_dicts = focus_models
-        self.cfg_parser_cls = ConfigParser(classifier_model)
-        self.cfg_parsers_focus = {
-            f["id_cls"]: ConfigParser(f) for f in focus_models
-        }
-        self.classifier_model = self.cfg_parser_cls.init_obj(
-            "arch", module=module_arch
-        )
-        self.focus_models = {
-            id_cls: parserer.init_obj("arch", module=module_arch)
-            for id_cls, parserer in self.cfg_parsers_focus.items()
-        }
-        self.tf_module = TransformModule(img_out_sz=out_img_size)
+        self.classifier_model = classifier_model
+        self.focus_models = focus_models
+        self.tf_module = TransformModule(image_out_sz=out_img_size)
 
     def get_n_model_params(self) -> str:
         """Function to print number of model trainable parameters.
@@ -40,10 +32,14 @@ class FocusCNN(BaseModel):
         Returns:
             str: model information as string
         """
+
+        def get_n_params(child):
+            return int(child.get_n_model_params()[22:])
+
         all_params = 0
-        all_params += self.classifier.get_n_model_params()
+        all_params += get_n_params(self.classifier)
         for focus_model in self.focus_models.values():
-            all_params += focus_model.get_n_model_params()
+            all_params += get_n_params(focus_model)
         return "Trainable parameters: {}".format(all_params)
 
     def __str__(self) -> str:
@@ -63,32 +59,41 @@ class FocusCNN(BaseModel):
             " params:{}".format(focus_details, str(self.classifier_model))
         )
 
-    def load_model(self, path: str) -> None:
+    def load_model(
+        self,
+        classifier_model_path: str,
+        focus_models_path: OrderedDict[str, str],
+    ) -> None:
         """Loads model from config file.
 
         Args:
-            path (str): UNUSED
+            classifier_model_path (str): path to classifier model checkpoint
+            focus_models_path (Dict[str, str]): dictionary of paths to focus models
         """
-        assert self.classifier_dict["model_checkpoint"] is not None and all(
+        assert classifier_model_path is not None and all(
             [
-                f["model_checkpoint"] is not None
-                for f in self.focus_models_dicts
+                focus_model_path is not None
+                for focus_model_path in focus_models_path.values()
             ]
         ), "Models checkpoint paths are not specified!"
 
+        assert set(focus_models_path.keys()) == set(
+            self.focus_models.keys()
+        ), "Focus models ids are not matching!"
+
         self.classifier_model.load_state_dict(
-            torch.load(self.classifier_dict["model_checkpoint"])
+            torch.load(classifier_model_path)["state_dict"]
         )
-        for focus_model_info in self.focus_models_dicts():
-            self.focus_models[focus_model_info["id_cls"]].load_state_dict(
-                torch.load(focus_model_info["model_checkpoint"])
+        for fm_id, fm_model in self.focus_models.items():
+            fm_model.load_state_dict(
+                torch.load(focus_models_path[fm_id])["state_dict"]
             )
 
     def forward(self, x, target):
-        outs_focus = [
-            focus_model(x, target[cls_idx])
+        outs_focus = {
+            cls_idx: focus_model(x, target[cls_idx])
             for cls_idx, focus_model in self.focus_models.items()
-        ]
+        }
 
         outs_focus_cat = {
             idx_cls: torch.cat(
@@ -121,7 +126,7 @@ class FocusCNN(BaseModel):
             .to(x.device)
         )
 
-        outs_cls = self.classifier_model(inputs_cls, target_cls)
+        outs_cls = self.classifier_model(inputs_cls)
 
         loss_val = loss.cross_entropy_loss(output=outs_cls, target=target_cls)
 
@@ -179,3 +184,15 @@ class FocusCNN(BaseModel):
                     )
 
         return final_out
+
+    def train(self):
+        super().train()
+        self.classifier_model.train()
+        for focus_model in self.focus_models.values():
+            focus_model.train()
+
+    def to(self, device):
+        super().to(device)
+        self.classifier_model.to(device)
+        for focus_model in self.focus_models.values():
+            focus_model.to(device)

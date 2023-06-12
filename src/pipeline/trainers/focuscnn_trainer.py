@@ -1,6 +1,7 @@
 import torch
-from base import BaseTrainer
 from tqdm import tqdm
+
+from base import BaseTrainer
 from pipeline import pipeline_utils
 
 

@@ -1,10 +1,12 @@
+from typing import List, Tuple
+
+import torch
 import torch.nn as nn
+
 from base import BaseModel
 from models.models_utils import assign_backbone
 from pipeline import loss
 from pipeline.pipeline_utils import convert_tf_params_to_bbox
-from typing import Tuple, List
-import torch
 
 
 class ResFocusNetwork(BaseModel):

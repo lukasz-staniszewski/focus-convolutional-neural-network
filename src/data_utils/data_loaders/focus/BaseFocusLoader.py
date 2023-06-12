@@ -1,5 +1,6 @@
+from typing import Callable, Dict, Tuple, Union
+
 from base import BaseDataLoader
-from typing import Tuple, Union, Dict, Callable
 
 
 class BaseFocusLoader(BaseDataLoader):

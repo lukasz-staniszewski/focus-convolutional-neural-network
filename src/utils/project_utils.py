@@ -1,15 +1,16 @@
 import json
-from typing import List, Tuple, Dict, Union
+import os
+import pathlib
+import platform
+import random
+from collections import OrderedDict
+from itertools import repeat
+from pathlib import Path
+from typing import Dict, List, Tuple, Union
+
+import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from pathlib import Path
-from itertools import repeat
-from collections import OrderedDict
-import numpy as np
-import os
-import platform
-import pathlib
-import random
 
 
 def ensure_dir(dirname: Union[str, Path]) -> None:

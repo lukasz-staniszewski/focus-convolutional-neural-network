@@ -1,12 +1,13 @@
-import torch
-from abc import abstractmethod
-from numpy import inf
-from utils.logger import TensorboardWriter
 import os
-from utils import ConfigParser
-from base import BaseModel
-from utils import MetricTracker, secure_load_path, inf_loop
+from abc import abstractmethod
+
 import numpy as np
+import torch
+from numpy import inf
+
+from base import BaseModel
+from utils import ConfigParser, MetricTracker, inf_loop, secure_load_path
+from utils.logger import TensorboardWriter
 
 
 class BaseTrainer:
@@ -232,7 +233,7 @@ class BaseTrainer:
             total = self.len_epoch
 
         return base.format(current, total, 100.0 * current / total)
-    
+
     def cpu_tensors(self, tensors):
         if isinstance(tensors, dict):
             tensors = {k: v.cpu() for (k, v) in tensors.items()}

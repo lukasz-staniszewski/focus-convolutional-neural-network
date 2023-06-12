@@ -1,8 +1,9 @@
-import torch.nn as nn
-from base import BaseModel
 import torch
-from pipeline import loss
+import torch.nn as nn
+
+from base import BaseModel
 from models import models_utils
+from pipeline import loss
 
 
 class MultiClassifier(BaseModel):

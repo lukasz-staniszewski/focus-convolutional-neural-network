@@ -1,11 +1,12 @@
-import torchvision
-from torch.utils.data import Dataset
-import torch
 import os
-import pandas as pd
-from typing import Union, Any
 from pathlib import Path
+from typing import Any, Union
+
+import pandas as pd
+import torch
+import torchvision
 from PIL import Image
+from torch.utils.data import Dataset
 
 
 class ClassifierTestDataset(Dataset):

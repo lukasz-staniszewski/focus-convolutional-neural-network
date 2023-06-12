@@ -1,6 +1,7 @@
-from external import transforms as T, utils
-from datasets import MyCocoDataset
 import torch
+from datasets import MyCocoDataset
+from external import transforms as T
+from external import utils
 
 
 def get_transform(train):
@@ -22,8 +23,8 @@ def split_dls_coco(
     batch_size,
     num_workers=-1,
     validation_split=0.10,
-    seed=0):
-    
+    seed=0,
+):
     # use our dataset and defined transformations
     dataset_train = MyCocoDataset(
         annotation_path=train_ann_path,
@@ -40,17 +41,16 @@ def split_dls_coco(
         images_dir=test_img_dir,
         transforms=get_transform(train=False),
     )
-    
-    return split_train_test_valid_dls(
-        dataset_train = dataset_train,
-        dataset_validate = dataset_validate,
-        dataset_test = dataset_test,
-        batch_size = batch_size,
-        num_workers = num_workers,
-        validation_split = validation_split,
-        seed = seed,
-    )
 
+    return split_train_test_valid_dls(
+        dataset_train=dataset_train,
+        dataset_validate=dataset_validate,
+        dataset_test=dataset_test,
+        batch_size=batch_size,
+        num_workers=num_workers,
+        validation_split=validation_split,
+        seed=seed,
+    )
 
 
 def split_train_test_valid_dls(

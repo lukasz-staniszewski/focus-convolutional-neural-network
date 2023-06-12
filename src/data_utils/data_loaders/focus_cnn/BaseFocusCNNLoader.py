@@ -1,5 +1,6 @@
+from typing import Callable, Dict, Tuple, Union
+
 from base import BaseDataLoader
-from typing import Tuple, Union, Dict, Callable
 
 
 class BaseFocusCNNLoader(BaseDataLoader):
@@ -26,7 +27,9 @@ class BaseFocusCNNLoader(BaseDataLoader):
         self.images_dir = images_dir
         self.is_test = is_test
         self.labels = labels
-        self.is_multilabel = len(self.labels.keys()) > 2 if self.labels else None
+        self.is_multilabel = (
+            len(self.labels.keys()) > 2 if self.labels else None
+        )
 
         assert (
             csv_path is not None or is_test

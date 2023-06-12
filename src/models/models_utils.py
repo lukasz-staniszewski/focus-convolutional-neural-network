@@ -1,7 +1,7 @@
 from torchvision import models
 from torchvision.models import (
-    ResNet34_Weights,
     ResNet18_Weights,
+    ResNet34_Weights,
     ResNet50_Weights,
 )
 

@@ -1,16 +1,17 @@
-import random
-from base.base_preprocessor import BasePreprocessor
-from PIL import Image, ImageOps
-from data_utils.constants import COCO_2017_LABEL_MAP
-from base import BasePreprocessor
-from math import inf
-import torchvision
-import pandas as pd
-import numpy as np
 import os
-from tqdm import tqdm
-from math import log
+import random
+from math import inf, log
+
 import cv2
+import numpy as np
+import pandas as pd
+import torchvision
+from PIL import Image, ImageOps
+from tqdm import tqdm
+
+from base import BasePreprocessor
+from base.base_preprocessor import BasePreprocessor
+from data_utils.constants import COCO_2017_LABEL_MAP
 
 
 class CocoFocusPreprocessor(BasePreprocessor):
