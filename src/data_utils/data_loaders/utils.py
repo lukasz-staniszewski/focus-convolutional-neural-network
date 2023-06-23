@@ -20,7 +20,7 @@ def label_oversample(
     ).astype(int)
 
     dfs_aug = []
-    for label, cnt in aug_labels_cnt.iteritems():
+    for label, cnt in aug_labels_cnt.items():
         dfs_aug.append(
             df_orig[df_orig[column_label] == label].sample(
                 cnt, replace=False, random_state=0
@@ -62,7 +62,7 @@ def label_undersample(
     ):
         df_undersampled = deepcopy(df_orig)
         min_cnt = new_label_cnt.min()
-        for label, cnt in new_label_cnt.iteritems():
+        for label, cnt in new_label_cnt.items():
             if cnt / max(min_cnt, 1) > balance_max_multiplicity:
                 df_undersampled = df_undersampled.drop(
                     df_undersampled[df_undersampled[column_label] == label]

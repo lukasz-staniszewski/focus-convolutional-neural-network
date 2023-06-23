@@ -6,8 +6,7 @@ import torch
 from numpy import inf
 
 from base import BaseModel
-from utils import ConfigParser, MetricTracker, inf_loop, secure_load_path
-from utils.logger import TensorboardWriter
+from utils import ConfigParser, MetricTrackerV2, inf_loop, secure_load_path
 
 
 class BaseTrainer:
@@ -68,19 +67,12 @@ class BaseTrainer:
             self.early_stop = self.cfg_trainer.get("early_stop", inf)
             if self.early_stop <= 0:
                 self.early_stop = inf
-        self.writer = TensorboardWriter(
-            self.config.log_dir, self.logger, self.cfg_trainer["tensorboard"]
-        )
-        self.train_metrics = MetricTracker(
-            "loss",
-            *[m.__name__ for m in self.metric_ftns],
-            writer=self.writer,
+        self.train_metrics = MetricTrackerV2(
+            metrics_handlers=self.metric_ftns,
         )
         if self.do_validation:
-            self.valid_metrics = MetricTracker(
-                "loss",
-                *[m.__name__ for m in self.metric_ftns],
-                writer=self.writer,
+            self.valid_metrics = MetricTrackerV2(
+                metrics_handlers=self.metric_ftns,
             )
 
     def _configure_dataloaders(self):

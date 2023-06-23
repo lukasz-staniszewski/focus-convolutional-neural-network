@@ -88,7 +88,6 @@ class FocusTrainer(BaseTrainer):
 
             pbar_loss = loss.item()
 
-            self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
             for loss_name, loss_val in loss_dict.items():
                 self.train_metrics.update(loss_name, loss_val.item())
 
@@ -105,14 +104,7 @@ class FocusTrainer(BaseTrainer):
                         epoch, self._progress(batch_idx), loss.item()
                     )
                 )
-                # self.writer.add_image(
-                #     "input",
-                #     make_grid(
-                #         pipeline_utils.cpu_tensors(data_in),
-                #         nrow=8,
-                #         normalize=True,
-                #     ),
-                # )
+
             if batch_idx == self.len_epoch:
                 break
 
@@ -163,10 +155,6 @@ class FocusTrainer(BaseTrainer):
                 loss = loss_dict["loss"]
                 pbar_loss = loss.item()
 
-                self.writer.set_step(
-                    (epoch - 1) * len(self.valid_data_loader) + batch_idx,
-                    "valid",
-                )
                 for loss_name, loss_val in loss_dict.items():
                     self.valid_metrics.update(loss_name, loss_val.item())
                 preds = self.model.get_prediction(output, target)
@@ -175,18 +163,5 @@ class FocusTrainer(BaseTrainer):
 
                 for met in self.metric_ftns:
                     self.valid_metrics.update(met.__name__, met(preds, target))
-
-                # self.writer.add_image(
-                #     "input",
-                #     make_grid(
-                #         pipeline_utils.cpu_tensors(data_in),
-                #         nrow=8,
-                #         normalize=True,
-                #     ),
-                # )
-
-        # adding histogram of model parameters to the tensorboard
-        # for name, p in self.model.named_parameters():
-        #     self.writer.add_histogram(name, p, bins="auto")
 
         return self.valid_metrics.result()
