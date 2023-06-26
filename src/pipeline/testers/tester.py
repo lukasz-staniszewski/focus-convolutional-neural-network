@@ -60,10 +60,14 @@ class Tester(BaseTester):
 
         with torch.no_grad():
             for data in progress_bar:
-                data = data.to(self.device)
+                data = pipeline_utils.move_tensors_to_device(
+                    data, device=self.device
+                )
                 output = self.model(data).squeeze()
                 output = self.model.get_prediction(output)
-                predictions.append(output.cpu())
+                predictions.append(
+                    pipeline_utils.move_tensors_to_device(output, device="cpu")
+                )
 
         predictions = torch.cat(predictions).numpy()
         self.data_loader.to_csv(
@@ -74,18 +78,19 @@ class Tester(BaseTester):
     def _calculate_metrics(self) -> None:
         """Metrics calculation logic."""
         targets = self.data_loader.get_targets()
+        targets = torch.Tensor(targets)
+        targets = pipeline_utils.move_tensors_to_device(targets, device="cpu")
+
         df_preds = pd.read_csv(self.predictions_path)
         assert (
             "label" in df_preds.columns
         ), "Predictions file does not contain label column!"
+        preds = torch.Tensor(df_preds["label"])
+        preds = pipeline_utils.move_tensors_to_device(preds, device="cpu")
 
         self.test_metrics.update_batch(
-            batch_model_outputs=pipeline_utils.cpu_tensors(
-                torch.Tensor(df_preds["label"])
-            ),
-            batch_expected_outputs=pipeline_utils.cpu_tensors(
-                torch.Tensor(targets)
-            ),
+            batch_model_outputs=preds,
+            batch_expected_outputs=targets,
         )
 
         self.logger.info(
@@ -95,7 +100,7 @@ class Tester(BaseTester):
         if self.data_loader.is_multilabel:
             pipeline_utils.print_per_class_metrics(
                 targets=targets,
-                predictions=df_preds["label"],
+                predictions=preds,
                 cls_map=self.data_loader.labels,
                 logger=self.logger,
             )

@@ -226,15 +226,6 @@ class BaseTrainer:
 
         return base.format(current, total, 100.0 * current / total)
 
-    def cpu_tensors(self, tensors):
-        if isinstance(tensors, dict):
-            tensors = {k: v.cpu() for (k, v) in tensors.items()}
-        elif isinstance(tensors, tuple):
-            tensors = tuple([t.cpu() for t in tensors])
-        else:
-            tensors = tensors.cpu()
-        return tensors
-
     @abstractmethod
     def _train_epoch(self, epoch: int) -> None:
         """Training logic for an epoch

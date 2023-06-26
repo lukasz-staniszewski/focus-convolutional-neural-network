@@ -56,7 +56,9 @@ class MetricTrackerV2:
             self._concatenate_outputs()
         self._data = {}
         if len(self.model_losses) > 0:
-            self._data["loss"] = sum(self.model_losses) / len(self.model_losses)
+            self._data["loss"] = sum(self.model_losses) / len(
+                self.model_losses
+            )
         for metric in tqdm(self.metrics_handlers):
             self._data[metric.__name__] = metric(
                 output=self.model_outputs, target=self.expected_outputs

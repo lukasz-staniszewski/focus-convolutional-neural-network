@@ -81,8 +81,12 @@ class Trainer(BaseTrainer):
 
             output = self.model.get_prediction(output)
 
-            target = pipeline_utils.cpu_tensors(target)
-            output = pipeline_utils.cpu_tensors(output)
+            target = pipeline_utils.move_tensors_to_device(
+                target, device="cpu"
+            )
+            output = pipeline_utils.move_tensors_to_device(
+                output, device="cpu"
+            )
 
             self.train_metrics.update_batch(
                 batch_model_outputs=output,
@@ -143,8 +147,12 @@ class Trainer(BaseTrainer):
 
                 output = self.model.get_prediction(output)
 
-                output = pipeline_utils.cpu_tensors(output)
-                target = pipeline_utils.cpu_tensors(target)
+                output = pipeline_utils.move_tensors_to_device(
+                    output, device="cpu"
+                )
+                target = pipeline_utils.move_tensors_to_device(
+                    target, device="cpu"
+                )
 
                 self.valid_metrics.update_batch(
                     batch_model_outputs=output,
