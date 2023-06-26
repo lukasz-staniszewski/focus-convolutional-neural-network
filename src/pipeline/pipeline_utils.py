@@ -17,7 +17,7 @@ def print_per_class_metrics(
         targets = torch.Tensor(targets)
     if isinstance(predictions, pd.Series):
         predictions = torch.Tensor(predictions)
-    targets, predictions = targets.cpu(), predictions.cpu()
+    targets, predictions = cpu_tensors(targets), cpu_tensors(predictions)
 
     TP, FP, FN, TN = get_class_cm(output=predictions, target=targets)
 

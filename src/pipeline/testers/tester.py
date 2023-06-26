@@ -6,7 +6,6 @@ from tqdm import tqdm
 
 from base import BaseDataLoader, BaseTester
 from pipeline import pipeline_utils
-from utils import MetricTracker
 
 
 class Tester(BaseTester):
@@ -41,11 +40,6 @@ class Tester(BaseTester):
         self.device = device
         self.data_loader = data_loader
         self.test_data_loader = self.data_loader.get_test_loader()
-
-        self.test_metrics = MetricTracker(
-            *[m.__name__ for m in self.metric_ftns],
-            writer=None,
-        )
 
         self.predictions_path = (
             Path(self.config.save_cfg_dir) / "predictions.csv"
@@ -85,14 +79,14 @@ class Tester(BaseTester):
             "label" in df_preds.columns
         ), "Predictions file does not contain label column!"
 
-        for met in self.metric_ftns:
-            self.test_metrics.update(
-                met.__name__,
-                met(
-                    torch.Tensor(df_preds["label"]).to(self.device),
-                    torch.Tensor(targets).to(self.device),
-                ),
-            )
+        self.test_metrics.update_batch(
+            batch_model_outputs=pipeline_utils.cpu_tensors(
+                torch.Tensor(df_preds["label"])
+            ),
+            batch_expected_outputs=pipeline_utils.cpu_tensors(
+                torch.Tensor(targets)
+            ),
+        )
 
         self.logger.info(
             f"Common metrics summary:\n{self.test_metrics.result()}"

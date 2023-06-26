@@ -38,12 +38,13 @@ class MetricTrackerV2:
         self,
         batch_model_outputs: List[Any],
         batch_expected_outputs: List[Any],
-        batch_loss: float,
+        batch_loss: float = None,
     ) -> None:
         """Updates both model outputs and expected outputs for epoch per batch."""
         self.model_outputs.append(batch_model_outputs)
         self.expected_outputs.append(batch_expected_outputs)
-        self.model_losses.append(batch_loss)
+        if batch_loss is not None:
+            self.model_losses.append(batch_loss)
 
     def result(self) -> Dict:
         """Returns the average value of all metrics.
@@ -54,7 +55,8 @@ class MetricTrackerV2:
         if isinstance(self.model_outputs, List):
             self._concatenate_outputs()
         self._data = {}
-        self._data["loss"] = sum(self.model_losses) / len(self.model_losses)
+        if len(self.model_losses) > 0:
+            self._data["loss"] = sum(self.model_losses) / len(self.model_losses)
         for metric in tqdm(self.metrics_handlers):
             self._data[metric.__name__] = metric(
                 output=self.model_outputs, target=self.expected_outputs

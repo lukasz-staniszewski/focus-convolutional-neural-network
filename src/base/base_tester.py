@@ -3,7 +3,7 @@ from abc import abstractmethod
 import torch
 
 from base import BaseModel
-from utils import ConfigParser
+from utils import ConfigParser, MetricTrackerV2
 from utils.project_utils import secure_load_path
 
 
@@ -25,6 +25,13 @@ class BaseTester:
         self.metric_ftns = metric_ftns
         self.only_predict = only_predict
         self._load_from_checkpoint(config["model_path"])
+
+        if not self.only_predict:
+            self._configure_metrics()
+
+    def _configure_metrics(self):
+        """Configures metrics."""
+        self.test_metrics = MetricTrackerV2(metrics_handlers=self.metric_ftns)
 
     @abstractmethod
     def _predict(self) -> None:
