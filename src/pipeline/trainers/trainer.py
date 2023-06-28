@@ -69,8 +69,8 @@ class Trainer(BaseTrainer):
         for batch_idx, (data, target) in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
 
-            data = pipeline_utils.move_tensors_to_device(data, self.device)
-            target = pipeline_utils.move_tensors_to_device(target, self.device)
+            data = pipeline_utils.to_device(data, self.device)
+            target = pipeline_utils.to_device(target, self.device)
             self.optimizer.zero_grad()
 
             output = self.model(data).squeeze()
@@ -81,12 +81,8 @@ class Trainer(BaseTrainer):
 
             output = self.model.get_prediction(output)
 
-            target = pipeline_utils.move_tensors_to_device(
-                target, device="cpu"
-            )
-            output = pipeline_utils.move_tensors_to_device(
-                output, device="cpu"
-            )
+            target = pipeline_utils.to_device(target, device="cpu")
+            output = pipeline_utils.to_device(output, device="cpu")
 
             self.train_metrics.update_batch(
                 batch_model_outputs=output,
@@ -136,10 +132,8 @@ class Trainer(BaseTrainer):
             for batch_idx, (data, target) in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
 
-                data = pipeline_utils.move_tensors_to_device(data, self.device)
-                target = pipeline_utils.move_tensors_to_device(
-                    target, self.device
-                )
+                data = pipeline_utils.to_device(data, self.device)
+                target = pipeline_utils.to_device(target, self.device)
 
                 output = self.model(data).squeeze()
                 loss = self.calc_loss(output, target)
@@ -147,12 +141,8 @@ class Trainer(BaseTrainer):
 
                 output = self.model.get_prediction(output)
 
-                output = pipeline_utils.move_tensors_to_device(
-                    output, device="cpu"
-                )
-                target = pipeline_utils.move_tensors_to_device(
-                    target, device="cpu"
-                )
+                output = pipeline_utils.to_device(output, device="cpu")
+                target = pipeline_utils.to_device(target, device="cpu")
 
                 self.valid_metrics.update_batch(
                     batch_model_outputs=output,

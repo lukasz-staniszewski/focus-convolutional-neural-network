@@ -17,9 +17,9 @@ def print_per_class_metrics(
         targets = torch.Tensor(targets)
     if isinstance(predictions, pd.Series):
         predictions = torch.Tensor(predictions)
-    targets, predictions = move_tensors_to_device(
-        targets, device="cpu"
-    ), move_tensors_to_device(predictions, device="cpu")
+    targets, predictions = to_device(targets, device="cpu"), to_device(
+        predictions, device="cpu"
+    )
 
     TP, FP, FN, TN = get_class_cm(output=predictions, target=targets)
 
@@ -94,37 +94,37 @@ def get_class_cm(output, target):
     return TP, FP, FN, TN
 
 
-def move_tensors_to_device(tensors, device, dict_columns=None):
-    # is just tensor
-    if torch.is_tensor(tensors):
-        return tensors.to(device)
-    # is tuple
-    elif isinstance(tensors, tuple):
-        return tuple(
-            move_tensors_to_device(
-                tensors=tens, device=device, dict_columns=dict_columns
-            )
-            for tens in tensors
-        )
-    # is dict
-    elif isinstance(tensors, dict):
-        # is dict contains tensors as values
-        if torch.is_tensor(list(tensors.values())[0]) and dict_columns:
+def to_device(tensors, device, remove_keys=[]):
+    def _remove_keys(rem_tensors, rem_keys):
+        if isinstance(rem_tensors, dict):
             return {
-                k: move_tensors_to_device(
-                    tensors=v, device=device, dict_columns=dict_columns
-                )
-                if k in dict_columns
-                else v
-                for (k, v) in tensors.items()
+                k: _remove_keys(v, rem_keys)
+                for k, v in rem_tensors.items()
+                if k not in rem_keys
             }
-        # is dict contains not tensors as values
+        elif isinstance(rem_tensors, tuple):
+            return tuple(_remove_keys(tens, rem_keys) for tens in rem_tensors)
+        elif torch.is_tensor(rem_tensors):
+            return rem_tensors
         else:
+            raise ValueError("Unknown type in TO_DEVICE_REMOVE_KEYS")
+
+    def _move_tensors(move_tensors, move_device):
+        if torch.is_tensor(move_tensors):
+            return move_tensors.to(move_device)
+        elif isinstance(move_tensors, tuple):
+            return tuple(
+                _move_tensors(tens, move_device) for tens in move_tensors
+            )
+        elif isinstance(move_tensors, dict):
             return {
-                k: move_tensors_to_device(
-                    tensors=v, device=device, dict_columns=dict_columns
-                )
-                for (k, v) in tensors.items()
+                k: _move_tensors(v, move_device)
+                for k, v in move_tensors.items()
             }
-    else:
-        return tensors
+        else:
+            raise ValueError("Unknown type in TO_DEVICE_MOVE_TENSORS")
+
+    if len(remove_keys) > 0:
+        tensors = _remove_keys(rem_tensors=tensors, rem_keys=remove_keys)
+
+    return _move_tensors(move_tensors=tensors, move_device=device)

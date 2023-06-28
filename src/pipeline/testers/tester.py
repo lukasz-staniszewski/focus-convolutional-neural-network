@@ -60,13 +60,11 @@ class Tester(BaseTester):
 
         with torch.no_grad():
             for data in progress_bar:
-                data = pipeline_utils.move_tensors_to_device(
-                    data, device=self.device
-                )
+                data = pipeline_utils.to_device(data, device=self.device)
                 output = self.model(data).squeeze()
                 output = self.model.get_prediction(output)
                 predictions.append(
-                    pipeline_utils.move_tensors_to_device(output, device="cpu")
+                    pipeline_utils.to_device(output, device="cpu")
                 )
 
         predictions = torch.cat(predictions).numpy()
@@ -79,14 +77,14 @@ class Tester(BaseTester):
         """Metrics calculation logic."""
         targets = self.data_loader.get_targets()
         targets = torch.Tensor(targets)
-        targets = pipeline_utils.move_tensors_to_device(targets, device="cpu")
+        targets = pipeline_utils.to_device(targets, device="cpu")
 
         df_preds = pd.read_csv(self.predictions_path)
         assert (
             "label" in df_preds.columns
         ), "Predictions file does not contain label column!"
         preds = torch.Tensor(df_preds["label"])
-        preds = pipeline_utils.move_tensors_to_device(preds, device="cpu")
+        preds = pipeline_utils.to_device(preds, device="cpu")
 
         self.test_metrics.update_batch(
             batch_model_outputs=preds,
