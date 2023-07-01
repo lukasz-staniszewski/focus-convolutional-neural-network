@@ -20,9 +20,9 @@
     "data_loader": {
         "type": "FocusLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoCarFocus/train_without_rot/images",
-            "batch_size": 24,
-            "csv_path": "data/processed/COCO-2017/CocoCarFocus/train_without_rot/labels.csv",
+            "images_dir": "data/processed/COCO-2017/CocoCarFocus/train/images",
+            "batch_size": 32,
+            "csv_path": "data/processed/COCO-2017/CocoCarFocus/train/labels.csv",
             "save_out_dir": "res/focus/coco_focus_car/trainer/labels/",
             "transform_mean": [
                 0.4572,
@@ -35,8 +35,8 @@
                 0.2712
             ],
             "shuffle": true,
-            "validation_split": 0.15,
-            "num_workers": 4,
+            "validation_split": 0.10,
+            "num_workers": 12,
             "labels": {
                 "0": "none",
                 "1": "car"
@@ -77,7 +77,7 @@
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",
-        "early_stop": 15,
+        "early_stop": 10,
         "tensorboard": false
     }
 }
