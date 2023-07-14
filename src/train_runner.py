@@ -28,6 +28,7 @@ def main(config: ConfigParser) -> None:
     model = model.to(device)
     if len(device_ids) > 1:
         model = torch.nn.DataParallel(model, device_ids=device_ids)
+    model = torch.compile(model)
 
     # function handles metrics
     metrics = [getattr(module_metric, met) for met in config["metrics"]]

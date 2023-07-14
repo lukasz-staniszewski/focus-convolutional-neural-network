@@ -5,10 +5,10 @@
         "args": {
             "img_in_dir_path": "data/raw/COCO-2017/train/",
             "ann_file_path": "data/raw/COCO-2017/annotations/instances_train2017.json",
-            "out_dir_path": "data/processed/COCO-2017/CocoBicycleFocus/train/",
+            "out_dir_path": "data/processed/COCO-2017/CocoBicycleFocus/train_without_rot/",
             "label_pos": "bicycle",
             "labels_neg": null,
-            "enable_rotation": true,
+            "enable_rotation": false,
             "max_input_size": [
                 640,
                 640
@@ -22,7 +22,7 @@
     },
     "preprocess": {
         "verbosity": 1,
-        "save_dir": "data/processed/COCO-2017/CocoBicycleFocus/train/"
+        "save_dir": "data/processed/COCO-2017/CocoBicycleFocus/train_without_rot/"
     },
     "seed": 42
 }
