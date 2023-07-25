@@ -15,11 +15,11 @@ from data_utils.data_sets import FocusCNNDataset
 
 def collate_func(batch):
     images = torch.stack([item["image"] for item in batch])
-    image_id = torch.Tensor([item["image_id"] for item in batch])
+    image_id = torch.LongTensor([item["image_id"] for item in batch])
     outputs = {cls: {} for cls in batch[0]["outs"].keys()}
     for key in outputs.keys():
         outputs[key] = {
-            "label": torch.Tensor(
+            "label": torch.LongTensor(
                 [item["outs"][key]["label"] for item in batch]
             ),
             "transform": torch.stack(

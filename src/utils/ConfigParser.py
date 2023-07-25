@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import logging
+from copy import deepcopy
 from argparse import Namespace
 from datetime import datetime
 from functools import partial, reduce
 from operator import getitem
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+import models as module_arch
 
 from utils.logger import setup_logging
 from utils.project_utils import read_json, set_seed, write_json
@@ -32,7 +34,8 @@ class ConfigParser:
         """
         self._config = _update_config(config, modification)
         self.resume = resume
-        self.experiment_name = self._config["name"]
+        if "name" in self._config.keys():
+            self.experiment_name = self._config["name"]
 
         if "trainer" in self._config.keys():
             self.init_process(process_name="trainer", run_id=run_id)
@@ -40,8 +43,10 @@ class ConfigParser:
             self.init_process(process_name="tester", run_id=run_id)
         elif "preprocess" in self._config.keys():
             self.init_process(process_name="preprocess", run_id=run_id)
-
-        write_json(self.config, self._save_cfg_dir / "config.json")
+        else:
+            self._save_cfg_dir = None
+        if self._save_cfg_dir is not None:
+            write_json(self.config, self._save_cfg_dir / "config.json")
 
     @classmethod
     def from_args(cls, args: Any, options: Any = "") -> ConfigParser:
@@ -78,6 +83,17 @@ class ConfigParser:
             modification=modification,
         )
 
+    def _update_dict_arguments(self, args: Dict) -> Dict:
+        new_args = deepcopy(args)
+        for k, v in args.items():
+            if isinstance(v, dict) and "arch" in v.keys():
+                new_args[k] = ConfigParser(v).init_obj("arch", module_arch)
+            elif isinstance(v, dict):
+                new_args[k] = self._update_dict_arguments(v)
+            else:
+                new_args[k] = v
+        return new_args
+
     def init_obj(self, name: str, module: Any, *args, **kwargs) -> Any:
         """Finds a function handle with the name given as 'type' in config, and returns the
         instance initialized with corresponding arguments given.
@@ -94,6 +110,8 @@ class ConfigParser:
         assert all(
             [k not in module_args for k in kwargs]
         ), "Overwriting kwargs given in config file is not allowed"
+
+        module_args = self._update_dict_arguments(module_args)
         module_args.update(kwargs)
 
         return getattr(module, module_name)(*args, **module_args)

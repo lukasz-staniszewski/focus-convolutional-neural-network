@@ -1,8 +1,10 @@
 import torch
 from tqdm import tqdm
+import os
 
 from base import BaseTrainer
 from pipeline import pipeline_utils
+from utils import secure_load_path
 
 
 class FocusCNNTrainer(BaseTrainer):
@@ -68,38 +70,37 @@ class FocusCNNTrainer(BaseTrainer):
         for batch_idx, data in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
 
-            data_in = pipeline_utils.move_tensors_to_device(
-                data[0], device=self.device
-            )
-            img_ids = pipeline_utils.move_tensors_to_device(
-                data[1], device=self.device
-            )
-            target = pipeline_utils.move_tensors_to_device(
+            data_in = pipeline_utils.to_device(data[0], device=self.device)
+            target = pipeline_utils.to_device(
                 data[2],
                 device=self.device,
-                dict_columns=["label", "transform"],
             )
 
             output = self.model(data_in, target)
             loss = output["loss"]
             self.optimizer.zero_grad()
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1)
             loss.backward()
             self.optimizer.step()
 
             pbar_loss = loss.item()
 
-            self.train_metrics.update("loss", loss.item())
+            output = pipeline_utils.to_device(output, device="cpu")
+            preds = self.model.get_predictions(output=output, img_ids=data[1])
 
-            preds = self.model.get_prediction(output, img_ids)
+            predictions = {}
+            targets = {}
+            predictions["cls_focuscnn"] = preds["cls_predictions"]
+            predictions["map_focuscnn"] = preds["map_predictions"]
+            targets["cls_focuscnn"] = output["target_cls"]
+            targets["map_focuscnn"] = self.model.prepare_target_for_map(
+                target_bboxes=data[3], target_image_ids=data[1]
+            )
 
-            # TODO: create input for map metric
-
-            preds = pipeline_utils.cpu_tensors(preds)
-            target = pipeline_utils.cpu_tensors(target)
-
-            for met in self.metric_ftns:
-                self.train_metrics.update(met.__name__, met(preds, target))
+            self.train_metrics.update_batch(
+                batch_model_outputs=predictions,
+                batch_expected_outputs=targets,
+                batch_loss=pbar_loss,
+            )
 
             if batch_idx % self.log_step == 0:
                 self.logger.debug(
@@ -142,29 +143,136 @@ class FocusCNNTrainer(BaseTrainer):
         with torch.no_grad():
             for batch_idx, data in progress_bar:
                 progress_bar.set_postfix({"loss": pbar_loss})
-                data_in = pipeline_utils.move_tensors_to_device(
-                    data[0], device=self.device
-                )
-                img_ids = pipeline_utils.move_tensors_to_device(
-                    data[1], device=self.device
-                )
-                target = pipeline_utils.move_tensors_to_device(
+
+                data_in = pipeline_utils.to_device(data[0], device=self.device)
+                target = pipeline_utils.to_device(
                     data[2],
                     device=self.device,
-                    dict_columns=["label", "transform"],
                 )
+
                 output = self.model(data_in, target)
-                loss_val = output["loss"]
-                pbar_loss = loss_val.item()
+                loss = output["loss"]
+                pbar_loss = loss.item()
 
-                self.valid_metrics.update("val_loss", loss_val.item())
-                preds = self.model.get_prediction(output, img_ids)
+                output = pipeline_utils.to_device(output, device="cpu")
+                preds = self.model.get_predictions(
+                    output=output, img_ids=data[1]
+                )
 
-                # here also for map metric
-                preds = pipeline_utils.cpu_tensors(preds)
-                target = pipeline_utils.cpu_tensors(target)
+                predictions = {}
+                targets = {}
+                predictions["cls_focuscnn"] = preds["cls_predictions"]
+                predictions["map_focuscnn"] = preds["map_predictions"]
+                targets["cls_focuscnn"] = output["target_cls"]
+                targets["map_focuscnn"] = self.model.prepare_target_for_map(
+                    target_bboxes=data[3], target_image_ids=data[1]
+                )
 
-                for met in self.metric_ftns:
-                    self.valid_metrics.update(met.__name__, met(preds, target))
+                self.valid_metrics.update_batch(
+                    batch_model_outputs=predictions,
+                    batch_expected_outputs=targets,
+                    batch_loss=pbar_loss,
+                )
 
         return self.valid_metrics.result()
+
+    def _save_checkpoint(self, epoch: int, save_as_best: bool = False) -> None:
+        """By default saves checkpoint of path. If save_as_best is True, saves checkpoint as best.
+        Args:
+            epoch (int): current epoch number
+            save_as_best (bool): if True, saves checkpoint as best; defaults to False
+        """
+        # classifier
+        classifier_arch = type(self.classifier_model).__name__
+        classifier_state_dict = self.classifier_model.state_dict()
+
+        focus_state = {
+            fm_id: {
+                "arch": type(fm_model).__name__,
+                "state_dict": fm_model.state_dict(),
+            }
+            for fm_id, fm_model in self.focus_models.items()
+        }
+
+        state = {
+            "classifier": {
+                "arch": classifier_arch,
+                "state_dict": classifier_state_dict,
+            },
+            "focus_models": focus_state,
+            "epoch": epoch,
+            "optimizer": self.optimizer.state_dict(),
+            "monitor_best": self.mnt_best,
+            "config": self.config,
+        }
+        if save_as_best:
+            path = os.path.join(self.checkpoint_dir / "model_best.pth")
+            log_info = "Saving current best: model_best.pth ..."
+        else:
+            path = os.path.join(
+                self.checkpoint_dir, f"checkpoint-epoch{epoch}.pth"
+            )
+            log_info = "Saving checkpoint: {} ...".format(path)
+
+        torch.save(state, path)
+        self.logger.info(log_info)
+
+    def _resume_checkpoint(self, resume_path: str) -> None:
+        """Resumes from saved checkpoint.
+
+        Args:
+            resume_path (str): checkpoint path to be resumed
+        """
+        self.logger.info("Loading checkpoint: {} ...".format(resume_path))
+        secure_load_path()
+        checkpoint = torch.load(resume_path)
+        self.start_epoch = checkpoint["epoch"] + 1
+        self.mnt_best = checkpoint["monitor_best"]
+
+        if (
+            checkpoint["config"]["classifier"]["arch"]
+            != self.config["classifier"]["arch"]
+        ):
+            self.logger.warning(
+                "Warning: Architecture config given in file differs"
+                " from the one of checkpoint. This may cause errors"
+                " while state_dict is being loaded if differences"
+                " are not caused by loss parameters."
+            )
+        # load architecture params from checkpoint.
+        self.classifier_model.load_state_dict(
+            checkpoint["classifier"]["state_dict"]
+        )
+
+        for focus_model_id in checkpoint["config"]["focus_models"].keys():
+            if (
+                checkpoint["config"]["focus_models"][focus_model_id]["arch"]
+                != self.config["focus_models"][focus_model_id]["arch"]
+            ):
+                self.logger.warning(
+                    "Warning: Architecture config given in file differs"
+                    " from the one of checkpoint. This may cause errors"
+                    " while state_dict is being loaded if differences"
+                    " are not caused by loss parameters."
+                )
+            self.focus_models[focus_model_id].load_state_dict(
+                checkpoint["focus_models"][focus_model_id]["state_dict"]
+            )
+
+        if (
+            checkpoint["config"]["optimizer"]["type"]
+            != self.config["optimizer"]["type"]
+        ):
+            self.logger.warning(
+                "Warning: Optimizer type given in config file is"
+                " different from that of checkpoint. Optimizer"
+                " parameters can't be resumed."
+            )
+        else:
+            self.optimizer.load_state_dict(checkpoint["optimizer"])
+
+        self.logger.info(
+            "Checkpoint loaded. Resuming training from epoch {}".format(
+                self.start_epoch
+            )
+        )
