@@ -27,18 +27,25 @@ class MetricTrackerV2:
             self.model_outputs = torch.cat(self.model_outputs)
             self.expected_outputs = torch.cat(self.expected_outputs)
         elif isinstance(self.model_outputs[0], dict):
-            self.model_outputs = {
-                output_name: torch.cat(
-                    [output[output_name] for output in self.model_outputs]
-                )
-                for output_name in self.model_outputs[0].keys()
-            }
-            self.expected_outputs = {
-                output_name: torch.cat(
-                    [output[output_name] for output in self.expected_outputs]
-                )
-                for output_name in self.expected_outputs[0].keys()
-            }
+            self.new_model_outputs = {}
+            self.new_expected_outputs = {}
+            for output_name in self.model_outputs[0].keys():
+                if torch.is_tensor(self.model_outputs[0][output_name]):
+                    self.new_model_outputs[output_name] = torch.cat(
+                        [output[output_name] for output in self.model_outputs]
+                    )
+                    self.new_expected_outputs[output_name] = torch.cat(
+                        [output[output_name] for output in self.expected_outputs]
+                    )
+                else:
+                    self.new_model_outputs[output_name] = [
+                        item for output in self.model_outputs for item in output[output_name]
+                    ]
+                    self.new_expected_outputs[output_name] = [
+                        item for output in self.expected_outputs for item in output[output_name]
+                    ]
+            self.model_outputs = self.new_model_outputs
+            self.expected_outputs = self.new_expected_outputs
 
     def get_model_outputs(self) -> List[Any]:
         return self.model_outputs

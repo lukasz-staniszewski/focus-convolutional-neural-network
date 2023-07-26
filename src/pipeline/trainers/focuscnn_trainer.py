@@ -183,15 +183,15 @@ class FocusCNNTrainer(BaseTrainer):
             save_as_best (bool): if True, saves checkpoint as best; defaults to False
         """
         # classifier
-        classifier_arch = type(self.classifier_model).__name__
-        classifier_state_dict = self.classifier_model.state_dict()
+        classifier_arch = type(self.model.classifier_model).__name__
+        classifier_state_dict = self.model.classifier_model.state_dict()
 
         focus_state = {
             fm_id: {
                 "arch": type(fm_model).__name__,
                 "state_dict": fm_model.state_dict(),
             }
-            for fm_id, fm_model in self.focus_models.items()
+            for fm_id, fm_model in self.model.focus_models.items()
         }
 
         state = {

@@ -26,8 +26,11 @@ def collate_func(batch):
                 [item["outs"][key]["transform"] for item in batch]
             ),
         }
-    bboxes = torch.cat(sum([item["bboxes"] for item in batch], []))
-
+    all_boxes = sum([item["bboxes"] for item in batch], [])
+    if len(all_boxes) > 0:
+        bboxes = torch.cat(all_boxes)
+    else:
+        bboxes = None
     return images, image_id, outputs, bboxes
 
 
