@@ -1,10 +1,11 @@
 from typing import List
 
 import torch
-from torchvision.ops import box_iou
 from torchmetrics.detection.mean_ap import MeanAveragePrecision
+from torchvision.ops import box_iou
 
 from pipeline.pipeline_utils import get_class_cm
+
 
 def _convert_to_focuscnn(output, target):
     if isinstance(output, dict):
@@ -234,6 +235,7 @@ def iou50_accuracy(output, target):
     else:
         return (torch.cat(ious) > 0.5).float().mean().item()
 
+
 # focus cnn metrics
 def focus_cnn_map(output, target):
     target = target["map_focuscnn"]
@@ -242,6 +244,7 @@ def focus_cnn_map(output, target):
     metric.update(output, target)
     result = metric.compute()
     return result["map"]
+
 
 def focus_cnn_map50(output, target):
     target = target["map_focuscnn"]

@@ -1,13 +1,12 @@
 from collections import OrderedDict
-from typing import Dict, Iterator, Tuple
+from typing import Dict, Tuple
 
 import torch
-from torch.nn.parameter import Parameter
 
 from base import BaseModel
-from models import TransformModule
 from models.classifier.MultiClassifier import MultiClassifier
 from models.focus.ResFocusNetwork import ResFocusNetwork
+from models.transform.TransformModule import TransformModule
 from pipeline import loss
 from pipeline.pipeline_utils import convert_tf_params_to_bbox
 
@@ -92,6 +91,12 @@ class FocusCNN(BaseModel):
         self.classifier_model.load_state_dict(
             torch.load(classifier_model_path)["state_dict"]
         )
+
+        assert (
+            len(self.focus_models) == len(focus_models_path)
+            and len(self.focus_models) > 0
+        )
+
         for fm_id, fm_model in self.focus_models.items():
             state_dict = torch.load(focus_models_path[fm_id])["state_dict"]
             try:

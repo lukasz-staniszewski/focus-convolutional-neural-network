@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 import logging
-from copy import deepcopy
 from argparse import Namespace
+from copy import deepcopy
 from datetime import datetime
 from functools import partial, reduce
 from operator import getitem
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
-import models as module_arch
 
+import models as module_arch
 from utils.logger import setup_logging
 from utils.project_utils import read_json, set_seed, write_json
 

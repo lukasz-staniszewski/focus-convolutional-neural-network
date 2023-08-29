@@ -90,7 +90,7 @@
         "type": "FocusCNNLoader",
         "args": {
             "images_dir": "data/processed/COCO-2017/CocoFocusCNN/train/images",
-            "batch_size": 8,
+            "batch_size": 16,
             "csv_path": "data/processed/COCO-2017/CocoFocusCNN/train/labels.csv",
             "save_out_dir": "res/focus_cnn/coco_focuscnn/trainer/labels/",
             "transform_mean": [
@@ -116,14 +116,18 @@
                 640,
                 640
             ],
-            "is_test": false
+            "is_test": false,
+            "balance_train": true,
+            "balance_methods": [
+                "remove_only_0"
+            ]
         }
     },
     "optimizer": {
         "type": "SGD",
         "args": {
-            "lr": 1e-4,
-            "momentum": 0.9,
+            "lr": 3e-4,
+            "momentum": 0.0,
             "weight_decay": 0.0
         }
     },

@@ -125,3 +125,21 @@ def label_make_0_half(
         return csv_path_train_undersampled
     else:
         return csv_path_train_orig
+
+
+def remove_only_0(
+    csv_path_train_orig: Union[str, Path],
+) -> Union[str, Path]:
+    """Function balances training data by removing rows where each label=0."""
+    df = pd.read_csv(csv_path_train_orig, header=0)
+
+    label_columns = [col for col in df.columns if col.startswith("label_")]
+    filter_condition = df[label_columns].eq(0).all(axis=1)
+    filtered_df = df[~filter_condition]
+
+    csv_path_balanced = Path(
+        str(csv_path_train_orig).replace(".csv", "_undersampled.csv")
+    )
+
+    filtered_df.to_csv(csv_path_balanced, index=False, header=True)
+    return csv_path_balanced

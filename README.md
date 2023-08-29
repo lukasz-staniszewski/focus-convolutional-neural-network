@@ -10,6 +10,7 @@
 <h2 align="center"> I. Abstract </h2>
 
 The proposed network Focus Convolutional Neural Network is an architecture for object detection in images. It is based on two neural component:
+
 1) the focus network that indicates in the input image a potential location where the object could be
 2) the classifier that verifies if the object is there.
 
@@ -18,31 +19,38 @@ Direct competitor for proposed network: <a href="https://arxiv.org/pdf/1506.0149
 <h2 align="center"> II. Architecture </h2>
 
 ### Focus Network
+
 The focus network is fed with an image. It outputs 4 numbers:
+
 1) $(x,y)$ coordinates of the location in the image where the object is likely to be,
 2) $log(scale)$, where scale says how much the part of the object needs to be zoomed to the predefined resolution,
 3) $\theta$ angle at which the indicated part needs to be rotated to its normal view,
 4) $p$ likelihood at which the located part contains the wanted object.
 
 ### Classifier
-The classifier is fed with the zoomed and rotated part of the image indicated by the focus network. It output one scalar that says if the image contains an object of the given class or not. 
+
+The classifier is fed with the zoomed and rotated part of the image indicated by the focus network. It output one scalar that says if the image contains an object of the given class or not.
 
 <h2 align="center"> III. Training </h2>
 
 ### Focus network pretraining
+
 The network is fed with original and rotated images from the dataset. Its job is to learn to indicate the smallest squares that contain the bounding boxes of the objects. The network is also fed with the images that do not contain the object; its job then is to produce the likelihood value equal to zero (the rest of the outputs do not matter).
 
 ### Classifier pretraining
+
 The network is pretraining with zoomed parts of the images from the dataset. These parts are either defined by the bounding boxes (then the output should be “yes”) or random parts (then the output should be “no”).
 
 ### Fine tuning
-The architecture is fed with the images that either contain or not contain the required objects. The classifier is to output a correct “yes” or “no”. The gradient flows backward through both the networks. 
+
+The architecture is fed with the images that either contain or not contain the required objects. The classifier is to output a correct “yes” or “no”. The gradient flows backward through both the networks.
 
 The training can be based on a dataset of images with objects indicated by bounding boxes.
 
 <h2 align="center"> IV. Datasets </h2>
 
 Experiments will be carried out on two benchmark datasets:
+
 + <a href="https://cocodataset.org/#home">COCO 2017 TRAIN/VAL DATASET FOR OBJECT DETECTION</a>
 + TBA
 
@@ -99,3 +107,59 @@ Experiments will be carried out on two benchmark datasets:
       ├── util.py
       └── ...
   ``` -->
+
+<h2 align="center"> VI. Final metrics </h2>
+
+### COCO 2017 DATASET
+
+#### CLASSIFIER PRETRAINING
+
+- Model path: /content/drive/MyDrive/GitHub/focus-convolutional-neural-network/res/classifiers/coco_classifier_multi/trainer/0627_075340/models//checkpoint-epoch73.pth ...
++ Testing model: CocoMultiClassifier
++ Predictions saved to res/classifiers/coco_classifier_multi/tester/0627_102942/predictions.csv
++ Metrics among all classes: {'micro_accuracy': 0.9673064947128296, 'micro_recall': 0.9346129894256592, 'micro_precision': 0.9346129894256592, 'micro_f1': 0.9346129894256592, 'macro_accuracy': 0.9673064947128296, 'macro_recall': 0.9022196531295776, 'macro_precision': 0.8579119443893433, 'macro_f1': 0.8785837888717651}
++ Metrics for each class:
+┏━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┓
+┃ Class      ┃ Accuracy ┃ Precision ┃ Recall ┃ F1-score ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━┩
+│ none       │    0.938 │     0.969 │  0.932 │    0.950 │
+│ person     │    0.954 │     0.902 │  0.949 │    0.925 │
+│ car        │    0.981 │     0.775 │  0.895 │    0.831 │
+│ bicycle    │    0.997 │     0.785 │  0.832 │    0.808 │
+└────────────┴──────────┴───────────┴────────┴──────────┘
+
+#### FOCUS NETWORK PRETRAINING
+
+##### PERSON CLASS
+
+##### CAR CLASS
+
+##### BICYCLE CLASS
+
+#### FOCUS-CNN
+
+### PASCAL VOC DATASET
+
+#### CLASSIFIER PRETRAINING
+
+- Model path: /content/drive/MyDrive/GitHub/focus-convolutional-neural-network/res/classifiers/coco_classifier_multi/trainer/0627_075340/models//checkpoint-epoch73.pth ...
++ Testing model: CocoMultiClassifier
++ Predictions saved to res/classifiers/coco_classifier_multi/tester/0627_102942/predictions.csv
++ Metrics among all classes: {'micro_accuracy': 0.9673064947128296, 'micro_recall': 0.9346129894256592, 'micro_precision': 0.9346129894256592, 'micro_f1': 0.9346129894256592, 'macro_accuracy': 0.9673064947128296, 'macro_recall': 0.9022196531295776, 'macro_precision': 0.8579119443893433, 'macro_f1': 0.8785837888717651}
++ Metrics for each class:
+┏━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┓
+┃ Class      ┃ Accuracy ┃ Precision ┃ Recall ┃ F1-score ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━┩
+│ none       │    0.938 │     0.969 │  0.932 │    0.950 │
+│ person     │    0.954 │     0.902 │  0.949 │    0.925 │
+│ car        │    0.981 │     0.775 │  0.895 │    0.831 │
+│ bicycle    │    0.997 │     0.785 │  0.832 │    0.808 │
+└────────────┴──────────┴───────────┴────────┴──────────┘
+
+#### FOCUS NETWORK PRETRAINING
+
+##### PERSON CLASS
+
+##### CAR CLASS
+
+##### BICYCLE CLASS

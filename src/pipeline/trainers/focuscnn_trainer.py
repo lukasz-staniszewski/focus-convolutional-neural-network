@@ -1,6 +1,7 @@
+import os
+
 import torch
 from tqdm import tqdm
-import os
 
 from base import BaseTrainer
 from pipeline import pipeline_utils
