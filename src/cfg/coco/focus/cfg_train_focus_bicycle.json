@@ -23,9 +23,9 @@
     "data_loader": {
         "type": "FocusLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoBicycleFocus/train/images",
+            "images_dir": "data/processed/COCO-2017/CocoBicycleFocus/train_with_rot/images",
             "batch_size": 32,
-            "csv_path": "data/processed/COCO-2017/CocoBicycleFocus/train/labels.csv",
+            "csv_path": "data/processed/COCO-2017/CocoBicycleFocus/train_with_rot/labels.csv",
             "save_out_dir": "res/focus/coco_focus_bicycle/trainer/labels/",
             "transform_mean": [
                 0.4686,

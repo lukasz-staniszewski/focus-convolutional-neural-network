@@ -1,10 +1,12 @@
 from typing import Dict
 
 import pandas as pd
+from deprecation import deprecated
 
 from utils.logger import TensorboardWriter
 
 
+@deprecated("Use MetricTrackerV2 instead.")
 class MetricTracker:
     """Class that keeps track of metrics during training and validation."""
 
@@ -35,26 +37,14 @@ class MetricTracker:
         """
         if key not in self._data.index:
             self._data.loc[key] = 0
-        if self.writer is not None:
+        if self.writer:
             self.writer.add_scalar(key, value)
-        if value is None:
-            return
-        self._data.total[key] += value * n
-        self._data.counts[key] += n
-        self._data.average[key] = (
-            self._data.total[key] / self._data.counts[key]
-        )
-
-    def avg(self, key: str) -> float:
-        """Returns the average value of the metric.
-
-        Args:
-            key (str): metric name
-
-        Returns:
-            float: metric value
-        """
-        return self._data.average[key]
+        if value:
+            self._data.total[key] += value * n
+            self._data.counts[key] += n
+            self._data.average[key] = (
+                self._data.total[key] / self._data.counts[key]
+            )
 
     def result(self) -> Dict:
         """Returns the average value of all metrics.

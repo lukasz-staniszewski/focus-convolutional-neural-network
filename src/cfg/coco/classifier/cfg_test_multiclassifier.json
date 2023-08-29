@@ -2,7 +2,7 @@
     "name": "CocoMultiClassifier",
     "device": 1,
     "seed": 42,
-    "model_path": "res/classifiers/coco_classifier_multi/trainer/1120_032413/models/checkpoint-epoch27.pth",
+    "model_path": "",
     "data_loader": {
         "type": "TestClassifierLoader",
         "args": {

@@ -20,7 +20,7 @@ def label_oversample(
     ).astype(int)
 
     dfs_aug = []
-    for label, cnt in aug_labels_cnt.iteritems():
+    for label, cnt in aug_labels_cnt.items():
         dfs_aug.append(
             df_orig[df_orig[column_label] == label].sample(
                 cnt, replace=False, random_state=0
@@ -62,7 +62,7 @@ def label_undersample(
     ):
         df_undersampled = deepcopy(df_orig)
         min_cnt = new_label_cnt.min()
-        for label, cnt in new_label_cnt.iteritems():
+        for label, cnt in new_label_cnt.items():
             if cnt / max(min_cnt, 1) > balance_max_multiplicity:
                 df_undersampled = df_undersampled.drop(
                     df_undersampled[df_undersampled[column_label] == label]
@@ -125,3 +125,21 @@ def label_make_0_half(
         return csv_path_train_undersampled
     else:
         return csv_path_train_orig
+
+
+def remove_only_0(
+    csv_path_train_orig: Union[str, Path],
+) -> Union[str, Path]:
+    """Function balances training data by removing rows where each label=0."""
+    df = pd.read_csv(csv_path_train_orig, header=0)
+
+    label_columns = [col for col in df.columns if col.startswith("label_")]
+    filter_condition = df[label_columns].eq(0).all(axis=1)
+    filtered_df = df[~filter_condition]
+
+    csv_path_balanced = Path(
+        str(csv_path_train_orig).replace(".csv", "_undersampled.csv")
+    )
+
+    filtered_df.to_csv(csv_path_balanced, index=False, header=True)
+    return csv_path_balanced

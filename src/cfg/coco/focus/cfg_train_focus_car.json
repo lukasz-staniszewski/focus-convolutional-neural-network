@@ -8,11 +8,11 @@
         "args": {
             "threshold": 0.5,
             "backbone": "resnet34",
-            "loss_lambda_tr": 12,
-            "loss_lambda_sc": 12,
+            "loss_lambda_tr": 7,
+            "loss_lambda_sc": 7,
             "loss_lambda_rot": 3,
             "loss_weights": [
-                6
+                3
             ],
             "inp_img_size": [
                 640,
@@ -23,9 +23,9 @@
     "data_loader": {
         "type": "FocusLoader",
         "args": {
-            "images_dir": "data/processed/COCO-2017/CocoCarFocus/train/images",
-            "batch_size": 32,
-            "csv_path": "data/processed/COCO-2017/CocoCarFocus/train/labels.csv",
+            "images_dir": "data/processed/COCO-2017/CocoCarFocus/train_without_rot/images",
+            "batch_size": 24,
+            "csv_path": "data/processed/COCO-2017/CocoCarFocus/train_without_rot/labels.csv",
             "save_out_dir": "res/focus/coco_focus_car/trainer/labels/",
             "transform_mean": [
                 0.4572,
@@ -38,8 +38,8 @@
                 0.2712
             ],
             "shuffle": true,
-            "validation_split": 0.10,
-            "num_workers": 12,
+            "validation_split": 0.1,
+            "num_workers": 4,
             "labels": {
                 "0": "none",
                 "1": "car"
@@ -52,7 +52,7 @@
             "balance_methods": [
                 "undersample"
             ],
-            "balance_max_multiplicity": 6
+            "balance_max_multiplicity": 3
         },
         "class_weights": null
     },
@@ -61,7 +61,7 @@
         "args": {
             "lr": 1e-4,
             "momentum": 0.9,
-            "weight_decay": 0.0
+            "weight_decay": 1e-05
         }
     },
     "metrics": [
@@ -80,7 +80,7 @@
         "save_period": 1,
         "verbosity": 1,
         "monitor": "min val_loss",
-        "early_stop": 10,
+        "early_stop": 15,
         "tensorboard": false
     }
 }

@@ -103,10 +103,6 @@ class ResFocusNetwork(BaseModel):
         translate_x_out = output["out_translate_x"]
         translate_y_out = output["out_translate_y"]
         scale_out = output["out_scale"]
-        # cls_target = target["label"]
-        # scale_target = target["transform"][:, 2:3]
-        # translate_target = target["transform"][:, :2]
-        # target_translate_x = target["transform"][:, 0:1]
         bbox = convert_tf_params_to_bbox(
             translations=torch.cat([translate_x_out, translate_y_out], dim=1),
             scales=scale_out,

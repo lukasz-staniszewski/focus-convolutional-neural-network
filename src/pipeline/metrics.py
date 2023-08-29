@@ -1,12 +1,21 @@
 from typing import List
 
 import torch
+from torchmetrics.detection.mean_ap import MeanAveragePrecision
 from torchvision.ops import box_iou
 
 from pipeline.pipeline_utils import get_class_cm
 
 
+def _convert_to_focuscnn(output, target):
+    if isinstance(output, dict):
+        output = output["cls_focuscnn"]
+        target = target["cls_focuscnn"]
+    return output, target
+
+
 def micro_accuracy(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, FP, FN, TN = get_class_cm(output, target)
     TP = sum(TP)
     FP = sum(FP)
@@ -17,6 +26,7 @@ def micro_accuracy(output, target):
 
 
 def macro_accuracy(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, FP, FN, TN = get_class_cm(output, target)
     accuracies = [0 for _ in range(len(TP))]
     for c in range(len(accuracies)):
@@ -25,6 +35,7 @@ def macro_accuracy(output, target):
 
 
 def micro_recall(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, _, FN, _ = get_class_cm(output=output, target=target)
     TP = sum(TP)
     FN = sum(FN)
@@ -32,6 +43,7 @@ def micro_recall(output, target):
 
 
 def macro_recall(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, _, FN, _ = get_class_cm(output=output, target=target)
     recalls = [0 for _ in range(len(TP))]
     for c in range(len(recalls)):
@@ -44,6 +56,7 @@ def macro_recall(output, target):
 
 
 def micro_precision(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, FP, _, _ = get_class_cm(output=output, target=target)
     TP = sum(TP)
     FP = sum(FP)
@@ -51,6 +64,7 @@ def micro_precision(output, target):
 
 
 def macro_precision(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, FP, _, _ = get_class_cm(output=output, target=target)
     precisions = [0 for _ in range(len(TP))]
     for c in range(len(TP)):
@@ -63,6 +77,7 @@ def macro_precision(output, target):
 
 
 def micro_f1(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     precision = micro_precision(output=output, target=target)
     recall = micro_recall(output=output, target=target)
     return (
@@ -73,6 +88,7 @@ def micro_f1(output, target):
 
 
 def macro_f1(output, target):
+    output, target = _convert_to_focuscnn(output, target)
     TP, FP, FN, TN = get_class_cm(output=output, target=target)
     f1s = [0 for _ in range(len(TP))]
     for c in range(len(f1s)):
@@ -218,3 +234,22 @@ def iou50_accuracy(output, target):
         return None
     else:
         return (torch.cat(ious) > 0.5).float().mean().item()
+
+
+# focus cnn metrics
+def focus_cnn_map(output, target):
+    target = target["map_focuscnn"]
+    output = output["map_focuscnn"]
+    metric = MeanAveragePrecision()
+    metric.update(output, target)
+    result = metric.compute()
+    return result["map"]
+
+
+def focus_cnn_map50(output, target):
+    target = target["map_focuscnn"]
+    output = output["map_focuscnn"]
+    metric = MeanAveragePrecision()
+    metric.update(output, target)
+    result = metric.compute()
+    return result["map_50"]

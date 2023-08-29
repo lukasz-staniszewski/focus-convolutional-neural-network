@@ -1,6 +1,6 @@
 from copy import deepcopy
 from pathlib import Path
-from typing import Dict, Tuple, Union
+from typing import Dict, Tuple, Union, List
 
 import pandas as pd
 import torch
@@ -10,24 +10,28 @@ from sklearn.model_selection import train_test_split
 from data_utils.data_loaders.focus_cnn.BaseFocusCNNLoader import (
     BaseFocusCNNLoader,
 )
+from data_utils.data_loaders.utils import remove_only_0
 from data_utils.data_sets import FocusCNNDataset
 
 
 def collate_func(batch):
     images = torch.stack([item["image"] for item in batch])
-    image_id = torch.Tensor([item["image_id"] for item in batch])
+    image_id = torch.LongTensor([item["image_id"] for item in batch])
     outputs = {cls: {} for cls in batch[0]["outs"].keys()}
     for key in outputs.keys():
         outputs[key] = {
-            "label": torch.Tensor(
+            "label": torch.LongTensor(
                 [item["outs"][key]["label"] for item in batch]
             ),
             "transform": torch.stack(
                 [item["outs"][key]["transform"] for item in batch]
             ),
         }
-    bboxes = torch.cat(sum([item["bboxes"] for item in batch], []))
-
+    all_boxes = sum([item["bboxes"] for item in batch], [])
+    if len(all_boxes) > 0:
+        bboxes = torch.cat(all_boxes)
+    else:
+        bboxes = None
     return images, image_id, outputs, bboxes
 
 
@@ -46,11 +50,15 @@ class FocusCNNLoader(BaseFocusCNNLoader):
         transform_std: Tuple[float] = None,
         validation_split: float = 0.0,
         is_test: bool = False,
+        balance_train: bool = False,
+        balance_methods: List[str] = None,
     ):
         # members
         self.validation_split = validation_split
         self.save_out_dir = save_out_dir
         self.tf_image_size = tf_image_size
+        self.balance_train = balance_train
+        self.balance_methods = balance_methods
 
         super().__init__(
             batch_size=batch_size,
@@ -91,12 +99,28 @@ class FocusCNNLoader(BaseFocusCNNLoader):
                 labels=self.labels,
             )
         # train set
+        if self.balance_train:
+            self.balance_data()
+        # no balancing
         self.dataset_train = FocusCNNDataset(
             images_dir=self.images_dir,
             csv_path=self.csv_path_train,
             transform=self.transform,
             labels=self.labels,
         )
+
+    def balance_data(self) -> None:
+        """Function balances training data by removing examples with only 0 as labels (no objects).
+
+        Possibilities in balance_methods:
+        * undersampling:
+            -- 'remove_only_0' - remove examples with only 0 as labels (no objects on the image)
+        """
+        # oversampling
+        if "remove_only_0" in self.balance_methods:
+            self.csv_path_train = remove_only_0(
+                csv_path_train_orig=self.csv_path_train,
+            )
 
     def combine_transforms(
         self,
