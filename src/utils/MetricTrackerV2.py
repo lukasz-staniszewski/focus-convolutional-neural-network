@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing import Any, Callable, Dict, List, Union
 
 import torch
@@ -7,7 +8,11 @@ from tqdm import tqdm
 class MetricTrackerV2:
     """Class that keeps track of metrics during training and validation along with mean of losses."""
 
-    def __init__(self, metrics_handlers: List[Callable[[Any, Any], float]]):
+    def __init__(
+        self,
+        metrics_handlers: List[Callable[[Any, Any], float]],
+        pred_columns: List[str] = None,
+    ):
         """Metric tracker constructor.
 
         Args:
@@ -17,6 +22,7 @@ class MetricTrackerV2:
         self.expected_outputs = []
         self.metrics_handlers = metrics_handlers
         self.model_losses = None
+        self.pred_columns = pred_columns
 
     def _concatenate_outputs(self) -> None:
         assert (
@@ -29,20 +35,32 @@ class MetricTrackerV2:
         elif isinstance(self.model_outputs[0], dict):
             self.new_model_outputs = {}
             self.new_expected_outputs = {}
-            for output_name in self.model_outputs[0].keys():
+            columns = None
+            if self.pred_columns:
+                columns = self.pred_columns
+            else:
+                columns = self.model_outputs[0].keys()
+            for output_name in columns:
                 if torch.is_tensor(self.model_outputs[0][output_name]):
                     self.new_model_outputs[output_name] = torch.cat(
                         [output[output_name] for output in self.model_outputs]
                     )
                     self.new_expected_outputs[output_name] = torch.cat(
-                        [output[output_name] for output in self.expected_outputs]
+                        [
+                            output[output_name]
+                            for output in self.expected_outputs
+                        ]
                     )
                 else:
                     self.new_model_outputs[output_name] = [
-                        item for output in self.model_outputs for item in output[output_name]
+                        item
+                        for output in self.model_outputs
+                        for item in output[output_name]
                     ]
                     self.new_expected_outputs[output_name] = [
-                        item for output in self.expected_outputs for item in output[output_name]
+                        item
+                        for output in self.expected_outputs
+                        for item in output[output_name]
                     ]
             self.model_outputs = self.new_model_outputs
             self.expected_outputs = self.new_expected_outputs
@@ -98,6 +116,7 @@ class MetricTrackerV2:
                 )
         for metric in tqdm(self.metrics_handlers):
             self._data[metric.__name__] = metric(
-                output=self.model_outputs, target=self.expected_outputs
+                output=deepcopy(self.model_outputs),
+                target=deepcopy(self.expected_outputs),
             )
         return self._data

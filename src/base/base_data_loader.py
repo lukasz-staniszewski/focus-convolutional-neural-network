@@ -20,11 +20,9 @@ class BaseDataLoader(DataLoader):
         self.shuffle = shuffle
         self.num_workers = num_workers
         self.collate_fn = collate_fn
-
         self.dataset_train = None
         self.dataset_validate = None
         self.dataset_test = None
-
         self.batch_idx = 0
 
     def get_train_loader(self) -> DataLoader:

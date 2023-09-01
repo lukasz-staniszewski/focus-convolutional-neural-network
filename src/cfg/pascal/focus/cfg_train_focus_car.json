@@ -1,0 +1,86 @@
+{
+    "name": "PascalCarFocus",
+    "device": 1,
+    "seed": 188,
+    "save_cfg_dir": "res/focus/pascal_focus_car/",
+    "arch": {
+        "type": "ResFocusNetwork",
+        "args": {
+            "threshold": 0.5,
+            "backbone": "resnet34",
+            "loss_lambda_tr": 7,
+            "loss_lambda_sc": 7,
+            "loss_lambda_rot": 3,
+            "loss_weights": [
+                3
+            ],
+            "inp_img_size": [
+                640,
+                640
+            ]
+        }
+    },
+    "data_loader": {
+        "type": "FocusLoader",
+        "args": {
+            "images_dir": "data/processed/PASCAL/PascalCarFocus/train/images",
+            "batch_size": 32,
+            "csv_path": "data/processed/PASCAL/PascalCarFocus/train/labels.csv",
+            "save_out_dir": "res/focus/pascal_focus_car/trainer/labels/",
+            "transform_mean": [
+                0.4402,
+                0.4222,
+                0.3923
+            ],
+            "transform_std": [
+                0.2594,
+                0.2604,
+                0.2690
+            ],
+            "shuffle": true,
+            "validation_split": 0.1,
+            "num_workers": 32,
+            "labels": {
+                "0": "none",
+                "1": "car"
+            },
+            "tf_image_size": [
+                640,
+                640
+            ],
+            "balance_train": true,
+            "balance_methods": [
+                "undersample"
+            ],
+            "balance_max_multiplicity": 3
+        },
+        "class_weights": null
+    },
+    "optimizer": {
+        "type": "SGD",
+        "args": {
+            "lr": 1e-4,
+            "momentum": 0.9,
+            "weight_decay": 1e-05
+        }
+    },
+    "metrics": [
+        "focus_accuracy",
+        "focus_recall",
+        "focus_precision",
+        "focus_f1",
+        "mean_iou",
+        "iou50_accuracy"
+    ],
+    "lr_scheduler": null,
+    "trainer": {
+        "type": "FocusTrainer",
+        "epochs": 100,
+        "save_dir": "res/focus/pascal_focus_car/",
+        "save_period": 1,
+        "verbosity": 1,
+        "monitor": "min val_loss",
+        "early_stop": 20,
+        "tensorboard": false
+    }
+}

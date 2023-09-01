@@ -59,6 +59,7 @@ class FocusCNNTrainer(BaseTrainer):
         """
         self.model.train()
         self.train_metrics.reset()
+        self.valid_metrics.reset()
 
         progress_bar = tqdm(
             enumerate(self.train_data_loader),
@@ -70,7 +71,6 @@ class FocusCNNTrainer(BaseTrainer):
 
         for batch_idx, data in progress_bar:
             progress_bar.set_postfix({"loss": pbar_loss})
-
             data_in = pipeline_utils.to_device(data[0], device=self.device)
             target = pipeline_utils.to_device(
                 data[2],
@@ -131,6 +131,7 @@ class FocusCNNTrainer(BaseTrainer):
             dict: log that contains information about validation
         """
         self.model.eval()
+        self.train_metrics.reset()
         self.valid_metrics.reset()
 
         progress_bar = tqdm(
@@ -139,6 +140,7 @@ class FocusCNNTrainer(BaseTrainer):
             colour="green",
             total=len(self.valid_data_loader),
         )
+
         pbar_loss = "None"
 
         with torch.no_grad():

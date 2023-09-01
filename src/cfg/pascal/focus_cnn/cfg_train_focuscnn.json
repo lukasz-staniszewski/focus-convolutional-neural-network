@@ -1,0 +1,158 @@
+{
+    "name": "PascalFocusCNN",
+    "device": 1,
+    "seed": 188,
+    "save_cfg_dir": "res/focus_cnn/pascal_focuscnn/",
+    "arch": {
+        "type": "FocusCNN",
+        "args": {
+            "classifier_model": {
+                "arch": {
+                    "type": "MultiClassifier",
+                    "args": {
+                        "n_classes": 4,
+                        "backbone": "resnet34"
+                    }
+                }
+            },
+            "focus_models": {
+                "1": {
+                    "arch": {
+                        "type": "ResFocusNetwork",
+                        "args": {
+                            "threshold": 0.5,
+                            "backbone": "resnet34",
+                            "loss_lambda_tr": 1,
+                            "loss_lambda_sc": 1,
+                            "loss_lambda_rot": 1,
+                            "inp_img_size": [
+                                640,
+                                640
+                            ],
+                            "loss_rot": false
+                        }
+                    }
+                },
+                "2": {
+                    "arch": {
+                        "type": "ResFocusNetwork",
+                        "args": {
+                            "threshold": 0.5,
+                            "backbone": "resnet34",
+                            "loss_lambda_tr": 1,
+                            "loss_lambda_sc": 1,
+                            "loss_lambda_rot": 1,
+                            "inp_img_size": [
+                                640,
+                                640
+                            ],
+                            "loss_rot": false
+                        }
+                    }
+                },
+                "3": {
+                    "arch": {
+                        "type": "ResFocusNetwork",
+                        "args": {
+                            "threshold": 0.5,
+                            "backbone": "resnet34",
+                            "loss_lambda_tr": 1,
+                            "loss_lambda_sc": 1,
+                            "loss_lambda_rot": 1,
+                            "inp_img_size": [
+                                640,
+                                640
+                            ],
+                            "loss_rot": false
+                        }
+                    }
+                }
+            },
+            "inp_img_size": [
+                640,
+                640
+            ],
+            "out_img_size": [
+                300,
+                300
+            ],
+            "model_checkpoints": {
+                "classifier_model": "/root/focus-convolutional-neural-network/res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch12.pth",
+                "focus_models": {
+                    "1": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch42.pth",
+                    "2": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_car/trainer/0830_112139/models/checkpoint-epoch51.pth",
+                    "3": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_bicycle/trainer/0830_230154/models/checkpoint-epoch20.pth"
+                }
+            }
+        }
+    },
+    "data_loader": {
+        "type": "FocusCNNLoader",
+        "args": {
+            "images_dir": "data/processed/PASCAL/PascalFocusCNN/train/images",
+            "batch_size": 16,
+            "csv_path": "data/processed/PASCAL/PascalFocusCNN/train/labels.csv",
+            "save_out_dir": "res/focus_cnn/pascal_focuscnn/trainer/labels/",
+            "transform_mean": [
+                0.4309,
+                0.4104,
+                0.3840
+            ],
+            "transform_std": [
+                0.2620,
+                0.2618,
+                0.2679
+            ],
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 16,
+            "labels": {
+                "0": "none",
+                "1": "person",
+                "2": "car",
+                "3": "bicycle"
+            },
+            "tf_image_size": [
+                640,
+                640
+            ],
+            "is_test": false,
+            "balance_train": true,
+            "balance_methods": [
+                "remove_only_0",
+                "remove_too_many_100"
+            ]
+        }
+    },
+    "optimizer": {
+        "type": "SGD",
+        "args": {
+            "lr": 1e-04,
+            "weight_decay": 0.05
+        }
+    },
+    "metrics": [
+        "micro_accuracy",
+        "micro_recall",
+        "micro_precision",
+        "micro_f1",
+        "macro_accuracy",
+        "macro_recall",
+        "macro_precision",
+        "macro_f1",
+        "focus_cnn_map",
+        "focus_cnn_map50"
+    ],
+    "lr_scheduler": null,
+    "trainer": {
+        "type": "FocusCNNTrainer",
+        "epochs": 100,
+        "save_dir": "res/focus_cnn/pascal_focuscnn/",
+        "save_period": 1,
+        "verbosity": 1,
+        "monitor": "min val_loss",
+        "early_stop": 12,
+        "tensorboard": false,
+        "do_validation": true
+    }
+}

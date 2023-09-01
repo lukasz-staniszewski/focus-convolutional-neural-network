@@ -44,6 +44,8 @@ class FocusTrainer(BaseTrainer):
             len_epoch=len_epoch,
             do_validation=do_validation,
         )
+        self.train_metrics.pred_columns = ["label", "bbox"]
+        self.valid_metrics.pred_columns = ["label", "bbox"]
 
     def _train_epoch(self, epoch: int) -> dict:
         """Training logic for an epoch.

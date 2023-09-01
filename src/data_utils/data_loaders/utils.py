@@ -143,3 +143,29 @@ def remove_only_0(
 
     filtered_df.to_csv(csv_path_balanced, index=False, header=True)
     return csv_path_balanced
+
+
+def remove_too_many_100(
+    csv_path_train_orig: Union[str, Path],
+) -> Union[str, Path]:
+    """Function balances training data by removing rows where each label=0."""
+    df = pd.read_csv(csv_path_train_orig, header=0)
+    df_label_1 = df[df["label_1"] == 1]
+
+    label_columns_no_1 = [
+        col
+        for col in df_label_1.columns
+        if col.startswith("label_") and col != "label_1"
+    ]
+    filter_condition = df_label_1[label_columns_no_1].eq(0).all(axis=1)
+    filtered_df_100 = df_label_1[filter_condition]
+    filtered_df_100.sample(n=round(len(filtered_df_100) / 2), random_state=0)
+
+    filtered_df = df[~df.index.isin(filtered_df_100.index)]
+
+    csv_path_balanced = Path(
+        str(csv_path_train_orig).replace(".csv", "_undersampled.csv")
+    )
+
+    filtered_df.to_csv(csv_path_balanced, index=False, header=True)
+    return csv_path_balanced
