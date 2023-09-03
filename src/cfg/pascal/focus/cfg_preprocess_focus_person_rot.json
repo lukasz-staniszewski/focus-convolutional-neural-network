@@ -1,0 +1,28 @@
+{
+    "name": "PascalFocusPersonPreprocessing",
+    "preprocessor": {
+        "type": "CocoFocusPreprocessor",
+        "args": {
+            "img_in_dir_path": "data/raw/PASCAL/images_train/",
+            "ann_file_path": "data/raw/PASCAL/ann_train/annotations_train_processed.json",
+            "out_dir_path": "data/processed/PASCAL/PascalPersonFocus/train/",
+            "label_pos": "person",
+            "labels_neg": null,
+            "enable_rotation": true,
+            "max_input_size": [
+                640,
+                640
+            ],
+            "img_out_shape": [
+                300,
+                300
+            ],
+            "label_max_size": null
+        }
+    },
+    "preprocess": {
+        "verbosity": 1,
+        "save_dir": "data/processed/PASCAL/PascalPersonFocus/train/"
+    },
+    "seed": 42
+}

@@ -79,9 +79,9 @@
             "model_checkpoints": {
                 "classifier_model": "/root/focus-convolutional-neural-network/res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch12.pth",
                 "focus_models": {
-                    "1": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch42.pth",
-                    "2": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_car/trainer/0830_112139/models/checkpoint-epoch51.pth",
-                    "3": "/root/focus-convolutional-neural-network/res/focus/pascal_focus_bicycle/trainer/0830_230154/models/checkpoint-epoch20.pth"
+                    "1": "/root/focus-convolutional-neural-network/res/focus/no_rot/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch42.pth",
+                    "2": "/root/focus-convolutional-neural-network/res/focus/no_rot/pascal_focus_car/trainer/0830_112139/models/checkpoint-epoch51.pth",
+                    "3": "/root/focus-convolutional-neural-network/res/focus/no_rot/pascal_focus_bicycle/trainer/0830_230154/models/checkpoint-epoch20.pth"
                 }
             }
         }

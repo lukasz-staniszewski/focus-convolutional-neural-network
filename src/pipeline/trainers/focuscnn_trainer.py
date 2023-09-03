@@ -233,7 +233,7 @@ class FocusCNNTrainer(BaseTrainer):
         self.mnt_best = checkpoint["monitor_best"]
 
         if (
-            checkpoint["config"]["classifier"]["arch"]
+            checkpoint["classifier"]["arch"]
             != self.config["classifier"]["arch"]
         ):
             self.logger.warning(
@@ -243,13 +243,13 @@ class FocusCNNTrainer(BaseTrainer):
                 " are not caused by loss parameters."
             )
         # load architecture params from checkpoint.
-        self.classifier_model.load_state_dict(
+        self.model.classifier_model.load_state_dict(
             checkpoint["classifier"]["state_dict"]
         )
 
-        for focus_model_id in checkpoint["config"]["focus_models"].keys():
+        for focus_model_id in checkpoint["focus_models"].keys():
             if (
-                checkpoint["config"]["focus_models"][focus_model_id]["arch"]
+                checkpoint["focus_models"][focus_model_id]["arch"]
                 != self.config["focus_models"][focus_model_id]["arch"]
             ):
                 self.logger.warning(
@@ -258,12 +258,12 @@ class FocusCNNTrainer(BaseTrainer):
                     " while state_dict is being loaded if differences"
                     " are not caused by loss parameters."
                 )
-            self.focus_models[focus_model_id].load_state_dict(
+            self.model.focus_models[focus_model_id].load_state_dict(
                 checkpoint["focus_models"][focus_model_id]["state_dict"]
             )
 
         if (
-            checkpoint["config"]["optimizer"]["type"]
+            checkpoint["optimizer"]["type"]
             != self.config["optimizer"]["type"]
         ):
             self.logger.warning(

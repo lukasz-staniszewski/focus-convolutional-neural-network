@@ -116,7 +116,7 @@ class MetricTrackerV2:
                 )
         for metric in tqdm(self.metrics_handlers):
             self._data[metric.__name__] = metric(
-                output=deepcopy(self.model_outputs),
-                target=deepcopy(self.expected_outputs),
+                output=self.model_outputs,
+                target=self.expected_outputs,
             )
         return self._data
