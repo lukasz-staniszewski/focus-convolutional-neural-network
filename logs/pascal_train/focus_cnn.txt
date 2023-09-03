@@ -1,0 +1,561 @@
+2023-09-01 22:55:09,042 - trainer - INFO -     epoch          : 1
+2023-09-01 22:55:09,043 - trainer - INFO -     loss           : 13.597726808467382
+2023-09-01 22:55:09,043 - trainer - INFO -     micro_accuracy : 0.8020740747451782
+2023-09-01 22:55:09,043 - trainer - INFO -     micro_recall   : 0.6041481494903564
+2023-09-01 22:55:09,043 - trainer - INFO -     micro_precision: 0.6041481494903564
+2023-09-01 22:55:09,043 - trainer - INFO -     micro_f1       : 0.6041481494903564
+2023-09-01 22:55:09,043 - trainer - INFO -     macro_accuracy : 0.802074134349823
+2023-09-01 22:55:09,043 - trainer - INFO -     macro_recall   : 0.6052438020706177
+2023-09-01 22:55:09,043 - trainer - INFO -     macro_precision: 0.6143409013748169
+2023-09-01 22:55:09,043 - trainer - INFO -     macro_f1       : 0.5891925692558289
+2023-09-01 22:55:09,043 - trainer - INFO -     focus_cnn_map  : 0.2064446061849594
+2023-09-01 22:55:09,044 - trainer - INFO -     focus_cnn_map50: 0.410929799079895
+2023-09-01 22:55:09,044 - trainer - INFO -     val_loss       : 7.244899525198826
+2023-09-01 22:55:09,044 - trainer - INFO -     val_micro_accuracy: 0.8981751799583435
+2023-09-01 22:55:09,044 - trainer - INFO -     val_micro_recall: 0.796350359916687
+2023-09-01 22:55:09,044 - trainer - INFO -     val_micro_precision: 0.796350359916687
+2023-09-01 22:55:09,044 - trainer - INFO -     val_micro_f1   : 0.796350359916687
+2023-09-01 22:55:09,044 - trainer - INFO -     val_macro_accuracy: 0.8981751799583435
+2023-09-01 22:55:09,044 - trainer - INFO -     val_macro_recall: 0.6946297287940979
+2023-09-01 22:55:09,044 - trainer - INFO -     val_macro_precision: 0.6650305986404419
+2023-09-01 22:55:09,044 - trainer - INFO -     val_macro_f1   : 0.6634759306907654
+2023-09-01 22:55:09,044 - trainer - INFO -     val_focus_cnn_map: 0.2988527715206146
+2023-09-01 22:55:09,045 - trainer - INFO -     val_focus_cnn_map50: 0.5101380944252014
+2023-09-01 22:55:09,527 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch1.pth ...
+2023-09-01 22:55:09,996 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 22:56:36,806 - trainer - INFO -     epoch          : 2
+2023-09-01 22:56:36,806 - trainer - INFO -     loss           : 12.88668048213905
+2023-09-01 22:56:36,807 - trainer - INFO -     micro_accuracy : 0.8152592778205872
+2023-09-01 22:56:36,807 - trainer - INFO -     micro_recall   : 0.6305184960365295
+2023-09-01 22:56:36,807 - trainer - INFO -     micro_precision: 0.6305184960365295
+2023-09-01 22:56:36,807 - trainer - INFO -     micro_f1       : 0.6305184960365295
+2023-09-01 22:56:36,807 - trainer - INFO -     macro_accuracy : 0.8152592778205872
+2023-09-01 22:56:36,807 - trainer - INFO -     macro_recall   : 0.6285367012023926
+2023-09-01 22:56:36,807 - trainer - INFO -     macro_precision: 0.6390553712844849
+2023-09-01 22:56:36,807 - trainer - INFO -     macro_f1       : 0.617172122001648
+2023-09-01 22:56:36,807 - trainer - INFO -     focus_cnn_map  : 0.20951968431472778
+2023-09-01 22:56:36,807 - trainer - INFO -     focus_cnn_map50: 0.4119734764099121
+2023-09-01 22:56:36,808 - trainer - INFO -     val_loss       : 6.9632758685322695
+2023-09-01 22:56:36,808 - trainer - INFO -     val_micro_accuracy: 0.9113746881484985
+2023-09-01 22:56:36,808 - trainer - INFO -     val_micro_recall: 0.8227493762969971
+2023-09-01 22:56:36,808 - trainer - INFO -     val_micro_precision: 0.8227493762969971
+2023-09-01 22:56:36,808 - trainer - INFO -     val_micro_f1   : 0.8227493762969971
+2023-09-01 22:56:36,808 - trainer - INFO -     val_macro_accuracy: 0.9113747477531433
+2023-09-01 22:56:36,808 - trainer - INFO -     val_macro_recall: 0.7025384902954102
+2023-09-01 22:56:36,808 - trainer - INFO -     val_macro_precision: 0.6569724678993225
+2023-09-01 22:56:36,808 - trainer - INFO -     val_macro_f1   : 0.6708498597145081
+2023-09-01 22:56:36,808 - trainer - INFO -     val_focus_cnn_map: 0.29797789454460144
+2023-09-01 22:56:36,808 - trainer - INFO -     val_focus_cnn_map50: 0.5091804265975952
+2023-09-01 22:56:37,209 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch2.pth ...
+2023-09-01 22:56:37,919 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 22:58:05,272 - trainer - INFO -     epoch          : 3
+2023-09-01 22:58:05,272 - trainer - INFO -     loss           : 12.840434437066737
+2023-09-01 22:58:05,272 - trainer - INFO -     micro_accuracy : 0.8155555725097656
+2023-09-01 22:58:05,273 - trainer - INFO -     micro_recall   : 0.6311110854148865
+2023-09-01 22:58:05,273 - trainer - INFO -     micro_precision: 0.6311110854148865
+2023-09-01 22:58:05,273 - trainer - INFO -     micro_f1       : 0.6311110854148865
+2023-09-01 22:58:05,273 - trainer - INFO -     macro_accuracy : 0.8155555725097656
+2023-09-01 22:58:05,273 - trainer - INFO -     macro_recall   : 0.6202837228775024
+2023-09-01 22:58:05,273 - trainer - INFO -     macro_precision: 0.6338914632797241
+2023-09-01 22:58:05,273 - trainer - INFO -     macro_f1       : 0.612504780292511
+2023-09-01 22:58:05,273 - trainer - INFO -     focus_cnn_map  : 0.20457763969898224
+2023-09-01 22:58:05,273 - trainer - INFO -     focus_cnn_map50: 0.4102303385734558
+2023-09-01 22:58:05,273 - trainer - INFO -     val_loss       : 6.9730259152345875
+2023-09-01 22:58:05,274 - trainer - INFO -     val_micro_accuracy: 0.9109489321708679
+2023-09-01 22:58:05,274 - trainer - INFO -     val_micro_recall: 0.8218978047370911
+2023-09-01 22:58:05,274 - trainer - INFO -     val_micro_precision: 0.8218978047370911
+2023-09-01 22:58:05,274 - trainer - INFO -     val_micro_f1   : 0.8218978047370911
+2023-09-01 22:58:05,274 - trainer - INFO -     val_macro_accuracy: 0.9109488725662231
+2023-09-01 22:58:05,274 - trainer - INFO -     val_macro_recall: 0.7220577001571655
+2023-09-01 22:58:05,274 - trainer - INFO -     val_macro_precision: 0.6587417125701904
+2023-09-01 22:58:05,274 - trainer - INFO -     val_macro_f1   : 0.6809569597244263
+2023-09-01 22:58:05,274 - trainer - INFO -     val_focus_cnn_map: 0.30461302399635315
+2023-09-01 22:58:05,274 - trainer - INFO -     val_focus_cnn_map50: 0.5247361063957214
+2023-09-01 22:58:05,794 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch3.pth ...
+2023-09-01 22:59:32,883 - trainer - INFO -     epoch          : 4
+2023-09-01 22:59:32,883 - trainer - INFO -     loss           : 12.646002447101433
+2023-09-01 22:59:32,883 - trainer - INFO -     micro_accuracy : 0.8185185194015503
+2023-09-01 22:59:32,883 - trainer - INFO -     micro_recall   : 0.6370370388031006
+2023-09-01 22:59:32,883 - trainer - INFO -     micro_precision: 0.6370370388031006
+2023-09-01 22:59:32,883 - trainer - INFO -     micro_f1       : 0.6370370388031006
+2023-09-01 22:59:32,883 - trainer - INFO -     macro_accuracy : 0.8185185194015503
+2023-09-01 22:59:32,883 - trainer - INFO -     macro_recall   : 0.6279491782188416
+2023-09-01 22:59:32,884 - trainer - INFO -     macro_precision: 0.6400849223136902
+2023-09-01 22:59:32,884 - trainer - INFO -     macro_f1       : 0.6199566721916199
+2023-09-01 22:59:32,884 - trainer - INFO -     focus_cnn_map  : 0.21937236189842224
+2023-09-01 22:59:32,884 - trainer - INFO -     focus_cnn_map50: 0.43296289443969727
+2023-09-01 22:59:32,884 - trainer - INFO -     val_loss       : 7.253906779511031
+2023-09-01 22:59:32,884 - trainer - INFO -     val_micro_accuracy: 0.9074209332466125
+2023-09-01 22:59:32,884 - trainer - INFO -     val_micro_recall: 0.8148418664932251
+2023-09-01 22:59:32,884 - trainer - INFO -     val_micro_precision: 0.8148418664932251
+2023-09-01 22:59:32,884 - trainer - INFO -     val_micro_f1   : 0.8148418664932251
+2023-09-01 22:59:32,884 - trainer - INFO -     val_macro_accuracy: 0.9074209332466125
+2023-09-01 22:59:32,884 - trainer - INFO -     val_macro_recall: 0.7234687209129333
+2023-09-01 22:59:32,884 - trainer - INFO -     val_macro_precision: 0.6375460624694824
+2023-09-01 22:59:32,885 - trainer - INFO -     val_macro_f1   : 0.6679075956344604
+2023-09-01 22:59:32,885 - trainer - INFO -     val_focus_cnn_map: 0.3006206154823303
+2023-09-01 22:59:32,885 - trainer - INFO -     val_focus_cnn_map50: 0.5266788005828857
+2023-09-01 22:59:33,371 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch4.pth ...
+2023-09-01 23:01:00,175 - trainer - INFO -     epoch          : 5
+2023-09-01 23:01:00,175 - trainer - INFO -     loss           : 12.40946409735881
+2023-09-01 23:01:00,175 - trainer - INFO -     micro_accuracy : 0.8271111249923706
+2023-09-01 23:01:00,175 - trainer - INFO -     micro_recall   : 0.6542222499847412
+2023-09-01 23:01:00,175 - trainer - INFO -     micro_precision: 0.6542222499847412
+2023-09-01 23:01:00,176 - trainer - INFO -     micro_f1       : 0.6542222499847412
+2023-09-01 23:01:00,176 - trainer - INFO -     macro_accuracy : 0.8271110653877258
+2023-09-01 23:01:00,176 - trainer - INFO -     macro_recall   : 0.6415750980377197
+2023-09-01 23:01:00,176 - trainer - INFO -     macro_precision: 0.6547254323959351
+2023-09-01 23:01:00,176 - trainer - INFO -     macro_f1       : 0.6363455653190613
+2023-09-01 23:01:00,176 - trainer - INFO -     focus_cnn_map  : 0.21835015714168549
+2023-09-01 23:01:00,176 - trainer - INFO -     focus_cnn_map50: 0.42657747864723206
+2023-09-01 23:01:00,176 - trainer - INFO -     val_loss       : 6.789328845434411
+2023-09-01 23:01:00,176 - trainer - INFO -     val_micro_accuracy: 0.91070556640625
+2023-09-01 23:01:00,176 - trainer - INFO -     val_micro_recall: 0.8214111924171448
+2023-09-01 23:01:00,176 - trainer - INFO -     val_micro_precision: 0.8214111924171448
+2023-09-01 23:01:00,177 - trainer - INFO -     val_micro_f1   : 0.8214111924171448
+2023-09-01 23:01:00,177 - trainer - INFO -     val_macro_accuracy: 0.91070556640625
+2023-09-01 23:01:00,177 - trainer - INFO -     val_macro_recall: 0.7482637166976929
+2023-09-01 23:01:00,177 - trainer - INFO -     val_macro_precision: 0.6404451131820679
+2023-09-01 23:01:00,177 - trainer - INFO -     val_macro_f1   : 0.6787011027336121
+2023-09-01 23:01:00,177 - trainer - INFO -     val_focus_cnn_map: 0.3076285123825073
+2023-09-01 23:01:00,177 - trainer - INFO -     val_focus_cnn_map50: 0.519615888595581
+2023-09-01 23:01:00,689 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch5.pth ...
+2023-09-01 23:01:01,355 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:02:29,655 - trainer - INFO -     epoch          : 6
+2023-09-01 23:02:29,655 - trainer - INFO -     loss           : 12.218109789028974
+2023-09-01 23:02:29,656 - trainer - INFO -     micro_accuracy : 0.8325926065444946
+2023-09-01 23:02:29,656 - trainer - INFO -     micro_recall   : 0.6651852130889893
+2023-09-01 23:02:29,656 - trainer - INFO -     micro_precision: 0.6651852130889893
+2023-09-01 23:02:29,656 - trainer - INFO -     micro_f1       : 0.6651852130889893
+2023-09-01 23:02:29,656 - trainer - INFO -     macro_accuracy : 0.8325926065444946
+2023-09-01 23:02:29,656 - trainer - INFO -     macro_recall   : 0.6498355865478516
+2023-09-01 23:02:29,656 - trainer - INFO -     macro_precision: 0.6641585230827332
+2023-09-01 23:02:29,656 - trainer - INFO -     macro_f1       : 0.6467981338500977
+2023-09-01 23:02:29,656 - trainer - INFO -     focus_cnn_map  : 0.21621963381767273
+2023-09-01 23:02:29,656 - trainer - INFO -     focus_cnn_map50: 0.43006211519241333
+2023-09-01 23:02:29,656 - trainer - INFO -     val_loss       : 6.659683479819187
+2023-09-01 23:02:29,657 - trainer - INFO -     val_micro_accuracy: 0.9178832173347473
+2023-09-01 23:02:29,657 - trainer - INFO -     val_micro_recall: 0.8357664346694946
+2023-09-01 23:02:29,657 - trainer - INFO -     val_micro_precision: 0.8357664346694946
+2023-09-01 23:02:29,657 - trainer - INFO -     val_micro_f1   : 0.8357664346694946
+2023-09-01 23:02:29,657 - trainer - INFO -     val_macro_accuracy: 0.9178832173347473
+2023-09-01 23:02:29,657 - trainer - INFO -     val_macro_recall: 0.7457343339920044
+2023-09-01 23:02:29,657 - trainer - INFO -     val_macro_precision: 0.6650905013084412
+2023-09-01 23:02:29,657 - trainer - INFO -     val_macro_f1   : 0.6972919702529907
+2023-09-01 23:02:29,657 - trainer - INFO -     val_focus_cnn_map: 0.3060120940208435
+2023-09-01 23:02:29,657 - trainer - INFO -     val_focus_cnn_map50: 0.5233839154243469
+2023-09-01 23:02:30,143 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch6.pth ...
+2023-09-01 23:02:30,778 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:03:57,348 - trainer - INFO -     epoch          : 7
+2023-09-01 23:03:57,349 - trainer - INFO -     loss           : 12.132594692874962
+2023-09-01 23:03:57,349 - trainer - INFO -     micro_accuracy : 0.828000009059906
+2023-09-01 23:03:57,349 - trainer - INFO -     micro_recall   : 0.656000018119812
+2023-09-01 23:03:57,349 - trainer - INFO -     micro_precision: 0.656000018119812
+2023-09-01 23:03:57,349 - trainer - INFO -     micro_f1       : 0.656000018119812
+2023-09-01 23:03:57,349 - trainer - INFO -     macro_accuracy : 0.8279999494552612
+2023-09-01 23:03:57,349 - trainer - INFO -     macro_recall   : 0.6451294422149658
+2023-09-01 23:03:57,349 - trainer - INFO -     macro_precision: 0.6568275690078735
+2023-09-01 23:03:57,349 - trainer - INFO -     macro_f1       : 0.6413174271583557
+2023-09-01 23:03:57,350 - trainer - INFO -     focus_cnn_map  : 0.2198454588651657
+2023-09-01 23:03:57,350 - trainer - INFO -     focus_cnn_map50: 0.44188717007637024
+2023-09-01 23:03:57,350 - trainer - INFO -     val_loss       : 6.639069836500079
+2023-09-01 23:03:57,350 - trainer - INFO -     val_micro_accuracy: 0.9188564419746399
+2023-09-01 23:03:57,350 - trainer - INFO -     val_micro_recall: 0.8377128839492798
+2023-09-01 23:03:57,350 - trainer - INFO -     val_micro_precision: 0.8377128839492798
+2023-09-01 23:03:57,350 - trainer - INFO -     val_micro_f1   : 0.8377128839492798
+2023-09-01 23:03:57,350 - trainer - INFO -     val_macro_accuracy: 0.9188563823699951
+2023-09-01 23:03:57,350 - trainer - INFO -     val_macro_recall: 0.7522603273391724
+2023-09-01 23:03:57,350 - trainer - INFO -     val_macro_precision: 0.6405626535415649
+2023-09-01 23:03:57,351 - trainer - INFO -     val_macro_f1   : 0.6855025291442871
+2023-09-01 23:03:57,351 - trainer - INFO -     val_focus_cnn_map: 0.2869003117084503
+2023-09-01 23:03:57,351 - trainer - INFO -     val_focus_cnn_map50: 0.5203505158424377
+2023-09-01 23:03:57,839 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch7.pth ...
+2023-09-01 23:03:58,495 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:05:25,378 - trainer - INFO -     epoch          : 8
+2023-09-01 23:05:25,379 - trainer - INFO -     loss           : 11.927025015925018
+2023-09-01 23:05:25,379 - trainer - INFO -     micro_accuracy : 0.8376296162605286
+2023-09-01 23:05:25,379 - trainer - INFO -     micro_recall   : 0.6752592325210571
+2023-09-01 23:05:25,379 - trainer - INFO -     micro_precision: 0.6752592325210571
+2023-09-01 23:05:25,379 - trainer - INFO -     micro_f1       : 0.6752592325210571
+2023-09-01 23:05:25,379 - trainer - INFO -     macro_accuracy : 0.8376295566558838
+2023-09-01 23:05:25,379 - trainer - INFO -     macro_recall   : 0.6555992364883423
+2023-09-01 23:05:25,379 - trainer - INFO -     macro_precision: 0.6801429986953735
+2023-09-01 23:05:25,379 - trainer - INFO -     macro_f1       : 0.6584501266479492
+2023-09-01 23:05:25,379 - trainer - INFO -     focus_cnn_map  : 0.21868334710597992
+2023-09-01 23:05:25,379 - trainer - INFO -     focus_cnn_map50: 0.42309466004371643
+2023-09-01 23:05:25,380 - trainer - INFO -     val_loss       : 6.359309473009997
+2023-09-01 23:05:25,380 - trainer - INFO -     val_micro_accuracy: 0.9178223609924316
+2023-09-01 23:05:25,380 - trainer - INFO -     val_micro_recall: 0.8356447815895081
+2023-09-01 23:05:25,380 - trainer - INFO -     val_micro_precision: 0.8356447815895081
+2023-09-01 23:05:25,380 - trainer - INFO -     val_micro_f1   : 0.8356447815895081
+2023-09-01 23:05:25,380 - trainer - INFO -     val_macro_accuracy: 0.9178223609924316
+2023-09-01 23:05:25,380 - trainer - INFO -     val_macro_recall: 0.7348305583000183
+2023-09-01 23:05:25,380 - trainer - INFO -     val_macro_precision: 0.6506049633026123
+2023-09-01 23:05:25,380 - trainer - INFO -     val_macro_f1   : 0.6847245693206787
+2023-09-01 23:05:25,380 - trainer - INFO -     val_focus_cnn_map: 0.29652565717697144
+2023-09-01 23:05:25,380 - trainer - INFO -     val_focus_cnn_map50: 0.5183354616165161
+2023-09-01 23:05:25,860 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch8.pth ...
+2023-09-01 23:05:26,622 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:06:53,373 - trainer - INFO -     epoch          : 9
+2023-09-01 23:06:53,373 - trainer - INFO -     loss           : 11.846199223692988
+2023-09-01 23:06:53,374 - trainer - INFO -     micro_accuracy : 0.8311111330986023
+2023-09-01 23:06:53,374 - trainer - INFO -     micro_recall   : 0.6622222065925598
+2023-09-01 23:06:53,374 - trainer - INFO -     micro_precision: 0.6622222065925598
+2023-09-01 23:06:53,374 - trainer - INFO -     micro_f1       : 0.6622222065925598
+2023-09-01 23:06:53,374 - trainer - INFO -     macro_accuracy : 0.8311111330986023
+2023-09-01 23:06:53,374 - trainer - INFO -     macro_recall   : 0.6417524814605713
+2023-09-01 23:06:53,374 - trainer - INFO -     macro_precision: 0.6518450379371643
+2023-09-01 23:06:53,374 - trainer - INFO -     macro_f1       : 0.6409258842468262
+2023-09-01 23:06:53,374 - trainer - INFO -     focus_cnn_map  : 0.21847780048847198
+2023-09-01 23:06:53,374 - trainer - INFO -     focus_cnn_map50: 0.42393383383750916
+2023-09-01 23:06:53,375 - trainer - INFO -     val_loss       : 6.353197493525439
+2023-09-01 23:06:53,375 - trainer - INFO -     val_micro_accuracy: 0.919099748134613
+2023-09-01 23:06:53,375 - trainer - INFO -     val_micro_recall: 0.8381994962692261
+2023-09-01 23:06:53,375 - trainer - INFO -     val_micro_precision: 0.8381994962692261
+2023-09-01 23:06:53,375 - trainer - INFO -     val_micro_f1   : 0.8381994962692261
+2023-09-01 23:06:53,375 - trainer - INFO -     val_macro_accuracy: 0.919099748134613
+2023-09-01 23:06:53,375 - trainer - INFO -     val_macro_recall: 0.7541251182556152
+2023-09-01 23:06:53,375 - trainer - INFO -     val_macro_precision: 0.6575716137886047
+2023-09-01 23:06:53,375 - trainer - INFO -     val_macro_f1   : 0.6961146593093872
+2023-09-01 23:06:53,375 - trainer - INFO -     val_focus_cnn_map: 0.3082396388053894
+2023-09-01 23:06:53,375 - trainer - INFO -     val_focus_cnn_map50: 0.5312462449073792
+2023-09-01 23:06:53,854 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch9.pth ...
+2023-09-01 23:06:54,491 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:08:20,484 - trainer - INFO -     epoch          : 10
+2023-09-01 23:08:20,484 - trainer - INFO -     loss           : 12.039294101822545
+2023-09-01 23:08:20,484 - trainer - INFO -     micro_accuracy : 0.8358518481254578
+2023-09-01 23:08:20,484 - trainer - INFO -     micro_recall   : 0.6717036962509155
+2023-09-01 23:08:20,484 - trainer - INFO -     micro_precision: 0.6717036962509155
+2023-09-01 23:08:20,485 - trainer - INFO -     micro_f1       : 0.6717036962509155
+2023-09-01 23:08:20,485 - trainer - INFO -     macro_accuracy : 0.835851788520813
+2023-09-01 23:08:20,485 - trainer - INFO -     macro_recall   : 0.6551378965377808
+2023-09-01 23:08:20,485 - trainer - INFO -     macro_precision: 0.6688944697380066
+2023-09-01 23:08:20,485 - trainer - INFO -     macro_f1       : 0.6565195322036743
+2023-09-01 23:08:20,485 - trainer - INFO -     focus_cnn_map  : 0.21757912635803223
+2023-09-01 23:08:20,485 - trainer - INFO -     focus_cnn_map50: 0.4347493052482605
+2023-09-01 23:08:20,485 - trainer - INFO -     val_loss       : 6.440724187119063
+2023-09-01 23:08:20,485 - trainer - INFO -     val_micro_accuracy: 0.923600971698761
+2023-09-01 23:08:20,485 - trainer - INFO -     val_micro_recall: 0.847201943397522
+2023-09-01 23:08:20,485 - trainer - INFO -     val_micro_precision: 0.847201943397522
+2023-09-01 23:08:20,486 - trainer - INFO -     val_micro_f1   : 0.847201943397522
+2023-09-01 23:08:20,486 - trainer - INFO -     val_macro_accuracy: 0.9236010313034058
+2023-09-01 23:08:20,486 - trainer - INFO -     val_macro_recall: 0.7480127215385437
+2023-09-01 23:08:20,486 - trainer - INFO -     val_macro_precision: 0.6429848074913025
+2023-09-01 23:08:20,486 - trainer - INFO -     val_macro_f1   : 0.6863160729408264
+2023-09-01 23:08:20,486 - trainer - INFO -     val_focus_cnn_map: 0.30696484446525574
+2023-09-01 23:08:20,486 - trainer - INFO -     val_focus_cnn_map50: 0.5250606536865234
+2023-09-01 23:08:20,975 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch10.pth ...
+2023-09-01 23:09:47,997 - trainer - INFO -     epoch          : 11
+2023-09-01 23:09:47,997 - trainer - INFO -     loss           : 11.877061346886864
+2023-09-01 23:09:47,997 - trainer - INFO -     micro_accuracy : 0.8357037305831909
+2023-09-01 23:09:47,997 - trainer - INFO -     micro_recall   : 0.6714074015617371
+2023-09-01 23:09:47,997 - trainer - INFO -     micro_precision: 0.6714074015617371
+2023-09-01 23:09:47,997 - trainer - INFO -     micro_f1       : 0.6714074015617371
+2023-09-01 23:09:47,997 - trainer - INFO -     macro_accuracy : 0.8357037305831909
+2023-09-01 23:09:47,997 - trainer - INFO -     macro_recall   : 0.6524474024772644
+2023-09-01 23:09:47,997 - trainer - INFO -     macro_precision: 0.6684321165084839
+2023-09-01 23:09:47,998 - trainer - INFO -     macro_f1       : 0.6555649638175964
+2023-09-01 23:09:47,998 - trainer - INFO -     focus_cnn_map  : 0.21719788014888763
+2023-09-01 23:09:47,998 - trainer - INFO -     focus_cnn_map50: 0.42436501383781433
+2023-09-01 23:09:47,998 - trainer - INFO -     val_loss       : 6.48804480738418
+2023-09-01 23:09:47,998 - trainer - INFO -     val_micro_accuracy: 0.9180656671524048
+2023-09-01 23:09:47,998 - trainer - INFO -     val_micro_recall: 0.8361313939094543
+2023-09-01 23:09:47,998 - trainer - INFO -     val_micro_precision: 0.8361313939094543
+2023-09-01 23:09:47,998 - trainer - INFO -     val_micro_f1   : 0.8361313939094543
+2023-09-01 23:09:47,998 - trainer - INFO -     val_macro_accuracy: 0.9180656671524048
+2023-09-01 23:09:47,998 - trainer - INFO -     val_macro_recall: 0.7574625611305237
+2023-09-01 23:09:47,999 - trainer - INFO -     val_macro_precision: 0.6232544779777527
+2023-09-01 23:09:47,999 - trainer - INFO -     val_macro_f1   : 0.6754802465438843
+2023-09-01 23:09:47,999 - trainer - INFO -     val_focus_cnn_map: 0.30729907751083374
+2023-09-01 23:09:47,999 - trainer - INFO -     val_focus_cnn_map50: 0.5253654718399048
+2023-09-01 23:09:48,506 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch11.pth ...
+2023-09-01 23:11:15,763 - trainer - INFO -     epoch          : 12
+2023-09-01 23:11:15,763 - trainer - INFO -     loss           : 11.849197750360194
+2023-09-01 23:11:15,763 - trainer - INFO -     micro_accuracy : 0.8291851878166199
+2023-09-01 23:11:15,763 - trainer - INFO -     micro_recall   : 0.6583703756332397
+2023-09-01 23:11:15,763 - trainer - INFO -     micro_precision: 0.6583703756332397
+2023-09-01 23:11:15,763 - trainer - INFO -     micro_f1       : 0.6583703756332397
+2023-09-01 23:11:15,763 - trainer - INFO -     macro_accuracy : 0.8291851878166199
+2023-09-01 23:11:15,763 - trainer - INFO -     macro_recall   : 0.6382104754447937
+2023-09-01 23:11:15,763 - trainer - INFO -     macro_precision: 0.6531013250350952
+2023-09-01 23:11:15,764 - trainer - INFO -     macro_f1       : 0.6422207355499268
+2023-09-01 23:11:15,764 - trainer - INFO -     focus_cnn_map  : 0.2145036906003952
+2023-09-01 23:11:15,764 - trainer - INFO -     focus_cnn_map50: 0.43263328075408936
+2023-09-01 23:11:15,764 - trainer - INFO -     val_loss       : 6.735233170348544
+2023-09-01 23:11:15,764 - trainer - INFO -     val_micro_accuracy: 0.9209246039390564
+2023-09-01 23:11:15,764 - trainer - INFO -     val_micro_recall: 0.841849148273468
+2023-09-01 23:11:15,764 - trainer - INFO -     val_micro_precision: 0.841849148273468
+2023-09-01 23:11:15,764 - trainer - INFO -     val_micro_f1   : 0.841849148273468
+2023-09-01 23:11:15,764 - trainer - INFO -     val_macro_accuracy: 0.9209246039390564
+2023-09-01 23:11:15,764 - trainer - INFO -     val_macro_recall: 0.7561012506484985
+2023-09-01 23:11:15,765 - trainer - INFO -     val_macro_precision: 0.6264921426773071
+2023-09-01 23:11:15,765 - trainer - INFO -     val_macro_f1   : 0.6776447296142578
+2023-09-01 23:11:15,765 - trainer - INFO -     val_focus_cnn_map: 0.2949327826499939
+2023-09-01 23:11:15,765 - trainer - INFO -     val_focus_cnn_map50: 0.5253944993019104
+2023-09-01 23:11:16,163 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch12.pth ...
+2023-09-01 23:12:42,720 - trainer - INFO -     epoch          : 13
+2023-09-01 23:12:42,720 - trainer - INFO -     loss           : 11.843621381571594
+2023-09-01 23:12:42,720 - trainer - INFO -     micro_accuracy : 0.8352592587471008
+2023-09-01 23:12:42,720 - trainer - INFO -     micro_recall   : 0.6705185174942017
+2023-09-01 23:12:42,721 - trainer - INFO -     micro_precision: 0.6705185174942017
+2023-09-01 23:12:42,721 - trainer - INFO -     micro_f1       : 0.6705185174942017
+2023-09-01 23:12:42,721 - trainer - INFO -     macro_accuracy : 0.835259199142456
+2023-09-01 23:12:42,721 - trainer - INFO -     macro_recall   : 0.653091311454773
+2023-09-01 23:12:42,721 - trainer - INFO -     macro_precision: 0.6651800870895386
+2023-09-01 23:12:42,721 - trainer - INFO -     macro_f1       : 0.6553777456283569
+2023-09-01 23:12:42,721 - trainer - INFO -     focus_cnn_map  : 0.2214856594800949
+2023-09-01 23:12:42,721 - trainer - INFO -     focus_cnn_map50: 0.42951032519340515
+2023-09-01 23:12:42,721 - trainer - INFO -     val_loss       : 6.269619690817456
+2023-09-01 23:12:42,721 - trainer - INFO -     val_micro_accuracy: 0.9229927062988281
+2023-09-01 23:12:42,722 - trainer - INFO -     val_micro_recall: 0.8459854125976562
+2023-09-01 23:12:42,722 - trainer - INFO -     val_micro_precision: 0.8459854125976562
+2023-09-01 23:12:42,722 - trainer - INFO -     val_micro_f1   : 0.8459854125976562
+2023-09-01 23:12:42,722 - trainer - INFO -     val_macro_accuracy: 0.9229927062988281
+2023-09-01 23:12:42,722 - trainer - INFO -     val_macro_recall: 0.7718122005462646
+2023-09-01 23:12:42,722 - trainer - INFO -     val_macro_precision: 0.6368898749351501
+2023-09-01 23:12:42,722 - trainer - INFO -     val_macro_f1   : 0.690349817276001
+2023-09-01 23:12:42,722 - trainer - INFO -     val_focus_cnn_map: 0.31143274903297424
+2023-09-01 23:12:42,722 - trainer - INFO -     val_focus_cnn_map50: 0.5299080014228821
+2023-09-01 23:12:43,143 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch13.pth ...
+2023-09-01 23:12:43,855 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:14:12,131 - trainer - INFO -     epoch          : 14
+2023-09-01 23:14:12,132 - trainer - INFO -     loss           : 11.777878291170362
+2023-09-01 23:14:12,132 - trainer - INFO -     micro_accuracy : 0.8348147869110107
+2023-09-01 23:14:12,132 - trainer - INFO -     micro_recall   : 0.6696296334266663
+2023-09-01 23:14:12,132 - trainer - INFO -     micro_precision: 0.6696296334266663
+2023-09-01 23:14:12,132 - trainer - INFO -     micro_f1       : 0.6696296334266663
+2023-09-01 23:14:12,132 - trainer - INFO -     macro_accuracy : 0.8348148465156555
+2023-09-01 23:14:12,132 - trainer - INFO -     macro_recall   : 0.6482072472572327
+2023-09-01 23:14:12,133 - trainer - INFO -     macro_precision: 0.6668321490287781
+2023-09-01 23:14:12,133 - trainer - INFO -     macro_f1       : 0.6547545194625854
+2023-09-01 23:14:12,133 - trainer - INFO -     focus_cnn_map  : 0.22452111542224884
+2023-09-01 23:14:12,133 - trainer - INFO -     focus_cnn_map50: 0.42588895559310913
+2023-09-01 23:14:12,133 - trainer - INFO -     val_loss       : 6.668107087528983
+2023-09-01 23:14:12,133 - trainer - INFO -     val_micro_accuracy: 0.917396605014801
+2023-09-01 23:14:12,133 - trainer - INFO -     val_micro_recall: 0.834793210029602
+2023-09-01 23:14:12,133 - trainer - INFO -     val_micro_precision: 0.834793210029602
+2023-09-01 23:14:12,133 - trainer - INFO -     val_micro_f1   : 0.834793210029602
+2023-09-01 23:14:12,133 - trainer - INFO -     val_macro_accuracy: 0.917396605014801
+2023-09-01 23:14:12,134 - trainer - INFO -     val_macro_recall: 0.7782427072525024
+2023-09-01 23:14:12,134 - trainer - INFO -     val_macro_precision: 0.6032154560089111
+2023-09-01 23:14:12,134 - trainer - INFO -     val_macro_f1   : 0.6653333306312561
+2023-09-01 23:14:12,134 - trainer - INFO -     val_focus_cnn_map: 0.3092355728149414
+2023-09-01 23:14:12,134 - trainer - INFO -     val_focus_cnn_map50: 0.5412251353263855
+2023-09-01 23:14:12,538 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch14.pth ...
+2023-09-01 23:15:40,099 - trainer - INFO -     epoch          : 15
+2023-09-01 23:15:40,099 - trainer - INFO -     loss           : 11.586763475982236
+2023-09-01 23:15:40,099 - trainer - INFO -     micro_accuracy : 0.8451851606369019
+2023-09-01 23:15:40,099 - trainer - INFO -     micro_recall   : 0.6903703808784485
+2023-09-01 23:15:40,100 - trainer - INFO -     micro_precision: 0.6903703808784485
+2023-09-01 23:15:40,100 - trainer - INFO -     micro_f1       : 0.6903703808784485
+2023-09-01 23:15:40,100 - trainer - INFO -     macro_accuracy : 0.8451851606369019
+2023-09-01 23:15:40,100 - trainer - INFO -     macro_recall   : 0.6634883284568787
+2023-09-01 23:15:40,100 - trainer - INFO -     macro_precision: 0.6855436563491821
+2023-09-01 23:15:40,100 - trainer - INFO -     macro_f1       : 0.6712296009063721
+2023-09-01 23:15:40,100 - trainer - INFO -     focus_cnn_map  : 0.21684935688972473
+2023-09-01 23:15:40,100 - trainer - INFO -     focus_cnn_map50: 0.4129772186279297
+2023-09-01 23:15:40,100 - trainer - INFO -     val_loss       : 6.521148691343707
+2023-09-01 23:15:40,100 - trainer - INFO -     val_micro_accuracy: 0.9176399111747742
+2023-09-01 23:15:40,100 - trainer - INFO -     val_micro_recall: 0.8352798223495483
+2023-09-01 23:15:40,101 - trainer - INFO -     val_micro_precision: 0.8352798223495483
+2023-09-01 23:15:40,101 - trainer - INFO -     val_micro_f1   : 0.8352798223495483
+2023-09-01 23:15:40,101 - trainer - INFO -     val_macro_accuracy: 0.9176398515701294
+2023-09-01 23:15:40,101 - trainer - INFO -     val_macro_recall: 0.7545208930969238
+2023-09-01 23:15:40,101 - trainer - INFO -     val_macro_precision: 0.6213607788085938
+2023-09-01 23:15:40,101 - trainer - INFO -     val_macro_f1   : 0.6724005341529846
+2023-09-01 23:15:40,101 - trainer - INFO -     val_focus_cnn_map: 0.29701969027519226
+2023-09-01 23:15:40,101 - trainer - INFO -     val_focus_cnn_map50: 0.5213831067085266
+2023-09-01 23:15:40,605 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch15.pth ...
+2023-09-01 23:17:08,273 - trainer - INFO -     epoch          : 16
+2023-09-01 23:17:08,273 - trainer - INFO -     loss           : 11.763084666829714
+2023-09-01 23:17:08,273 - trainer - INFO -     micro_accuracy : 0.8354074358940125
+2023-09-01 23:17:08,273 - trainer - INFO -     micro_recall   : 0.6708148121833801
+2023-09-01 23:17:08,273 - trainer - INFO -     micro_precision: 0.6708148121833801
+2023-09-01 23:17:08,273 - trainer - INFO -     micro_f1       : 0.6708148121833801
+2023-09-01 23:17:08,274 - trainer - INFO -     macro_accuracy : 0.8354074358940125
+2023-09-01 23:17:08,274 - trainer - INFO -     macro_recall   : 0.653139054775238
+2023-09-01 23:17:08,274 - trainer - INFO -     macro_precision: 0.6665167212486267
+2023-09-01 23:17:08,274 - trainer - INFO -     macro_f1       : 0.6572406888008118
+2023-09-01 23:17:08,274 - trainer - INFO -     focus_cnn_map  : 0.22249889373779297
+2023-09-01 23:17:08,274 - trainer - INFO -     focus_cnn_map50: 0.4162067174911499
+2023-09-01 23:17:08,274 - trainer - INFO -     val_loss       : 5.870262499465499
+2023-09-01 23:17:08,274 - trainer - INFO -     val_micro_accuracy: 0.919099748134613
+2023-09-01 23:17:08,274 - trainer - INFO -     val_micro_recall: 0.8381994962692261
+2023-09-01 23:17:08,274 - trainer - INFO -     val_micro_precision: 0.8381994962692261
+2023-09-01 23:17:08,274 - trainer - INFO -     val_micro_f1   : 0.8381994962692261
+2023-09-01 23:17:08,275 - trainer - INFO -     val_macro_accuracy: 0.9190998077392578
+2023-09-01 23:17:08,275 - trainer - INFO -     val_macro_recall: 0.7791075706481934
+2023-09-01 23:17:08,275 - trainer - INFO -     val_macro_precision: 0.618459165096283
+2023-09-01 23:17:08,275 - trainer - INFO -     val_macro_f1   : 0.6764289736747742
+2023-09-01 23:17:08,275 - trainer - INFO -     val_focus_cnn_map: 0.32393017411231995
+2023-09-01 23:17:08,275 - trainer - INFO -     val_focus_cnn_map50: 0.5446428656578064
+2023-09-01 23:17:08,907 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch16.pth ...
+2023-09-01 23:17:09,546 - trainer - INFO - Saving current best: model_best.pth ...
+2023-09-01 23:18:36,746 - trainer - INFO -     epoch          : 17
+2023-09-01 23:18:36,746 - trainer - INFO -     loss           : 11.467332047475896
+2023-09-01 23:18:36,746 - trainer - INFO -     micro_accuracy : 0.8405925631523132
+2023-09-01 23:18:36,746 - trainer - INFO -     micro_recall   : 0.6811851859092712
+2023-09-01 23:18:36,747 - trainer - INFO -     micro_precision: 0.6811851859092712
+2023-09-01 23:18:36,747 - trainer - INFO -     micro_f1       : 0.6811851859092712
+2023-09-01 23:18:36,747 - trainer - INFO -     macro_accuracy : 0.8405925631523132
+2023-09-01 23:18:36,747 - trainer - INFO -     macro_recall   : 0.6631149053573608
+2023-09-01 23:18:36,747 - trainer - INFO -     macro_precision: 0.6827983856201172
+2023-09-01 23:18:36,747 - trainer - INFO -     macro_f1       : 0.6707447171211243
+2023-09-01 23:18:36,747 - trainer - INFO -     focus_cnn_map  : 0.21586036682128906
+2023-09-01 23:18:36,747 - trainer - INFO -     focus_cnn_map50: 0.4168330132961273
+2023-09-01 23:18:36,747 - trainer - INFO -     val_loss       : 6.725010728420213
+2023-09-01 23:18:36,747 - trainer - INFO -     val_micro_accuracy: 0.924452543258667
+2023-09-01 23:18:36,747 - trainer - INFO -     val_micro_recall: 0.848905086517334
+2023-09-01 23:18:36,748 - trainer - INFO -     val_micro_precision: 0.848905086517334
+2023-09-01 23:18:36,748 - trainer - INFO -     val_micro_f1   : 0.848905086517334
+2023-09-01 23:18:36,748 - trainer - INFO -     val_macro_accuracy: 0.9244526028633118
+2023-09-01 23:18:36,748 - trainer - INFO -     val_macro_recall: 0.7538775205612183
+2023-09-01 23:18:36,748 - trainer - INFO -     val_macro_precision: 0.6279288530349731
+2023-09-01 23:18:36,748 - trainer - INFO -     val_macro_f1   : 0.6781526803970337
+2023-09-01 23:18:36,748 - trainer - INFO -     val_focus_cnn_map: 0.30331337451934814
+2023-09-01 23:18:36,748 - trainer - INFO -     val_focus_cnn_map50: 0.5272926688194275
+2023-09-01 23:18:37,233 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch17.pth ...
+2023-09-01 23:20:03,744 - trainer - INFO -     epoch          : 18
+2023-09-01 23:20:03,745 - trainer - INFO -     loss           : 11.889242172241211
+2023-09-01 23:20:03,745 - trainer - INFO -     micro_accuracy : 0.8383703827857971
+2023-09-01 23:20:03,745 - trainer - INFO -     micro_recall   : 0.6767407655715942
+2023-09-01 23:20:03,745 - trainer - INFO -     micro_precision: 0.6767407655715942
+2023-09-01 23:20:03,745 - trainer - INFO -     micro_f1       : 0.6767407655715942
+2023-09-01 23:20:03,745 - trainer - INFO -     macro_accuracy : 0.8383703827857971
+2023-09-01 23:20:03,745 - trainer - INFO -     macro_recall   : 0.6531809568405151
+2023-09-01 23:20:03,745 - trainer - INFO -     macro_precision: 0.6693354845046997
+2023-09-01 23:20:03,745 - trainer - INFO -     macro_f1       : 0.6589305400848389
+2023-09-01 23:20:03,746 - trainer - INFO -     focus_cnn_map  : 0.22000782191753387
+2023-09-01 23:20:03,746 - trainer - INFO -     focus_cnn_map50: 0.416867196559906
+2023-09-01 23:20:03,746 - trainer - INFO -     val_loss       : 6.516317419534506
+2023-09-01 23:20:03,746 - trainer - INFO -     val_micro_accuracy: 0.9226277470588684
+2023-09-01 23:20:03,746 - trainer - INFO -     val_micro_recall: 0.8452554941177368
+2023-09-01 23:20:03,746 - trainer - INFO -     val_micro_precision: 0.8452554941177368
+2023-09-01 23:20:03,746 - trainer - INFO -     val_micro_f1   : 0.8452554941177368
+2023-09-01 23:20:03,746 - trainer - INFO -     val_macro_accuracy: 0.9226277470588684
+2023-09-01 23:20:03,746 - trainer - INFO -     val_macro_recall: 0.7606870532035828
+2023-09-01 23:20:03,747 - trainer - INFO -     val_macro_precision: 0.6172332763671875
+2023-09-01 23:20:03,747 - trainer - INFO -     val_macro_f1   : 0.6726537942886353
+2023-09-01 23:20:03,747 - trainer - INFO -     val_focus_cnn_map: 0.3042179346084595
+2023-09-01 23:20:03,747 - trainer - INFO -     val_focus_cnn_map50: 0.525645911693573
+2023-09-01 23:20:04,157 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch18.pth ...
+2023-09-01 23:21:31,177 - trainer - INFO -     epoch          : 19
+2023-09-01 23:21:31,178 - trainer - INFO -     loss           : 11.621788790528203
+2023-09-01 23:21:31,178 - trainer - INFO -     micro_accuracy : 0.8391110897064209
+2023-09-01 23:21:31,178 - trainer - INFO -     micro_recall   : 0.6782222390174866
+2023-09-01 23:21:31,178 - trainer - INFO -     micro_precision: 0.6782222390174866
+2023-09-01 23:21:31,178 - trainer - INFO -     micro_f1       : 0.6782222390174866
+2023-09-01 23:21:31,178 - trainer - INFO -     macro_accuracy : 0.8391110897064209
+2023-09-01 23:21:31,178 - trainer - INFO -     macro_recall   : 0.6552982330322266
+2023-09-01 23:21:31,178 - trainer - INFO -     macro_precision: 0.6707728505134583
+2023-09-01 23:21:31,179 - trainer - INFO -     macro_f1       : 0.660825252532959
+2023-09-01 23:21:31,179 - trainer - INFO -     focus_cnn_map  : 0.21673749387264252
+2023-09-01 23:21:31,179 - trainer - INFO -     focus_cnn_map50: 0.4335494041442871
+2023-09-01 23:21:31,179 - trainer - INFO -     val_loss       : 6.4626022868378215
+2023-09-01 23:21:31,179 - trainer - INFO -     val_micro_accuracy: 0.9272506237030029
+2023-09-01 23:21:31,179 - trainer - INFO -     val_micro_recall: 0.8545011878013611
+2023-09-01 23:21:31,179 - trainer - INFO -     val_micro_precision: 0.8545011878013611
+2023-09-01 23:21:31,179 - trainer - INFO -     val_micro_f1   : 0.8545011878013611
+2023-09-01 23:21:31,179 - trainer - INFO -     val_macro_accuracy: 0.9272506237030029
+2023-09-01 23:21:31,179 - trainer - INFO -     val_macro_recall: 0.7772756218910217
+2023-09-01 23:21:31,180 - trainer - INFO -     val_macro_precision: 0.6383956670761108
+2023-09-01 23:21:31,180 - trainer - INFO -     val_macro_f1   : 0.6928368210792542
+2023-09-01 23:21:31,180 - trainer - INFO -     val_focus_cnn_map: 0.31077325344085693
+2023-09-01 23:21:31,180 - trainer - INFO -     val_focus_cnn_map50: 0.5316953659057617
+2023-09-01 23:21:31,751 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch19.pth ...
+2023-09-01 23:23:23,488 - trainer - INFO -     epoch          : 20
+2023-09-01 23:23:23,488 - trainer - INFO -     loss           : 11.756629547602694
+2023-09-01 23:23:23,488 - trainer - INFO -     micro_accuracy : 0.8453333377838135
+2023-09-01 23:23:23,489 - trainer - INFO -     micro_recall   : 0.690666675567627
+2023-09-01 23:23:23,489 - trainer - INFO -     micro_precision: 0.690666675567627
+2023-09-01 23:23:23,489 - trainer - INFO -     micro_f1       : 0.690666675567627
+2023-09-01 23:23:23,489 - trainer - INFO -     macro_accuracy : 0.8453333377838135
+2023-09-01 23:23:23,489 - trainer - INFO -     macro_recall   : 0.6635544300079346
+2023-09-01 23:23:23,489 - trainer - INFO -     macro_precision: 0.6870554089546204
+2023-09-01 23:23:23,489 - trainer - INFO -     macro_f1       : 0.672932505607605
+2023-09-01 23:23:23,489 - trainer - INFO -     focus_cnn_map  : 0.21652956306934357
+2023-09-01 23:23:23,489 - trainer - INFO -     focus_cnn_map50: 0.42098763585090637
+2023-09-01 23:23:23,490 - trainer - INFO -     val_loss       : 6.609336873126584
+2023-09-01 23:23:23,490 - trainer - INFO -     val_micro_accuracy: 0.9271897673606873
+2023-09-01 23:23:23,490 - trainer - INFO -     val_micro_recall: 0.8543795347213745
+2023-09-01 23:23:23,490 - trainer - INFO -     val_micro_precision: 0.8543795347213745
+2023-09-01 23:23:23,490 - trainer - INFO -     val_micro_f1   : 0.8543795347213745
+2023-09-01 23:23:23,490 - trainer - INFO -     val_macro_accuracy: 0.9271897077560425
+2023-09-01 23:23:23,490 - trainer - INFO -     val_macro_recall: 0.7544896602630615
+2023-09-01 23:23:23,490 - trainer - INFO -     val_macro_precision: 0.6544134616851807
+2023-09-01 23:23:23,490 - trainer - INFO -     val_macro_f1   : 0.6963585019111633
+2023-09-01 23:23:23,490 - trainer - INFO -     val_focus_cnn_map: 0.29407891631126404
+2023-09-01 23:23:23,491 - trainer - INFO -     val_focus_cnn_map50: 0.5189003944396973
+2023-09-01 23:23:23,893 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch20.pth ...
+2023-09-01 23:24:51,527 - trainer - INFO -     epoch          : 21
+2023-09-01 23:24:51,527 - trainer - INFO -     loss           : 11.71325630537221
+2023-09-01 23:24:51,527 - trainer - INFO -     micro_accuracy : 0.8383703827857971
+2023-09-01 23:24:51,527 - trainer - INFO -     micro_recall   : 0.6767407655715942
+2023-09-01 23:24:51,527 - trainer - INFO -     micro_precision: 0.6767407655715942
+2023-09-01 23:24:51,527 - trainer - INFO -     micro_f1       : 0.6767407655715942
+2023-09-01 23:24:51,527 - trainer - INFO -     macro_accuracy : 0.8383703827857971
+2023-09-01 23:24:51,527 - trainer - INFO -     macro_recall   : 0.6526482701301575
+2023-09-01 23:24:51,528 - trainer - INFO -     macro_precision: 0.6754118204116821
+2023-09-01 23:24:51,528 - trainer - INFO -     macro_f1       : 0.6617374420166016
+2023-09-01 23:24:51,528 - trainer - INFO -     focus_cnn_map  : 0.21642030775547028
+2023-09-01 23:24:51,528 - trainer - INFO -     focus_cnn_map50: 0.4211309254169464
+2023-09-01 23:24:51,528 - trainer - INFO -     val_loss       : 6.24036777712578
+2023-09-01 23:24:51,528 - trainer - INFO -     val_micro_accuracy: 0.926703155040741
+2023-09-01 23:24:51,528 - trainer - INFO -     val_micro_recall: 0.8534063100814819
+2023-09-01 23:24:51,528 - trainer - INFO -     val_micro_precision: 0.8534063100814819
+2023-09-01 23:24:51,528 - trainer - INFO -     val_micro_f1   : 0.8534063100814819
+2023-09-01 23:24:51,528 - trainer - INFO -     val_macro_accuracy: 0.926703155040741
+2023-09-01 23:24:51,528 - trainer - INFO -     val_macro_recall: 0.7765834331512451
+2023-09-01 23:24:51,529 - trainer - INFO -     val_macro_precision: 0.6367178559303284
+2023-09-01 23:24:51,529 - trainer - INFO -     val_macro_f1   : 0.6917808055877686
+2023-09-01 23:24:51,529 - trainer - INFO -     val_focus_cnn_map: 0.3095478117465973
+2023-09-01 23:24:51,529 - trainer - INFO -     val_focus_cnn_map50: 0.5287414193153381
+2023-09-01 23:24:52,003 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch21.pth ...
+2023-09-01 23:26:18,811 - trainer - INFO -     epoch          : 22
+2023-09-01 23:26:18,811 - trainer - INFO -     loss           : 11.444207527268102
+2023-09-01 23:26:18,811 - trainer - INFO -     micro_accuracy : 0.8425185084342957
+2023-09-01 23:26:18,811 - trainer - INFO -     micro_recall   : 0.6850370168685913
+2023-09-01 23:26:18,811 - trainer - INFO -     micro_precision: 0.6850370168685913
+2023-09-01 23:26:18,811 - trainer - INFO -     micro_f1       : 0.6850370168685913
+2023-09-01 23:26:18,812 - trainer - INFO -     macro_accuracy : 0.8425184488296509
+2023-09-01 23:26:18,812 - trainer - INFO -     macro_recall   : 0.6615829467773438
+2023-09-01 23:26:18,812 - trainer - INFO -     macro_precision: 0.6838734149932861
+2023-09-01 23:26:18,812 - trainer - INFO -     macro_f1       : 0.670569121837616
+2023-09-01 23:26:18,812 - trainer - INFO -     focus_cnn_map  : 0.2248363047838211
+2023-09-01 23:26:18,812 - trainer - INFO -     focus_cnn_map50: 0.4387081265449524
+2023-09-01 23:26:18,812 - trainer - INFO -     val_loss       : 6.332971918028455
+2023-09-01 23:26:18,812 - trainer - INFO -     val_micro_accuracy: 0.9253649711608887
+2023-09-01 23:26:18,812 - trainer - INFO -     val_micro_recall: 0.8507299423217773
+2023-09-01 23:26:18,812 - trainer - INFO -     val_micro_precision: 0.8507299423217773
+2023-09-01 23:26:18,812 - trainer - INFO -     val_micro_f1   : 0.8507299423217773
+2023-09-01 23:26:18,813 - trainer - INFO -     val_macro_accuracy: 0.9253649711608887
+2023-09-01 23:26:18,813 - trainer - INFO -     val_macro_recall: 0.7606725692749023
+2023-09-01 23:26:18,813 - trainer - INFO -     val_macro_precision: 0.6411486268043518
+2023-09-01 23:26:18,813 - trainer - INFO -     val_macro_f1   : 0.6898307204246521
+2023-09-01 23:26:18,813 - trainer - INFO -     val_focus_cnn_map: 0.3138431906700134
+2023-09-01 23:26:18,813 - trainer - INFO -     val_focus_cnn_map50: 0.53898686170578
+2023-09-01 23:26:19,292 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch22.pth ...
+2023-09-01 23:27:45,915 - trainer - INFO -     epoch          : 23
+2023-09-01 23:27:45,915 - trainer - INFO -     loss           : 11.696239316967171
+2023-09-01 23:27:45,915 - trainer - INFO -     micro_accuracy : 0.8413333296775818
+2023-09-01 23:27:45,915 - trainer - INFO -     micro_recall   : 0.6826666593551636
+2023-09-01 23:27:45,915 - trainer - INFO -     micro_precision: 0.6826666593551636
+2023-09-01 23:27:45,916 - trainer - INFO -     micro_f1       : 0.6826666593551636
+2023-09-01 23:27:45,916 - trainer - INFO -     macro_accuracy : 0.8413333296775818
+2023-09-01 23:27:45,916 - trainer - INFO -     macro_recall   : 0.6566404700279236
+2023-09-01 23:27:45,916 - trainer - INFO -     macro_precision: 0.6817045211791992
+2023-09-01 23:27:45,916 - trainer - INFO -     macro_f1       : 0.6664712429046631
+2023-09-01 23:27:45,916 - trainer - INFO -     focus_cnn_map  : 0.22764644026756287
+2023-09-01 23:27:45,916 - trainer - INFO -     focus_cnn_map50: 0.43461546301841736
+2023-09-01 23:27:45,916 - trainer - INFO -     val_loss       : 6.546227463456088
+2023-09-01 23:27:45,916 - trainer - INFO -     val_micro_accuracy: 0.9286496639251709
+2023-09-01 23:27:45,916 - trainer - INFO -     val_micro_recall: 0.857299268245697
+2023-09-01 23:27:45,916 - trainer - INFO -     val_micro_precision: 0.857299268245697
+2023-09-01 23:27:45,917 - trainer - INFO -     val_micro_f1   : 0.857299268245697
+2023-09-01 23:27:45,917 - trainer - INFO -     val_macro_accuracy: 0.9286496639251709
+2023-09-01 23:27:45,917 - trainer - INFO -     val_macro_recall: 0.7633249163627625
+2023-09-01 23:27:45,917 - trainer - INFO -     val_macro_precision: 0.647263765335083
+2023-09-01 23:27:45,917 - trainer - INFO -     val_macro_f1   : 0.6952043771743774
+2023-09-01 23:27:45,917 - trainer - INFO -     val_focus_cnn_map: 0.30511146783828735
+2023-09-01 23:27:45,917 - trainer - INFO -     val_focus_cnn_map50: 0.5270448327064514
+2023-09-01 23:27:46,418 - trainer - INFO - Saving checkpoint: res/focus_cnn/pascal_focuscnn/trainer/0901_225336/models/checkpoint-epoch23.pth ...

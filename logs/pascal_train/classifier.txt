@@ -1,0 +1,678 @@
+2023-08-29 23:43:59,923 - trainer - INFO - {class: none, accuracy: 0.8942, recall: 0.8317, precision: 0.9583, f1-score: 0.8905}
+2023-08-29 23:43:59,923 - trainer - INFO - {class: person, accuracy: 0.9058, recall: 0.8914, precision: 0.8770, f1-score: 0.8841}
+2023-08-29 23:43:59,923 - trainer - INFO - {class: car, accuracy: 0.9697, recall: 0.9688, precision: 0.4537, f1-score: 0.6179}
+2023-08-29 23:43:59,924 - trainer - INFO - {class: bicycle, accuracy: 0.9612, recall: 0.9466, precision: 0.5891, f1-score: 0.7263}
+2023-08-29 23:44:00,045 - trainer - INFO -     epoch          : 1
+2023-08-29 23:44:00,045 - trainer - INFO -     loss           : 0.9475218593105068
+2023-08-29 23:44:00,045 - trainer - INFO -     micro_accuracy : 0.7548651695251465
+2023-08-29 23:44:00,045 - trainer - INFO -     micro_recall   : 0.509730339050293
+2023-08-29 23:44:00,045 - trainer - INFO -     micro_precision: 0.509730339050293
+2023-08-29 23:44:00,045 - trainer - INFO -     micro_f1       : 0.509730339050293
+2023-08-29 23:44:00,046 - trainer - INFO -     macro_accuracy : 0.7548651695251465
+2023-08-29 23:44:00,046 - trainer - INFO -     macro_recall   : 0.6062368154525757
+2023-08-29 23:44:00,046 - trainer - INFO -     macro_precision: 0.47904977202415466
+2023-08-29 23:44:00,046 - trainer - INFO -     macro_f1       : 0.44793492555618286
+2023-08-29 23:44:00,046 - trainer - INFO -     val_loss       : 0.40883990079164506
+2023-08-29 23:44:00,046 - trainer - INFO -     val_micro_accuracy: 0.9327354431152344
+2023-08-29 23:44:00,046 - trainer - INFO -     val_micro_recall: 0.865470826625824
+2023-08-29 23:44:00,046 - trainer - INFO -     val_micro_precision: 0.865470826625824
+2023-08-29 23:44:00,047 - trainer - INFO -     val_micro_f1   : 0.865470826625824
+2023-08-29 23:44:00,047 - trainer - INFO -     val_macro_accuracy: 0.9327354431152344
+2023-08-29 23:44:00,047 - trainer - INFO -     val_macro_recall: 0.9096078872680664
+2023-08-29 23:44:00,047 - trainer - INFO -     val_macro_precision: 0.7195197343826294
+2023-08-29 23:44:00,047 - trainer - INFO -     val_macro_f1   : 0.7797131538391113
+2023-08-29 23:44:00,468 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch1.pth ...
+2023-08-29 23:44:00,867 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:44:40,279 - trainer - INFO - {class: none, accuracy: 0.9248, recall: 0.8955, precision: 0.9564, f1-score: 0.9249}
+2023-08-29 23:44:40,279 - trainer - INFO - {class: person, accuracy: 0.9330, recall: 0.9274, precision: 0.9083, f1-score: 0.9177}
+2023-08-29 23:44:40,279 - trainer - INFO - {class: car, accuracy: 0.9868, recall: 0.9375, precision: 0.6716, f1-score: 0.7826}
+2023-08-29 23:44:40,280 - trainer - INFO - {class: bicycle, accuracy: 0.9765, recall: 0.9175, precision: 0.7241, f1-score: 0.8094}
+2023-08-29 23:44:40,387 - trainer - INFO -     epoch          : 2
+2023-08-29 23:44:40,388 - trainer - INFO -     loss           : 0.37998593713694473
+2023-08-29 23:44:40,388 - trainer - INFO -     micro_accuracy : 0.9299478530883789
+2023-08-29 23:44:40,388 - trainer - INFO -     micro_recall   : 0.8598957061767578
+2023-08-29 23:44:40,388 - trainer - INFO -     micro_precision: 0.8598957061767578
+2023-08-29 23:44:40,388 - trainer - INFO -     micro_f1       : 0.8598957061767578
+2023-08-29 23:44:40,388 - trainer - INFO -     macro_accuracy : 0.9299478530883789
+2023-08-29 23:44:40,388 - trainer - INFO -     macro_recall   : 0.8915396928787231
+2023-08-29 23:44:40,388 - trainer - INFO -     macro_precision: 0.7527347803115845
+2023-08-29 23:44:40,388 - trainer - INFO -     macro_f1       : 0.8014455437660217
+2023-08-29 23:44:40,388 - trainer - INFO -     val_loss       : 0.25813011502226196
+2023-08-29 23:44:40,389 - trainer - INFO -     val_micro_accuracy: 0.955288827419281
+2023-08-29 23:44:40,389 - trainer - INFO -     val_micro_recall: 0.910577654838562
+2023-08-29 23:44:40,389 - trainer - INFO -     val_micro_precision: 0.910577654838562
+2023-08-29 23:44:40,389 - trainer - INFO -     val_micro_f1   : 0.910577654838562
+2023-08-29 23:44:40,389 - trainer - INFO -     val_macro_accuracy: 0.9552888870239258
+2023-08-29 23:44:40,389 - trainer - INFO -     val_macro_recall: 0.9194483160972595
+2023-08-29 23:44:40,389 - trainer - INFO -     val_macro_precision: 0.8151350021362305
+2023-08-29 23:44:40,389 - trainer - INFO -     val_macro_f1   : 0.8586793541908264
+2023-08-29 23:44:40,795 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch2.pth ...
+2023-08-29 23:44:41,361 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:45:22,193 - trainer - INFO - {class: none, accuracy: 0.9333, recall: 0.9102, precision: 0.9586, f1-score: 0.9338}
+2023-08-29 23:45:22,194 - trainer - INFO - {class: person, accuracy: 0.9388, recall: 0.9378, precision: 0.9127, f1-score: 0.9251}
+2023-08-29 23:45:22,194 - trainer - INFO - {class: car, accuracy: 0.9868, recall: 0.9479, precision: 0.6691, f1-score: 0.7845}
+2023-08-29 23:45:22,195 - trainer - INFO - {class: bicycle, accuracy: 0.9850, recall: 0.9029, precision: 0.8341, f1-score: 0.8671}
+2023-08-29 23:45:22,273 - trainer - INFO -     epoch          : 3
+2023-08-29 23:45:22,273 - trainer - INFO -     loss           : 0.21702123397007222
+2023-08-29 23:45:22,273 - trainer - INFO -     micro_accuracy : 0.9606016278266907
+2023-08-29 23:45:22,273 - trainer - INFO -     micro_recall   : 0.9212032556533813
+2023-08-29 23:45:22,273 - trainer - INFO -     micro_precision: 0.9212032556533813
+2023-08-29 23:45:22,273 - trainer - INFO -     micro_f1       : 0.9212032556533813
+2023-08-29 23:45:22,273 - trainer - INFO -     macro_accuracy : 0.9606016874313354
+2023-08-29 23:45:22,274 - trainer - INFO -     macro_recall   : 0.9418584108352661
+2023-08-29 23:45:22,274 - trainer - INFO -     macro_precision: 0.8577144145965576
+2023-08-29 23:45:22,274 - trainer - INFO -     macro_f1       : 0.8940549492835999
+2023-08-29 23:45:22,274 - trainer - INFO -     val_loss       : 0.2575343797604243
+2023-08-29 23:45:22,274 - trainer - INFO -     val_micro_accuracy: 0.9609601497650146
+2023-08-29 23:45:22,274 - trainer - INFO -     val_micro_recall: 0.9219203591346741
+2023-08-29 23:45:22,274 - trainer - INFO -     val_micro_precision: 0.9219203591346741
+2023-08-29 23:45:22,274 - trainer - INFO -     val_micro_f1   : 0.9219203591346741
+2023-08-29 23:45:22,274 - trainer - INFO -     val_macro_accuracy: 0.9609601497650146
+2023-08-29 23:45:22,274 - trainer - INFO -     val_macro_recall: 0.9247266054153442
+2023-08-29 23:45:22,274 - trainer - INFO -     val_macro_precision: 0.8436459302902222
+2023-08-29 23:45:22,275 - trainer - INFO -     val_macro_f1   : 0.8776375651359558
+2023-08-29 23:45:22,702 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch3.pth ...
+2023-08-29 23:45:23,254 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:46:03,202 - trainer - INFO - {class: none, accuracy: 0.9409, recall: 0.9332, precision: 0.9516, f1-score: 0.9423}
+2023-08-29 23:46:03,203 - trainer - INFO - {class: person, accuracy: 0.9465, recall: 0.9359, precision: 0.9316, f1-score: 0.9337}
+2023-08-29 23:46:03,203 - trainer - INFO - {class: car, accuracy: 0.9889, recall: 0.9375, precision: 0.7143, f1-score: 0.8108}
+2023-08-29 23:46:03,203 - trainer - INFO - {class: bicycle, accuracy: 0.9860, recall: 0.8738, precision: 0.8696, f1-score: 0.8717}
+2023-08-29 23:46:03,318 - trainer - INFO -     epoch          : 4
+2023-08-29 23:46:03,319 - trainer - INFO -     loss           : 0.13418821278747503
+2023-08-29 23:46:03,319 - trainer - INFO -     micro_accuracy : 0.9754197597503662
+2023-08-29 23:46:03,319 - trainer - INFO -     micro_recall   : 0.9508394598960876
+2023-08-29 23:46:03,319 - trainer - INFO -     micro_precision: 0.9508394598960876
+2023-08-29 23:46:03,319 - trainer - INFO -     micro_f1       : 0.9508394598960876
+2023-08-29 23:46:03,319 - trainer - INFO -     macro_accuracy : 0.9754197597503662
+2023-08-29 23:46:03,319 - trainer - INFO -     macro_recall   : 0.9655852317810059
+2023-08-29 23:46:03,319 - trainer - INFO -     macro_precision: 0.9181581139564514
+2023-08-29 23:46:03,320 - trainer - INFO -     macro_f1       : 0.9402431845664978
+2023-08-29 23:46:03,320 - trainer - INFO -     val_loss       : 0.30192274898290633
+2023-08-29 23:46:03,320 - trainer - INFO -     val_micro_accuracy: 0.9655763506889343
+2023-08-29 23:46:03,320 - trainer - INFO -     val_micro_recall: 0.9311527013778687
+2023-08-29 23:46:03,320 - trainer - INFO -     val_micro_precision: 0.9311527013778687
+2023-08-29 23:46:03,320 - trainer - INFO -     val_micro_f1   : 0.9311527013778687
+2023-08-29 23:46:03,320 - trainer - INFO -     val_macro_accuracy: 0.9655764102935791
+2023-08-29 23:46:03,320 - trainer - INFO -     val_macro_recall: 0.9200869202613831
+2023-08-29 23:46:03,321 - trainer - INFO -     val_macro_precision: 0.8667712807655334
+2023-08-29 23:46:03,321 - trainer - INFO -     val_macro_f1   : 0.8896335363388062
+2023-08-29 23:46:03,745 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch4.pth ...
+2023-08-29 23:46:04,286 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:46:44,617 - trainer - INFO - {class: none, accuracy: 0.9385, recall: 0.9312, precision: 0.9491, f1-score: 0.9400}
+2023-08-29 23:46:44,618 - trainer - INFO - {class: person, accuracy: 0.9454, recall: 0.9490, precision: 0.9183, f1-score: 0.9334}
+2023-08-29 23:46:44,618 - trainer - INFO - {class: car, accuracy: 0.9939, recall: 0.9062, precision: 0.8614, f1-score: 0.8832}
+2023-08-29 23:46:44,618 - trainer - INFO - {class: bicycle, accuracy: 0.9855, recall: 0.8204, precision: 0.9037, f1-score: 0.8601}
+2023-08-29 23:46:44,715 - trainer - INFO -     epoch          : 5
+2023-08-29 23:46:44,716 - trainer - INFO -     loss           : 0.10014727843425623
+2023-08-29 23:46:44,716 - trainer - INFO -     micro_accuracy : 0.984005331993103
+2023-08-29 23:46:44,716 - trainer - INFO -     micro_recall   : 0.968010663986206
+2023-08-29 23:46:44,716 - trainer - INFO -     micro_precision: 0.968010663986206
+2023-08-29 23:46:44,716 - trainer - INFO -     micro_f1       : 0.968010663986206
+2023-08-29 23:46:44,716 - trainer - INFO -     macro_accuracy : 0.984005331993103
+2023-08-29 23:46:44,716 - trainer - INFO -     macro_recall   : 0.9757465720176697
+2023-08-29 23:46:44,716 - trainer - INFO -     macro_precision: 0.9410699605941772
+2023-08-29 23:46:44,716 - trainer - INFO -     macro_f1       : 0.9575521945953369
+2023-08-29 23:46:44,716 - trainer - INFO -     val_loss       : 0.4000347981850306
+2023-08-29 23:46:44,716 - trainer - INFO -     val_micro_accuracy: 0.9658401608467102
+2023-08-29 23:46:44,717 - trainer - INFO -     val_micro_recall: 0.9316803216934204
+2023-08-29 23:46:44,717 - trainer - INFO -     val_micro_precision: 0.9316803216934204
+2023-08-29 23:46:44,717 - trainer - INFO -     val_micro_f1   : 0.9316803216934204
+2023-08-29 23:46:44,717 - trainer - INFO -     val_macro_accuracy: 0.9658401608467102
+2023-08-29 23:46:44,717 - trainer - INFO -     val_macro_recall: 0.9016872048377991
+2023-08-29 23:46:44,717 - trainer - INFO -     val_macro_precision: 0.9081241488456726
+2023-08-29 23:46:44,717 - trainer - INFO -     val_macro_f1   : 0.9041754007339478
+2023-08-29 23:46:45,141 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch5.pth ...
+2023-08-29 23:46:45,678 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:47:25,323 - trainer - INFO - {class: none, accuracy: 0.9348, recall: 0.9189, precision: 0.9534, f1-score: 0.9359}
+2023-08-29 23:47:25,323 - trainer - INFO - {class: person, accuracy: 0.9422, recall: 0.9437, precision: 0.9156, f1-score: 0.9294}
+2023-08-29 23:47:25,323 - trainer - INFO - {class: car, accuracy: 0.9918, recall: 0.8750, precision: 0.8155, f1-score: 0.8442}
+2023-08-29 23:47:25,323 - trainer - INFO - {class: bicycle, accuracy: 0.9834, recall: 0.8883, precision: 0.8206, f1-score: 0.8531}
+2023-08-29 23:47:25,408 - trainer - INFO -     epoch          : 6
+2023-08-29 23:47:25,408 - trainer - INFO -     loss           : 0.06815396673311062
+2023-08-29 23:47:25,408 - trainer - INFO -     micro_accuracy : 0.9895064830780029
+2023-08-29 23:47:25,408 - trainer - INFO -     micro_recall   : 0.9790129661560059
+2023-08-29 23:47:25,408 - trainer - INFO -     micro_precision: 0.9790129661560059
+2023-08-29 23:47:25,408 - trainer - INFO -     micro_f1       : 0.9790129661560059
+2023-08-29 23:47:25,408 - trainer - INFO -     macro_accuracy : 0.9895064830780029
+2023-08-29 23:47:25,409 - trainer - INFO -     macro_recall   : 0.9842502474784851
+2023-08-29 23:47:25,409 - trainer - INFO -     macro_precision: 0.9626994132995605
+2023-08-29 23:47:25,409 - trainer - INFO -     macro_f1       : 0.9731563925743103
+2023-08-29 23:47:25,409 - trainer - INFO -     val_loss       : 0.3727077672878901
+2023-08-29 23:47:25,409 - trainer - INFO -     val_micro_accuracy: 0.9630704522132874
+2023-08-29 23:47:25,409 - trainer - INFO -     val_micro_recall: 0.9261408448219299
+2023-08-29 23:47:25,409 - trainer - INFO -     val_micro_precision: 0.9261408448219299
+2023-08-29 23:47:25,409 - trainer - INFO -     val_micro_f1   : 0.9261408448219299
+2023-08-29 23:47:25,410 - trainer - INFO -     val_macro_accuracy: 0.9630704522132874
+2023-08-29 23:47:25,410 - trainer - INFO -     val_macro_recall: 0.9064964056015015
+2023-08-29 23:47:25,410 - trainer - INFO -     val_macro_precision: 0.8762891292572021
+2023-08-29 23:47:25,410 - trainer - INFO -     val_macro_f1   : 0.8906629681587219
+2023-08-29 23:47:25,873 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch6.pth ...
+2023-08-29 23:48:05,615 - trainer - INFO - {class: none, accuracy: 0.9362, recall: 0.9470, precision: 0.9308, f1-score: 0.9388}
+2023-08-29 23:48:05,616 - trainer - INFO - {class: person, accuracy: 0.9438, recall: 0.9136, precision: 0.9452, f1-score: 0.9291}
+2023-08-29 23:48:05,616 - trainer - INFO - {class: car, accuracy: 0.9921, recall: 0.8333, precision: 0.8511, f1-score: 0.8421}
+2023-08-29 23:48:05,616 - trainer - INFO - {class: bicycle, accuracy: 0.9829, recall: 0.8883, precision: 0.8133, f1-score: 0.8492}
+2023-08-29 23:48:05,734 - trainer - INFO -     epoch          : 7
+2023-08-29 23:48:05,734 - trainer - INFO -     loss           : 0.05205936132498631
+2023-08-29 23:48:05,734 - trainer - INFO -     micro_accuracy : 0.99265456199646
+2023-08-29 23:48:05,734 - trainer - INFO -     micro_recall   : 0.9853090643882751
+2023-08-29 23:48:05,734 - trainer - INFO -     micro_precision: 0.9853090643882751
+2023-08-29 23:48:05,734 - trainer - INFO -     micro_f1       : 0.9853090643882751
+2023-08-29 23:48:05,735 - trainer - INFO -     macro_accuracy : 0.99265456199646
+2023-08-29 23:48:05,735 - trainer - INFO -     macro_recall   : 0.9887266159057617
+2023-08-29 23:48:05,735 - trainer - INFO -     macro_precision: 0.9721736907958984
+2023-08-29 23:48:05,735 - trainer - INFO -     macro_f1       : 0.9802594780921936
+2023-08-29 23:48:05,735 - trainer - INFO -     val_loss       : 0.5094544009615978
+2023-08-29 23:48:05,735 - trainer - INFO -     val_micro_accuracy: 0.9637298583984375
+2023-08-29 23:48:05,735 - trainer - INFO -     val_micro_recall: 0.9274597764015198
+2023-08-29 23:48:05,735 - trainer - INFO -     val_micro_precision: 0.9274597764015198
+2023-08-29 23:48:05,735 - trainer - INFO -     val_micro_f1   : 0.9274597764015198
+2023-08-29 23:48:05,736 - trainer - INFO -     val_macro_accuracy: 0.9637299180030823
+2023-08-29 23:48:05,736 - trainer - INFO -     val_macro_recall: 0.8955652713775635
+2023-08-29 23:48:05,736 - trainer - INFO -     val_macro_precision: 0.8850957751274109
+2023-08-29 23:48:05,736 - trainer - INFO -     val_macro_f1   : 0.8898096084594727
+2023-08-29 23:48:06,206 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch7.pth ...
+2023-08-29 23:48:45,623 - trainer - INFO - {class: none, accuracy: 0.9367, recall: 0.9398, precision: 0.9379, f1-score: 0.9389}
+2023-08-29 23:48:45,624 - trainer - INFO - {class: person, accuracy: 0.9462, recall: 0.9287, precision: 0.9373, f1-score: 0.9329}
+2023-08-29 23:48:45,624 - trainer - INFO - {class: car, accuracy: 0.9937, recall: 0.8542, precision: 0.8913, f1-score: 0.8723}
+2023-08-29 23:48:45,624 - trainer - INFO - {class: bicycle, accuracy: 0.9826, recall: 0.8738, precision: 0.8182, f1-score: 0.8451}
+2023-08-29 23:48:45,701 - trainer - INFO -     epoch          : 8
+2023-08-29 23:48:45,701 - trainer - INFO -     loss           : 0.049701731023567966
+2023-08-29 23:48:45,701 - trainer - INFO -     micro_accuracy : 0.9934812784194946
+2023-08-29 23:48:45,702 - trainer - INFO -     micro_recall   : 0.986962616443634
+2023-08-29 23:48:45,702 - trainer - INFO -     micro_precision: 0.986962616443634
+2023-08-29 23:48:45,702 - trainer - INFO -     micro_f1       : 0.986962616443634
+2023-08-29 23:48:45,702 - trainer - INFO -     macro_accuracy : 0.9934812784194946
+2023-08-29 23:48:45,702 - trainer - INFO -     macro_recall   : 0.9897164106369019
+2023-08-29 23:48:45,702 - trainer - INFO -     macro_precision: 0.9730129241943359
+2023-08-29 23:48:45,702 - trainer - INFO -     macro_f1       : 0.9811627864837646
+2023-08-29 23:48:45,702 - trainer - INFO -     val_loss       : 0.4918702654540539
+2023-08-29 23:48:45,702 - trainer - INFO -     val_micro_accuracy: 0.9647850394248962
+2023-08-29 23:48:45,702 - trainer - INFO -     val_micro_recall: 0.9295700192451477
+2023-08-29 23:48:45,702 - trainer - INFO -     val_micro_precision: 0.9295700192451477
+2023-08-29 23:48:45,702 - trainer - INFO -     val_micro_f1   : 0.9295700192451477
+2023-08-29 23:48:45,703 - trainer - INFO -     val_macro_accuracy: 0.9647849798202515
+2023-08-29 23:48:45,703 - trainer - INFO -     val_macro_recall: 0.8991111516952515
+2023-08-29 23:48:45,703 - trainer - INFO -     val_macro_precision: 0.8961629271507263
+2023-08-29 23:48:45,703 - trainer - INFO -     val_macro_f1   : 0.8973047137260437
+2023-08-29 23:48:46,114 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch8.pth ...
+2023-08-29 23:49:25,473 - trainer - INFO - {class: none, accuracy: 0.9375, recall: 0.9465, precision: 0.9336, f1-score: 0.9400}
+2023-08-29 23:49:25,474 - trainer - INFO - {class: person, accuracy: 0.9441, recall: 0.9202, precision: 0.9398, f1-score: 0.9299}
+2023-08-29 23:49:25,474 - trainer - INFO - {class: car, accuracy: 0.9931, recall: 0.8333, precision: 0.8889, f1-score: 0.8602}
+2023-08-29 23:49:25,474 - trainer - INFO - {class: bicycle, accuracy: 0.9844, recall: 0.8835, precision: 0.8387, f1-score: 0.8605}
+2023-08-29 23:49:25,553 - trainer - INFO -     epoch          : 9
+2023-08-29 23:49:25,553 - trainer - INFO -     loss           : 0.07311898199614228
+2023-08-29 23:49:25,553 - trainer - INFO -     micro_accuracy : 0.989697277545929
+2023-08-29 23:49:25,553 - trainer - INFO -     micro_recall   : 0.9793945550918579
+2023-08-29 23:49:25,553 - trainer - INFO -     micro_precision: 0.9793945550918579
+2023-08-29 23:49:25,553 - trainer - INFO -     micro_f1       : 0.9793945550918579
+2023-08-29 23:49:25,554 - trainer - INFO -     macro_accuracy : 0.9896973371505737
+2023-08-29 23:49:25,554 - trainer - INFO -     macro_recall   : 0.9818263649940491
+2023-08-29 23:49:25,554 - trainer - INFO -     macro_precision: 0.9532409906387329
+2023-08-29 23:49:25,554 - trainer - INFO -     macro_f1       : 0.9669399261474609
+2023-08-29 23:49:25,554 - trainer - INFO -     val_loss       : 0.5175792867938678
+2023-08-29 23:49:25,554 - trainer - INFO -     val_micro_accuracy: 0.9647850394248962
+2023-08-29 23:49:25,554 - trainer - INFO -     val_micro_recall: 0.9295700192451477
+2023-08-29 23:49:25,554 - trainer - INFO -     val_micro_precision: 0.9295700192451477
+2023-08-29 23:49:25,554 - trainer - INFO -     val_micro_f1   : 0.9295700192451477
+2023-08-29 23:49:25,554 - trainer - INFO -     val_macro_accuracy: 0.9647849798202515
+2023-08-29 23:49:25,555 - trainer - INFO -     val_macro_recall: 0.8958603143692017
+2023-08-29 23:49:25,555 - trainer - INFO -     val_macro_precision: 0.9002599120140076
+2023-08-29 23:49:25,555 - trainer - INFO -     val_macro_f1   : 0.8976535201072693
+2023-08-29 23:49:25,971 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch9.pth ...
+2023-08-29 23:50:06,589 - trainer - INFO - {class: none, accuracy: 0.9399, recall: 0.9398, precision: 0.9437, f1-score: 0.9417}
+2023-08-29 23:50:06,589 - trainer - INFO - {class: person, accuracy: 0.9459, recall: 0.9352, precision: 0.9309, f1-score: 0.9331}
+2023-08-29 23:50:06,590 - trainer - INFO - {class: car, accuracy: 0.9929, recall: 0.8958, precision: 0.8350, f1-score: 0.8643}
+2023-08-29 23:50:06,590 - trainer - INFO - {class: bicycle, accuracy: 0.9873, recall: 0.8689, precision: 0.8950, f1-score: 0.8818}
+2023-08-29 23:50:06,639 - trainer - INFO -     epoch          : 10
+2023-08-29 23:50:06,639 - trainer - INFO -     loss           : 0.0439128272417115
+2023-08-29 23:50:06,639 - trainer - INFO -     micro_accuracy : 0.9937992691993713
+2023-08-29 23:50:06,639 - trainer - INFO -     micro_recall   : 0.9875985980033875
+2023-08-29 23:50:06,640 - trainer - INFO -     micro_precision: 0.9875985980033875
+2023-08-29 23:50:06,640 - trainer - INFO -     micro_f1       : 0.9875985980033875
+2023-08-29 23:50:06,640 - trainer - INFO -     macro_accuracy : 0.9937993288040161
+2023-08-29 23:50:06,640 - trainer - INFO -     macro_recall   : 0.9904870390892029
+2023-08-29 23:50:06,640 - trainer - INFO -     macro_precision: 0.9741392135620117
+2023-08-29 23:50:06,640 - trainer - INFO -     macro_f1       : 0.9821313619613647
+2023-08-29 23:50:06,640 - trainer - INFO -     val_loss       : 0.4780818005402883
+2023-08-29 23:50:06,640 - trainer - INFO -     val_micro_accuracy: 0.9664996266365051
+2023-08-29 23:50:06,640 - trainer - INFO -     val_micro_recall: 0.9329991936683655
+2023-08-29 23:50:06,640 - trainer - INFO -     val_micro_precision: 0.9329991936683655
+2023-08-29 23:50:06,640 - trainer - INFO -     val_micro_f1   : 0.9329991936683655
+2023-08-29 23:50:06,641 - trainer - INFO -     val_macro_accuracy: 0.9664995670318604
+2023-08-29 23:50:06,641 - trainer - INFO -     val_macro_recall: 0.909950315952301
+2023-08-29 23:50:06,641 - trainer - INFO -     val_macro_precision: 0.9011431336402893
+2023-08-29 23:50:06,641 - trainer - INFO -     val_macro_f1   : 0.9052287340164185
+2023-08-29 23:50:06,990 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch10.pth ...
+2023-08-29 23:50:46,887 - trainer - INFO - {class: none, accuracy: 0.9428, recall: 0.9398, precision: 0.9490, f1-score: 0.9444}
+2023-08-29 23:50:46,887 - trainer - INFO - {class: person, accuracy: 0.9491, recall: 0.9411, precision: 0.9332, f1-score: 0.9371}
+2023-08-29 23:50:46,888 - trainer - INFO - {class: car, accuracy: 0.9937, recall: 0.8958, precision: 0.8600, f1-score: 0.8776}
+2023-08-29 23:50:46,888 - trainer - INFO - {class: bicycle, accuracy: 0.9858, recall: 0.8738, precision: 0.8654, f1-score: 0.8696}
+2023-08-29 23:50:46,943 - trainer - INFO -     epoch          : 11
+2023-08-29 23:50:46,943 - trainer - INFO -     loss           : 0.024768196311362876
+2023-08-29 23:50:46,943 - trainer - INFO -     micro_accuracy : 0.9968201518058777
+2023-08-29 23:50:46,943 - trainer - INFO -     micro_recall   : 0.9936403036117554
+2023-08-29 23:50:46,943 - trainer - INFO -     micro_precision: 0.9936403036117554
+2023-08-29 23:50:46,943 - trainer - INFO -     micro_f1       : 0.9936403036117554
+2023-08-29 23:50:46,943 - trainer - INFO -     macro_accuracy : 0.9968200922012329
+2023-08-29 23:50:46,943 - trainer - INFO -     macro_recall   : 0.9948426485061646
+2023-08-29 23:50:46,943 - trainer - INFO -     macro_precision: 0.9862313270568848
+2023-08-29 23:50:46,944 - trainer - INFO -     macro_f1       : 0.9904658794403076
+2023-08-29 23:50:46,944 - trainer - INFO -     val_loss       : 0.4985070978601774
+2023-08-29 23:50:46,944 - trainer - INFO -     val_micro_accuracy: 0.9678184986114502
+2023-08-29 23:50:46,944 - trainer - INFO -     val_micro_recall: 0.9356370568275452
+2023-08-29 23:50:46,944 - trainer - INFO -     val_micro_precision: 0.9356370568275452
+2023-08-29 23:50:46,944 - trainer - INFO -     val_micro_f1   : 0.9356370568275452
+2023-08-29 23:50:46,944 - trainer - INFO -     val_macro_accuracy: 0.9678184986114502
+2023-08-29 23:50:46,944 - trainer - INFO -     val_macro_recall: 0.9126364588737488
+2023-08-29 23:50:46,944 - trainer - INFO -     val_macro_precision: 0.9018915891647339
+2023-08-29 23:50:46,944 - trainer - INFO -     val_macro_f1   : 0.9071577787399292
+2023-08-29 23:50:47,324 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch11.pth ...
+2023-08-29 23:51:28,070 - trainer - INFO - {class: none, accuracy: 0.9425, recall: 0.9434, precision: 0.9453, f1-score: 0.9444}
+2023-08-29 23:51:28,070 - trainer - INFO - {class: person, accuracy: 0.9486, recall: 0.9411, precision: 0.9320, f1-score: 0.9365}
+2023-08-29 23:51:28,070 - trainer - INFO - {class: car, accuracy: 0.9950, recall: 0.8750, precision: 0.9231, f1-score: 0.8984}
+2023-08-29 23:51:28,071 - trainer - INFO - {class: bicycle, accuracy: 0.9873, recall: 0.8689, precision: 0.8950, f1-score: 0.8818}
+2023-08-29 23:51:28,149 - trainer - INFO -     epoch          : 12
+2023-08-29 23:51:28,149 - trainer - INFO -     loss           : 0.019405243435601998
+2023-08-29 23:51:28,149 - trainer - INFO -     micro_accuracy : 0.9978377223014832
+2023-08-29 23:51:28,150 - trainer - INFO -     micro_recall   : 0.9956753849983215
+2023-08-29 23:51:28,150 - trainer - INFO -     micro_precision: 0.9956753849983215
+2023-08-29 23:51:28,150 - trainer - INFO -     micro_f1       : 0.9956753849983215
+2023-08-29 23:51:28,150 - trainer - INFO -     macro_accuracy : 0.9978376626968384
+2023-08-29 23:51:28,150 - trainer - INFO -     macro_recall   : 0.9951082468032837
+2023-08-29 23:51:28,150 - trainer - INFO -     macro_precision: 0.9894939064979553
+2023-08-29 23:51:28,150 - trainer - INFO -     macro_f1       : 0.9922730326652527
+2023-08-29 23:51:28,150 - trainer - INFO -     val_loss       : 0.5938549816608429
+2023-08-29 23:51:28,150 - trainer - INFO -     val_micro_accuracy: 0.9683460593223572
+2023-08-29 23:51:28,150 - trainer - INFO -     val_micro_recall: 0.9366921782493591
+2023-08-29 23:51:28,151 - trainer - INFO -     val_micro_precision: 0.9366921782493591
+2023-08-29 23:51:28,151 - trainer - INFO -     val_micro_f1   : 0.9366921782493591
+2023-08-29 23:51:28,151 - trainer - INFO -     val_macro_accuracy: 0.968346118927002
+2023-08-29 23:51:28,151 - trainer - INFO -     val_macro_recall: 0.9071069359779358
+2023-08-29 23:51:28,151 - trainer - INFO -     val_macro_precision: 0.9238380193710327
+2023-08-29 23:51:28,151 - trainer - INFO -     val_macro_f1   : 0.9152578115463257
+2023-08-29 23:51:28,573 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch12.pth ...
+2023-08-29 23:51:29,124 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-29 23:52:09,333 - trainer - INFO - {class: none, accuracy: 0.9420, recall: 0.9546, precision: 0.9346, f1-score: 0.9445}
+2023-08-29 23:52:09,333 - trainer - INFO - {class: person, accuracy: 0.9467, recall: 0.9202, precision: 0.9462, f1-score: 0.9330}
+2023-08-29 23:52:09,334 - trainer - INFO - {class: car, accuracy: 0.9950, recall: 0.8958, precision: 0.9053, f1-score: 0.9005}
+2023-08-29 23:52:09,334 - trainer - INFO - {class: bicycle, accuracy: 0.9871, recall: 0.8835, precision: 0.8792, f1-score: 0.8814}
+2023-08-29 23:52:09,383 - trainer - INFO -     epoch          : 13
+2023-08-29 23:52:09,383 - trainer - INFO -     loss           : 0.01843240232646041
+2023-08-29 23:52:09,383 - trainer - INFO -     micro_accuracy : 0.9977422952651978
+2023-08-29 23:52:09,383 - trainer - INFO -     micro_recall   : 0.9954845905303955
+2023-08-29 23:52:09,383 - trainer - INFO -     micro_precision: 0.9954845905303955
+2023-08-29 23:52:09,384 - trainer - INFO -     micro_f1       : 0.9954845905303955
+2023-08-29 23:52:09,384 - trainer - INFO -     macro_accuracy : 0.9977422952651978
+2023-08-29 23:52:09,384 - trainer - INFO -     macro_recall   : 0.9958341717720032
+2023-08-29 23:52:09,384 - trainer - INFO -     macro_precision: 0.9893078207969666
+2023-08-29 23:52:09,384 - trainer - INFO -     macro_f1       : 0.9925422072410583
+2023-08-29 23:52:09,384 - trainer - INFO -     val_loss       : 0.5408213672538599
+2023-08-29 23:52:09,384 - trainer - INFO -     val_micro_accuracy: 0.967686653137207
+2023-08-29 23:52:09,384 - trainer - INFO -     val_micro_recall: 0.9353732466697693
+2023-08-29 23:52:09,384 - trainer - INFO -     val_micro_precision: 0.9353732466697693
+2023-08-29 23:52:09,384 - trainer - INFO -     val_micro_f1   : 0.9353732466697693
+2023-08-29 23:52:09,384 - trainer - INFO -     val_macro_accuracy: 0.967686653137207
+2023-08-29 23:52:09,385 - trainer - INFO -     val_macro_recall: 0.9135251045227051
+2023-08-29 23:52:09,385 - trainer - INFO -     val_macro_precision: 0.9163131713867188
+2023-08-29 23:52:09,385 - trainer - INFO -     val_macro_f1   : 0.9148398637771606
+2023-08-29 23:52:09,798 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch13.pth ...
+2023-08-29 23:52:49,086 - trainer - INFO - {class: none, accuracy: 0.9383, recall: 0.9230, precision: 0.9562, f1-score: 0.9393}
+2023-08-29 23:52:49,087 - trainer - INFO - {class: person, accuracy: 0.9454, recall: 0.9483, precision: 0.9188, f1-score: 0.9333}
+2023-08-29 23:52:49,087 - trainer - INFO - {class: car, accuracy: 0.9924, recall: 0.9167, precision: 0.8073, f1-score: 0.8585}
+2023-08-29 23:52:49,087 - trainer - INFO - {class: bicycle, accuracy: 0.9858, recall: 0.8835, precision: 0.8585, f1-score: 0.8708}
+2023-08-29 23:52:49,167 - trainer - INFO -     epoch          : 14
+2023-08-29 23:52:49,167 - trainer - INFO -     loss           : 0.048403282254192284
+2023-08-29 23:52:49,167 - trainer - INFO -     micro_accuracy : 0.99357670545578
+2023-08-29 23:52:49,168 - trainer - INFO -     micro_recall   : 0.9871534109115601
+2023-08-29 23:52:49,168 - trainer - INFO -     micro_precision: 0.9871534109115601
+2023-08-29 23:52:49,168 - trainer - INFO -     micro_f1       : 0.9871534109115601
+2023-08-29 23:52:49,168 - trainer - INFO -     macro_accuracy : 0.9935766458511353
+2023-08-29 23:52:49,168 - trainer - INFO -     macro_recall   : 0.9889446496963501
+2023-08-29 23:52:49,168 - trainer - INFO -     macro_precision: 0.9704406261444092
+2023-08-29 23:52:49,168 - trainer - INFO -     macro_f1       : 0.9794381856918335
+2023-08-29 23:52:49,168 - trainer - INFO -     val_loss       : 0.5444751630226771
+2023-08-29 23:52:49,168 - trainer - INFO -     val_micro_accuracy: 0.9654444456100464
+2023-08-29 23:52:49,168 - trainer - INFO -     val_micro_recall: 0.9308889508247375
+2023-08-29 23:52:49,168 - trainer - INFO -     val_micro_precision: 0.9308889508247375
+2023-08-29 23:52:49,169 - trainer - INFO -     val_micro_f1   : 0.9308889508247375
+2023-08-29 23:52:49,169 - trainer - INFO -     val_macro_accuracy: 0.9654444456100464
+2023-08-29 23:52:49,169 - trainer - INFO -     val_macro_recall: 0.9178646802902222
+2023-08-29 23:52:49,169 - trainer - INFO -     val_macro_precision: 0.8852043151855469
+2023-08-29 23:52:49,169 - trainer - INFO -     val_macro_f1   : 0.9004917740821838
+2023-08-29 23:52:49,595 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch14.pth ...
+2023-08-29 23:53:30,382 - trainer - INFO - {class: none, accuracy: 0.9404, recall: 0.9454, precision: 0.9397, f1-score: 0.9426}
+2023-08-29 23:53:30,382 - trainer - INFO - {class: person, accuracy: 0.9459, recall: 0.9241, precision: 0.9407, f1-score: 0.9323}
+2023-08-29 23:53:30,382 - trainer - INFO - {class: car, accuracy: 0.9942, recall: 0.9167, precision: 0.8627, f1-score: 0.8889}
+2023-08-29 23:53:30,383 - trainer - INFO - {class: bicycle, accuracy: 0.9871, recall: 0.9029, precision: 0.8651, f1-score: 0.8836}
+2023-08-29 23:53:30,462 - trainer - INFO -     epoch          : 15
+2023-08-29 23:53:30,462 - trainer - INFO -     loss           : 0.034589449371536816
+2023-08-29 23:53:30,462 - trainer - INFO -     micro_accuracy : 0.9952937960624695
+2023-08-29 23:53:30,462 - trainer - INFO -     micro_recall   : 0.9905876517295837
+2023-08-29 23:53:30,462 - trainer - INFO -     micro_precision: 0.9905876517295837
+2023-08-29 23:53:30,463 - trainer - INFO -     micro_f1       : 0.9905876517295837
+2023-08-29 23:53:30,463 - trainer - INFO -     macro_accuracy : 0.9952937960624695
+2023-08-29 23:53:30,463 - trainer - INFO -     macro_recall   : 0.9928706884384155
+2023-08-29 23:53:30,463 - trainer - INFO -     macro_precision: 0.9771410822868347
+2023-08-29 23:53:30,463 - trainer - INFO -     macro_f1       : 0.9848344326019287
+2023-08-29 23:53:30,463 - trainer - INFO -     val_loss       : 0.4587900477151076
+2023-08-29 23:53:30,463 - trainer - INFO -     val_micro_accuracy: 0.9668952822685242
+2023-08-29 23:53:30,463 - trainer - INFO -     val_micro_recall: 0.9337905645370483
+2023-08-29 23:53:30,463 - trainer - INFO -     val_micro_precision: 0.9337905645370483
+2023-08-29 23:53:30,463 - trainer - INFO -     val_micro_f1   : 0.9337905645370483
+2023-08-29 23:53:30,463 - trainer - INFO -     val_macro_accuracy: 0.9668952822685242
+2023-08-29 23:53:30,464 - trainer - INFO -     val_macro_recall: 0.9222747683525085
+2023-08-29 23:53:30,464 - trainer - INFO -     val_macro_precision: 0.9020633697509766
+2023-08-29 23:53:30,464 - trainer - INFO -     val_macro_f1   : 0.9118430614471436
+2023-08-29 23:53:30,896 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch15.pth ...
+2023-08-29 23:54:11,667 - trainer - INFO - {class: none, accuracy: 0.9319, recall: 0.9194, precision: 0.9475, f1-score: 0.9332}
+2023-08-29 23:54:11,667 - trainer - INFO - {class: person, accuracy: 0.9422, recall: 0.9287, precision: 0.9281, f1-score: 0.9284}
+2023-08-29 23:54:11,667 - trainer - INFO - {class: car, accuracy: 0.9889, recall: 0.9375, precision: 0.7143, f1-score: 0.8108}
+2023-08-29 23:54:11,668 - trainer - INFO - {class: bicycle, accuracy: 0.9813, recall: 0.8932, precision: 0.7897, f1-score: 0.8383}
+2023-08-29 23:54:11,744 - trainer - INFO -     epoch          : 16
+2023-08-29 23:54:11,744 - trainer - INFO -     loss           : 0.03426359686054047
+2023-08-29 23:54:11,744 - trainer - INFO -     micro_accuracy : 0.9959933757781982
+2023-08-29 23:54:11,744 - trainer - INFO -     micro_recall   : 0.9919867515563965
+2023-08-29 23:54:11,745 - trainer - INFO -     micro_precision: 0.9919867515563965
+2023-08-29 23:54:11,745 - trainer - INFO -     micro_f1       : 0.9919867515563965
+2023-08-29 23:54:11,745 - trainer - INFO -     macro_accuracy : 0.9959933757781982
+2023-08-29 23:54:11,745 - trainer - INFO -     macro_recall   : 0.9933686256408691
+2023-08-29 23:54:11,745 - trainer - INFO -     macro_precision: 0.9793468713760376
+2023-08-29 23:54:11,745 - trainer - INFO -     macro_f1       : 0.9862154722213745
+2023-08-29 23:54:11,745 - trainer - INFO -     val_loss       : 0.44968783656756084
+2023-08-29 23:54:11,745 - trainer - INFO -     val_micro_accuracy: 0.9610920548439026
+2023-08-29 23:54:11,745 - trainer - INFO -     val_micro_recall: 0.9221841096878052
+2023-08-29 23:54:11,745 - trainer - INFO -     val_micro_precision: 0.9221841096878052
+2023-08-29 23:54:11,745 - trainer - INFO -     val_micro_f1   : 0.9221841096878052
+2023-08-29 23:54:11,745 - trainer - INFO -     val_macro_accuracy: 0.9610920548439026
+2023-08-29 23:54:11,746 - trainer - INFO -     val_macro_recall: 0.9196994304656982
+2023-08-29 23:54:11,746 - trainer - INFO -     val_macro_precision: 0.8448735475540161
+2023-08-29 23:54:11,746 - trainer - INFO -     val_macro_f1   : 0.8776676058769226
+2023-08-29 23:54:12,154 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch16.pth ...
+2023-08-29 23:54:52,949 - trainer - INFO - {class: none, accuracy: 0.9399, recall: 0.9541, precision: 0.9313, f1-score: 0.9426}
+2023-08-29 23:54:52,950 - trainer - INFO - {class: person, accuracy: 0.9436, recall: 0.9123, precision: 0.9457, f1-score: 0.9287}
+2023-08-29 23:54:52,950 - trainer - INFO - {class: car, accuracy: 0.9921, recall: 0.9062, precision: 0.8056, f1-score: 0.8529}
+2023-08-29 23:54:52,950 - trainer - INFO - {class: bicycle, accuracy: 0.9889, recall: 0.8835, precision: 0.9100, f1-score: 0.8966}
+2023-08-29 23:54:53,033 - trainer - INFO -     epoch          : 17
+2023-08-29 23:54:53,034 - trainer - INFO -     loss           : 0.03175444298847843
+2023-08-29 23:54:53,034 - trainer - INFO -     micro_accuracy : 0.9958980083465576
+2023-08-29 23:54:53,034 - trainer - INFO -     micro_recall   : 0.9917959570884705
+2023-08-29 23:54:53,034 - trainer - INFO -     micro_precision: 0.9917959570884705
+2023-08-29 23:54:53,034 - trainer - INFO -     micro_f1       : 0.9917959570884705
+2023-08-29 23:54:53,034 - trainer - INFO -     macro_accuracy : 0.9958980083465576
+2023-08-29 23:54:53,034 - trainer - INFO -     macro_recall   : 0.992375373840332
+2023-08-29 23:54:53,034 - trainer - INFO -     macro_precision: 0.978618860244751
+2023-08-29 23:54:53,035 - trainer - INFO -     macro_f1       : 0.985365092754364
+2023-08-29 23:54:53,035 - trainer - INFO -     val_loss       : 0.5234206231931845
+2023-08-29 23:54:53,035 - trainer - INFO -     val_micro_accuracy: 0.9661039113998413
+2023-08-29 23:54:53,035 - trainer - INFO -     val_micro_recall: 0.9322078824043274
+2023-08-29 23:54:53,035 - trainer - INFO -     val_micro_precision: 0.9322078824043274
+2023-08-29 23:54:53,035 - trainer - INFO -     val_micro_f1   : 0.9322078824043274
+2023-08-29 23:54:53,035 - trainer - INFO -     val_macro_accuracy: 0.9661039113998413
+2023-08-29 23:54:53,035 - trainer - INFO -     val_macro_recall: 0.9140384793281555
+2023-08-29 23:54:53,035 - trainer - INFO -     val_macro_precision: 0.8981476426124573
+2023-08-29 23:54:53,035 - trainer - INFO -     val_macro_f1   : 0.9051940441131592
+2023-08-29 23:54:53,466 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch17.pth ...
+2023-08-29 23:55:33,712 - trainer - INFO - {class: none, accuracy: 0.9417, recall: 0.9495, precision: 0.9385, f1-score: 0.9440}
+2023-08-29 23:55:33,713 - trainer - INFO - {class: person, accuracy: 0.9459, recall: 0.9234, precision: 0.9413, f1-score: 0.9323}
+2023-08-29 23:55:33,713 - trainer - INFO - {class: car, accuracy: 0.9921, recall: 0.9062, precision: 0.8056, f1-score: 0.8529}
+2023-08-29 23:55:33,714 - trainer - INFO - {class: bicycle, accuracy: 0.9879, recall: 0.8738, precision: 0.9000, f1-score: 0.8867}
+2023-08-29 23:55:33,784 - trainer - INFO -     epoch          : 18
+2023-08-29 23:55:33,784 - trainer - INFO -     loss           : 0.018913964136140195
+2023-08-29 23:55:33,785 - trainer - INFO -     micro_accuracy : 0.9974879026412964
+2023-08-29 23:55:33,785 - trainer - INFO -     micro_recall   : 0.9949758052825928
+2023-08-29 23:55:33,785 - trainer - INFO -     micro_precision: 0.9949758052825928
+2023-08-29 23:55:33,785 - trainer - INFO -     micro_f1       : 0.9949758052825928
+2023-08-29 23:55:33,785 - trainer - INFO -     macro_accuracy : 0.9974879026412964
+2023-08-29 23:55:33,785 - trainer - INFO -     macro_recall   : 0.9954013824462891
+2023-08-29 23:55:33,785 - trainer - INFO -     macro_precision: 0.9875985383987427
+2023-08-29 23:55:33,785 - trainer - INFO -     macro_f1       : 0.9914524555206299
+2023-08-29 23:55:33,786 - trainer - INFO -     val_loss       : 0.5638802086313566
+2023-08-29 23:55:33,786 - trainer - INFO -     val_micro_accuracy: 0.9668952822685242
+2023-08-29 23:55:33,786 - trainer - INFO -     val_micro_recall: 0.9337905645370483
+2023-08-29 23:55:33,786 - trainer - INFO -     val_micro_precision: 0.9337905645370483
+2023-08-29 23:55:33,786 - trainer - INFO -     val_micro_f1   : 0.9337905645370483
+2023-08-29 23:55:33,786 - trainer - INFO -     val_macro_accuracy: 0.9668952226638794
+2023-08-29 23:55:33,786 - trainer - INFO -     val_macro_recall: 0.9132453203201294
+2023-08-29 23:55:33,786 - trainer - INFO -     val_macro_precision: 0.8963394165039062
+2023-08-29 23:55:33,787 - trainer - INFO -     val_macro_f1   : 0.903974175453186
+2023-08-29 23:55:34,134 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch18.pth ...
+2023-08-29 23:56:13,436 - trainer - INFO - {class: none, accuracy: 0.9422, recall: 0.9429, precision: 0.9453, f1-score: 0.9441}
+2023-08-29 23:56:13,436 - trainer - INFO - {class: person, accuracy: 0.9451, recall: 0.9274, precision: 0.9359, f1-score: 0.9316}
+2023-08-29 23:56:13,436 - trainer - INFO - {class: car, accuracy: 0.9894, recall: 0.8958, precision: 0.7414, f1-score: 0.8113}
+2023-08-29 23:56:13,437 - trainer - INFO - {class: bicycle, accuracy: 0.9887, recall: 0.8932, precision: 0.8976, f1-score: 0.8954}
+2023-08-29 23:56:13,513 - trainer - INFO -     epoch          : 19
+2023-08-29 23:56:13,513 - trainer - INFO -     loss           : 0.029145829028419664
+2023-08-29 23:56:13,513 - trainer - INFO -     micro_accuracy : 0.9964703917503357
+2023-08-29 23:56:13,513 - trainer - INFO -     micro_recall   : 0.9929407238960266
+2023-08-29 23:56:13,513 - trainer - INFO -     micro_precision: 0.9929407238960266
+2023-08-29 23:56:13,513 - trainer - INFO -     micro_f1       : 0.9929407238960266
+2023-08-29 23:56:13,513 - trainer - INFO -     macro_accuracy : 0.9964703321456909
+2023-08-29 23:56:13,513 - trainer - INFO -     macro_recall   : 0.9925199747085571
+2023-08-29 23:56:13,513 - trainer - INFO -     macro_precision: 0.983113169670105
+2023-08-29 23:56:13,514 - trainer - INFO -     macro_f1       : 0.9877402186393738
+2023-08-29 23:56:13,514 - trainer - INFO -     val_loss       : 0.45773933703700703
+2023-08-29 23:56:13,514 - trainer - INFO -     val_micro_accuracy: 0.9663677215576172
+2023-08-29 23:56:13,514 - trainer - INFO -     val_micro_recall: 0.9327354431152344
+2023-08-29 23:56:13,514 - trainer - INFO -     val_micro_precision: 0.9327354431152344
+2023-08-29 23:56:13,514 - trainer - INFO -     val_micro_f1   : 0.9327354431152344
+2023-08-29 23:56:13,514 - trainer - INFO -     val_macro_accuracy: 0.9663677215576172
+2023-08-29 23:56:13,514 - trainer - INFO -     val_macro_recall: 0.9148198366165161
+2023-08-29 23:56:13,514 - trainer - INFO -     val_macro_precision: 0.8800420761108398
+2023-08-29 23:56:13,514 - trainer - INFO -     val_macro_f1   : 0.8956029415130615
+2023-08-29 23:56:13,847 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch19.pth ...
+2023-08-29 23:56:54,549 - trainer - INFO - {class: none, accuracy: 0.9430, recall: 0.9312, precision: 0.9575, f1-score: 0.9442}
+2023-08-29 23:56:54,550 - trainer - INFO - {class: person, accuracy: 0.9480, recall: 0.9476, precision: 0.9252, f1-score: 0.9363}
+2023-08-29 23:56:54,550 - trainer - INFO - {class: car, accuracy: 0.9889, recall: 0.9375, precision: 0.7143, f1-score: 0.8108}
+2023-08-29 23:56:54,551 - trainer - INFO - {class: bicycle, accuracy: 0.9892, recall: 0.8689, precision: 0.9275, f1-score: 0.8972}
+2023-08-29 23:56:54,666 - trainer - INFO -     epoch          : 20
+2023-08-29 23:56:54,667 - trainer - INFO -     loss           : 0.02453493277875449
+2023-08-29 23:56:54,667 - trainer - INFO -     micro_accuracy : 0.9969473481178284
+2023-08-29 23:56:54,667 - trainer - INFO -     micro_recall   : 0.9938946962356567
+2023-08-29 23:56:54,667 - trainer - INFO -     micro_precision: 0.9938946962356567
+2023-08-29 23:56:54,667 - trainer - INFO -     micro_f1       : 0.9938946962356567
+2023-08-29 23:56:54,667 - trainer - INFO -     macro_accuracy : 0.9969472885131836
+2023-08-29 23:56:54,668 - trainer - INFO -     macro_recall   : 0.993873119354248
+2023-08-29 23:56:54,668 - trainer - INFO -     macro_precision: 0.9825652837753296
+2023-08-29 23:56:54,668 - trainer - INFO -     macro_f1       : 0.9881081581115723
+2023-08-29 23:56:54,668 - trainer - INFO -     val_loss       : 0.5588187680890163
+2023-08-29 23:56:54,668 - trainer - INFO -     val_micro_accuracy: 0.9672909379005432
+2023-08-29 23:56:54,668 - trainer - INFO -     val_micro_recall: 0.9345818758010864
+2023-08-29 23:56:54,668 - trainer - INFO -     val_micro_precision: 0.9345818758010864
+2023-08-29 23:56:54,669 - trainer - INFO -     val_micro_f1   : 0.9345818758010864
+2023-08-29 23:56:54,669 - trainer - INFO -     val_macro_accuracy: 0.9672909379005432
+2023-08-29 23:56:54,669 - trainer - INFO -     val_macro_recall: 0.9213083982467651
+2023-08-29 23:56:54,669 - trainer - INFO -     val_macro_precision: 0.8811278343200684
+2023-08-29 23:56:54,669 - trainer - INFO -     val_macro_f1   : 0.8971297740936279
+2023-08-29 23:56:55,088 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch20.pth ...
+2023-08-29 23:57:34,701 - trainer - INFO - {class: none, accuracy: 0.9417, recall: 0.9424, precision: 0.9448, f1-score: 0.9436}
+2023-08-29 23:57:34,702 - trainer - INFO - {class: person, accuracy: 0.9441, recall: 0.9300, precision: 0.9312, f1-score: 0.9306}
+2023-08-29 23:57:34,702 - trainer - INFO - {class: car, accuracy: 0.9905, recall: 0.8958, precision: 0.7679, f1-score: 0.8269}
+2023-08-29 23:57:34,702 - trainer - INFO - {class: bicycle, accuracy: 0.9881, recall: 0.8689, precision: 0.9086, f1-score: 0.8883}
+2023-08-29 23:57:34,784 - trainer - INFO -     epoch          : 21
+2023-08-29 23:57:34,785 - trainer - INFO -     loss           : 0.015485014726703123
+2023-08-29 23:57:34,785 - trainer - INFO -     micro_accuracy : 0.9981238842010498
+2023-08-29 23:57:34,785 - trainer - INFO -     micro_recall   : 0.9962477684020996
+2023-08-29 23:57:34,785 - trainer - INFO -     micro_precision: 0.9962477684020996
+2023-08-29 23:57:34,785 - trainer - INFO -     micro_f1       : 0.9962477684020996
+2023-08-29 23:57:34,785 - trainer - INFO -     macro_accuracy : 0.9981238842010498
+2023-08-29 23:57:34,785 - trainer - INFO -     macro_recall   : 0.9968980550765991
+2023-08-29 23:57:34,785 - trainer - INFO -     macro_precision: 0.9913769364356995
+2023-08-29 23:57:34,786 - trainer - INFO -     macro_f1       : 0.9941171407699585
+2023-08-29 23:57:34,786 - trainer - INFO -     val_loss       : 0.5764217779040337
+2023-08-29 23:57:34,786 - trainer - INFO -     val_micro_accuracy: 0.9661039113998413
+2023-08-29 23:57:34,786 - trainer - INFO -     val_micro_recall: 0.9322078824043274
+2023-08-29 23:57:34,786 - trainer - INFO -     val_micro_precision: 0.9322078824043274
+2023-08-29 23:57:34,786 - trainer - INFO -     val_micro_f1   : 0.9322078824043274
+2023-08-29 23:57:34,786 - trainer - INFO -     val_macro_accuracy: 0.9661039710044861
+2023-08-29 23:57:34,786 - trainer - INFO -     val_macro_recall: 0.9092788696289062
+2023-08-29 23:57:34,786 - trainer - INFO -     val_macro_precision: 0.8881161212921143
+2023-08-29 23:57:34,787 - trainer - INFO -     val_macro_f1   : 0.8973556756973267
+2023-08-29 23:57:35,230 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch21.pth ...
+2023-08-29 23:58:15,189 - trainer - INFO - {class: none, accuracy: 0.9298, recall: 0.9439, precision: 0.9223, f1-score: 0.9330}
+2023-08-29 23:58:15,189 - trainer - INFO - {class: person, accuracy: 0.9359, recall: 0.8927, precision: 0.9453, f1-score: 0.9182}
+2023-08-29 23:58:15,190 - trainer - INFO - {class: car, accuracy: 0.9905, recall: 0.9479, precision: 0.7459, f1-score: 0.8349}
+2023-08-29 23:58:15,190 - trainer - INFO - {class: bicycle, accuracy: 0.9855, recall: 0.8981, precision: 0.8447, f1-score: 0.8706}
+2023-08-29 23:58:15,268 - trainer - INFO -     epoch          : 22
+2023-08-29 23:58:15,268 - trainer - INFO -     loss           : 0.017841965593757274
+2023-08-29 23:58:15,268 - trainer - INFO -     micro_accuracy : 0.9979013204574585
+2023-08-29 23:58:15,268 - trainer - INFO -     micro_recall   : 0.9958025813102722
+2023-08-29 23:58:15,268 - trainer - INFO -     micro_precision: 0.9958025813102722
+2023-08-29 23:58:15,268 - trainer - INFO -     micro_f1       : 0.9958025813102722
+2023-08-29 23:58:15,268 - trainer - INFO -     macro_accuracy : 0.9979013204574585
+2023-08-29 23:58:15,269 - trainer - INFO -     macro_recall   : 0.9957668781280518
+2023-08-29 23:58:15,269 - trainer - INFO -     macro_precision: 0.992416262626648
+2023-08-29 23:58:15,269 - trainer - INFO -     macro_f1       : 0.9940839409828186
+2023-08-29 23:58:15,269 - trainer - INFO -     val_loss       : 0.5254925375183424
+2023-08-29 23:58:15,269 - trainer - INFO -     val_micro_accuracy: 0.9604325890541077
+2023-08-29 23:58:15,269 - trainer - INFO -     val_micro_recall: 0.9208651781082153
+2023-08-29 23:58:15,269 - trainer - INFO -     val_micro_precision: 0.9208651781082153
+2023-08-29 23:58:15,269 - trainer - INFO -     val_micro_f1   : 0.9208651781082153
+2023-08-29 23:58:15,269 - trainer - INFO -     val_macro_accuracy: 0.9604325890541077
+2023-08-29 23:58:15,269 - trainer - INFO -     val_macro_recall: 0.9206377863883972
+2023-08-29 23:58:15,269 - trainer - INFO -     val_macro_precision: 0.8645439147949219
+2023-08-29 23:58:15,270 - trainer - INFO -     val_macro_f1   : 0.8891559839248657
+2023-08-29 23:58:15,686 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch22.pth ...
+2023-08-29 23:58:54,874 - trainer - INFO - {class: none, accuracy: 0.9425, recall: 0.9393, precision: 0.9490, f1-score: 0.9441}
+2023-08-29 23:58:54,875 - trainer - INFO - {class: person, accuracy: 0.9449, recall: 0.9346, precision: 0.9291, f1-score: 0.9318}
+2023-08-29 23:58:54,875 - trainer - INFO - {class: car, accuracy: 0.9926, recall: 0.9167, precision: 0.8148, f1-score: 0.8627}
+2023-08-29 23:58:54,875 - trainer - INFO - {class: bicycle, accuracy: 0.9876, recall: 0.8835, precision: 0.8878, f1-score: 0.8856}
+2023-08-29 23:58:54,991 - trainer - INFO -     epoch          : 23
+2023-08-29 23:58:54,991 - trainer - INFO -     loss           : 0.026217481556795236
+2023-08-29 23:58:54,991 - trainer - INFO -     micro_accuracy : 0.9962477684020996
+2023-08-29 23:58:54,991 - trainer - INFO -     micro_recall   : 0.9924955368041992
+2023-08-29 23:58:54,992 - trainer - INFO -     micro_precision: 0.9924955368041992
+2023-08-29 23:58:54,992 - trainer - INFO -     micro_f1       : 0.9924955368041992
+2023-08-29 23:58:54,992 - trainer - INFO -     macro_accuracy : 0.9962477684020996
+2023-08-29 23:58:54,992 - trainer - INFO -     macro_recall   : 0.9939045310020447
+2023-08-29 23:58:54,992 - trainer - INFO -     macro_precision: 0.979321300983429
+2023-08-29 23:58:54,992 - trainer - INFO -     macro_f1       : 0.9864569902420044
+2023-08-29 23:58:54,992 - trainer - INFO -     val_loss       : 0.5146782901138067
+2023-08-29 23:58:54,992 - trainer - INFO -     val_micro_accuracy: 0.9668952822685242
+2023-08-29 23:58:54,993 - trainer - INFO -     val_micro_recall: 0.9337905645370483
+2023-08-29 23:58:54,993 - trainer - INFO -     val_micro_precision: 0.9337905645370483
+2023-08-29 23:58:54,993 - trainer - INFO -     val_micro_f1   : 0.9337905645370483
+2023-08-29 23:58:54,993 - trainer - INFO -     val_macro_accuracy: 0.9668952822685242
+2023-08-29 23:58:54,993 - trainer - INFO -     val_macro_recall: 0.9185083508491516
+2023-08-29 23:58:54,993 - trainer - INFO -     val_macro_precision: 0.8951743841171265
+2023-08-29 23:58:54,993 - trainer - INFO -     val_macro_f1   : 0.9060829281806946
+2023-08-29 23:58:55,456 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch23.pth ...
+2023-08-29 23:59:35,282 - trainer - INFO - {class: none, accuracy: 0.9396, recall: 0.9332, precision: 0.9492, f1-score: 0.9411}
+2023-08-29 23:59:35,282 - trainer - INFO - {class: person, accuracy: 0.9417, recall: 0.9287, precision: 0.9268, f1-score: 0.9278}
+2023-08-29 23:59:35,282 - trainer - INFO - {class: car, accuracy: 0.9910, recall: 0.9583, precision: 0.7541, f1-score: 0.8440}
+2023-08-29 23:59:35,283 - trainer - INFO - {class: bicycle, accuracy: 0.9863, recall: 0.8835, precision: 0.8667, f1-score: 0.8750}
+2023-08-29 23:59:35,384 - trainer - INFO -     epoch          : 24
+2023-08-29 23:59:35,384 - trainer - INFO -     loss           : 0.027372459592335533
+2023-08-29 23:59:35,384 - trainer - INFO -     micro_accuracy : 0.997233510017395
+2023-08-29 23:59:35,384 - trainer - INFO -     micro_recall   : 0.9944670796394348
+2023-08-29 23:59:35,384 - trainer - INFO -     micro_precision: 0.9944670796394348
+2023-08-29 23:59:35,384 - trainer - INFO -     micro_f1       : 0.9944670796394348
+2023-08-29 23:59:35,384 - trainer - INFO -     macro_accuracy : 0.997233510017395
+2023-08-29 23:59:35,384 - trainer - INFO -     macro_recall   : 0.9944573640823364
+2023-08-29 23:59:35,384 - trainer - INFO -     macro_precision: 0.9890190958976746
+2023-08-29 23:59:35,385 - trainer - INFO -     macro_f1       : 0.9917187094688416
+2023-08-29 23:59:35,385 - trainer - INFO -     val_loss       : 0.4616865006275475
+2023-08-29 23:59:35,385 - trainer - INFO -     val_micro_accuracy: 0.9646531343460083
+2023-08-29 23:59:35,385 - trainer - INFO -     val_micro_recall: 0.9293062686920166
+2023-08-29 23:59:35,385 - trainer - INFO -     val_micro_precision: 0.9293062686920166
+2023-08-29 23:59:35,385 - trainer - INFO -     val_micro_f1   : 0.9293062686920166
+2023-08-29 23:59:35,385 - trainer - INFO -     val_macro_accuracy: 0.9646531343460083
+2023-08-29 23:59:35,385 - trainer - INFO -     val_macro_recall: 0.9259226322174072
+2023-08-29 23:59:35,385 - trainer - INFO -     val_macro_precision: 0.8741950988769531
+2023-08-29 23:59:35,385 - trainer - INFO -     val_macro_f1   : 0.8969767093658447
+2023-08-29 23:59:35,811 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch24.pth ...
+2023-08-30 00:00:15,435 - trainer - INFO - {class: none, accuracy: 0.9425, recall: 0.9332, precision: 0.9546, f1-score: 0.9438}
+2023-08-30 00:00:15,436 - trainer - INFO - {class: person, accuracy: 0.9454, recall: 0.9404, precision: 0.9253, f1-score: 0.9328}
+2023-08-30 00:00:15,436 - trainer - INFO - {class: car, accuracy: 0.9929, recall: 0.9688, precision: 0.7949, f1-score: 0.8732}
+2023-08-30 00:00:15,436 - trainer - INFO - {class: bicycle, accuracy: 0.9879, recall: 0.8835, precision: 0.8922, f1-score: 0.8878}
+2023-08-30 00:00:15,553 - trainer - INFO -     epoch          : 25
+2023-08-30 00:00:15,553 - trainer - INFO -     loss           : 0.01576975642748904
+2023-08-30 00:00:15,553 - trainer - INFO -     micro_accuracy : 0.9985372424125671
+2023-08-30 00:00:15,553 - trainer - INFO -     micro_recall   : 0.997074544429779
+2023-08-30 00:00:15,553 - trainer - INFO -     micro_precision: 0.997074544429779
+2023-08-30 00:00:15,553 - trainer - INFO -     micro_f1       : 0.997074544429779
+2023-08-30 00:00:15,554 - trainer - INFO -     macro_accuracy : 0.9985372424125671
+2023-08-30 00:00:15,554 - trainer - INFO -     macro_recall   : 0.997451663017273
+2023-08-30 00:00:15,554 - trainer - INFO -     macro_precision: 0.9921173453330994
+2023-08-30 00:00:15,554 - trainer - INFO -     macro_f1       : 0.9947616457939148
+2023-08-30 00:00:15,554 - trainer - INFO -     val_loss       : 0.47951781625549
+2023-08-30 00:00:15,554 - trainer - INFO -     val_micro_accuracy: 0.9671590328216553
+2023-08-30 00:00:15,554 - trainer - INFO -     val_micro_recall: 0.9343181252479553
+2023-08-30 00:00:15,554 - trainer - INFO -     val_micro_precision: 0.9343181252479553
+2023-08-30 00:00:15,555 - trainer - INFO -     val_micro_f1   : 0.9343181252479553
+2023-08-30 00:00:15,555 - trainer - INFO -     val_macro_accuracy: 0.9671590328216553
+2023-08-30 00:00:15,555 - trainer - INFO -     val_macro_recall: 0.9314718842506409
+2023-08-30 00:00:15,555 - trainer - INFO -     val_macro_precision: 0.8917377591133118
+2023-08-30 00:00:15,555 - trainer - INFO -     val_macro_f1   : 0.9094109535217285
+2023-08-30 00:00:15,963 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch25.pth ...
+2023-08-30 00:00:56,235 - trainer - INFO - {class: none, accuracy: 0.9436, recall: 0.9429, precision: 0.9477, f1-score: 0.9453}
+2023-08-30 00:00:56,236 - trainer - INFO - {class: person, accuracy: 0.9475, recall: 0.9313, precision: 0.9380, f1-score: 0.9346}
+2023-08-30 00:00:56,236 - trainer - INFO - {class: car, accuracy: 0.9926, recall: 0.9583, precision: 0.7931, f1-score: 0.8679}
+2023-08-30 00:00:56,236 - trainer - INFO - {class: bicycle, accuracy: 0.9887, recall: 0.8981, precision: 0.8937, f1-score: 0.8959}
+2023-08-30 00:00:56,349 - trainer - INFO -     epoch          : 26
+2023-08-30 00:00:56,350 - trainer - INFO -     loss           : 0.010419333642074173
+2023-08-30 00:00:56,350 - trainer - INFO -     micro_accuracy : 0.9986644387245178
+2023-08-30 00:00:56,350 - trainer - INFO -     micro_recall   : 0.9973289370536804
+2023-08-30 00:00:56,350 - trainer - INFO -     micro_precision: 0.9973289370536804
+2023-08-30 00:00:56,350 - trainer - INFO -     micro_f1       : 0.9973289370536804
+2023-08-30 00:00:56,350 - trainer - INFO -     macro_accuracy : 0.9986644387245178
+2023-08-30 00:00:56,350 - trainer - INFO -     macro_recall   : 0.9977787733078003
+2023-08-30 00:00:56,350 - trainer - INFO -     macro_precision: 0.9924124479293823
+2023-08-30 00:00:56,350 - trainer - INFO -     macro_f1       : 0.9950754046440125
+2023-08-30 00:00:56,351 - trainer - INFO -     val_loss       : 0.48312814608216287
+2023-08-30 00:00:56,351 - trainer - INFO -     val_micro_accuracy: 0.9680823087692261
+2023-08-30 00:00:56,351 - trainer - INFO -     val_micro_recall: 0.9361646175384521
+2023-08-30 00:00:56,351 - trainer - INFO -     val_micro_precision: 0.9361646175384521
+2023-08-30 00:00:56,351 - trainer - INFO -     val_micro_f1   : 0.9361646175384521
+2023-08-30 00:00:56,351 - trainer - INFO -     val_macro_accuracy: 0.9680823087692261
+2023-08-30 00:00:56,351 - trainer - INFO -     val_macro_recall: 0.9326401352882385
+2023-08-30 00:00:56,351 - trainer - INFO -     val_macro_precision: 0.8931444883346558
+2023-08-30 00:00:56,351 - trainer - INFO -     val_macro_f1   : 0.9109379649162292
+2023-08-30 00:00:56,777 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch26.pth ...
+2023-08-30 00:01:36,536 - trainer - INFO - {class: none, accuracy: 0.9430, recall: 0.9378, precision: 0.9514, f1-score: 0.9445}
+2023-08-30 00:01:36,536 - trainer - INFO - {class: person, accuracy: 0.9467, recall: 0.9444, precision: 0.9250, f1-score: 0.9346}
+2023-08-30 00:01:36,536 - trainer - INFO - {class: car, accuracy: 0.9945, recall: 0.9479, precision: 0.8505, f1-score: 0.8966}
+2023-08-30 00:01:36,537 - trainer - INFO - {class: bicycle, accuracy: 0.9892, recall: 0.8641, precision: 0.9319, f1-score: 0.8967}
+2023-08-30 00:01:36,653 - trainer - INFO -     epoch          : 27
+2023-08-30 00:01:36,653 - trainer - INFO -     loss           : 0.010038765787139414
+2023-08-30 00:01:36,653 - trainer - INFO -     micro_accuracy : 0.9989188313484192
+2023-08-30 00:01:36,653 - trainer - INFO -     micro_recall   : 0.9978377223014832
+2023-08-30 00:01:36,653 - trainer - INFO -     micro_precision: 0.9978377223014832
+2023-08-30 00:01:36,653 - trainer - INFO -     micro_f1       : 0.9978377223014832
+2023-08-30 00:01:36,653 - trainer - INFO -     macro_accuracy : 0.9989188313484192
+2023-08-30 00:01:36,654 - trainer - INFO -     macro_recall   : 0.9977672100067139
+2023-08-30 00:01:36,654 - trainer - INFO -     macro_precision: 0.9934892654418945
+2023-08-30 00:01:36,654 - trainer - INFO -     macro_f1       : 0.9956157207489014
+2023-08-30 00:01:36,654 - trainer - INFO -     val_loss       : 0.561193295319875
+2023-08-30 00:01:36,654 - trainer - INFO -     val_micro_accuracy: 0.9683460593223572
+2023-08-30 00:01:36,654 - trainer - INFO -     val_micro_recall: 0.9366921782493591
+2023-08-30 00:01:36,654 - trainer - INFO -     val_micro_precision: 0.9366921782493591
+2023-08-30 00:01:36,654 - trainer - INFO -     val_micro_f1   : 0.9366921782493591
+2023-08-30 00:01:36,655 - trainer - INFO -     val_macro_accuracy: 0.9683460593223572
+2023-08-30 00:01:36,655 - trainer - INFO -     val_macro_recall: 0.9235382080078125
+2023-08-30 00:01:36,655 - trainer - INFO -     val_macro_precision: 0.9146938323974609
+2023-08-30 00:01:36,655 - trainer - INFO -     val_macro_f1   : 0.9180981516838074
+2023-08-30 00:01:37,093 - trainer - INFO - Saving checkpoint: res/classifiers/pascal_classifier_multi/trainer/0829_234315/models/checkpoint-epoch27.pth ...
+2023-08-30 00:02:16,812 - trainer - INFO - {class: none, accuracy: 0.9436, recall: 0.9403, precision: 0.9500, f1-score: 0.9452}
+2023-08-30 00:02:16,812 - trainer - INFO - {class: person, accuracy: 0.9480, recall: 0.9339, precision: 0.9370, f1-score: 0.9354}
+2023-08-30 00:02:16,812 - trainer - INFO - {class: car, accuracy: 0.9921, recall: 0.9271, precision: 0.7946, f1-score: 0.8558}
+2023-08-30 00:02:16,812 - trainer - INFO - {class: bicycle, accuracy: 0.9871, recall: 0.9029, precision: 0.8651, f1-score: 0.8836}
+2023-08-30 00:02:16,890 - trainer - INFO -     epoch          : 28
+2023-08-30 00:02:16,890 - trainer - INFO -     loss           : 0.015111745070624431
+2023-08-30 00:02:16,891 - trainer - INFO -     micro_accuracy : 0.9988552331924438
+2023-08-30 00:02:16,891 - trainer - INFO -     micro_recall   : 0.9977105259895325
+2023-08-30 00:02:16,891 - trainer - INFO -     micro_precision: 0.9977105259895325
+2023-08-30 00:02:16,891 - trainer - INFO -     micro_f1       : 0.9977105259895325
+2023-08-30 00:02:16,891 - trainer - INFO -     macro_accuracy : 0.9988552331924438
+2023-08-30 00:02:16,891 - trainer - INFO -     macro_recall   : 0.9968201518058777
+2023-08-30 00:02:16,891 - trainer - INFO -     macro_precision: 0.9935042262077332
+2023-08-30 00:02:16,891 - trainer - INFO -     macro_f1       : 0.9951547384262085
+2023-08-30 00:02:16,891 - trainer - INFO -     val_loss       : 0.5586774865786235
+2023-08-30 00:02:16,891 - trainer - INFO -     val_micro_accuracy: 0.967686653137207
+2023-08-30 00:02:16,891 - trainer - INFO -     val_micro_recall: 0.9353732466697693
+2023-08-30 00:02:16,891 - trainer - INFO -     val_micro_precision: 0.9353732466697693
+2023-08-30 00:02:16,892 - trainer - INFO -     val_micro_f1   : 0.9353732466697693
+2023-08-30 00:02:16,892 - trainer - INFO -     val_macro_accuracy: 0.9676865935325623
+2023-08-30 00:02:16,892 - trainer - INFO -     val_macro_recall: 0.9260582327842712
+2023-08-30 00:02:16,892 - trainer - INFO -     val_macro_precision: 0.8866878747940063
+2023-08-30 00:02:16,892 - trainer - INFO -     val_macro_f1   : 0.9049918055534363
+2023-08-30 00:02:16,892 - trainer - INFO - Validation performance didn't improve for 15 epochs. Training stops.
