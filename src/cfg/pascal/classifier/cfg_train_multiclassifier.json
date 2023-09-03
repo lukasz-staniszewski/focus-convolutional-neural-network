@@ -1,0 +1,83 @@
+{
+    "name": "PascalMultiClassifier",
+    "device": 1,
+    "seed": 42,
+    "save_cfg_dir": "res/classifiers/pascal_classifier_multi/",
+    "arch": {
+        "type": "MultiClassifier",
+        "args": {
+            "n_classes": 4,
+            "backbone": "resnet34",
+            "class_weights": [
+                0.50121127,
+                0.64326624,
+                5.11848958,
+                3.92315369
+            ]
+        }
+    },
+    "data_loader": {
+        "type": "ClassifierLoader",
+        "args": {
+            "images_dir": "data/processed/PASCAL/PascalMultiClassifier/train/images",
+            "batch_size": 128,
+            "csv_path": "data/processed/PASCAL/PascalMultiClassifier/train/labels.csv",
+            "save_out_dir": "res/classifiers/pascal_classifier_multi/trainer/labels/",
+            "transform_mean": [
+                0.3962,
+                0.3688,
+                0.3429
+            ],
+            "transform_std": [
+                0.2836,
+                0.2741,
+                0.2764
+            ],
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 12,
+            "balance_train": true,
+            "balance_methods": [
+                "oversample",
+                "make_0_half"
+            ],
+            "balance_max_multiplicity": null,
+            "labels": {
+                "0": "none",
+                "1": "person",
+                "2": "car",
+                "3": "bicycle"
+            }
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 3e-05,
+            "weight_decay": 0.0005,
+            "amsgrad": true
+        }
+    },
+    "loss": "cross_entropy_loss_weighted",
+    "metrics": [
+        "micro_accuracy",
+        "micro_recall",
+        "micro_precision",
+        "micro_f1",
+        "macro_accuracy",
+        "macro_recall",
+        "macro_precision",
+        "macro_f1"
+    ],
+    "lr_scheduler": null,
+    "trainer": {
+        "type": "Trainer",
+        "epochs": 100,
+        "save_dir": "res/classifiers/pascal_classifier_multi/",
+        "save_period": 1,
+        "verbosity": 1,
+        "monitor": "max val_macro_precision",
+        "early_stop": 15,
+        "tensorboard": false
+    }
+}

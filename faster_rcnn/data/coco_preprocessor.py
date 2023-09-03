@@ -12,7 +12,7 @@ class CocoPreprocessor:
         self.coco = COCO(json_in_path)
         self.json_in_path = json_in_path
         self.json_out_path = json_out_path
-        self.categories_names = categories_names
+        self.categories_names = categories_names if categories_names else []
 
         self.cat_ids = self.coco.getCatIds(catNms=self.categories_names)
         self.images = self._get_imgs()

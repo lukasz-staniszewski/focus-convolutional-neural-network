@@ -19,7 +19,7 @@ class ResFocusNetwork(BaseModel):
         threshold: float = 0.5,
         inp_img_size: Tuple[int, int] = (640, 640),
         loss_weights: List[float] = [1.0],
-        loss_rot: bool = True,
+        loss_rot: bool = False,
     ) -> None:
         super().__init__()
         self.threshold = threshold

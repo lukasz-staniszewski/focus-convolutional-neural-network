@@ -1,6 +1,6 @@
 from copy import deepcopy
 from pathlib import Path
-from typing import Dict, Tuple, Union, List
+from typing import Dict, List, Tuple, Union
 
 import pandas as pd
 import torch
@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from data_utils.data_loaders.focus_cnn.BaseFocusCNNLoader import (
     BaseFocusCNNLoader,
 )
-from data_utils.data_loaders.utils import remove_only_0
+from data_utils.data_loaders.utils import remove_only_0, remove_too_many_100
 from data_utils.data_sets import FocusCNNDataset
 
 
@@ -115,10 +115,15 @@ class FocusCNNLoader(BaseFocusCNNLoader):
         Possibilities in balance_methods:
         * undersampling:
             -- 'remove_only_0' - remove examples with only 0 as labels (no objects on the image)
+            -- 'remove_too_many_100' - remove 1/3 of examples with only "1"
         """
         # oversampling
         if "remove_only_0" in self.balance_methods:
             self.csv_path_train = remove_only_0(
+                csv_path_train_orig=self.csv_path_train,
+            )
+        if "remove_too_many_100" in self.balance_methods:
+            self.csv_path_train = remove_too_many_100(
                 csv_path_train_orig=self.csv_path_train,
             )
 

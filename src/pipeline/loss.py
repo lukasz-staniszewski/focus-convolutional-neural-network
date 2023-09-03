@@ -200,7 +200,7 @@ def focus_multiloss_2(
     lambda_scale: float,
     lambda_rotation: float,
     weights: List[float] = None,
-    loss_rot: bool = True,
+    loss_rot: bool = False,
 ):
     """Calculates second version of loss for focus model - weighted sum of classification loss and regression on transform param loss.
 

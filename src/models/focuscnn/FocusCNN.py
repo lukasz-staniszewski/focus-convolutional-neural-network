@@ -44,7 +44,7 @@ class FocusCNN(BaseModel):
             return int(child.get_n_model_params()[22:])
 
         all_params = 0
-        all_params += get_n_params(self.classifier)
+        all_params += get_n_params(self.classifier_model)
         for focus_model in self.focus_models.values():
             all_params += get_n_params(focus_model)
         return "Trainable parameters: {}".format(all_params)
@@ -69,7 +69,7 @@ class FocusCNN(BaseModel):
     def load_model(
         self,
         classifier_model_path: str,
-        focus_models_path: OrderedDict[str, str],
+        focus_models_path: Dict[str, str],
     ) -> None:
         """Loads model from config file.
 
@@ -145,14 +145,11 @@ class FocusCNN(BaseModel):
         )
         outs_cls = self.classifier_model(inputs_cls)
 
-        loss_val = loss.cross_entropy_loss_weighted(
-            output=outs_cls,
-            target=target_cls,
-            weights=[0.3221, 1.3864, 7.2780, 27.5914],
-        ) + 0.25 * sum(focus_models_loss)
-        # )
+        loss_val = loss.cross_entropy_loss(
+            output=outs_cls, target=target_cls
+        ) + 10 * sum(focus_models_loss)
 
-        return {
+        outputs = {
             "out_cls": outs_cls,
             "outs_translate_x": {
                 cls_idx: out_focus["out_translate_x"]
@@ -169,6 +166,7 @@ class FocusCNN(BaseModel):
             "target_cls": target_cls,
             "loss": loss_val,
         }
+        return outputs
 
     def get_predictions(self, output, img_ids):
         out_cls = output["out_cls"]
@@ -241,13 +239,13 @@ class FocusCNN(BaseModel):
                 target_bboxes[:, 0] == image_id
             ]  # Filter bboxes for current image
             if len(image_bboxes) > 0:
-                # Convert [x, y, w, h] to [xmin, ymin, xmax, ymax]
+                # [xmin, ymin, xmax, ymax]
                 boxes = torch.stack(
                     [
                         image_bboxes[:, 2],
                         image_bboxes[:, 3],
-                        image_bboxes[:, 2] + image_bboxes[:, 4],
-                        image_bboxes[:, 3] + image_bboxes[:, 5],
+                        image_bboxes[:, 4],
+                        image_bboxes[:, 5],
                     ],
                     dim=1,
                 )

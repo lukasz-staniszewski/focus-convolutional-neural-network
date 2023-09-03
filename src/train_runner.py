@@ -42,15 +42,17 @@ def main(config: ConfigParser) -> None:
 
     # trainer initialization
     trainer_class = getattr(module_trainers, config["trainer"]["type"])
+    do_validation = config["trainer"]["do_validation"]
 
     trainer = trainer_class(
-        model,
-        metrics,
-        optimizer,
+        model=model,
+        metric_ftns=metrics,
+        optimizer=optimizer,
         config=config,
         device=device,
         data_loader=data_loader,
         lr_scheduler=lr_scheduler,
+        do_validation=do_validation,
     )
 
     trainer.train()
