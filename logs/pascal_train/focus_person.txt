@@ -1,0 +1,1264 @@
+2023-08-30 08:48:58,529 - trainer - INFO -     epoch          : 1
+2023-08-30 08:48:58,530 - trainer - INFO -     loss           : 8.691109519738417
+2023-08-30 08:48:58,530 - trainer - INFO -     cls_loss       : 0.6922097274890313
+2023-08-30 08:48:58,530 - trainer - INFO -     translation_x_loss: 0.1798270876713834
+2023-08-30 08:48:58,530 - trainer - INFO -     translation_y_loss: 0.11358565309054248
+2023-08-30 08:48:58,530 - trainer - INFO -     scale_log_loss : 0.3642912542672603
+2023-08-30 08:48:58,530 - trainer - INFO -     rotation_loss  : 0.03548393469907671
+2023-08-30 08:48:58,530 - trainer - INFO -     focus_accuracy : 0.5279519106912838
+2023-08-30 08:48:58,530 - trainer - INFO -     focus_recall   : 0.4709687355613738
+2023-08-30 08:48:58,530 - trainer - INFO -     focus_precision: 0.597265625
+2023-08-30 08:48:58,530 - trainer - INFO -     focus_f1       : 0.5266511667958323
+2023-08-30 08:48:58,531 - trainer - INFO -     mean_iou       : 0.3881620168685913
+2023-08-30 08:48:58,531 - trainer - INFO -     iou50_accuracy : 0.3614661991596222
+2023-08-30 08:48:58,531 - trainer - INFO -     val_loss       : 7.317051726121169
+2023-08-30 08:48:58,531 - trainer - INFO -     val_cls_loss   : 0.6839141983252305
+2023-08-30 08:48:58,531 - trainer - INFO -     val_translation_x_loss: 0.16973754717753484
+2023-08-30 08:48:58,531 - trainer - INFO -     val_translation_y_loss: 0.09518308622332719
+2023-08-30 08:48:58,531 - trainer - INFO -     val_scale_log_loss: 0.2846808259303753
+2023-08-30 08:48:58,531 - trainer - INFO -     val_rotation_loss: 0.012640031548933341
+2023-08-30 08:48:58,531 - trainer - INFO -     val_focus_accuracy: 0.5479318734793187
+2023-08-30 08:48:58,531 - trainer - INFO -     val_focus_recall: 0.2181500872600349
+2023-08-30 08:48:58,531 - trainer - INFO -     val_focus_precision: 0.8833922261484098
+2023-08-30 08:48:58,532 - trainer - INFO -     val_focus_f1   : 0.34989503149055284
+2023-08-30 08:48:58,532 - trainer - INFO -     val_mean_iou   : 0.45309874415397644
+2023-08-30 08:48:58,532 - trainer - INFO -     val_iou50_accuracy: 0.4773123860359192
+2023-08-30 08:48:58,727 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch1.pth ...
+2023-08-30 08:48:58,920 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 08:51:12,414 - trainer - INFO -     epoch          : 2
+2023-08-30 08:51:12,415 - trainer - INFO -     loss           : 7.201353177919493
+2023-08-30 08:51:12,415 - trainer - INFO -     cls_loss       : 0.6792491204463519
+2023-08-30 08:51:12,415 - trainer - INFO -     translation_x_loss: 0.17486864521812934
+2023-08-30 08:51:12,415 - trainer - INFO -     translation_y_loss: 0.09950915261448084
+2023-08-30 08:51:12,415 - trainer - INFO -     scale_log_loss : 0.2645377113923922
+2023-08-30 08:51:12,415 - trainer - INFO -     rotation_loss  : 0.018372652770767172
+2023-08-30 08:51:12,415 - trainer - INFO -     focus_accuracy : 0.5676255903821382
+2023-08-30 08:51:12,415 - trainer - INFO -     focus_recall   : 0.3077160018481442
+2023-08-30 08:51:12,416 - trainer - INFO -     focus_precision: 0.7872340425531915
+2023-08-30 08:51:12,416 - trainer - INFO -     focus_f1       : 0.44247591628834015
+2023-08-30 08:51:12,416 - trainer - INFO -     mean_iou       : 0.4312201142311096
+2023-08-30 08:51:12,416 - trainer - INFO -     iou50_accuracy : 0.45048514008522034
+2023-08-30 08:51:12,416 - trainer - INFO -     val_loss       : 6.716752294393686
+2023-08-30 08:51:12,416 - trainer - INFO -     val_cls_loss   : 0.669077402811784
+2023-08-30 08:51:12,416 - trainer - INFO -     val_translation_x_loss: 0.17053345430355807
+2023-08-30 08:51:12,416 - trainer - INFO -     val_translation_y_loss: 0.08908123780901615
+2023-08-30 08:51:12,416 - trainer - INFO -     val_scale_log_loss: 0.24236714794085576
+2023-08-30 08:51:12,416 - trainer - INFO -     val_rotation_loss: 0.00796425320709554
+2023-08-30 08:51:12,417 - trainer - INFO -     val_focus_accuracy: 0.6175182481751825
+2023-08-30 08:51:12,417 - trainer - INFO -     val_focus_recall: 0.33158813263525305
+2023-08-30 08:51:12,417 - trainer - INFO -     val_focus_precision: 0.95
+2023-08-30 08:51:12,417 - trainer - INFO -     val_focus_f1   : 0.49159120310478654
+2023-08-30 08:51:12,417 - trainer - INFO -     val_mean_iou   : 0.46328404545783997
+2023-08-30 08:51:12,417 - trainer - INFO -     val_iou50_accuracy: 0.4930191934108734
+2023-08-30 08:51:12,655 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch2.pth ...
+2023-08-30 08:51:12,932 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 08:53:25,570 - trainer - INFO -     epoch          : 3
+2023-08-30 08:53:25,570 - trainer - INFO -     loss           : 6.734483878691118
+2023-08-30 08:53:25,571 - trainer - INFO -     cls_loss       : 0.664446058672863
+2023-08-30 08:53:25,571 - trainer - INFO -     translation_x_loss: 0.17339675488707784
+2023-08-30 08:53:25,571 - trainer - INFO -     translation_y_loss: 0.0912062467618303
+2023-08-30 08:53:25,571 - trainer - INFO -     scale_log_loss : 0.23798393067177182
+2023-08-30 08:53:25,571 - trainer - INFO -     rotation_loss  : 0.012998202315449797
+2023-08-30 08:53:25,571 - trainer - INFO -     focus_accuracy : 0.6297123228853585
+2023-08-30 08:53:25,571 - trainer - INFO -     focus_recall   : 0.3699368550746958
+2023-08-30 08:53:25,571 - trainer - INFO -     focus_precision: 0.9157453297750667
+2023-08-30 08:53:25,571 - trainer - INFO -     focus_f1       : 0.5269855199648968
+2023-08-30 08:53:25,571 - trainer - INFO -     mean_iou       : 0.44614508748054504
+2023-08-30 08:53:25,572 - trainer - INFO -     iou50_accuracy : 0.47497305274009705
+2023-08-30 08:53:25,572 - trainer - INFO -     val_loss       : 6.568797492980957
+2023-08-30 08:53:25,572 - trainer - INFO -     val_cls_loss   : 0.6484030292584346
+2023-08-30 08:53:25,572 - trainer - INFO -     val_translation_x_loss: 0.16714480192615436
+2023-08-30 08:53:25,572 - trainer - INFO -     val_translation_y_loss: 0.08635143872637015
+2023-08-30 08:53:25,572 - trainer - INFO -     val_scale_log_loss: 0.23824405658703585
+2023-08-30 08:53:25,572 - trainer - INFO -     val_rotation_loss: 0.00650363012145345
+2023-08-30 08:53:25,572 - trainer - INFO -     val_focus_accuracy: 0.6895377128953771
+2023-08-30 08:53:25,572 - trainer - INFO -     val_focus_recall: 0.45287958115183247
+2023-08-30 08:53:25,572 - trainer - INFO -     val_focus_precision: 0.9792452830188679
+2023-08-30 08:53:25,572 - trainer - INFO -     val_focus_f1   : 0.6193317422434368
+2023-08-30 08:53:25,573 - trainer - INFO -     val_mean_iou   : 0.4819594919681549
+2023-08-30 08:53:25,573 - trainer - INFO -     val_iou50_accuracy: 0.5244328379631042
+2023-08-30 08:53:25,818 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch3.pth ...
+2023-08-30 08:53:26,110 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 08:55:37,502 - trainer - INFO -     epoch          : 4
+2023-08-30 08:55:37,502 - trainer - INFO -     loss           : 6.3563587966856065
+2023-08-30 08:55:37,503 - trainer - INFO -     cls_loss       : 0.6495421835026898
+2023-08-30 08:55:37,503 - trainer - INFO -     translation_x_loss: 0.17207548613813553
+2023-08-30 08:55:37,503 - trainer - INFO -     translation_y_loss: 0.08343042529464423
+2023-08-30 08:55:37,503 - trainer - INFO -     scale_log_loss : 0.21757455008452412
+2023-08-30 08:55:37,503 - trainer - INFO -     rotation_loss  : 0.009950362291739701
+2023-08-30 08:55:37,503 - trainer - INFO -     focus_accuracy : 0.6980678402747961
+2023-08-30 08:55:37,503 - trainer - INFO -     focus_recall   : 0.5043893423687048
+2023-08-30 08:55:37,503 - trainer - INFO -     focus_precision: 0.9165966974531207
+2023-08-30 08:55:37,503 - trainer - INFO -     focus_f1       : 0.6507053447248162
+2023-08-30 08:55:37,503 - trainer - INFO -     mean_iou       : 0.46147099137306213
+2023-08-30 08:55:37,504 - trainer - INFO -     iou50_accuracy : 0.5022331476211548
+2023-08-30 08:55:37,504 - trainer - INFO -     val_loss       : 6.2700728416442875
+2023-08-30 08:55:37,504 - trainer - INFO -     val_cls_loss   : 0.6337165887539203
+2023-08-30 08:55:37,504 - trainer - INFO -     val_translation_x_loss: 0.1684574802334492
+2023-08-30 08:55:37,504 - trainer - INFO -     val_translation_y_loss: 0.07671590017584654
+2023-08-30 08:55:37,504 - trainer - INFO -     val_scale_log_loss: 0.2234442760164921
+2023-08-30 08:55:37,504 - trainer - INFO -     val_rotation_loss: 0.0043147920487591855
+2023-08-30 08:55:37,504 - trainer - INFO -     val_focus_accuracy: 0.7464720194647202
+2023-08-30 08:55:37,504 - trainer - INFO -     val_focus_recall: 0.5645724258289704
+2023-08-30 08:55:37,504 - trainer - INFO -     val_focus_precision: 0.9671150971599403
+2023-08-30 08:55:37,504 - trainer - INFO -     val_focus_f1   : 0.712947658402204
+2023-08-30 08:55:37,505 - trainer - INFO -     val_mean_iou   : 0.4893750250339508
+2023-08-30 08:55:37,505 - trainer - INFO -     val_iou50_accuracy: 0.5523560047149658
+2023-08-30 08:55:37,747 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch4.pth ...
+2023-08-30 08:55:38,069 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 08:57:47,468 - trainer - INFO -     epoch          : 5
+2023-08-30 08:57:47,468 - trainer - INFO -     loss           : 6.05619049858261
+2023-08-30 08:57:47,468 - trainer - INFO -     cls_loss       : 0.6346266770755852
+2023-08-30 08:57:47,468 - trainer - INFO -     translation_x_loss: 0.17191967669014746
+2023-08-30 08:57:47,468 - trainer - INFO -     translation_y_loss: 0.07749091713064975
+2023-08-30 08:57:47,468 - trainer - INFO -     scale_log_loss : 0.20035638940612693
+2023-08-30 08:57:47,469 - trainer - INFO -     rotation_loss  : 0.008120012161281
+2023-08-30 08:57:47,469 - trainer - INFO -     focus_accuracy : 0.7428939458995277
+2023-08-30 08:57:47,469 - trainer - INFO -     focus_recall   : 0.5761589403973509
+2023-08-30 08:57:47,469 - trainer - INFO -     focus_precision: 0.939241777554607
+2023-08-30 08:57:47,469 - trainer - INFO -     focus_f1       : 0.7142038946162657
+2023-08-30 08:57:47,469 - trainer - INFO -     mean_iou       : 0.4721149504184723
+2023-08-30 08:57:47,469 - trainer - INFO -     iou50_accuracy : 0.5187124609947205
+2023-08-30 08:57:47,469 - trainer - INFO -     val_loss       : 6.515284340198224
+2023-08-30 08:57:47,469 - trainer - INFO -     val_cls_loss   : 0.6169175459788396
+2023-08-30 08:57:47,469 - trainer - INFO -     val_translation_x_loss: 0.1667250225177178
+2023-08-30 08:57:47,469 - trainer - INFO -     val_translation_y_loss: 0.07376077736799534
+2023-08-30 08:57:47,470 - trainer - INFO -     val_scale_log_loss: 0.2501447012791267
+2023-08-30 08:57:47,470 - trainer - INFO -     val_rotation_loss: 0.003600285592703865
+2023-08-30 08:57:47,470 - trainer - INFO -     val_focus_accuracy: 0.7557177615571776
+2023-08-30 08:57:47,470 - trainer - INFO -     val_focus_recall: 0.5767888307155323
+2023-08-30 08:57:47,470 - trainer - INFO -     val_focus_precision: 0.9749262536873157
+2023-08-30 08:57:47,470 - trainer - INFO -     val_focus_f1   : 0.7247807017543859
+2023-08-30 08:57:47,470 - trainer - INFO -     val_mean_iou   : 0.48808684945106506
+2023-08-30 08:57:47,470 - trainer - INFO -     val_iou50_accuracy: 0.5445026159286499
+2023-08-30 08:57:47,687 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch5.pth ...
+2023-08-30 08:59:57,673 - trainer - INFO -     epoch          : 6
+2023-08-30 08:59:57,673 - trainer - INFO -     loss           : 5.801867060608917
+2023-08-30 08:59:57,673 - trainer - INFO -     cls_loss       : 0.6184505839924236
+2023-08-30 08:59:57,673 - trainer - INFO -     translation_x_loss: 0.1707603312660377
+2023-08-30 08:59:57,674 - trainer - INFO -     translation_y_loss: 0.07283715437586
+2023-08-30 08:59:57,674 - trainer - INFO -     scale_log_loss : 0.1867077447023693
+2023-08-30 08:59:57,674 - trainer - INFO -     rotation_loss  : 0.006584577392889084
+2023-08-30 08:59:57,674 - trainer - INFO -     focus_accuracy : 0.7852297123228854
+2023-08-30 08:59:57,674 - trainer - INFO -     focus_recall   : 0.6510087786847374
+2023-08-30 08:59:57,674 - trainer - INFO -     focus_precision: 0.947333034513671
+2023-08-30 08:59:57,674 - trainer - INFO -     focus_f1       : 0.7717024189867641
+2023-08-30 08:59:57,674 - trainer - INFO -     mean_iou       : 0.4809395968914032
+2023-08-30 08:59:57,674 - trainer - INFO -     iou50_accuracy : 0.5351917743682861
+2023-08-30 08:59:57,674 - trainer - INFO -     val_loss       : 6.387054524054894
+2023-08-30 08:59:57,675 - trainer - INFO -     val_cls_loss   : 0.5915063101511735
+2023-08-30 08:59:57,675 - trainer - INFO -     val_translation_x_loss: 0.16745480344845698
+2023-08-30 08:59:57,675 - trainer - INFO -     val_translation_y_loss: 0.07172095437462513
+2023-08-30 08:59:57,675 - trainer - INFO -     val_scale_log_loss: 0.24295569234169445
+2023-08-30 08:59:57,675 - trainer - INFO -     val_rotation_loss: 0.003323609555641619
+2023-08-30 08:59:57,675 - trainer - INFO -     val_focus_accuracy: 0.8472019464720195
+2023-08-30 08:59:57,675 - trainer - INFO -     val_focus_recall: 0.7513089005235603
+2023-08-30 08:59:57,675 - trainer - INFO -     val_focus_precision: 0.9674157303370786
+2023-08-30 08:59:57,675 - trainer - INFO -     val_focus_f1   : 0.8457760314341848
+2023-08-30 08:59:57,675 - trainer - INFO -     val_mean_iou   : 0.4975946545600891
+2023-08-30 08:59:57,675 - trainer - INFO -     val_iou50_accuracy: 0.5619546175003052
+2023-08-30 08:59:57,918 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch6.pth ...
+2023-08-30 09:02:07,811 - trainer - INFO -     epoch          : 7
+2023-08-30 09:02:07,812 - trainer - INFO -     loss           : 5.609601183907016
+2023-08-30 09:02:07,812 - trainer - INFO -     cls_loss       : 0.6009829144228945
+2023-08-30 09:02:07,812 - trainer - INFO -     translation_x_loss: 0.16795619087969207
+2023-08-30 09:02:07,812 - trainer - INFO -     translation_y_loss: 0.06877189516959774
+2023-08-30 09:02:07,812 - trainer - INFO -     scale_log_loss : 0.1792144616758758
+2023-08-30 09:02:07,812 - trainer - INFO -     rotation_loss  : 0.005769234941248874
+2023-08-30 09:02:07,812 - trainer - INFO -     focus_accuracy : 0.8139115500214684
+2023-08-30 09:02:07,812 - trainer - INFO -     focus_recall   : 0.7027568150315725
+2023-08-30 09:02:07,812 - trainer - INFO -     focus_precision: 0.950625
+2023-08-30 09:02:07,812 - trainer - INFO -     focus_f1       : 0.8081112193394139
+2023-08-30 09:02:07,813 - trainer - INFO -     mean_iou       : 0.49051758646965027
+2023-08-30 09:02:07,813 - trainer - INFO -     iou50_accuracy : 0.5485907793045044
+2023-08-30 09:02:07,813 - trainer - INFO -     val_loss       : 5.864841633576614
+2023-08-30 09:02:07,813 - trainer - INFO -     val_cls_loss   : 0.58319849050962
+2023-08-30 09:02:07,813 - trainer - INFO -     val_translation_x_loss: 0.1617328344629361
+2023-08-30 09:02:07,813 - trainer - INFO -     val_translation_y_loss: 0.06704304149517647
+2023-08-30 09:02:07,813 - trainer - INFO -     val_scale_log_loss: 0.21059142866959937
+2023-08-30 09:02:07,813 - trainer - INFO -     val_rotation_loss: 0.00307850856333971
+2023-08-30 09:02:07,813 - trainer - INFO -     val_focus_accuracy: 0.832603406326034
+2023-08-30 09:02:07,813 - trainer - INFO -     val_focus_recall: 0.7233856893542757
+2023-08-30 09:02:07,813 - trainer - INFO -     val_focus_precision: 0.9684579439252337
+2023-08-30 09:02:07,814 - trainer - INFO -     val_focus_f1   : 0.8281718281718282
+2023-08-30 09:02:07,814 - trainer - INFO -     val_mean_iou   : 0.5034274458885193
+2023-08-30 09:02:07,814 - trainer - INFO -     val_iou50_accuracy: 0.5523560047149658
+2023-08-30 09:02:08,083 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch7.pth ...
+2023-08-30 09:02:08,409 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:04:19,348 - trainer - INFO -     epoch          : 8
+2023-08-30 09:04:19,348 - trainer - INFO -     loss           : 5.334445147723942
+2023-08-30 09:04:19,348 - trainer - INFO -     cls_loss       : 0.5858472040393851
+2023-08-30 09:04:19,348 - trainer - INFO -     translation_x_loss: 0.16044967132364654
+2023-08-30 09:04:19,348 - trainer - INFO -     translation_y_loss: 0.06489668758893079
+2023-08-30 09:04:19,349 - trainer - INFO -     scale_log_loss : 0.16910873492667963
+2023-08-30 09:04:19,349 - trainer - INFO -     rotation_loss  : 0.0050456010612434
+2023-08-30 09:04:19,349 - trainer - INFO -     focus_accuracy : 0.8419063975955345
+2023-08-30 09:04:19,349 - trainer - INFO -     focus_recall   : 0.7506545510549822
+2023-08-30 09:04:19,349 - trainer - INFO -     focus_precision: 0.956436420722135
+2023-08-30 09:04:19,349 - trainer - INFO -     focus_f1       : 0.8411424626801277
+2023-08-30 09:04:19,349 - trainer - INFO -     mean_iou       : 0.5054578185081482
+2023-08-30 09:04:19,349 - trainer - INFO -     iou50_accuracy : 0.5707685351371765
+2023-08-30 09:04:19,349 - trainer - INFO -     val_loss       : 6.261226221231314
+2023-08-30 09:04:19,349 - trainer - INFO -     val_cls_loss   : 0.5671389423883878
+2023-08-30 09:04:19,349 - trainer - INFO -     val_translation_x_loss: 0.15720474135417203
+2023-08-30 09:04:19,350 - trainer - INFO -     val_translation_y_loss: 0.06700066757889894
+2023-08-30 09:04:19,350 - trainer - INFO -     val_scale_log_loss: 0.2495520171064597
+2023-08-30 09:04:19,350 - trainer - INFO -     val_rotation_loss: 0.002999385412280949
+2023-08-30 09:04:19,350 - trainer - INFO -     val_focus_accuracy: 0.8725060827250608
+2023-08-30 09:04:19,350 - trainer - INFO -     val_focus_recall: 0.8141361256544503
+2023-08-30 09:04:19,350 - trainer - INFO -     val_focus_precision: 0.9501018329938901
+2023-08-30 09:04:19,350 - trainer - INFO -     val_focus_f1   : 0.8768796992481203
+2023-08-30 09:04:19,350 - trainer - INFO -     val_mean_iou   : 0.5041865110397339
+2023-08-30 09:04:19,350 - trainer - INFO -     val_iou50_accuracy: 0.566317617893219
+2023-08-30 09:04:19,555 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch8.pth ...
+2023-08-30 09:06:29,192 - trainer - INFO -     epoch          : 9
+2023-08-30 09:06:29,193 - trainer - INFO -     loss           : 5.09908513708429
+2023-08-30 09:06:29,193 - trainer - INFO -     cls_loss       : 0.5761150604748464
+2023-08-30 09:06:29,193 - trainer - INFO -     translation_x_loss: 0.1528781204187608
+2023-08-30 09:06:29,193 - trainer - INFO -     translation_y_loss: 0.06203661313546555
+2023-08-30 09:06:29,193 - trainer - INFO -     scale_log_loss : 0.16087243372349294
+2023-08-30 09:06:29,193 - trainer - INFO -     rotation_loss  : 0.004508022577143633
+2023-08-30 09:06:29,193 - trainer - INFO -     focus_accuracy : 0.8522971232288535
+2023-08-30 09:06:29,193 - trainer - INFO -     focus_recall   : 0.7700600646850454
+2023-08-30 09:06:29,193 - trainer - INFO -     focus_precision: 0.9565716472163766
+2023-08-30 09:06:29,193 - trainer - INFO -     focus_f1       : 0.8532423208191127
+2023-08-30 09:06:29,194 - trainer - INFO -     mean_iou       : 0.5194594860076904
+2023-08-30 09:06:29,194 - trainer - INFO -     iou50_accuracy : 0.5960264801979065
+2023-08-30 09:06:29,194 - trainer - INFO -     val_loss       : 5.7065229746011585
+2023-08-30 09:06:29,194 - trainer - INFO -     val_cls_loss   : 0.5573681959739099
+2023-08-30 09:06:29,194 - trainer - INFO -     val_translation_x_loss: 0.15009781970427585
+2023-08-30 09:06:29,194 - trainer - INFO -     val_translation_y_loss: 0.06565038395615724
+2023-08-30 09:06:29,194 - trainer - INFO -     val_scale_log_loss: 0.2128713111464794
+2023-08-30 09:06:29,194 - trainer - INFO -     val_rotation_loss: 0.0019068697234615683
+2023-08-30 09:06:29,194 - trainer - INFO -     val_focus_accuracy: 0.8895377128953771
+2023-08-30 09:06:29,194 - trainer - INFO -     val_focus_recall: 0.824607329842932
+2023-08-30 09:06:29,194 - trainer - INFO -     val_focus_precision: 0.9732234809474768
+2023-08-30 09:06:29,195 - trainer - INFO -     val_focus_f1   : 0.8927727916863485
+2023-08-30 09:06:29,195 - trainer - INFO -     val_mean_iou   : 0.5224606990814209
+2023-08-30 09:06:29,195 - trainer - INFO -     val_iou50_accuracy: 0.6099476218223572
+2023-08-30 09:06:29,390 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch9.pth ...
+2023-08-30 09:06:29,670 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:08:43,383 - trainer - INFO -     epoch          : 10
+2023-08-30 09:08:43,383 - trainer - INFO -     loss           : 4.915087076988849
+2023-08-30 09:08:43,383 - trainer - INFO -     cls_loss       : 0.5640754602276362
+2023-08-30 09:08:43,384 - trainer - INFO -     translation_x_loss: 0.14612988450124367
+2023-08-30 09:08:43,384 - trainer - INFO -     translation_y_loss: 0.059239366910532935
+2023-08-30 09:08:43,384 - trainer - INFO -     scale_log_loss : 0.15624353514759096
+2023-08-30 09:08:43,384 - trainer - INFO -     rotation_loss  : 0.0038860594146311856
+2023-08-30 09:08:43,384 - trainer - INFO -     focus_accuracy : 0.8670674109059682
+2023-08-30 09:08:43,384 - trainer - INFO -     focus_recall   : 0.795934082858463
+2023-08-30 09:08:43,384 - trainer - INFO -     focus_precision: 0.95863476163977
+2023-08-30 09:08:43,384 - trainer - INFO -     focus_f1       : 0.8697408280040391
+2023-08-30 09:08:43,384 - trainer - INFO -     mean_iou       : 0.533523678779602
+2023-08-30 09:08:43,384 - trainer - INFO -     iou50_accuracy : 0.6192823052406311
+2023-08-30 09:08:43,384 - trainer - INFO -     val_loss       : 5.5876585960388185
+2023-08-30 09:08:43,385 - trainer - INFO -     val_cls_loss   : 0.5517203074235183
+2023-08-30 09:08:43,385 - trainer - INFO -     val_translation_x_loss: 0.14597098368864794
+2023-08-30 09:08:43,385 - trainer - INFO -     val_translation_y_loss: 0.06474094173082938
+2023-08-30 09:08:43,385 - trainer - INFO -     val_scale_log_loss: 0.20827567651867868
+2023-08-30 09:08:43,385 - trainer - INFO -     val_rotation_loss: 0.0026956898267739096
+2023-08-30 09:08:43,385 - trainer - INFO -     val_focus_accuracy: 0.883698296836983
+2023-08-30 09:08:43,385 - trainer - INFO -     val_focus_recall: 0.8184991273996509
+2023-08-30 09:08:43,385 - trainer - INFO -     val_focus_precision: 0.9680082559339526
+2023-08-30 09:08:43,385 - trainer - INFO -     val_focus_f1   : 0.8869976359338062
+2023-08-30 09:08:43,385 - trainer - INFO -     val_mean_iou   : 0.5235075950622559
+2023-08-30 09:08:43,385 - trainer - INFO -     val_iou50_accuracy: 0.6003490686416626
+2023-08-30 09:08:43,635 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch10.pth ...
+2023-08-30 09:08:43,959 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:10:57,005 - trainer - INFO -     epoch          : 11
+2023-08-30 09:10:57,005 - trainer - INFO -     loss           : 4.679818911866827
+2023-08-30 09:10:57,005 - trainer - INFO -     cls_loss       : 0.5574457181187776
+2023-08-30 09:10:57,005 - trainer - INFO -     translation_x_loss: 0.13843561108172922
+2023-08-30 09:10:57,006 - trainer - INFO -     translation_y_loss: 0.05564918230891555
+2023-08-30 09:10:57,006 - trainer - INFO -     scale_log_loss : 0.14858562908657305
+2023-08-30 09:10:57,006 - trainer - INFO -     rotation_loss  : 0.003442707946165823
+2023-08-30 09:10:57,006 - trainer - INFO -     focus_accuracy : 0.8750536711034779
+2023-08-30 09:10:57,006 - trainer - INFO -     focus_recall   : 0.8110272601262899
+2023-08-30 09:10:57,006 - trainer - INFO -     focus_precision: 0.9585001820167456
+2023-08-30 09:10:57,006 - trainer - INFO -     focus_f1       : 0.8786185033786602
+2023-08-30 09:10:57,006 - trainer - INFO -     mean_iou       : 0.5466397404670715
+2023-08-30 09:10:57,006 - trainer - INFO -     iou50_accuracy : 0.6366856694221497
+2023-08-30 09:10:57,006 - trainer - INFO -     val_loss       : 5.4049994542048525
+2023-08-30 09:10:57,007 - trainer - INFO -     val_cls_loss   : 0.5404281024749462
+2023-08-30 09:10:57,007 - trainer - INFO -     val_translation_x_loss: 0.14221997134960615
+2023-08-30 09:10:57,007 - trainer - INFO -     val_translation_y_loss: 0.06245758590789942
+2023-08-30 09:10:57,007 - trainer - INFO -     val_scale_log_loss: 0.20031110403629449
+2023-08-30 09:10:57,007 - trainer - INFO -     val_rotation_loss: 0.0015691306773358239
+2023-08-30 09:10:57,007 - trainer - INFO -     val_focus_accuracy: 0.8948905109489051
+2023-08-30 09:10:57,007 - trainer - INFO -     val_focus_recall: 0.8394415357766143
+2023-08-30 09:10:57,007 - trainer - INFO -     val_focus_precision: 0.9678068410462777
+2023-08-30 09:10:57,007 - trainer - INFO -     val_focus_f1   : 0.8990654205607477
+2023-08-30 09:10:57,007 - trainer - INFO -     val_mean_iou   : 0.5344947576522827
+2023-08-30 09:10:57,007 - trainer - INFO -     val_iou50_accuracy: 0.6186736226081848
+2023-08-30 09:10:57,203 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch11.pth ...
+2023-08-30 09:10:57,471 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:13:07,924 - trainer - INFO -     epoch          : 12
+2023-08-30 09:13:07,924 - trainer - INFO -     loss           : 4.507916182607085
+2023-08-30 09:13:07,924 - trainer - INFO -     cls_loss       : 0.5521604475247991
+2023-08-30 09:13:07,924 - trainer - INFO -     translation_x_loss: 0.1320315879759389
+2023-08-30 09:13:07,925 - trainer - INFO -     translation_y_loss: 0.055389382738292546
+2023-08-30 09:13:07,925 - trainer - INFO -     scale_log_loss : 0.1414656990545464
+2023-08-30 09:13:07,925 - trainer - INFO -     rotation_loss  : 0.003038564332630383
+2023-08-30 09:13:07,925 - trainer - INFO -     focus_accuracy : 0.8812365822241305
+2023-08-30 09:13:07,925 - trainer - INFO -     focus_recall   : 0.8228861851224395
+2023-08-30 09:13:07,925 - trainer - INFO -     focus_precision: 0.9582137733142038
+2023-08-30 09:13:07,925 - trainer - INFO -     focus_f1       : 0.8854088988317176
+2023-08-30 09:13:07,925 - trainer - INFO -     mean_iou       : 0.5582984089851379
+2023-08-30 09:13:07,925 - trainer - INFO -     iou50_accuracy : 0.648698627948761
+2023-08-30 09:13:07,925 - trainer - INFO -     val_loss       : 5.425077111904438
+2023-08-30 09:13:07,925 - trainer - INFO -     val_cls_loss   : 0.5352454423904419
+2023-08-30 09:13:07,925 - trainer - INFO -     val_translation_x_loss: 0.1373815274009338
+2023-08-30 09:13:07,926 - trainer - INFO -     val_translation_y_loss: 0.06262345084777245
+2023-08-30 09:13:07,926 - trainer - INFO -     val_scale_log_loss: 0.2071300772520212
+2023-08-30 09:13:07,926 - trainer - INFO -     val_rotation_loss: 0.0014036661649767595
+2023-08-30 09:13:07,926 - trainer - INFO -     val_focus_accuracy: 0.908029197080292
+2023-08-30 09:13:07,926 - trainer - INFO -     val_focus_recall: 0.8472949389179756
+2023-08-30 09:13:07,926 - trainer - INFO -     val_focus_precision: 0.9857868020304569
+2023-08-30 09:13:07,926 - trainer - INFO -     val_focus_f1   : 0.9113092444861568
+2023-08-30 09:13:07,926 - trainer - INFO -     val_mean_iou   : 0.5388346314430237
+2023-08-30 09:13:07,926 - trainer - INFO -     val_iou50_accuracy: 0.6308900713920593
+2023-08-30 09:13:08,145 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch12.pth ...
+2023-08-30 09:15:22,305 - trainer - INFO -     epoch          : 13
+2023-08-30 09:15:22,305 - trainer - INFO -     loss           : 4.31968419106452
+2023-08-30 09:15:22,305 - trainer - INFO -     cls_loss       : 0.5460178167610378
+2023-08-30 09:15:22,305 - trainer - INFO -     translation_x_loss: 0.12643351104970163
+2023-08-30 09:15:22,305 - trainer - INFO -     translation_y_loss: 0.053073328745725394
+2023-08-30 09:15:22,305 - trainer - INFO -     scale_log_loss : 0.1343024928880098
+2023-08-30 09:15:22,305 - trainer - INFO -     rotation_loss  : 0.002651457897077857
+2023-08-30 09:15:22,305 - trainer - INFO -     focus_accuracy : 0.8879347359381708
+2023-08-30 09:15:22,306 - trainer - INFO -     focus_recall   : 0.8282766055752349
+2023-08-30 09:15:22,306 - trainer - INFO -     focus_precision: 0.9658764367816092
+2023-08-30 09:15:22,306 - trainer - INFO -     focus_f1       : 0.891800016582373
+2023-08-30 09:15:22,306 - trainer - INFO -     mean_iou       : 0.569214403629303
+2023-08-30 09:15:22,306 - trainer - INFO -     iou50_accuracy : 0.6676420569419861
+2023-08-30 09:15:22,306 - trainer - INFO -     val_loss       : 5.744591734959529
+2023-08-30 09:15:22,306 - trainer - INFO -     val_cls_loss   : 0.5330347359180451
+2023-08-30 09:15:22,306 - trainer - INFO -     val_translation_x_loss: 0.1358489114504594
+2023-08-30 09:15:22,306 - trainer - INFO -     val_translation_y_loss: 0.06363797778120407
+2023-08-30 09:15:22,306 - trainer - INFO -     val_scale_log_loss: 0.23405033155129507
+2023-08-30 09:15:22,306 - trainer - INFO -     val_rotation_loss: 0.0030367733588298924
+2023-08-30 09:15:22,307 - trainer - INFO -     val_focus_accuracy: 0.9051094890510949
+2023-08-30 09:15:22,307 - trainer - INFO -     val_focus_recall: 0.8656195462478184
+2023-08-30 09:15:22,307 - trainer - INFO -     val_focus_precision: 0.9603097773475314
+2023-08-30 09:15:22,307 - trainer - INFO -     val_focus_f1   : 0.9105094079853142
+2023-08-30 09:15:22,307 - trainer - INFO -     val_mean_iou   : 0.5371450781822205
+2023-08-30 09:15:22,307 - trainer - INFO -     val_iou50_accuracy: 0.6308900713920593
+2023-08-30 09:15:22,546 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch13.pth ...
+2023-08-30 09:17:34,422 - trainer - INFO -     epoch          : 14
+2023-08-30 09:17:34,423 - trainer - INFO -     loss           : 4.172391712665558
+2023-08-30 09:17:34,423 - trainer - INFO -     cls_loss       : 0.5418139874607653
+2023-08-30 09:17:34,423 - trainer - INFO -     translation_x_loss: 0.12066605751617597
+2023-08-30 09:17:34,423 - trainer - INFO -     translation_y_loss: 0.05129595097809375
+2023-08-30 09:17:34,423 - trainer - INFO -     scale_log_loss : 0.1299774463871842
+2023-08-30 09:17:34,423 - trainer - INFO -     rotation_loss  : 0.0024347541368295246
+2023-08-30 09:17:34,423 - trainer - INFO -     focus_accuracy : 0.8938600257621296
+2023-08-30 09:17:34,423 - trainer - INFO -     focus_recall   : 0.8378253503773294
+2023-08-30 09:17:34,424 - trainer - INFO -     focus_precision: 0.9674550951449404
+2023-08-30 09:17:34,424 - trainer - INFO -     focus_f1       : 0.897986134037636
+2023-08-30 09:17:34,424 - trainer - INFO -     mean_iou       : 0.5791037678718567
+2023-08-30 09:17:34,424 - trainer - INFO -     iou50_accuracy : 0.6811951398849487
+2023-08-30 09:17:34,424 - trainer - INFO -     val_loss       : 5.6779085782858045
+2023-08-30 09:17:34,424 - trainer - INFO -     val_cls_loss   : 0.5289523762006026
+2023-08-30 09:17:34,424 - trainer - INFO -     val_translation_x_loss: 0.13660073349109061
+2023-08-30 09:17:34,424 - trainer - INFO -     val_translation_y_loss: 0.0631615644464126
+2023-08-30 09:17:34,424 - trainer - INFO -     val_scale_log_loss: 0.22887934618271313
+2023-08-30 09:17:34,424 - trainer - INFO -     val_rotation_loss: 0.0017521675049255673
+2023-08-30 09:17:34,424 - trainer - INFO -     val_focus_accuracy: 0.9090024330900244
+2023-08-30 09:17:34,424 - trainer - INFO -     val_focus_recall: 0.8507853403141361
+2023-08-30 09:17:34,425 - trainer - INFO -     val_focus_precision: 0.9838546922300706
+2023-08-30 09:17:34,425 - trainer - INFO -     val_focus_f1   : 0.9124941506785212
+2023-08-30 09:17:34,425 - trainer - INFO -     val_mean_iou   : 0.5376073122024536
+2023-08-30 09:17:34,425 - trainer - INFO -     val_iou50_accuracy: 0.6273996233940125
+2023-08-30 09:17:34,676 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch14.pth ...
+2023-08-30 09:19:47,140 - trainer - INFO -     epoch          : 15
+2023-08-30 09:19:47,141 - trainer - INFO -     loss           : 4.030975199007726
+2023-08-30 09:19:47,141 - trainer - INFO -     cls_loss       : 0.5383248570692408
+2023-08-30 09:19:47,141 - trainer - INFO -     translation_x_loss: 0.11349652845739991
+2023-08-30 09:19:47,141 - trainer - INFO -     translation_y_loss: 0.04961215025121039
+2023-08-30 09:19:47,141 - trainer - INFO -     scale_log_loss : 0.12740204643949374
+2023-08-30 09:19:47,141 - trainer - INFO -     rotation_loss  : 0.0021738842747604046
+2023-08-30 09:19:47,141 - trainer - INFO -     focus_accuracy : 0.8950622584800344
+2023-08-30 09:19:47,141 - trainer - INFO -     focus_recall   : 0.8370552903126444
+2023-08-30 09:19:47,142 - trainer - INFO -     focus_precision: 0.9707090551884265
+2023-08-30 09:19:47,142 - trainer - INFO -     focus_f1       : 0.8989414488918291
+2023-08-30 09:19:47,142 - trainer - INFO -     mean_iou       : 0.5879358053207397
+2023-08-30 09:19:47,142 - trainer - INFO -     iou50_accuracy : 0.6973664164543152
+2023-08-30 09:19:47,142 - trainer - INFO -     val_loss       : 5.379295121706449
+2023-08-30 09:19:47,142 - trainer - INFO -     val_cls_loss   : 0.5265781549307016
+2023-08-30 09:19:47,142 - trainer - INFO -     val_translation_x_loss: 0.13817753058213453
+2023-08-30 09:19:47,142 - trainer - INFO -     val_translation_y_loss: 0.06117066574784426
+2023-08-30 09:19:47,142 - trainer - INFO -     val_scale_log_loss: 0.2047181207400102
+2023-08-30 09:19:47,142 - trainer - INFO -     val_rotation_loss: 0.0013070580854008978
+2023-08-30 09:19:47,143 - trainer - INFO -     val_focus_accuracy: 0.9094890510948905
+2023-08-30 09:19:47,143 - trainer - INFO -     val_focus_recall: 0.8516579406631762
+2023-08-30 09:19:47,143 - trainer - INFO -     val_focus_precision: 0.9838709677419355
+2023-08-30 09:19:47,143 - trainer - INFO -     val_focus_f1   : 0.9130028063610852
+2023-08-30 09:19:47,143 - trainer - INFO -     val_mean_iou   : 0.5434874892234802
+2023-08-30 09:19:47,143 - trainer - INFO -     val_iou50_accuracy: 0.6343804597854614
+2023-08-30 09:19:47,391 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch15.pth ...
+2023-08-30 09:19:47,718 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:22:01,837 - trainer - INFO -     epoch          : 16
+2023-08-30 09:22:01,838 - trainer - INFO -     loss           : 3.8809683532505246
+2023-08-30 09:22:01,838 - trainer - INFO -     cls_loss       : 0.5368963487364433
+2023-08-30 09:22:01,838 - trainer - INFO -     translation_x_loss: 0.10907259341943396
+2023-08-30 09:22:01,838 - trainer - INFO -     translation_y_loss: 0.04833154697073521
+2023-08-30 09:22:01,838 - trainer - INFO -     scale_log_loss : 0.12079514977573366
+2023-08-30 09:22:01,838 - trainer - INFO -     rotation_loss  : 0.001893502970323335
+2023-08-30 09:22:01,839 - trainer - INFO -     focus_accuracy : 0.8982395878059253
+2023-08-30 09:22:01,839 - trainer - INFO -     focus_recall   : 0.8441398429077468
+2023-08-30 09:22:01,839 - trainer - INFO -     focus_precision: 0.9694021931376017
+2023-08-30 09:22:01,839 - trainer - INFO -     focus_f1       : 0.9024450481600396
+2023-08-30 09:22:01,839 - trainer - INFO -     mean_iou       : 0.597705066204071
+2023-08-30 09:22:01,839 - trainer - INFO -     iou50_accuracy : 0.7098413705825806
+2023-08-30 09:22:01,839 - trainer - INFO -     val_loss       : 5.407261067170364
+2023-08-30 09:22:01,839 - trainer - INFO -     val_cls_loss   : 0.5279399170325353
+2023-08-30 09:22:01,839 - trainer - INFO -     val_translation_x_loss: 0.13474274346461662
+2023-08-30 09:22:01,839 - trainer - INFO -     val_translation_y_loss: 0.061031302322561924
+2023-08-30 09:22:01,839 - trainer - INFO -     val_scale_log_loss: 0.21062950595067098
+2023-08-30 09:22:01,840 - trainer - INFO -     val_rotation_loss: 0.0008261727925855666
+2023-08-30 09:22:01,840 - trainer - INFO -     val_focus_accuracy: 0.9163017031630171
+2023-08-30 09:22:01,840 - trainer - INFO -     val_focus_recall: 0.8787085514834206
+2023-08-30 09:22:01,840 - trainer - INFO -     val_focus_precision: 0.9682692307692308
+2023-08-30 09:22:01,840 - trainer - INFO -     val_focus_f1   : 0.9213174748398902
+2023-08-30 09:22:01,840 - trainer - INFO -     val_mean_iou   : 0.5523631572723389
+2023-08-30 09:22:01,840 - trainer - INFO -     val_iou50_accuracy: 0.6465968489646912
+2023-08-30 09:22:02,049 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch16.pth ...
+2023-08-30 09:24:13,290 - trainer - INFO -     epoch          : 17
+2023-08-30 09:24:13,290 - trainer - INFO -     loss           : 3.779742263175629
+2023-08-30 09:24:13,291 - trainer - INFO -     cls_loss       : 0.5333605885178179
+2023-08-30 09:24:13,291 - trainer - INFO -     translation_x_loss: 0.10531251767015719
+2023-08-30 09:24:13,291 - trainer - INFO -     translation_y_loss: 0.0460236965637695
+2023-08-30 09:24:13,291 - trainer - INFO -     scale_log_loss : 0.11876397490869839
+2023-08-30 09:24:13,291 - trainer - INFO -     rotation_loss  : 0.0017264683404361707
+2023-08-30 09:24:13,291 - trainer - INFO -     focus_accuracy : 0.9019321597252039
+2023-08-30 09:24:13,291 - trainer - INFO -     focus_recall   : 0.8492222393346681
+2023-08-30 09:24:13,291 - trainer - INFO -     focus_precision: 0.9712876519288357
+2023-08-30 09:24:13,291 - trainer - INFO -     focus_f1       : 0.9061626951520132
+2023-08-30 09:24:13,291 - trainer - INFO -     mean_iou       : 0.6043928265571594
+2023-08-30 09:24:13,291 - trainer - INFO -     iou50_accuracy : 0.7215462923049927
+2023-08-30 09:24:13,291 - trainer - INFO -     val_loss       : 5.704044613471398
+2023-08-30 09:24:13,292 - trainer - INFO -     val_cls_loss   : 0.5264502282326038
+2023-08-30 09:24:13,292 - trainer - INFO -     val_translation_x_loss: 0.13758591264486314
+2023-08-30 09:24:13,292 - trainer - INFO -     val_translation_y_loss: 0.06277325477164525
+2023-08-30 09:24:13,292 - trainer - INFO -     val_scale_log_loss: 0.23089964458575615
+2023-08-30 09:24:13,292 - trainer - INFO -     val_rotation_loss: 0.0008295286473674843
+2023-08-30 09:24:13,292 - trainer - INFO -     val_focus_accuracy: 0.9114355231143553
+2023-08-30 09:24:13,292 - trainer - INFO -     val_focus_recall: 0.8621291448516579
+2023-08-30 09:24:13,292 - trainer - INFO -     val_focus_precision: 0.9762845849802372
+2023-08-30 09:24:13,292 - trainer - INFO -     val_focus_f1   : 0.9156626506024096
+2023-08-30 09:24:13,292 - trainer - INFO -     val_mean_iou   : 0.5384969115257263
+2023-08-30 09:24:13,292 - trainer - INFO -     val_iou50_accuracy: 0.6335078477859497
+2023-08-30 09:24:13,604 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch17.pth ...
+2023-08-30 09:26:25,483 - trainer - INFO -     epoch          : 18
+2023-08-30 09:26:25,484 - trainer - INFO -     loss           : 3.666396663084135
+2023-08-30 09:26:25,484 - trainer - INFO -     cls_loss       : 0.5324067934365063
+2023-08-30 09:26:25,484 - trainer - INFO -     translation_x_loss: 0.10154934000264812
+2023-08-30 09:26:25,484 - trainer - INFO -     translation_y_loss: 0.04547214107894963
+2023-08-30 09:26:25,484 - trainer - INFO -     scale_log_loss : 0.11373777064279868
+2023-08-30 09:26:25,484 - trainer - INFO -     rotation_loss  : 0.0016262868266094701
+2023-08-30 09:26:25,484 - trainer - INFO -     focus_accuracy : 0.9032202662086732
+2023-08-30 09:26:25,485 - trainer - INFO -     focus_recall   : 0.84860619128292
+2023-08-30 09:26:25,485 - trainer - INFO -     focus_precision: 0.9745313052706048
+2023-08-30 09:26:25,485 - trainer - INFO -     focus_f1       : 0.9072198896846958
+2023-08-30 09:26:25,485 - trainer - INFO -     mean_iou       : 0.6123651266098022
+2023-08-30 09:26:25,485 - trainer - INFO -     iou50_accuracy : 0.7304790019989014
+2023-08-30 09:26:25,485 - trainer - INFO -     val_loss       : 5.5558436943934515
+2023-08-30 09:26:25,485 - trainer - INFO -     val_cls_loss   : 0.5250464728245369
+2023-08-30 09:26:25,485 - trainer - INFO -     val_translation_x_loss: 0.13860864226634687
+2023-08-30 09:26:25,485 - trainer - INFO -     val_translation_y_loss: 0.06383227797654958
+2023-08-30 09:26:25,485 - trainer - INFO -     val_scale_log_loss: 0.21661302567674565
+2023-08-30 09:26:25,485 - trainer - INFO -     val_rotation_loss: 0.0007166449750701969
+2023-08-30 09:26:25,486 - trainer - INFO -     val_focus_accuracy: 0.9070559610705596
+2023-08-30 09:26:25,486 - trainer - INFO -     val_focus_recall: 0.8464223385689355
+2023-08-30 09:26:25,486 - trainer - INFO -     val_focus_precision: 0.9847715736040609
+2023-08-30 09:26:25,486 - trainer - INFO -     val_focus_f1   : 0.9103707179727827
+2023-08-30 09:26:25,486 - trainer - INFO -     val_mean_iou   : 0.5393491983413696
+2023-08-30 09:26:25,486 - trainer - INFO -     val_iou50_accuracy: 0.6178010702133179
+2023-08-30 09:26:25,688 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch18.pth ...
+2023-08-30 09:28:36,858 - trainer - INFO -     epoch          : 19
+2023-08-30 09:28:36,858 - trainer - INFO -     loss           : 3.5498882027772756
+2023-08-30 09:28:36,858 - trainer - INFO -     cls_loss       : 0.5301528207057125
+2023-08-30 09:28:36,858 - trainer - INFO -     translation_x_loss: 0.09677078576942721
+2023-08-30 09:28:36,859 - trainer - INFO -     translation_y_loss: 0.04314778463730773
+2023-08-30 09:28:36,859 - trainer - INFO -     scale_log_loss : 0.11135316967636674
+2023-08-30 09:28:36,859 - trainer - INFO -     rotation_loss  : 0.0014915066271646788
+2023-08-30 09:28:36,859 - trainer - INFO -     focus_accuracy : 0.9072563331902104
+2023-08-30 09:28:36,859 - trainer - INFO -     focus_recall   : 0.8556907438780225
+2023-08-30 09:28:36,859 - trainer - INFO -     focus_precision: 0.9749078785751887
+2023-08-30 09:28:36,859 - trainer - INFO -     focus_f1       : 0.9114173228346457
+2023-08-30 09:28:36,859 - trainer - INFO -     mean_iou       : 0.6229410767555237
+2023-08-30 09:28:36,859 - trainer - INFO -     iou50_accuracy : 0.7401817440986633
+2023-08-30 09:28:36,859 - trainer - INFO -     val_loss       : 5.526855897903443
+2023-08-30 09:28:36,859 - trainer - INFO -     val_cls_loss   : 0.5222665896782508
+2023-08-30 09:28:36,860 - trainer - INFO -     val_translation_x_loss: 0.14554408158247287
+2023-08-30 09:28:36,860 - trainer - INFO -     val_translation_y_loss: 0.06262884764717175
+2023-08-30 09:28:36,860 - trainer - INFO -     val_scale_log_loss: 0.20868110404564785
+2023-08-30 09:28:36,860 - trainer - INFO -     val_rotation_loss: 0.0007803157482367868
+2023-08-30 09:28:36,860 - trainer - INFO -     val_focus_accuracy: 0.9177615571776155
+2023-08-30 09:28:36,860 - trainer - INFO -     val_focus_recall: 0.8743455497382199
+2023-08-30 09:28:36,860 - trainer - INFO -     val_focus_precision: 0.9756572541382668
+2023-08-30 09:28:36,860 - trainer - INFO -     val_focus_f1   : 0.9222273354809019
+2023-08-30 09:28:36,860 - trainer - INFO -     val_mean_iou   : 0.5412437915802002
+2023-08-30 09:28:36,860 - trainer - INFO -     val_iou50_accuracy: 0.6230366230010986
+2023-08-30 09:28:37,110 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch19.pth ...
+2023-08-30 09:30:48,500 - trainer - INFO -     epoch          : 20
+2023-08-30 09:30:48,500 - trainer - INFO -     loss           : 3.430206209748656
+2023-08-30 09:30:48,500 - trainer - INFO -     cls_loss       : 0.5299681511062843
+2023-08-30 09:30:48,501 - trainer - INFO -     translation_x_loss: 0.09138343187437935
+2023-08-30 09:30:48,501 - trainer - INFO -     translation_y_loss: 0.042774999826368724
+2023-08-30 09:30:48,501 - trainer - INFO -     scale_log_loss : 0.10718716772088965
+2023-08-30 09:30:48,501 - trainer - INFO -     rotation_loss  : 0.0013636186692395484
+2023-08-30 09:30:48,501 - trainer - INFO -     focus_accuracy : 0.9057106054100472
+2023-08-30 09:30:48,501 - trainer - INFO -     focus_recall   : 0.8544586477745264
+2023-08-30 09:30:48,501 - trainer - INFO -     focus_precision: 0.9731626030520961
+2023-08-30 09:30:48,501 - trainer - INFO -     focus_f1       : 0.9099557159258652
+2023-08-30 09:30:48,501 - trainer - INFO -     mean_iou       : 0.6283981800079346
+2023-08-30 09:30:48,501 - trainer - INFO -     iou50_accuracy : 0.7521946430206299
+2023-08-30 09:30:48,501 - trainer - INFO -     val_loss       : 5.390703656123235
+2023-08-30 09:30:48,502 - trainer - INFO -     val_cls_loss   : 0.5219481569070082
+2023-08-30 09:30:48,502 - trainer - INFO -     val_translation_x_loss: 0.1386632440181879
+2023-08-30 09:30:48,502 - trainer - INFO -     val_translation_y_loss: 0.06149767986856974
+2023-08-30 09:30:48,502 - trainer - INFO -     val_scale_log_loss: 0.20541298653070744
+2023-08-30 09:30:48,502 - trainer - INFO -     val_rotation_loss: 0.0006228611074710408
+2023-08-30 09:30:48,502 - trainer - INFO -     val_focus_accuracy: 0.9172749391727494
+2023-08-30 09:30:48,502 - trainer - INFO -     val_focus_recall: 0.8699825479930192
+2023-08-30 09:30:48,502 - trainer - INFO -     val_focus_precision: 0.9793713163064833
+2023-08-30 09:30:48,502 - trainer - INFO -     val_focus_f1   : 0.9214417744916822
+2023-08-30 09:30:48,502 - trainer - INFO -     val_mean_iou   : 0.5449681878089905
+2023-08-30 09:30:48,503 - trainer - INFO -     val_iou50_accuracy: 0.6247818470001221
+2023-08-30 09:30:48,703 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch20.pth ...
+2023-08-30 09:33:00,346 - trainer - INFO -     epoch          : 21
+2023-08-30 09:33:00,346 - trainer - INFO -     loss           : 3.3341116784038123
+2023-08-30 09:33:00,347 - trainer - INFO -     cls_loss       : 0.5293391920053042
+2023-08-30 09:33:00,347 - trainer - INFO -     translation_x_loss: 0.08761554630984972
+2023-08-30 09:33:00,347 - trainer - INFO -     translation_y_loss: 0.04208423649114403
+2023-08-30 09:33:00,347 - trainer - INFO -     scale_log_loss : 0.10372911923779891
+2023-08-30 09:33:00,347 - trainer - INFO -     rotation_loss  : 0.0012085558190157606
+2023-08-30 09:33:00,347 - trainer - INFO -     focus_accuracy : 0.9039931300987548
+2023-08-30 09:33:00,347 - trainer - INFO -     focus_recall   : 0.8549206838133374
+2023-08-30 09:33:00,347 - trainer - INFO -     focus_precision: 0.9692683778592631
+2023-08-30 09:33:00,347 - trainer - INFO -     focus_f1       : 0.9085106382978724
+2023-08-30 09:33:00,347 - trainer - INFO -     mean_iou       : 0.6377347707748413
+2023-08-30 09:33:00,347 - trainer - INFO -     iou50_accuracy : 0.76466965675354
+2023-08-30 09:33:00,348 - trainer - INFO -     val_loss       : 5.4492749984447775
+2023-08-30 09:33:00,348 - trainer - INFO -     val_cls_loss   : 0.5222086402086111
+2023-08-30 09:33:00,348 - trainer - INFO -     val_translation_x_loss: 0.1341130399933228
+2023-08-30 09:33:00,348 - trainer - INFO -     val_translation_y_loss: 0.061553417719327486
+2023-08-30 09:33:00,348 - trainer - INFO -     val_scale_log_loss: 0.2148102764899914
+2023-08-30 09:33:00,348 - trainer - INFO -     val_rotation_loss: 0.00044849891430483413
+2023-08-30 09:33:00,348 - trainer - INFO -     val_focus_accuracy: 0.9177615571776155
+2023-08-30 09:33:00,348 - trainer - INFO -     val_focus_recall: 0.8778359511343804
+2023-08-30 09:33:00,348 - trainer - INFO -     val_focus_precision: 0.9719806763285024
+2023-08-30 09:33:00,348 - trainer - INFO -     val_focus_f1   : 0.9225126088950023
+2023-08-30 09:33:00,348 - trainer - INFO -     val_mean_iou   : 0.5490870475769043
+2023-08-30 09:33:00,349 - trainer - INFO -     val_iou50_accuracy: 0.6378708481788635
+2023-08-30 09:33:00,656 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch21.pth ...
+2023-08-30 09:35:12,918 - trainer - INFO -     epoch          : 22
+2023-08-30 09:35:12,918 - trainer - INFO -     loss           : 3.2309482726421983
+2023-08-30 09:35:12,918 - trainer - INFO -     cls_loss       : 0.5261357388162351
+2023-08-30 09:35:12,918 - trainer - INFO -     translation_x_loss: 0.0831356733668964
+2023-08-30 09:35:12,918 - trainer - INFO -     translation_y_loss: 0.04174354935453816
+2023-08-30 09:35:12,918 - trainer - INFO -     scale_log_loss : 0.10023871553386306
+2023-08-30 09:35:12,918 - trainer - INFO -     rotation_loss  : 0.0011324280923952676
+2023-08-30 09:35:12,919 - trainer - INFO -     focus_accuracy : 0.9118076427651353
+2023-08-30 09:35:12,919 - trainer - INFO -     focus_recall   : 0.863391344524873
+2023-08-30 09:35:12,919 - trainer - INFO -     focus_precision: 0.9756352245040028
+2023-08-30 09:35:12,919 - trainer - INFO -     focus_f1       : 0.9160879156793856
+2023-08-30 09:35:12,919 - trainer - INFO -     mean_iou       : 0.6453216671943665
+2023-08-30 09:35:12,919 - trainer - INFO -     iou50_accuracy : 0.7674418687820435
+2023-08-30 09:35:12,919 - trainer - INFO -     val_loss       : 5.575203363712017
+2023-08-30 09:35:12,919 - trainer - INFO -     val_cls_loss   : 0.5191269750778492
+2023-08-30 09:35:12,919 - trainer - INFO -     val_translation_x_loss: 0.1379294183391791
+2023-08-30 09:35:12,919 - trainer - INFO -     val_translation_y_loss: 0.06124214862401669
+2023-08-30 09:35:12,919 - trainer - INFO -     val_scale_log_loss: 0.2219077223768601
+2023-08-30 09:35:12,919 - trainer - INFO -     val_rotation_loss: 0.0010416385099793282
+2023-08-30 09:35:12,920 - trainer - INFO -     val_focus_accuracy: 0.9231143552311436
+2023-08-30 09:35:12,920 - trainer - INFO -     val_focus_recall: 0.8778359511343804
+2023-08-30 09:35:12,920 - trainer - INFO -     val_focus_precision: 0.982421875
+2023-08-30 09:35:12,920 - trainer - INFO -     val_focus_f1   : 0.9271889400921659
+2023-08-30 09:35:12,920 - trainer - INFO -     val_mean_iou   : 0.5432628989219666
+2023-08-30 09:35:12,920 - trainer - INFO -     val_iou50_accuracy: 0.6387434601783752
+2023-08-30 09:35:13,167 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch22.pth ...
+2023-08-30 09:37:25,438 - trainer - INFO -     epoch          : 23
+2023-08-30 09:37:25,439 - trainer - INFO -     loss           : 3.190441925774564
+2023-08-30 09:37:25,439 - trainer - INFO -     cls_loss       : 0.5245653774875861
+2023-08-30 09:37:25,439 - trainer - INFO -     translation_x_loss: 0.08072188312372008
+2023-08-30 09:37:25,439 - trainer - INFO -     translation_y_loss: 0.04072074914494386
+2023-08-30 09:37:25,439 - trainer - INFO -     scale_log_loss : 0.10043851868505334
+2023-08-30 09:37:25,439 - trainer - INFO -     rotation_loss  : 0.0011009149981603783
+2023-08-30 09:37:25,439 - trainer - INFO -     focus_accuracy : 0.9138686131386862
+2023-08-30 09:37:25,439 - trainer - INFO -     focus_recall   : 0.864623440628369
+2023-08-30 09:37:25,440 - trainer - INFO -     focus_precision: 0.9783896828163123
+2023-08-30 09:37:25,440 - trainer - INFO -     focus_f1       : 0.9179952579511079
+2023-08-30 09:37:25,440 - trainer - INFO -     mean_iou       : 0.6491304039955139
+2023-08-30 09:37:25,440 - trainer - INFO -     iou50_accuracy : 0.7776066660881042
+2023-08-30 09:37:25,440 - trainer - INFO -     val_loss       : 5.483565620275644
+2023-08-30 09:37:25,440 - trainer - INFO -     val_cls_loss   : 0.5176563813136175
+2023-08-30 09:37:25,440 - trainer - INFO -     val_translation_x_loss: 0.1371028102361239
+2023-08-30 09:37:25,440 - trainer - INFO -     val_translation_y_loss: 0.06239290048296635
+2023-08-30 09:37:25,440 - trainer - INFO -     val_scale_log_loss: 0.21418694017025142
+2023-08-30 09:37:25,440 - trainer - INFO -     val_rotation_loss: 0.0005724870066982335
+2023-08-30 09:37:25,440 - trainer - INFO -     val_focus_accuracy: 0.9182481751824818
+2023-08-30 09:37:25,440 - trainer - INFO -     val_focus_recall: 0.868237347294939
+2023-08-30 09:37:25,441 - trainer - INFO -     val_focus_precision: 0.983201581027668
+2023-08-30 09:37:25,441 - trainer - INFO -     val_focus_f1   : 0.9221501390176089
+2023-08-30 09:37:25,441 - trainer - INFO -     val_mean_iou   : 0.5512386560440063
+2023-08-30 09:37:25,441 - trainer - INFO -     val_iou50_accuracy: 0.6448516845703125
+2023-08-30 09:37:25,677 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch23.pth ...
+2023-08-30 09:39:37,592 - trainer - INFO -     epoch          : 24
+2023-08-30 09:39:37,592 - trainer - INFO -     loss           : 3.0498603045285404
+2023-08-30 09:39:37,592 - trainer - INFO -     cls_loss       : 0.5233033906954986
+2023-08-30 09:39:37,592 - trainer - INFO -     translation_x_loss: 0.07663401913737039
+2023-08-30 09:39:37,593 - trainer - INFO -     translation_y_loss: 0.03884965105616784
+2023-08-30 09:39:37,593 - trainer - INFO -     scale_log_loss : 0.09480713017202996
+2023-08-30 09:39:37,593 - trainer - INFO -     rotation_loss  : 0.001022438988921739
+2023-08-30 09:39:37,593 - trainer - INFO -     focus_accuracy : 0.9168741949334478
+2023-08-30 09:39:37,593 - trainer - INFO -     focus_recall   : 0.8724780532881565
+2023-08-30 09:39:37,593 - trainer - INFO -     focus_precision: 0.9758828596037898
+2023-08-30 09:39:37,593 - trainer - INFO -     focus_f1       : 0.9212880143112702
+2023-08-30 09:39:37,593 - trainer - INFO -     mean_iou       : 0.6609057188034058
+2023-08-30 09:39:37,593 - trainer - INFO -     iou50_accuracy : 0.7906976938247681
+2023-08-30 09:39:37,593 - trainer - INFO -     val_loss       : 5.317409082559439
+2023-08-30 09:39:37,593 - trainer - INFO -     val_cls_loss   : 0.5205582004327041
+2023-08-30 09:39:37,594 - trainer - INFO -     val_translation_x_loss: 0.13708771169185638
+2023-08-30 09:39:37,594 - trainer - INFO -     val_translation_y_loss: 0.05992636107481443
+2023-08-30 09:39:37,594 - trainer - INFO -     val_scale_log_loss: 0.20248963431670117
+2023-08-30 09:39:37,594 - trainer - INFO -     val_rotation_loss: 0.0009354733942578045
+2023-08-30 09:39:37,594 - trainer - INFO -     val_focus_accuracy: 0.9245742092457421
+2023-08-30 09:39:37,594 - trainer - INFO -     val_focus_recall: 0.8926701570680629
+2023-08-30 09:39:37,594 - trainer - INFO -     val_focus_precision: 0.9696682464454977
+2023-08-30 09:39:37,594 - trainer - INFO -     val_focus_f1   : 0.9295774647887324
+2023-08-30 09:39:37,594 - trainer - INFO -     val_mean_iou   : 0.5514257550239563
+2023-08-30 09:39:37,594 - trainer - INFO -     val_iou50_accuracy: 0.6448516845703125
+2023-08-30 09:39:37,789 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch24.pth ...
+2023-08-30 09:39:38,062 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:41:50,089 - trainer - INFO -     epoch          : 25
+2023-08-30 09:41:50,089 - trainer - INFO -     loss           : 2.9896958748717886
+2023-08-30 09:41:50,089 - trainer - INFO -     cls_loss       : 0.5221692608607994
+2023-08-30 09:41:50,089 - trainer - INFO -     translation_x_loss: 0.07420637398692113
+2023-08-30 09:41:50,089 - trainer - INFO -     translation_y_loss: 0.03816211216438275
+2023-08-30 09:41:50,089 - trainer - INFO -     scale_log_loss : 0.09300870961090038
+2023-08-30 09:41:50,089 - trainer - INFO -     rotation_loss  : 0.0010000915195572876
+2023-08-30 09:41:50,090 - trainer - INFO -     focus_accuracy : 0.9180764276513526
+2023-08-30 09:41:50,090 - trainer - INFO -     focus_recall   : 0.8707839211458493
+2023-08-30 09:41:50,090 - trainer - INFO -     focus_precision: 0.9800658693014387
+2023-08-30 09:41:50,090 - trainer - INFO -     focus_f1       : 0.9221986625346599
+2023-08-30 09:41:50,090 - trainer - INFO -     mean_iou       : 0.6655585765838623
+2023-08-30 09:41:50,090 - trainer - INFO -     iou50_accuracy : 0.7991683483123779
+2023-08-30 09:41:50,090 - trainer - INFO -     val_loss       : 5.280702198468722
+2023-08-30 09:41:50,090 - trainer - INFO -     val_cls_loss   : 0.5181661825913649
+2023-08-30 09:41:50,090 - trainer - INFO -     val_translation_x_loss: 0.1368422957567068
+2023-08-30 09:41:50,091 - trainer - INFO -     val_translation_y_loss: 0.061588685902265405
+2023-08-30 09:41:50,091 - trainer - INFO -     val_scale_log_loss: 0.19829813838005067
+2023-08-30 09:41:50,091 - trainer - INFO -     val_rotation_loss: 0.0005955406231805682
+2023-08-30 09:41:50,091 - trainer - INFO -     val_focus_accuracy: 0.9211678832116789
+2023-08-30 09:41:50,091 - trainer - INFO -     val_focus_recall: 0.8717277486910995
+2023-08-30 09:41:50,091 - trainer - INFO -     val_focus_precision: 0.985207100591716
+2023-08-30 09:41:50,091 - trainer - INFO -     val_focus_f1   : 0.925
+2023-08-30 09:41:50,091 - trainer - INFO -     val_mean_iou   : 0.5478479862213135
+2023-08-30 09:41:50,091 - trainer - INFO -     val_iou50_accuracy: 0.639616072177887
+2023-08-30 09:41:50,289 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch25.pth ...
+2023-08-30 09:41:50,578 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:44:03,563 - trainer - INFO -     epoch          : 26
+2023-08-30 09:44:03,563 - trainer - INFO -     loss           : 2.926671950699209
+2023-08-30 09:44:03,563 - trainer - INFO -     cls_loss       : 0.5222170342292104
+2023-08-30 09:44:03,564 - trainer - INFO -     translation_x_loss: 0.0707086284163889
+2023-08-30 09:44:03,564 - trainer - INFO -     translation_y_loss: 0.037786229979246855
+2023-08-30 09:44:03,564 - trainer - INFO -     scale_log_loss : 0.09165086540915482
+2023-08-30 09:44:03,564 - trainer - INFO -     rotation_loss  : 0.0009020743743678975
+2023-08-30 09:44:03,564 - trainer - INFO -     focus_accuracy : 0.917045942464577
+2023-08-30 09:44:03,564 - trainer - INFO -     focus_recall   : 0.8715539812105344
+2023-08-30 09:44:03,564 - trainer - INFO -     focus_precision: 0.9772060093248144
+2023-08-30 09:44:03,564 - trainer - INFO -     focus_f1       : 0.921361120156301
+2023-08-30 09:44:03,564 - trainer - INFO -     mean_iou       : 0.672127902507782
+2023-08-30 09:44:03,564 - trainer - INFO -     iou50_accuracy : 0.8059448599815369
+2023-08-30 09:44:03,564 - trainer - INFO -     val_loss       : 5.400653277910672
+2023-08-30 09:44:03,565 - trainer - INFO -     val_cls_loss   : 0.5207483190756578
+2023-08-30 09:44:03,565 - trainer - INFO -     val_translation_x_loss: 0.13999409893384346
+2023-08-30 09:44:03,565 - trainer - INFO -     val_translation_y_loss: 0.06060653002216266
+2023-08-30 09:44:03,565 - trainer - INFO -     val_scale_log_loss: 0.20598018020391465
+2023-08-30 09:44:03,565 - trainer - INFO -     val_rotation_loss: 0.00031174481600128973
+2023-08-30 09:44:03,565 - trainer - INFO -     val_focus_accuracy: 0.9153284671532846
+2023-08-30 09:44:03,565 - trainer - INFO -     val_focus_recall: 0.8577661431064573
+2023-08-30 09:44:03,565 - trainer - INFO -     val_focus_precision: 0.9889336016096579
+2023-08-30 09:44:03,565 - trainer - INFO -     val_focus_f1   : 0.9186915887850468
+2023-08-30 09:44:03,565 - trainer - INFO -     val_mean_iou   : 0.551628053188324
+2023-08-30 09:44:03,565 - trainer - INFO -     val_iou50_accuracy: 0.6431064605712891
+2023-08-30 09:44:03,805 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch26.pth ...
+2023-08-30 09:46:14,250 - trainer - INFO -     epoch          : 27
+2023-08-30 09:46:14,250 - trainer - INFO -     loss           : 2.8372815375799663
+2023-08-30 09:46:14,250 - trainer - INFO -     cls_loss       : 0.5210294753804312
+2023-08-30 09:46:14,250 - trainer - INFO -     translation_x_loss: 0.06809105566487862
+2023-08-30 09:46:14,251 - trainer - INFO -     translation_y_loss: 0.03599881167410986
+2023-08-30 09:46:14,251 - trainer - INFO -     scale_log_loss : 0.08869839731890422
+2023-08-30 09:46:14,251 - trainer - INFO -     rotation_loss  : 0.0009309587798530369
+2023-08-30 09:46:14,251 - trainer - INFO -     focus_accuracy : 0.9192786603692572
+2023-08-30 09:46:14,251 - trainer - INFO -     focus_recall   : 0.8730941013399045
+2023-08-30 09:46:14,251 - trainer - INFO -     focus_precision: 0.9799481417458945
+2023-08-30 09:46:14,251 - trainer - INFO -     focus_f1       : 0.923440299723082
+2023-08-30 09:46:14,251 - trainer - INFO -     mean_iou       : 0.6800050139427185
+2023-08-30 09:46:14,251 - trainer - INFO -     iou50_accuracy : 0.8170337080955505
+2023-08-30 09:46:14,251 - trainer - INFO -     val_loss       : 5.213304053820097
+2023-08-30 09:46:14,251 - trainer - INFO -     val_cls_loss   : 0.5172342135356023
+2023-08-30 09:46:14,251 - trainer - INFO -     val_translation_x_loss: 0.1348834148966349
+2023-08-30 09:46:14,252 - trainer - INFO -     val_translation_y_loss: 0.060801794265325254
+2023-08-30 09:46:14,252 - trainer - INFO -     val_scale_log_loss: 0.19546937185984392
+2023-08-30 09:46:14,252 - trainer - INFO -     val_rotation_loss: 0.0007382801939876607
+2023-08-30 09:46:14,252 - trainer - INFO -     val_focus_accuracy: 0.9226277372262773
+2023-08-30 09:46:14,252 - trainer - INFO -     val_focus_recall: 0.8717277486910995
+2023-08-30 09:46:14,252 - trainer - INFO -     val_focus_precision: 0.9881305637982196
+2023-08-30 09:46:14,252 - trainer - INFO -     val_focus_f1   : 0.9262865090403338
+2023-08-30 09:46:14,252 - trainer - INFO -     val_mean_iou   : 0.552203893661499
+2023-08-30 09:46:14,252 - trainer - INFO -     val_iou50_accuracy: 0.6439790725708008
+2023-08-30 09:46:14,445 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch27.pth ...
+2023-08-30 09:46:14,718 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 09:48:27,367 - trainer - INFO -     epoch          : 28
+2023-08-30 09:48:27,367 - trainer - INFO -     loss           : 2.7639753271590224
+2023-08-30 09:48:27,367 - trainer - INFO -     cls_loss       : 0.5206382746224875
+2023-08-30 09:48:27,367 - trainer - INFO -     translation_x_loss: 0.06449752671459874
+2023-08-30 09:48:27,367 - trainer - INFO -     translation_y_loss: 0.03539610764134552
+2023-08-30 09:48:27,368 - trainer - INFO -     scale_log_loss : 0.08683281106321694
+2023-08-30 09:48:27,368 - trainer - INFO -     rotation_loss  : 0.0008732372402196883
+2023-08-30 09:48:27,368 - trainer - INFO -     focus_accuracy : 0.9203950193215973
+2023-08-30 09:48:27,368 - trainer - INFO -     focus_recall   : 0.8754042815339597
+2023-08-30 09:48:27,368 - trainer - INFO -     focus_precision: 0.979662185453292
+2023-08-30 09:48:27,368 - trainer - INFO -     focus_f1       : 0.924603497356649
+2023-08-30 09:48:27,368 - trainer - INFO -     mean_iou       : 0.6861504912376404
+2023-08-30 09:48:27,368 - trainer - INFO -     iou50_accuracy : 0.8230401873588562
+2023-08-30 09:48:27,368 - trainer - INFO -     val_loss       : 5.268990967823909
+2023-08-30 09:48:27,368 - trainer - INFO -     val_cls_loss   : 0.5164491451703586
+2023-08-30 09:48:27,368 - trainer - INFO -     val_translation_x_loss: 0.13757958102684756
+2023-08-30 09:48:27,369 - trainer - INFO -     val_translation_y_loss: 0.06105274414786926
+2023-08-30 09:48:27,369 - trainer - INFO -     val_scale_log_loss: 0.19726821883366658
+2023-08-30 09:48:27,369 - trainer - INFO -     val_rotation_loss: 0.0005784362814245889
+2023-08-30 09:48:27,369 - trainer - INFO -     val_focus_accuracy: 0.9236009732360098
+2023-08-30 09:48:27,369 - trainer - INFO -     val_focus_recall: 0.8787085514834206
+2023-08-30 09:48:27,369 - trainer - INFO -     val_focus_precision: 0.9824390243902439
+2023-08-30 09:48:27,369 - trainer - INFO -     val_focus_f1   : 0.9276830953477659
+2023-08-30 09:48:27,369 - trainer - INFO -     val_mean_iou   : 0.5553216338157654
+2023-08-30 09:48:27,369 - trainer - INFO -     val_iou50_accuracy: 0.650959849357605
+2023-08-30 09:48:27,567 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch28.pth ...
+2023-08-30 09:50:39,972 - trainer - INFO -     epoch          : 29
+2023-08-30 09:50:39,972 - trainer - INFO -     loss           : 2.729882518341253
+2023-08-30 09:50:39,972 - trainer - INFO -     cls_loss       : 0.5201032329555396
+2023-08-30 09:50:39,972 - trainer - INFO -     translation_x_loss: 0.06345479677502926
+2023-08-30 09:50:39,972 - trainer - INFO -     translation_y_loss: 0.03494499312652336
+2023-08-30 09:50:39,972 - trainer - INFO -     scale_log_loss : 0.08554487538288583
+2023-08-30 09:50:39,973 - trainer - INFO -     rotation_loss  : 0.0008144309939490375
+2023-08-30 09:50:39,973 - trainer - INFO -     focus_accuracy : 0.9200515242593388
+2023-08-30 09:50:39,973 - trainer - INFO -     focus_recall   : 0.8757123055598337
+2023-08-30 09:50:39,973 - trainer - INFO -     focus_precision: 0.978657487091222
+2023-08-30 09:50:39,973 - trainer - INFO -     focus_f1       : 0.9243273998211818
+2023-08-30 09:50:39,973 - trainer - INFO -     mean_iou       : 0.689090371131897
+2023-08-30 09:50:39,973 - trainer - INFO -     iou50_accuracy : 0.8228861689567566
+2023-08-30 09:50:39,973 - trainer - INFO -     val_loss       : 5.240869342363798
+2023-08-30 09:50:39,973 - trainer - INFO -     val_cls_loss   : 0.5166145508105938
+2023-08-30 09:50:39,973 - trainer - INFO -     val_translation_x_loss: 0.13411380430826775
+2023-08-30 09:50:39,973 - trainer - INFO -     val_translation_y_loss: 0.05959227099441565
+2023-08-30 09:50:39,973 - trainer - INFO -     val_scale_log_loss: 0.19989707252153985
+2023-08-30 09:50:39,974 - trainer - INFO -     val_rotation_loss: 0.0003390203315155724
+2023-08-30 09:50:39,974 - trainer - INFO -     val_focus_accuracy: 0.921654501216545
+2023-08-30 09:50:39,974 - trainer - INFO -     val_focus_recall: 0.8769633507853403
+2023-08-30 09:50:39,974 - trainer - INFO -     val_focus_precision: 0.9804878048780488
+2023-08-30 09:50:39,974 - trainer - INFO -     val_focus_f1   : 0.9258406264394289
+2023-08-30 09:50:39,974 - trainer - INFO -     val_mean_iou   : 0.5564629435539246
+2023-08-30 09:50:39,974 - trainer - INFO -     val_iou50_accuracy: 0.6535776853561401
+2023-08-30 09:50:40,217 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch29.pth ...
+2023-08-30 09:52:49,539 - trainer - INFO -     epoch          : 30
+2023-08-30 09:52:49,539 - trainer - INFO -     loss           : 2.682056631688233
+2023-08-30 09:52:49,539 - trainer - INFO -     cls_loss       : 0.5183533679816749
+2023-08-30 09:52:49,539 - trainer - INFO -     translation_x_loss: 0.062174094441745965
+2023-08-30 09:52:49,539 - trainer - INFO -     translation_y_loss: 0.03447779538723957
+2023-08-30 09:52:49,539 - trainer - INFO -     scale_log_loss : 0.08346141467464495
+2023-08-30 09:52:49,539 - trainer - INFO -     rotation_loss  : 0.0007812011604623327
+2023-08-30 09:52:49,539 - trainer - INFO -     focus_accuracy : 0.9221983683984543
+2023-08-30 09:52:49,540 - trainer - INFO -     focus_recall   : 0.8763283536115817
+2023-08-30 09:52:49,540 - trainer - INFO -     focus_precision: 0.9822199205938201
+2023-08-30 09:52:49,540 - trainer - INFO -     focus_f1       : 0.9262575288946768
+2023-08-30 09:52:49,540 - trainer - INFO -     mean_iou       : 0.6930941939353943
+2023-08-30 09:52:49,540 - trainer - INFO -     iou50_accuracy : 0.8316648602485657
+2023-08-30 09:52:49,540 - trainer - INFO -     val_loss       : 5.230807429093581
+2023-08-30 09:52:49,540 - trainer - INFO -     val_cls_loss   : 0.5162081810144278
+2023-08-30 09:52:49,540 - trainer - INFO -     val_translation_x_loss: 0.134430347268398
+2023-08-30 09:52:49,540 - trainer - INFO -     val_translation_y_loss: 0.060065838150106944
+2023-08-30 09:52:49,540 - trainer - INFO -     val_scale_log_loss: 0.19831654658684364
+2023-08-30 09:52:49,540 - trainer - INFO -     val_rotation_loss: 0.000282164994860068
+2023-08-30 09:52:49,541 - trainer - INFO -     val_focus_accuracy: 0.9231143552311436
+2023-08-30 09:52:49,541 - trainer - INFO -     val_focus_recall: 0.8760907504363001
+2023-08-30 09:52:49,541 - trainer - INFO -     val_focus_precision: 0.984313725490196
+2023-08-30 09:52:49,541 - trainer - INFO -     val_focus_f1   : 0.9270544783010156
+2023-08-30 09:52:49,541 - trainer - INFO -     val_mean_iou   : 0.5566079616546631
+2023-08-30 09:52:49,541 - trainer - INFO -     val_iou50_accuracy: 0.6439790725708008
+2023-08-30 09:52:49,739 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch30.pth ...
+2023-08-30 09:55:02,076 - trainer - INFO -     epoch          : 31
+2023-08-30 09:55:02,076 - trainer - INFO -     loss           : 2.596764167914024
+2023-08-30 09:55:02,076 - trainer - INFO -     cls_loss       : 0.5175781215612705
+2023-08-30 09:55:02,077 - trainer - INFO -     translation_x_loss: 0.05820843928933635
+2023-08-30 09:55:02,077 - trainer - INFO -     translation_y_loss: 0.033458567127216975
+2023-08-30 09:55:02,077 - trainer - INFO -     scale_log_loss : 0.08140895575039335
+2023-08-30 09:55:02,077 - trainer - INFO -     rotation_loss  : 0.0007581632246281236
+2023-08-30 09:55:02,077 - trainer - INFO -     focus_accuracy : 0.9248604551309575
+2023-08-30 09:55:02,077 - trainer - INFO -     focus_recall   : 0.88002464192207
+2023-08-30 09:55:02,077 - trainer - INFO -     focus_precision: 0.9834767641996558
+2023-08-30 09:55:02,077 - trainer - INFO -     focus_f1       : 0.9288791351702838
+2023-08-30 09:55:02,077 - trainer - INFO -     mean_iou       : 0.7003781199455261
+2023-08-30 09:55:02,077 - trainer - INFO -     iou50_accuracy : 0.8345910906791687
+2023-08-30 09:55:02,077 - trainer - INFO -     val_loss       : 5.280233738972591
+2023-08-30 09:55:02,078 - trainer - INFO -     val_cls_loss   : 0.5147541004877824
+2023-08-30 09:55:02,078 - trainer - INFO -     val_translation_x_loss: 0.135084800192943
+2023-08-30 09:55:02,078 - trainer - INFO -     val_translation_y_loss: 0.06234005357210453
+2023-08-30 09:55:02,078 - trainer - INFO -     val_scale_log_loss: 0.19959827627126986
+2023-08-30 09:55:02,078 - trainer - INFO -     val_rotation_loss: 0.00040070081774431924
+2023-08-30 09:55:02,078 - trainer - INFO -     val_focus_accuracy: 0.9250608272506082
+2023-08-30 09:55:02,078 - trainer - INFO -     val_focus_recall: 0.8769633507853403
+2023-08-30 09:55:02,078 - trainer - INFO -     val_focus_precision: 0.9872298624754421
+2023-08-30 09:55:02,078 - trainer - INFO -     val_focus_f1   : 0.9288354898336414
+2023-08-30 09:55:02,078 - trainer - INFO -     val_mean_iou   : 0.5540844202041626
+2023-08-30 09:55:02,078 - trainer - INFO -     val_iou50_accuracy: 0.6535776853561401
+2023-08-30 09:55:02,323 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch31.pth ...
+2023-08-30 09:57:13,740 - trainer - INFO -     epoch          : 32
+2023-08-30 09:57:13,740 - trainer - INFO -     loss           : 2.5659250885575684
+2023-08-30 09:57:13,740 - trainer - INFO -     cls_loss       : 0.51638192822645
+2023-08-30 09:57:13,741 - trainer - INFO -     translation_x_loss: 0.05612433819448227
+2023-08-30 09:57:13,741 - trainer - INFO -     translation_y_loss: 0.0331101734574966
+2023-08-30 09:57:13,741 - trainer - INFO -     scale_log_loss : 0.08136431878985284
+2023-08-30 09:57:13,741 - trainer - INFO -     rotation_loss  : 0.0007857305170766047
+2023-08-30 09:57:13,741 - trainer - INFO -     focus_accuracy : 0.9257191927866036
+2023-08-30 09:57:13,741 - trainer - INFO -     focus_recall   : 0.8826428461419991
+2023-08-30 09:57:13,741 - trainer - INFO -     focus_precision: 0.9823448748714433
+2023-08-30 09:57:13,741 - trainer - INFO -     focus_f1       : 0.9298288310213352
+2023-08-30 09:57:13,741 - trainer - INFO -     mean_iou       : 0.706957995891571
+2023-08-30 09:57:13,741 - trainer - INFO -     iou50_accuracy : 0.8439858555793762
+2023-08-30 09:57:13,741 - trainer - INFO -     val_loss       : 5.26741943359375
+2023-08-30 09:57:13,742 - trainer - INFO -     val_cls_loss   : 0.5152559220790863
+2023-08-30 09:57:13,742 - trainer - INFO -     val_translation_x_loss: 0.13433985480895408
+2023-08-30 09:57:13,742 - trainer - INFO -     val_translation_y_loss: 0.05975602183204431
+2023-08-30 09:57:13,742 - trainer - INFO -     val_scale_log_loss: 0.201839505479886
+2023-08-30 09:57:13,742 - trainer - INFO -     val_rotation_loss: 0.00031298365412602344
+2023-08-30 09:57:13,742 - trainer - INFO -     val_focus_accuracy: 0.9231143552311436
+2023-08-30 09:57:13,742 - trainer - INFO -     val_focus_recall: 0.8865619546247818
+2023-08-30 09:57:13,742 - trainer - INFO -     val_focus_precision: 0.9731800766283525
+2023-08-30 09:57:13,742 - trainer - INFO -     val_focus_f1   : 0.9278538812785387
+2023-08-30 09:57:13,742 - trainer - INFO -     val_mean_iou   : 0.5601816177368164
+2023-08-30 09:57:13,742 - trainer - INFO -     val_iou50_accuracy: 0.6605584621429443
+2023-08-30 09:57:13,988 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch32.pth ...
+2023-08-30 09:59:26,787 - trainer - INFO -     epoch          : 33
+2023-08-30 09:59:26,787 - trainer - INFO -     loss           : 2.5425275901516717
+2023-08-30 09:59:26,787 - trainer - INFO -     cls_loss       : 0.516325366284166
+2023-08-30 09:59:26,787 - trainer - INFO -     translation_x_loss: 0.05477561193242014
+2023-08-30 09:59:26,788 - trainer - INFO -     translation_y_loss: 0.032359015145390246
+2023-08-30 09:59:26,788 - trainer - INFO -     scale_log_loss : 0.08153186111639325
+2023-08-30 09:59:26,788 - trainer - INFO -     rotation_loss  : 0.000734787883250117
+2023-08-30 09:59:26,788 - trainer - INFO -     focus_accuracy : 0.927007299270073
+2023-08-30 09:59:26,788 - trainer - INFO -     focus_recall   : 0.8841829662713692
+2023-08-30 09:59:26,788 - trainer - INFO -     focus_precision: 0.9832163041616715
+2023-08-30 09:59:26,788 - trainer - INFO -     focus_f1       : 0.9310736295815765
+2023-08-30 09:59:26,788 - trainer - INFO -     mean_iou       : 0.7089674472808838
+2023-08-30 09:59:26,788 - trainer - INFO -     iou50_accuracy : 0.8427537083625793
+2023-08-30 09:59:26,788 - trainer - INFO -     val_loss       : 5.1359586972456714
+2023-08-30 09:59:26,788 - trainer - INFO -     val_cls_loss   : 0.5164616135450509
+2023-08-30 09:59:26,789 - trainer - INFO -     val_translation_x_loss: 0.13232802427732027
+2023-08-30 09:59:26,789 - trainer - INFO -     val_translation_y_loss: 0.05845175488637044
+2023-08-30 09:59:26,789 - trainer - INFO -     val_scale_log_loss: 0.19405263524789076
+2023-08-30 09:59:26,789 - trainer - INFO -     val_rotation_loss: 0.0005027183873328165
+2023-08-30 09:59:26,789 - trainer - INFO -     val_focus_accuracy: 0.9245742092457421
+2023-08-30 09:59:26,789 - trainer - INFO -     val_focus_recall: 0.8804537521815009
+2023-08-30 09:59:26,789 - trainer - INFO -     val_focus_precision: 0.9824732229795521
+2023-08-30 09:59:26,789 - trainer - INFO -     val_focus_f1   : 0.9286700414173953
+2023-08-30 09:59:26,789 - trainer - INFO -     val_mean_iou   : 0.5588153600692749
+2023-08-30 09:59:26,789 - trainer - INFO -     val_iou50_accuracy: 0.6544502377510071
+2023-08-30 09:59:27,035 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch33.pth ...
+2023-08-30 09:59:27,364 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 10:01:41,227 - trainer - INFO -     epoch          : 34
+2023-08-30 10:01:41,228 - trainer - INFO -     loss           : 2.4917136365240746
+2023-08-30 10:01:41,228 - trainer - INFO -     cls_loss       : 0.5152114102473626
+2023-08-30 10:01:41,228 - trainer - INFO -     translation_x_loss: 0.055613735086888404
+2023-08-30 10:01:41,228 - trainer - INFO -     translation_y_loss: 0.03187177423387766
+2023-08-30 10:01:41,228 - trainer - INFO -     scale_log_loss : 0.07704176156075446
+2023-08-30 10:01:41,228 - trainer - INFO -     rotation_loss  : 0.0007249926482992512
+2023-08-30 10:01:41,228 - trainer - INFO -     focus_accuracy : 0.927436668097896
+2023-08-30 10:01:41,228 - trainer - INFO -     focus_recall   : 0.8840289542584322
+2023-08-30 10:01:41,229 - trainer - INFO -     focus_precision: 0.9842249657064472
+2023-08-30 10:01:41,229 - trainer - INFO -     focus_f1       : 0.9314401622718053
+2023-08-30 10:01:41,229 - trainer - INFO -     mean_iou       : 0.7109667658805847
+2023-08-30 10:01:41,229 - trainer - INFO -     iou50_accuracy : 0.8509163856506348
+2023-08-30 10:01:41,229 - trainer - INFO -     val_loss       : 5.249156361359816
+2023-08-30 10:01:41,229 - trainer - INFO -     val_cls_loss   : 0.5168908334695376
+2023-08-30 10:01:41,229 - trainer - INFO -     val_translation_x_loss: 0.13506718140382032
+2023-08-30 10:01:41,229 - trainer - INFO -     val_translation_y_loss: 0.05853067086293147
+2023-08-30 10:01:41,229 - trainer - INFO -     val_scale_log_loss: 0.2006904185964511
+2023-08-30 10:01:41,229 - trainer - INFO -     val_rotation_loss: 0.0002687702353936262
+2023-08-30 10:01:41,229 - trainer - INFO -     val_focus_accuracy: 0.9201946472019464
+2023-08-30 10:01:41,229 - trainer - INFO -     val_focus_recall: 0.8717277486910995
+2023-08-30 10:01:41,230 - trainer - INFO -     val_focus_precision: 0.9832677165354331
+2023-08-30 10:01:41,230 - trainer - INFO -     val_focus_f1   : 0.9241443108233118
+2023-08-30 10:01:41,230 - trainer - INFO -     val_mean_iou   : 0.5600382685661316
+2023-08-30 10:01:41,230 - trainer - INFO -     val_iou50_accuracy: 0.6570680737495422
+2023-08-30 10:01:41,473 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch34.pth ...
+2023-08-30 10:03:52,189 - trainer - INFO -     epoch          : 35
+2023-08-30 10:03:52,190 - trainer - INFO -     loss           : 2.439205511913195
+2023-08-30 10:03:52,190 - trainer - INFO -     cls_loss       : 0.5149459258376897
+2023-08-30 10:03:52,190 - trainer - INFO -     translation_x_loss: 0.052457774467356916
+2023-08-30 10:03:52,190 - trainer - INFO -     translation_y_loss: 0.031291563127824405
+2023-08-30 10:03:52,190 - trainer - INFO -     scale_log_loss : 0.07642529986205172
+2023-08-30 10:03:52,190 - trainer - INFO -     rotation_loss  : 0.0007213158834809412
+2023-08-30 10:03:52,190 - trainer - INFO -     focus_accuracy : 0.929497638471447
+2023-08-30 10:03:52,190 - trainer - INFO -     focus_recall   : 0.8912675188664716
+2023-08-30 10:03:52,190 - trainer - INFO -     focus_precision: 0.9805150796340224
+2023-08-30 10:03:52,190 - trainer - INFO -     focus_f1       : 0.9337636143606293
+2023-08-30 10:03:52,190 - trainer - INFO -     mean_iou       : 0.716918408870697
+2023-08-30 10:03:52,191 - trainer - INFO -     iou50_accuracy : 0.8552287220954895
+2023-08-30 10:03:52,191 - trainer - INFO -     val_loss       : 5.216274719971877
+2023-08-30 10:03:52,191 - trainer - INFO -     val_cls_loss   : 0.511551531461569
+2023-08-30 10:03:52,191 - trainer - INFO -     val_translation_x_loss: 0.13411863417579578
+2023-08-30 10:03:52,191 - trainer - INFO -     val_translation_y_loss: 0.05963939078725301
+2023-08-30 10:03:52,191 - trainer - INFO -     val_scale_log_loss: 0.19811413437128067
+2023-08-30 10:03:52,191 - trainer - INFO -     val_rotation_loss: 0.0007524242835083546
+2023-08-30 10:03:52,191 - trainer - INFO -     val_focus_accuracy: 0.9284671532846716
+2023-08-30 10:03:52,191 - trainer - INFO -     val_focus_recall: 0.8917975567190227
+2023-08-30 10:03:52,191 - trainer - INFO -     val_focus_precision: 0.9779904306220095
+2023-08-30 10:03:52,191 - trainer - INFO -     val_focus_f1   : 0.9329073482428116
+2023-08-30 10:03:52,191 - trainer - INFO -     val_mean_iou   : 0.5510387420654297
+2023-08-30 10:03:52,192 - trainer - INFO -     val_iou50_accuracy: 0.6544502377510071
+2023-08-30 10:03:52,430 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch35.pth ...
+2023-08-30 10:06:05,982 - trainer - INFO -     epoch          : 36
+2023-08-30 10:06:05,982 - trainer - INFO -     loss           : 2.408862998197367
+2023-08-30 10:06:05,982 - trainer - INFO -     cls_loss       : 0.5135264544860347
+2023-08-30 10:06:05,982 - trainer - INFO -     translation_x_loss: 0.05137133572230136
+2023-08-30 10:06:05,982 - trainer - INFO -     translation_y_loss: 0.030644538525778513
+2023-08-30 10:06:05,982 - trainer - INFO -     scale_log_loss : 0.07574886725294394
+2023-08-30 10:06:05,982 - trainer - INFO -     rotation_loss  : 0.0007198804820431038
+2023-08-30 10:06:05,983 - trainer - INFO -     focus_accuracy : 0.9327608415629025
+2023-08-30 10:06:05,983 - trainer - INFO -     focus_recall   : 0.8928076389958417
+2023-08-30 10:06:05,983 - trainer - INFO -     focus_precision: 0.9852141400407886
+2023-08-30 10:06:05,983 - trainer - INFO -     focus_f1       : 0.9367374969701866
+2023-08-30 10:06:05,983 - trainer - INFO -     mean_iou       : 0.7201473712921143
+2023-08-30 10:06:05,983 - trainer - INFO -     iou50_accuracy : 0.8566148281097412
+2023-08-30 10:06:05,983 - trainer - INFO -     val_loss       : 5.1719044978802025
+2023-08-30 10:06:05,983 - trainer - INFO -     val_cls_loss   : 0.5133249424971067
+2023-08-30 10:06:05,983 - trainer - INFO -     val_translation_x_loss: 0.13145026793846717
+2023-08-30 10:06:05,983 - trainer - INFO -     val_translation_y_loss: 0.060254410224465225
+2023-08-30 10:06:05,983 - trainer - INFO -     val_scale_log_loss: 0.19644986803715045
+2023-08-30 10:06:05,984 - trainer - INFO -     val_rotation_loss: 0.00024166033477880633
+2023-08-30 10:06:05,984 - trainer - INFO -     val_focus_accuracy: 0.9274939172749391
+2023-08-30 10:06:05,984 - trainer - INFO -     val_focus_recall: 0.8926701570680629
+2023-08-30 10:06:05,984 - trainer - INFO -     val_focus_precision: 0.9752144899904671
+2023-08-30 10:06:05,984 - trainer - INFO -     val_focus_f1   : 0.932118451025057
+2023-08-30 10:06:05,984 - trainer - INFO -     val_mean_iou   : 0.5627583861351013
+2023-08-30 10:06:05,984 - trainer - INFO -     val_iou50_accuracy: 0.6605584621429443
+2023-08-30 10:06:06,260 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch36.pth ...
+2023-08-30 10:08:16,276 - trainer - INFO -     epoch          : 37
+2023-08-30 10:08:16,276 - trainer - INFO -     loss           : 2.371468491279162
+2023-08-30 10:08:16,276 - trainer - INFO -     cls_loss       : 0.5127688858371514
+2023-08-30 10:08:16,276 - trainer - INFO -     translation_x_loss: 0.05010592470273048
+2023-08-30 10:08:16,277 - trainer - INFO -     translation_y_loss: 0.030258957404070176
+2023-08-30 10:08:16,277 - trainer - INFO -     scale_log_loss : 0.07437226498642793
+2023-08-30 10:08:16,277 - trainer - INFO -     rotation_loss  : 0.0006179477444035641
+2023-08-30 10:08:16,277 - trainer - INFO -     focus_accuracy : 0.9334478316874195
+2023-08-30 10:08:16,277 - trainer - INFO -     focus_recall   : 0.8931156630217157
+2023-08-30 10:08:16,277 - trainer - INFO -     focus_precision: 0.9862244897959184
+2023-08-30 10:08:16,277 - trainer - INFO -     focus_f1       : 0.9373636143215065
+2023-08-30 10:08:16,277 - trainer - INFO -     mean_iou       : 0.72469562292099
+2023-08-30 10:08:16,277 - trainer - INFO -     iou50_accuracy : 0.8618512153625488
+2023-08-30 10:08:16,277 - trainer - INFO -     val_loss       : 5.246017793508677
+2023-08-30 10:08:16,277 - trainer - INFO -     val_cls_loss   : 0.5109201174515944
+2023-08-30 10:08:16,278 - trainer - INFO -     val_translation_x_loss: 0.13406516772050123
+2023-08-30 10:08:16,278 - trainer - INFO -     val_translation_y_loss: 0.05985170920880941
+2023-08-30 10:08:16,278 - trainer - INFO -     val_scale_log_loss: 0.20057628544477316
+2023-08-30 10:08:16,278 - trainer - INFO -     val_rotation_loss: 0.00039323995599541096
+2023-08-30 10:08:16,278 - trainer - INFO -     val_focus_accuracy: 0.9245742092457421
+2023-08-30 10:08:16,278 - trainer - INFO -     val_focus_recall: 0.8726003490401396
+2023-08-30 10:08:16,278 - trainer - INFO -     val_focus_precision: 0.9910802775024777
+2023-08-30 10:08:16,278 - trainer - INFO -     val_focus_f1   : 0.9280742459396751
+2023-08-30 10:08:16,278 - trainer - INFO -     val_mean_iou   : 0.559899628162384
+2023-08-30 10:08:16,278 - trainer - INFO -     val_iou50_accuracy: 0.6596858501434326
+2023-08-30 10:08:16,521 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch37.pth ...
+2023-08-30 10:10:26,785 - trainer - INFO -     epoch          : 38
+2023-08-30 10:10:26,785 - trainer - INFO -     loss           : 2.316431610138862
+2023-08-30 10:10:26,785 - trainer - INFO -     cls_loss       : 0.5137251748161001
+2023-08-30 10:10:26,785 - trainer - INFO -     translation_x_loss: 0.04890153056604194
+2023-08-30 10:10:26,785 - trainer - INFO -     translation_y_loss: 0.030015730869618583
+2023-08-30 10:10:26,785 - trainer - INFO -     scale_log_loss : 0.07111650461760852
+2023-08-30 10:10:26,786 - trainer - INFO -     rotation_loss  : 0.0007670843841189488
+2023-08-30 10:10:26,786 - trainer - INFO -     focus_accuracy : 0.9296693860025762
+2023-08-30 10:10:26,786 - trainer - INFO -     focus_recall   : 0.8903434467888496
+2023-08-30 10:10:26,786 - trainer - INFO -     focus_precision: 0.981827445652174
+2023-08-30 10:10:26,786 - trainer - INFO -     focus_f1       : 0.9338502544220985
+2023-08-30 10:10:26,786 - trainer - INFO -     mean_iou       : 0.7287041544914246
+2023-08-30 10:10:26,786 - trainer - INFO -     iou50_accuracy : 0.868935763835907
+2023-08-30 10:10:26,786 - trainer - INFO -     val_loss       : 5.143893476632925
+2023-08-30 10:10:26,786 - trainer - INFO -     val_cls_loss   : 0.5120129057994256
+2023-08-30 10:10:26,786 - trainer - INFO -     val_translation_x_loss: 0.1320194883988454
+2023-08-30 10:10:26,786 - trainer - INFO -     val_translation_y_loss: 0.05877554279107314
+2023-08-30 10:10:26,787 - trainer - INFO -     val_scale_log_loss: 0.1951089125413161
+2023-08-30 10:10:26,787 - trainer - INFO -     val_rotation_loss: 0.0003444185755842437
+2023-08-30 10:10:26,787 - trainer - INFO -     val_focus_accuracy: 0.9284671532846716
+2023-08-30 10:10:26,787 - trainer - INFO -     val_focus_recall: 0.881326352530541
+2023-08-30 10:10:26,787 - trainer - INFO -     val_focus_precision: 0.9892262487757101
+2023-08-30 10:10:26,787 - trainer - INFO -     val_focus_f1   : 0.9321642824180897
+2023-08-30 10:10:26,787 - trainer - INFO -     val_mean_iou   : 0.5601697564125061
+2023-08-30 10:10:26,787 - trainer - INFO -     val_iou50_accuracy: 0.6561954617500305
+2023-08-30 10:10:26,981 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch38.pth ...
+2023-08-30 10:12:38,445 - trainer - INFO -     epoch          : 39
+2023-08-30 10:12:38,446 - trainer - INFO -     loss           : 2.3297885184759624
+2023-08-30 10:12:38,446 - trainer - INFO -     cls_loss       : 0.5130783261342363
+2023-08-30 10:12:38,446 - trainer - INFO -     translation_x_loss: 0.048594647470943546
+2023-08-30 10:12:38,446 - trainer - INFO -     translation_y_loss: 0.028832082263101917
+2023-08-30 10:12:38,446 - trainer - INFO -     scale_log_loss : 0.07380420933631095
+2023-08-30 10:12:38,446 - trainer - INFO -     rotation_loss  : 0.0006463064320476926
+2023-08-30 10:12:38,446 - trainer - INFO -     focus_accuracy : 0.933104336625161
+2023-08-30 10:12:38,447 - trainer - INFO -     focus_recall   : 0.8937317110734637
+2023-08-30 10:12:38,447 - trainer - INFO -     focus_precision: 0.9848947725729803
+2023-08-30 10:12:38,447 - trainer - INFO -     focus_f1       : 0.9371013322567623
+2023-08-30 10:12:38,447 - trainer - INFO -     mean_iou       : 0.730861246585846
+2023-08-30 10:12:38,447 - trainer - INFO -     iou50_accuracy : 0.8712459802627563
+2023-08-30 10:12:38,447 - trainer - INFO -     val_loss       : 5.1745732160714955
+2023-08-30 10:12:38,447 - trainer - INFO -     val_cls_loss   : 0.5125761527281542
+2023-08-30 10:12:38,447 - trainer - INFO -     val_translation_x_loss: 0.1325542587500352
+2023-08-30 10:12:38,447 - trainer - INFO -     val_translation_y_loss: 0.05949573046886004
+2023-08-30 10:12:38,447 - trainer - INFO -     val_scale_log_loss: 0.19628442927048756
+2023-08-30 10:12:38,447 - trainer - INFO -     val_rotation_loss: 0.0006613572896010457
+2023-08-30 10:12:38,448 - trainer - INFO -     val_focus_accuracy: 0.927007299270073
+2023-08-30 10:12:38,448 - trainer - INFO -     val_focus_recall: 0.8944153577661431
+2023-08-30 10:12:38,448 - trainer - INFO -     val_focus_precision: 0.9724857685009488
+2023-08-30 10:12:38,448 - trainer - INFO -     val_focus_f1   : 0.9318181818181819
+2023-08-30 10:12:38,448 - trainer - INFO -     val_mean_iou   : 0.5630702376365662
+2023-08-30 10:12:38,448 - trainer - INFO -     val_iou50_accuracy: 0.6588132381439209
+2023-08-30 10:12:38,687 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch39.pth ...
+2023-08-30 10:14:49,329 - trainer - INFO -     epoch          : 40
+2023-08-30 10:14:49,329 - trainer - INFO -     loss           : 2.282069266497434
+2023-08-30 10:14:49,329 - trainer - INFO -     cls_loss       : 0.5131588260551075
+2023-08-30 10:14:49,329 - trainer - INFO -     translation_x_loss: 0.04801072635698122
+2023-08-30 10:14:49,329 - trainer - INFO -     translation_y_loss: 0.029020681258311476
+2023-08-30 10:14:49,329 - trainer - INFO -     scale_log_loss : 0.07018911373381923
+2023-08-30 10:14:49,329 - trainer - INFO -     rotation_loss  : 0.000754729246322173
+2023-08-30 10:14:49,330 - trainer - INFO -     focus_accuracy : 0.9317303563761271
+2023-08-30 10:14:49,330 - trainer - INFO -     focus_recall   : 0.8915755428923456
+2023-08-30 10:14:49,330 - trainer - INFO -     focus_precision: 0.9845238095238096
+2023-08-30 10:14:49,330 - trainer - INFO -     focus_f1       : 0.9357471914652873
+2023-08-30 10:14:49,330 - trainer - INFO -     mean_iou       : 0.7329013347625732
+2023-08-30 10:14:49,330 - trainer - INFO -     iou50_accuracy : 0.8726320862770081
+2023-08-30 10:14:49,330 - trainer - INFO -     val_loss       : 5.102212087924664
+2023-08-30 10:14:49,330 - trainer - INFO -     val_cls_loss   : 0.5134343339846684
+2023-08-30 10:14:49,330 - trainer - INFO -     val_translation_x_loss: 0.1313535479398874
+2023-08-30 10:14:49,330 - trainer - INFO -     val_translation_y_loss: 0.05785996229029619
+2023-08-30 10:14:49,330 - trainer - INFO -     val_scale_log_loss: 0.1931029664209256
+2023-08-30 10:14:49,331 - trainer - INFO -     val_rotation_loss: 0.0003266719487818101
+2023-08-30 10:14:49,331 - trainer - INFO -     val_focus_accuracy: 0.9231143552311436
+2023-08-30 10:14:49,331 - trainer - INFO -     val_focus_recall: 0.8778359511343804
+2023-08-30 10:14:49,331 - trainer - INFO -     val_focus_precision: 0.982421875
+2023-08-30 10:14:49,331 - trainer - INFO -     val_focus_f1   : 0.9271889400921659
+2023-08-30 10:14:49,331 - trainer - INFO -     val_mean_iou   : 0.567166805267334
+2023-08-30 10:14:49,331 - trainer - INFO -     val_iou50_accuracy: 0.6710296869277954
+2023-08-30 10:14:49,528 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch40.pth ...
+2023-08-30 10:14:49,806 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 10:16:58,697 - trainer - INFO -     epoch          : 41
+2023-08-30 10:16:58,697 - trainer - INFO -     loss           : 2.2332970562217
+2023-08-30 10:16:58,698 - trainer - INFO -     cls_loss       : 0.5114777048865518
+2023-08-30 10:16:58,698 - trainer - INFO -     translation_x_loss: 0.046142427455429194
+2023-08-30 10:16:58,698 - trainer - INFO -     translation_y_loss: 0.028397307334631517
+2023-08-30 10:16:58,698 - trainer - INFO -     scale_log_loss : 0.06878045225863928
+2023-08-30 10:16:58,698 - trainer - INFO -     rotation_loss  : 0.0006590411097392092
+2023-08-30 10:16:58,698 - trainer - INFO -     focus_accuracy : 0.9351653069987119
+2023-08-30 10:16:58,698 - trainer - INFO -     focus_recall   : 0.8961959032804558
+2023-08-30 10:16:58,698 - trainer - INFO -     focus_precision: 0.986271186440678
+2023-08-30 10:16:58,698 - trainer - INFO -     focus_f1       : 0.9390785120632615
+2023-08-30 10:16:58,698 - trainer - INFO -     mean_iou       : 0.7378801107406616
+2023-08-30 10:16:58,698 - trainer - INFO -     iou50_accuracy : 0.8732481002807617
+2023-08-30 10:16:58,699 - trainer - INFO -     val_loss       : 5.113130668493418
+2023-08-30 10:16:58,699 - trainer - INFO -     val_cls_loss   : 0.512989225754371
+2023-08-30 10:16:58,699 - trainer - INFO -     val_translation_x_loss: 0.13104690049703305
+2023-08-30 10:16:58,699 - trainer - INFO -     val_translation_y_loss: 0.058473154415304845
+2023-08-30 10:16:58,699 - trainer - INFO -     val_scale_log_loss: 0.19371868761686178
+2023-08-30 10:16:58,699 - trainer - INFO -     val_rotation_loss: 0.00042550161194342833
+2023-08-30 10:16:58,699 - trainer - INFO -     val_focus_accuracy: 0.9284671532846716
+2023-08-30 10:16:58,699 - trainer - INFO -     val_focus_recall: 0.8891797556719022
+2023-08-30 10:16:58,699 - trainer - INFO -     val_focus_precision: 0.9807507218479307
+2023-08-30 10:16:58,699 - trainer - INFO -     val_focus_f1   : 0.9327231121281464
+2023-08-30 10:16:58,699 - trainer - INFO -     val_mean_iou   : 0.5685626864433289
+2023-08-30 10:16:58,699 - trainer - INFO -     val_iou50_accuracy: 0.6623036861419678
+2023-08-30 10:16:58,942 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch41.pth ...
+2023-08-30 10:19:10,764 - trainer - INFO -     epoch          : 42
+2023-08-30 10:19:10,765 - trainer - INFO -     loss           : 2.2110922660801435
+2023-08-30 10:19:10,765 - trainer - INFO -     cls_loss       : 0.5107073118234728
+2023-08-30 10:19:10,765 - trainer - INFO -     translation_x_loss: 0.04496799035325319
+2023-08-30 10:19:10,765 - trainer - INFO -     translation_y_loss: 0.028089997977796165
+2023-08-30 10:19:10,765 - trainer - INFO -     scale_log_loss : 0.0684843120513136
+2023-08-30 10:19:10,765 - trainer - INFO -     rotation_loss  : 0.0006257812674048582
+2023-08-30 10:19:10,765 - trainer - INFO -     focus_accuracy : 0.938085015027909
+2023-08-30 10:19:10,765 - trainer - INFO -     focus_recall   : 0.8997381795780071
+2023-08-30 10:19:10,765 - trainer - INFO -     focus_precision: 0.9881596752368065
+2023-08-30 10:19:10,766 - trainer - INFO -     focus_f1       : 0.9418782748891575
+2023-08-30 10:19:10,766 - trainer - INFO -     mean_iou       : 0.7407191395759583
+2023-08-30 10:19:10,766 - trainer - INFO -     iou50_accuracy : 0.8775604367256165
+2023-08-30 10:19:10,766 - trainer - INFO -     val_loss       : 5.064973614766047
+2023-08-30 10:19:10,766 - trainer - INFO -     val_cls_loss   : 0.5150356865846194
+2023-08-30 10:19:10,766 - trainer - INFO -     val_translation_x_loss: 0.12585145424191768
+2023-08-30 10:19:10,766 - trainer - INFO -     val_translation_y_loss: 0.059021038017593896
+2023-08-30 10:19:10,766 - trainer - INFO -     val_scale_log_loss: 0.19422790660307956
+2023-08-30 10:19:10,766 - trainer - INFO -     val_rotation_loss: 0.0002443761887172094
+2023-08-30 10:19:10,766 - trainer - INFO -     val_focus_accuracy: 0.9274939172749391
+2023-08-30 10:19:10,766 - trainer - INFO -     val_focus_recall: 0.8883071553228621
+2023-08-30 10:19:10,766 - trainer - INFO -     val_focus_precision: 0.9797882579403272
+2023-08-30 10:19:10,767 - trainer - INFO -     val_focus_f1   : 0.931807780320366
+2023-08-30 10:19:10,767 - trainer - INFO -     val_mean_iou   : 0.569736659526825
+2023-08-30 10:19:10,767 - trainer - INFO -     val_iou50_accuracy: 0.6710296869277954
+2023-08-30 10:19:11,001 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch42.pth ...
+2023-08-30 10:19:11,324 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 10:21:24,256 - trainer - INFO -     epoch          : 43
+2023-08-30 10:21:24,257 - trainer - INFO -     loss           : 2.1998047635450466
+2023-08-30 10:21:24,257 - trainer - INFO -     cls_loss       : 0.510487101153358
+2023-08-30 10:21:24,257 - trainer - INFO -     translation_x_loss: 0.04569061353270497
+2023-08-30 10:21:24,257 - trainer - INFO -     translation_y_loss: 0.028487762758651607
+2023-08-30 10:21:24,257 - trainer - INFO -     scale_log_loss : 0.06642274477181363
+2023-08-30 10:21:24,257 - trainer - INFO -     rotation_loss  : 0.0007014019783937428
+2023-08-30 10:21:24,257 - trainer - INFO -     focus_accuracy : 0.9375697724345212
+2023-08-30 10:21:24,257 - trainer - INFO -     focus_recall   : 0.898352071461574
+2023-08-30 10:21:24,257 - trainer - INFO -     focus_precision: 0.9886440677966102
+2023-08-30 10:21:24,258 - trainer - INFO -     focus_f1       : 0.9413378520132333
+2023-08-30 10:21:24,258 - trainer - INFO -     mean_iou       : 0.7401736378669739
+2023-08-30 10:21:24,258 - trainer - INFO -     iou50_accuracy : 0.8703218698501587
+2023-08-30 10:21:24,258 - trainer - INFO -     val_loss       : 5.206887175486638
+2023-08-30 10:21:24,258 - trainer - INFO -     val_cls_loss   : 0.5132474532494178
+2023-08-30 10:21:24,258 - trainer - INFO -     val_translation_x_loss: 0.12988309608055995
+2023-08-30 10:21:24,258 - trainer - INFO -     val_translation_y_loss: 0.0581687728372904
+2023-08-30 10:21:24,258 - trainer - INFO -     val_scale_log_loss: 0.20302172910708646
+2023-08-30 10:21:24,258 - trainer - INFO -     val_rotation_loss: 0.0002522030290072927
+2023-08-30 10:21:24,259 - trainer - INFO -     val_focus_accuracy: 0.9250608272506082
+2023-08-30 10:21:24,259 - trainer - INFO -     val_focus_recall: 0.8839441535776614
+2023-08-30 10:21:24,259 - trainer - INFO -     val_focus_precision: 0.9796905222437138
+2023-08-30 10:21:24,259 - trainer - INFO -     val_focus_f1   : 0.9293577981651377
+2023-08-30 10:21:24,259 - trainer - INFO -     val_mean_iou   : 0.5681288242340088
+2023-08-30 10:21:24,259 - trainer - INFO -     val_iou50_accuracy: 0.6736474633216858
+2023-08-30 10:21:24,462 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch43.pth ...
+2023-08-30 10:23:35,005 - trainer - INFO -     epoch          : 44
+2023-08-30 10:23:35,006 - trainer - INFO -     loss           : 2.153077943639441
+2023-08-30 10:23:35,006 - trainer - INFO -     cls_loss       : 0.5097699833440257
+2023-08-30 10:23:35,006 - trainer - INFO -     translation_x_loss: 0.04439440400820676
+2023-08-30 10:23:35,006 - trainer - INFO -     translation_y_loss: 0.02742118418861467
+2023-08-30 10:23:35,006 - trainer - INFO -     scale_log_loss : 0.0649531439796172
+2023-08-30 10:23:35,007 - trainer - INFO -     rotation_loss  : 0.0006943888599510371
+2023-08-30 10:23:35,007 - trainer - INFO -     focus_accuracy : 0.9381708887934735
+2023-08-30 10:23:35,007 - trainer - INFO -     focus_recall   : 0.9000462036038811
+2023-08-30 10:23:35,007 - trainer - INFO -     focus_precision: 0.9879966187658495
+2023-08-30 10:23:35,007 - trainer - INFO -     focus_f1       : 0.941972920696325
+2023-08-30 10:23:35,007 - trainer - INFO -     mean_iou       : 0.7450249195098877
+2023-08-30 10:23:35,007 - trainer - INFO -     iou50_accuracy : 0.8821808099746704
+2023-08-30 10:23:35,007 - trainer - INFO -     val_loss       : 5.016683651850774
+2023-08-30 10:23:35,007 - trainer - INFO -     val_cls_loss   : 0.5132837419326489
+2023-08-30 10:23:35,007 - trainer - INFO -     val_translation_x_loss: 0.1272460495050137
+2023-08-30 10:23:35,008 - trainer - INFO -     val_translation_y_loss: 0.058749000900066815
+2023-08-30 10:23:35,008 - trainer - INFO -     val_scale_log_loss: 0.1891788282073461
+2023-08-30 10:23:35,008 - trainer - INFO -     val_rotation_loss: 0.0004378044194219491
+2023-08-30 10:23:35,008 - trainer - INFO -     val_focus_accuracy: 0.9260340632603407
+2023-08-30 10:23:35,008 - trainer - INFO -     val_focus_recall: 0.8760907504363001
+2023-08-30 10:23:35,008 - trainer - INFO -     val_focus_precision: 0.9901380670611439
+2023-08-30 10:23:35,008 - trainer - INFO -     val_focus_f1   : 0.9296296296296296
+2023-08-30 10:23:35,008 - trainer - INFO -     val_mean_iou   : 0.5640378594398499
+2023-08-30 10:23:35,008 - trainer - INFO -     val_iou50_accuracy: 0.6527050733566284
+2023-08-30 10:23:35,268 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch44.pth ...
+2023-08-30 10:23:35,594 - trainer - INFO - Saving current best: model_best.pth ...
+2023-08-30 10:25:48,707 - trainer - INFO -     epoch          : 45
+2023-08-30 10:25:48,707 - trainer - INFO -     loss           : 2.1391830012038513
+2023-08-30 10:25:48,707 - trainer - INFO -     cls_loss       : 0.5101196229621604
+2023-08-30 10:25:48,708 - trainer - INFO -     translation_x_loss: 0.043002071391258924
+2023-08-30 10:25:48,708 - trainer - INFO -     translation_y_loss: 0.027255900022522598
+2023-08-30 10:25:48,708 - trainer - INFO -     scale_log_loss : 0.06533960394233793
+2023-08-30 10:25:48,708 - trainer - INFO -     rotation_loss  : 0.0006308265854406253
+2023-08-30 10:25:48,708 - trainer - INFO -     focus_accuracy : 0.9370545298411336
+2023-08-30 10:25:48,708 - trainer - INFO -     focus_recall   : 0.898352071461574
+2023-08-30 10:25:48,708 - trainer - INFO -     focus_precision: 0.9876396884524212
+2023-08-30 10:25:48,708 - trainer - INFO -     focus_f1       : 0.9408823292200984
+2023-08-30 10:25:48,708 - trainer - INFO -     mean_iou       : 0.7484898567199707
+2023-08-30 10:25:48,708 - trainer - INFO -     iou50_accuracy : 0.8829508423805237
+2023-08-30 10:25:48,708 - trainer - INFO -     val_loss       : 5.042133382650522
+2023-08-30 10:25:48,708 - trainer - INFO -     val_cls_loss   : 0.5104882194445683
+2023-08-30 10:25:48,709 - trainer - INFO -     val_translation_x_loss: 0.1297376255576427
+2023-08-30 10:25:48,709 - trainer - INFO -     val_translation_y_loss: 0.05924313865028895
+2023-08-30 10:25:48,709 - trainer - INFO -     val_scale_log_loss: 0.18850106505247263
+2023-08-30 10:25:48,709 - trainer - INFO -     val_rotation_loss: 0.00062107715370635
+2023-08-30 10:25:48,709 - trainer - INFO -     val_focus_accuracy: 0.9333333333333333
+2023-08-30 10:25:48,709 - trainer - INFO -     val_focus_recall: 0.8952879581151832
+2023-08-30 10:25:48,709 - trainer - INFO -     val_focus_precision: 0.9837008628954937
+2023-08-30 10:25:48,709 - trainer - INFO -     val_focus_f1   : 0.9374143444495203
+2023-08-30 10:25:48,709 - trainer - INFO -     val_mean_iou   : 0.5653084516525269
+2023-08-30 10:25:48,709 - trainer - INFO -     val_iou50_accuracy: 0.6666666865348816
+2023-08-30 10:25:48,945 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch45.pth ...
+2023-08-30 10:28:00,127 - trainer - INFO -     epoch          : 46
+2023-08-30 10:28:00,128 - trainer - INFO -     loss           : 2.1359734391118144
+2023-08-30 10:28:00,128 - trainer - INFO -     cls_loss       : 0.508677350623267
+2023-08-30 10:28:00,128 - trainer - INFO -     translation_x_loss: 0.044523075877965154
+2023-08-30 10:28:00,128 - trainer - INFO -     translation_y_loss: 0.026792985927006536
+2023-08-30 10:28:00,128 - trainer - INFO -     scale_log_loss : 0.06412307592620561
+2023-08-30 10:28:00,128 - trainer - INFO -     rotation_loss  : 0.000675480295835219
+2023-08-30 10:28:00,129 - trainer - INFO -     focus_accuracy : 0.9414340918849291
+2023-08-30 10:28:00,129 - trainer - INFO -     focus_recall   : 0.9035884799014323
+2023-08-30 10:28:00,129 - trainer - INFO -     focus_precision: 0.9905453317575553
+2023-08-30 10:28:00,129 - trainer - INFO -     focus_f1       : 0.9450708762886598
+2023-08-30 10:28:00,129 - trainer - INFO -     mean_iou       : 0.7479085326194763
+2023-08-30 10:28:00,129 - trainer - INFO -     iou50_accuracy : 0.8827968835830688
+2023-08-30 10:28:00,129 - trainer - INFO -     val_loss       : 5.114443456209623
+2023-08-30 10:28:00,129 - trainer - INFO -     val_cls_loss   : 0.5097746610641479
+2023-08-30 10:28:00,129 - trainer - INFO -     val_translation_x_loss: 0.13161239658410734
+2023-08-30 10:28:00,129 - trainer - INFO -     val_translation_y_loss: 0.05923927804598442
+2023-08-30 10:28:00,129 - trainer - INFO -     val_scale_log_loss: 0.19280496262587032
+2023-08-30 10:28:00,129 - trainer - INFO -     val_rotation_loss: 0.0002630471424289191
+2023-08-30 10:28:00,130 - trainer - INFO -     val_focus_accuracy: 0.9343065693430657
+2023-08-30 10:28:00,130 - trainer - INFO -     val_focus_recall: 0.8987783595113438
+2023-08-30 10:28:00,130 - trainer - INFO -     val_focus_precision: 0.9818875119161106
+2023-08-30 10:28:00,130 - trainer - INFO -     val_focus_f1   : 0.938496583143508
+2023-08-30 10:28:00,130 - trainer - INFO -     val_mean_iou   : 0.5679563879966736
+2023-08-30 10:28:00,130 - trainer - INFO -     val_iou50_accuracy: 0.669284462928772
+2023-08-30 10:28:00,327 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch46.pth ...
+2023-08-30 10:30:12,210 - trainer - INFO -     epoch          : 47
+2023-08-30 10:30:12,210 - trainer - INFO -     loss           : 2.099579463293264
+2023-08-30 10:30:12,210 - trainer - INFO -     cls_loss       : 0.5074182596507963
+2023-08-30 10:30:12,210 - trainer - INFO -     translation_x_loss: 0.042943428961334976
+2023-08-30 10:30:12,210 - trainer - INFO -     translation_y_loss: 0.02631687969327546
+2023-08-30 10:30:12,210 - trainer - INFO -     scale_log_loss : 0.0632578869462832
+2023-08-30 10:30:12,211 - trainer - INFO -     rotation_loss  : 0.0006476212029455993
+2023-08-30 10:30:12,211 - trainer - INFO -     focus_accuracy : 0.9428939458995277
+2023-08-30 10:30:12,211 - trainer - INFO -     focus_recall   : 0.9057446480825504
+2023-08-30 10:30:12,211 - trainer - INFO -     focus_precision: 0.9910684192787327
+2023-08-30 10:30:12,211 - trainer - INFO -     focus_f1       : 0.9464874869236339
+2023-08-30 10:30:12,211 - trainer - INFO -     mean_iou       : 0.7511101365089417
+2023-08-30 10:30:12,211 - trainer - INFO -     iou50_accuracy : 0.8872631788253784
+2023-08-30 10:30:12,211 - trainer - INFO -     val_loss       : 5.1087123394012455
+2023-08-30 10:30:12,211 - trainer - INFO -     val_cls_loss   : 0.5127090444931617
+2023-08-30 10:30:12,211 - trainer - INFO -     val_translation_x_loss: 0.13213044588382428
+2023-08-30 10:30:12,211 - trainer - INFO -     val_translation_y_loss: 0.058175206470947996
+2023-08-30 10:30:12,211 - trainer - INFO -     val_scale_log_loss: 0.19255509640161808
+2023-08-30 10:30:12,212 - trainer - INFO -     val_rotation_loss: 0.0005581005962225251
+2023-08-30 10:30:12,212 - trainer - INFO -     val_focus_accuracy: 0.9284671532846716
+2023-08-30 10:30:12,212 - trainer - INFO -     val_focus_recall: 0.893542757417103
+2023-08-30 10:30:12,212 - trainer - INFO -     val_focus_precision: 0.9761677788369876
+2023-08-30 10:30:12,212 - trainer - INFO -     val_focus_f1   : 0.9330296127562643
+2023-08-30 10:30:12,212 - trainer - INFO -     val_mean_iou   : 0.5656116008758545
+2023-08-30 10:30:12,212 - trainer - INFO -     val_iou50_accuracy: 0.6666666865348816
+2023-08-30 10:30:12,407 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch47.pth ...
+2023-08-30 10:32:23,822 - trainer - INFO -     epoch          : 48
+2023-08-30 10:32:23,822 - trainer - INFO -     loss           : 2.0647881974230757
+2023-08-30 10:32:23,822 - trainer - INFO -     cls_loss       : 0.5071294285602622
+2023-08-30 10:32:23,822 - trainer - INFO -     translation_x_loss: 0.04136681746036469
+2023-08-30 10:32:23,822 - trainer - INFO -     translation_y_loss: 0.02620904725607853
+2023-08-30 10:32:23,822 - trainer - INFO -     scale_log_loss : 0.062077860276286416
+2023-08-30 10:32:23,823 - trainer - INFO -     rotation_loss  : 0.0006046907172396339
+2023-08-30 10:32:23,823 - trainer - INFO -     focus_accuracy : 0.9422069557750107
+2023-08-30 10:32:23,823 - trainer - INFO -     focus_recall   : 0.9065147081472354
+2023-08-30 10:32:23,823 - trainer - INFO -     focus_precision: 0.9889112903225806
+2023-08-30 10:32:23,823 - trainer - INFO -     focus_f1       : 0.9459220570510245
+2023-08-30 10:32:23,823 - trainer - INFO -     mean_iou       : 0.755059540271759
+2023-08-30 10:32:23,823 - trainer - INFO -     iou50_accuracy : 0.887417197227478
+2023-08-30 10:32:23,823 - trainer - INFO -     val_loss       : 5.103060465592605
+2023-08-30 10:32:23,823 - trainer - INFO -     val_cls_loss   : 0.5114036697607774
+2023-08-30 10:32:23,823 - trainer - INFO -     val_translation_x_loss: 0.1281398335328469
+2023-08-30 10:32:23,823 - trainer - INFO -     val_translation_y_loss: 0.05853941214199249
+2023-08-30 10:32:23,823 - trainer - INFO -     val_scale_log_loss: 0.19576929154304357
+2023-08-30 10:32:23,824 - trainer - INFO -     val_rotation_loss: 0.0007581253822606344
+2023-08-30 10:32:23,824 - trainer - INFO -     val_focus_accuracy: 0.9284671532846716
+2023-08-30 10:32:23,824 - trainer - INFO -     val_focus_recall: 0.893542757417103
+2023-08-30 10:32:23,824 - trainer - INFO -     val_focus_precision: 0.9761677788369876
+2023-08-30 10:32:23,824 - trainer - INFO -     val_focus_f1   : 0.9330296127562643
+2023-08-30 10:32:23,824 - trainer - INFO -     val_mean_iou   : 0.5721649527549744
+2023-08-30 10:32:23,824 - trainer - INFO -     val_iou50_accuracy: 0.6701570749282837
+2023-08-30 10:32:24,024 - trainer - INFO - Saving checkpoint: res/focus/pascal_focus_person/trainer/0830_084648/models/checkpoint-epoch48.pth ...
