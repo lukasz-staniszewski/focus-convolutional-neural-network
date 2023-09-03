@@ -104,7 +104,7 @@
                 0.2797
             ],
             "shuffle": true,
-            "validation_split": 0.15,
+            "validation_split": 0.2,
             "num_workers": 12,
             "labels": {
                 "0": "none",
@@ -119,16 +119,16 @@
             "is_test": false,
             "balance_train": true,
             "balance_methods": [
-                "remove_only_0"
+                "remove_only_0",
+                "remove_too_many_100"
             ]
         }
     },
     "optimizer": {
         "type": "SGD",
         "args": {
-            "lr": 3e-4,
-            "momentum": 0.0,
-            "weight_decay": 0.0
+            "lr": 1e-04,
+            "weight_decay": 0.05
         }
     },
     "metrics": [
@@ -152,6 +152,7 @@
         "verbosity": 1,
         "monitor": "min val_loss",
         "early_stop": 12,
-        "tensorboard": false
+        "tensorboard": false,
+        "do_validation": true
     }
 }
